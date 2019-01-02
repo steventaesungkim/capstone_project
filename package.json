@@ -5,12 +5,24 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "reset-db": "dropdb project-db; createdb project-db; psql -f schema.sql project-db; psql -f seed.sql project-db"
+    "reset-db": "dropdb project-db; createdb project-db; psql -f schema.sql project-db; psql -f seed.sql project-db; psql project-db < node_modules/connect-pg-simple/table.sql",
+    "debug": "node --inspect-brk index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.18.9"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.3",
+    "body-parser": "^1.18.3",
+    "connect-pg-simple": "^5.0.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "node": "^11.6.0",
+    "pg-promise": "^8.5.4"
   }
 }

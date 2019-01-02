@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 class User {
-    constructor(id, username, pwhash, name, avatar) {
+    constructor(id, name, username, pwhash, avatar) {
         this.id = id;
         this.username = username;
         this.pwhash = pwhash;
@@ -12,22 +12,21 @@ class User {
     }
 
     // === ===  CREATE  === === (working)
-    static createUser(name, username, password, phone_number) {
+    static createUser(name, username, password, avatar) {
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(password, salt);
         return db
             .one(
                 `
             insert into users 
-                (name, username, pwhash, phone_number)
+                (name, username, pwhash, avatar)
             values 
                 ($1, $2, $3, $4)
                 returning id`,
-                [name, username, hash, phone_number]
+                [name, username, hash, avatar]
             )
             .then(data => {
-                const u = new User(data.id, name, username, hash, phone_number);
-                return u;
+                return new User(data.id, name, username, hash, avatar);
             });
     }
 
@@ -49,9 +48,9 @@ class User {
             return instanceArray;
         });
     }
-    static getByPhone(phone_number) {
+    static getByAvatar(avatar) {
         return db
-            .one('select * from users where phone_number = $1', [phone_number])
+            .one('select * from users where avatar = $1', [avatar])
             .then(result => {
                 // console.log('look at my', result.id);
                 return result.id;

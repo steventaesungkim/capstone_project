@@ -1,0 +1,4 @@
+# ignore api keys
+.env
+# ignore ds_store files
+.DS_Store

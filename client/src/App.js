@@ -4,14 +4,15 @@ import {
     Route, 
 }   from 'react-router-dom';
 import './App.css';
-import logo from './logo.svg';
+import Capstone from './Capstone';
+// import logo from './logo.svg';
 
 class App extends Component {
     render() {
         return (
             <div className="App">
                 <Router>
-
+                    <Capstone />
                 </Router>
             </div>
         );

@@ -30,50 +30,38 @@ class Category {
 
     // === ===  RETRIEVE  === ===  [[START]]
     
-    // Gets all records from Users table
-    // Returns an array of User class instances 
+    // Gets all records from Categories table
+    // Returns an array of Category class instances 
     static getAll() {
         return db.any(`
-                SELECT * FROM users`
+                SELECT * FROM categories`
             )
-            .then(userArray => {
-                const instanceArray = userArray.map(userObj => {
-                    return new User(userObj.id, userObj.name, userObj.username, userObj.pwhash, userObj.avatar);
+            .then(catArray => {
+                const instanceArray = catArray.map(catObj => {
+                    return new Category(catObj.id, catObj.category, catObj.levels, catObj.id_user);
                 });
                 return instanceArray;
             });
     }
 
-    // Get individual record from Users table for a specific ID
-    // Returns a User class instance
+    // Get individual record from Categories table for a specific ID
+    // Returns a Category class instance
     static getById(id) {
         return db.one(`
-                SELECT * FROM users WHERE id = $1`,
+                SELECT * FROM categories WHERE id = $1`,
                 [id]
             )
             .then(result => {
-                return new User(result.id, result.name, result.username, result.pwhash, result.avatar);
+                return new Category(result.id, result.category, result.levels, result.id_user);
             });
         }
-        
-    // Get individual record from Users table for a specific Username
-    // Returns a User class instance
-    static getByUserName(username) {
-        return db.one(`
-                SELECT * FROM users WHERE username = $1`,
-                [username]
-            )
-            .then(result => {
-                return new User(result.id, result.name, result.username, result.pwhash, result.avatar);
-            });
-    }
 
-    // Gets all records from Users table for a specific Avatar
-    // Returns an array of IDs for all users that use the specific Avatar
-    static getByAvatar(avatar) {
+    // Gets all records from Categories table for a specific User ID
+    // Returns an array of Category IDs for all categories the user owns
+    static getByUserID(userID) {
         return db.any(`
-                SELECT id FROM users WHERE avatar = $1`,
-                [avatar]
+                SELECT id FROM categories WHERE id_user = $1`,
+                [userID]
             )
             .then(result => {
                 return result.map(r => r.id);
@@ -89,7 +77,7 @@ class Category {
     // Returns boolean True if successful, False if unsuccessful
     updateName(name) {
         return db.result(`
-                UPDATE users SET name=$2 WHERE id=$1`,
+                UPDATE categories SET name=$2 WHERE id=$1`,
                 [this.id, name]
             )
             .then(result => {
@@ -101,7 +89,7 @@ class Category {
     // Returns boolean True if successful, False if unsuccessful
     updateUsername(username) {
         return db.result(`
-                UPDATE users SET username=$2 WHERE id=$1`,
+                UPDATE categories SET username=$2 WHERE id=$1`,
                 [this.id, username]
             )
             .then(result => {
@@ -113,7 +101,7 @@ class Category {
     // Returns boolean True if successful, False if unsuccessful
     updateAvatar(avatar) {
         return db.result(`
-                UPDATE users SET avatar=$2 WHERE id=$1`,
+                UPDATE categories SET avatar=$2 WHERE id=$1`,
                 [this.id, avatar]
             )
             .then(result => {
@@ -127,7 +115,7 @@ class Category {
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(password, salt);
         return db.result(`
-                UPDATE users SET pwhash=$2 WHERE id=$1`,
+                UPDATE categories SET pwhash=$2 WHERE id=$1`,
                 [this.id, hash]
             )
             .then(result => {
@@ -143,7 +131,7 @@ class Category {
     // Delete THIS user
     delete() {
         return db.result(`
-                DELETE FROM users WHERE id = $1`,
+                DELETE FROM categories WHERE id = $1`,
                [this.id]
         );
     }
@@ -151,7 +139,7 @@ class Category {
     // Delete a specific user by ID
     static deleteById(id) {
         return db.result(`
-                DELETE FROM users WHERE id = $1`,
+                DELETE FROM categories WHERE id = $1`,
                 [id]
         );
     }

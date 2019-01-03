@@ -104,7 +104,7 @@ class Category {
     
     // === ===  DELETE  === ===  [[START]]
     
-    // Delete THIS user
+    // Delete THIS category
     delete() {
         return db.result(`
                 DELETE FROM categories WHERE id = $1`,
@@ -112,11 +112,19 @@ class Category {
         );
     }
 
-    // Delete a specific user by ID
+    // Delete a specific category by ID
     static deleteById(id) {
         return db.result(`
                 DELETE FROM categories WHERE id = $1`,
                 [id]
+        );
+    }
+
+    // Delete all the categories owned by a specific User ID
+    static deleteByUserId(id_user) {
+        return db.result(`
+                DELETE FROM categories WHERE id_user = $1`,
+                [id_user]
         );
     }
 

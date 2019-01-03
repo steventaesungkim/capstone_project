@@ -5,6 +5,7 @@ html {
     box-sizing: inherit;
 }
 
+
 html, body {
     margin: 0;
     padding: 0;
@@ -18,3 +19,16 @@ html, body {
     flex-direction: column;
     text-align: center;
 }
+
+
+header{
+    /* outline: 1px solid red; */
+    align-items: flex-end;
+}
+
+
+.clockDisplay {
+    font-size: 70px;
+    letter-spacing: 7px;
+}
+

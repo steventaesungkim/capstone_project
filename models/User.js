@@ -12,17 +12,17 @@ class User {
     }
 
     // === ===  CREATE  === ===
+    // Inserts a new record in the Users table after bcrypting password
+    // Returns a new instance of the User class
     static createUser(name, username, password, avatar) {
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(password, salt);
-        return db
-            .one(
-                `
-            insert into users 
-                (name, username, pwhash, avatar)
-            values 
-                ($1, $2, $3, $4)
-                returning id`,
+        return db.one(`
+                INSERT INTO users 
+                    (name, username, pwhash, avatar)
+                VALUES 
+                    ($1, $2, $3, $4)
+                RETURNING id`,
                 [name, username, hash, avatar]
             )
             .then(data => {
@@ -30,24 +30,57 @@ class User {
             });
     }
 
+
+    // === === RETRIEVE === ===
+    
+    // Gets all records from Users table
+    // Returns an array of User class instances 
+    static getAll() {
+        return db.any(`
+                SELECT * FROM users`
+            )
+            .then(userArray => {
+                const instanceArray = userArray.map(userObj => {
+                    return new User(userObj.id, userObj.name, userObj.username, userObj.pwhash, userObj.avatar);
+                });
+                return instanceArray;
+            });
+    }
+
+    // Get individual record from Users table for a specific ID
+    // Returns a User class instance
+    static getById(id) {
+        return db.one(`
+                SELECT * FROM users WHERE id = $1`,
+                [id]
+            )
+            .then(result => {
+                return new User(result.id, result.name, result.username, result.pwhash, result.avatar);
+            });
+        }
+        
+    // Get individual record from Users table for a specific Username
+    // Returns a User class instance
+    static getByUserName(username) {
+        return db.one(`
+                SELECT * FROM users WHERE username = $1`,
+                [username]
+            )
+            .then(result => {
+                return new User(result.id, result.name, result.username, result.pwhash, result.avatar);
+            });
+    }
+
+    // NEED TO CONFIRM HOW/WHY THIS IS NEEDED
     static from(userObj) {
         const id = userObj.id;
         const name = userObj.name;
-        const username = userObj.iusernamed;
+        const username = userObj.iusernamed;        // is this correct????
         const pwhash = userObj.pwhash;
-        return new User(id, name, username, pwhash);
+        return new User(id, name, username, pwhash);  // could eliminate the consts
     }
 
-    // RETRIEVE (working)
-    static getAll() {
-        return db.any(`select * from users`).then(userArray => {
-            const instanceArray = userArray.map(userObj => {
-                const u = new User(userObj.id, userObj.name);
-                return u;
-            });
-            return instanceArray;
-        });
-    }
+    
     static getByAvatar(avatar) {
         return db
             .one('select * from users where avatar = $1', [avatar])
@@ -57,42 +90,15 @@ class User {
             });
     }
 
-    static getById(id) {
-        return db
-            .one('select * from users where id = $1', [id])
-            .then(result => {
-                const u = new User(result.id, result.name, result.username);
-                return u;
-            });
-    }
+    
 
-    static getByUserName(username) {
-        return db
-            .one(
-                `
-            select * from users 
-            where username ilike '%$1:raw%'
-            `,
-                [username]
-            )
-            .then(result => {
-                console.log(result);
-                return new User(
-                    result.id,
-                    result.name,
-                    result.username,
-                    result.pwhash
-                );
-            });
-    }
-
-    getReminders() {
-        return db.any(
-            `select reminder, id from reminders
-        where user_id = $1`,
-            [this.id]
-        );
-    }
+    // getReminders() {
+    //     return db.any(
+    //         `select reminder, id from reminders
+    //     where user_id = $1`,
+    //         [this.id]
+    //     );
+    // }
     passwordDoesMatch(thePassword) {
         const didMatch = bcrypt.compareSync(thePassword, this.pwhash);
         return didMatch;

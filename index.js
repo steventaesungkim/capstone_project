@@ -31,8 +31,18 @@ const db = require('./models/db');
 // Model Variables
 const User = require('./models/User');
 
-User.getAll()
-    .then(a => console.log(a));
+User.createUser("Mondo", "mmdondo", "abc", "coming soon")
+    .then(a => console.log(a))
+    .then(
+        User.getAll());
+// User.getById(1)
+//     .then(a => console.log(a))
+//     .then(User.getByUserName('mdondo')
+//         .then(a => console.log(a))
+    
+//     );
+
+
 // const Location = require('./models/Location');
 // const Init_Reminder = require('./models/Init_Reminder');
 // const Reminder = require('./models/Reminder');

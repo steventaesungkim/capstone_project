@@ -8,17 +8,17 @@ CREATE TABLE users(
 
 CREATE TABLE categories(
     id serial primary key,
-    category_type text,
-    level boolean,
-    theuser_id integer references users (id)
+    category text,
+    levels boolean,
+    id_user integer references users (id)
 );
 
 CREATE TABLE timers(
     id serial primary key,
     time timestamp,
     level text,
-    category_id integer references categories (id),
-    theuser_id integer references users (id)
+    id_category integer references categories (id),
+    id_user integer references users (id)
 );
 
 CREATE TABLE questions(
@@ -26,13 +26,13 @@ CREATE TABLE questions(
     level text,
     question text,
     answer text,
-    category_id integer references categories (id)
+    id_category integer references categories (id)
 );
 
 CREATE TABLE results(
     id serial primary key,
     correct boolean,
     time timestamp,
-    theuser_id integer references users (id),
-    question_id integer references questions (id)
+    id_user integer references users (id),
+    id_question integer references questions (id)
 );

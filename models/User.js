@@ -11,7 +11,7 @@ class User {
         this.avatar = avatar;
     }
 
-    // === ===  CREATE  === === (working)
+    // === ===  CREATE  === ===
     static createUser(name, username, password, avatar) {
         const salt = bcrypt.genSaltSync(saltRounds);
         const hash = bcrypt.hashSync(password, salt);

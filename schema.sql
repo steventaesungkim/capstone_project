@@ -1,8 +1,8 @@
 CREATE TABLE users(
-    id serial primary key,
-    userName text,
-    passWord text,
+    id serial PRIMARY KEY,
     name text,
+    userName text UNIQUE,
+    passWord text,
     avatar text
 );
 

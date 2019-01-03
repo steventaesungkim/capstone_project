@@ -1,5 +1,5 @@
 INSERT INTO users
-    (name, userName, passWord, avatar)
+    (name, userName, pwhash, avatar)
 VALUES
     ('stan', 'stan', 'stan', 'stanIMG'),
     ('greg', 'greg', 'greg', 'gregIMG'),

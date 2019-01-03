@@ -2,7 +2,7 @@ CREATE TABLE users(
     id serial PRIMARY KEY,
     name text,
     userName text UNIQUE,
-    passWord text,
+    pwhash text,
     avatar text
 );
 

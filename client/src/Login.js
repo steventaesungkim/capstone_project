@@ -1,54 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
+import LogInForm from './LogInForm';
 
-const Login = (props) => {
-    // console.log(props)
-    return (
-        <form className='login-form' onSubmit = {(event) => {props.submit(event)}}>
-
-            <label>
-                <input 
-                    className='input'
-                    type='text'
-                    placeholder='UserName'
-                    onChange = {(e) => {
-                        console.log(e.target.value);
-                        props.updateUserName(e.target.value);
-                    }}
-                    value = {props.inputUserName}
+class Login extends Component {
+    constructor(props) {
+        super(props); 
+        this.state = {
+            username: '',
+            password: ''
+        }
+    }
+    render() {
+        return (
+            <div>
+                <h2>Login</h2> 
+                <LogInForm 
+                    inputUserName = {this.state.username}
+                    updateUserName = {this._userName}
+                    inputPassWord = {this.state.password}
+                    updatePassword = {this.state._password}
+                    submit = {this._onSubmit}
                 />
-            </label>
-            <label>
-                <input 
-                    className='input'
-                    type='text'
-                    placeholder='Password'
-                    onChange = {(e) => {
-                        props.updatePassword(e.target.value);
-                    }}
-                    value = {props.inputPassword}
-                />
-            </label>
-            <input 
-                className='input-submit'
-                type='submit'
-                value='Login'
-            />
-            <br />
-            <button 
-                className='btn' 
-                type='submit' 
-                value='submit'
-                
-                >Register</button>
+            </div>
+        )
+    }
+    _name = (input) => {
+        this.setState ({
+            name: input
+        });
+    }
 
-            <button 
-                className='btn' 
-                type='submit' 
-                value='submit'
-                
-                >Sign in as Guest</button>
-        </form>
-    )
+    _userName = (input) => {
+        this.setState ({
+            username: input
+        });
+    }
+
+
+
+    
 }
 
 export default Login;

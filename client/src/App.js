@@ -4,7 +4,9 @@ import {
     Route, 
 }   from 'react-router-dom';
 import './App.css';
-import Capstone from './Capstone';
+import Home from './Home';
+// import Login from './Login';
+// import Register from './Register';
 // import logo from './logo.svg';
 
 class App extends Component {
@@ -12,7 +14,10 @@ class App extends Component {
         return (
             <div className="App">
                 <Router>
-                    <Capstone />
+                    <div>
+                        <Home />
+                        
+                    </div>    
                 </Router>
             </div>
         );

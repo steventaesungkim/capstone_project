@@ -31,30 +31,30 @@ const db = require('./models/db');
 // Model Variables
 const User = require('./models/User');
 
-// User.createUser("Mondo", "mmdondo", "abc", "coming soon")
-//     .then(a => console.log(a))
-//     .then(
-//         User.getAll());
-User.getById(5)
+// TEST CODE THAT GETS ALL USERS FROM DB
+User.getAll()
     .then(a => {
-        const Mondo = a;
-        console.log("Mondo's original password hash: " + Mondo.pwhash);
-        Mondo.updatePassword("zzz")
-            .then(changed => {
-                if (changed) {
-                    User.getById(Mondo.id)
-                        .then(res => {
-                            console.log("Mondo's new password is: " + res.pwhash)
-                        })
-                }
-                else {
-                    console.log("NOT CHANGED");
-                }});
-    })
-//     .then(User.getByUserName('mdondo')
-//         .then(a => console.log(a))
-    
-//     );
+        console.log(a);
+    });
+
+// Test Code for adding a new user to the DB
+// User.createUser("Mondo", "mdondo", "abc", "coming soon")
+//     .then(a => console.log(a))
+
+
+// TEST CODE FOR DELETE A SPECFIC USER
+// User.getAll()
+//     .then(a => {
+//         console.log(a);
+//         console.log("Say bye to Mondo");
+//         User.deleteById(8)
+//             .then(a => {
+//                 User.getAll()
+//                     .then(b => console.log(b));
+//             })
+//         })
+
+
 
 
 // const Location = require('./models/Location');

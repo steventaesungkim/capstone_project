@@ -89,6 +89,7 @@ class User {
 
 
     // === ===  UPDATE  === ===  [[START]]
+
     // Updates the name for THIS user
     // Returns boolean True if successful, False if unsuccessful
     updateName(name) {
@@ -143,25 +144,29 @@ class User {
 
     
     // === ===  DELETE  === ===  [[START]]
-    // DELETE
+    
+    // Delete THIS user
     delete() {
-        return db.result(
-            `delete from users
-        where id = $1`,
-            [this.id]
+        return db.result(`
+                DELETE FROM users WHERE id = $1`,
+               [this.id]
         );
     }
+
+    // Delete a specific user by ID
     static deleteById(id) {
-        return db.result(
-            `delete from users
-        where id = $1`,
-            [id]
+        return db.result(`
+                DELETE FROM users WHERE id = $1`,
+                [id]
         );
     }
+
     // === ===  DELETE  === ===  [[END]]
 
 
-    // NEED TO CONFIRM HOW/WHY THIS IS NEEDED
+
+    // ========================================================
+    // NEED TO CONFIRM WHETHER THESE ARE NEEDED
     static from(userObj) {
         const id = userObj.id;
         const name = userObj.name;
@@ -170,12 +175,11 @@ class User {
         return new User(id, name, username, pwhash);  // could eliminate the consts
     }
     
-    
     passwordDoesMatch(thePassword) {
         const didMatch = bcrypt.compareSync(thePassword, this.pwhash);
         return didMatch;
     }
-
+    // ========================================================
 
 }
 module.exports = User;

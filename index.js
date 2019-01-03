@@ -31,8 +31,32 @@ const db = require('./models/db');
 // Model Variables
 const User = require('./models/User');
 
+// TEST CODE THAT GETS ALL USERS FROM DB
 User.getAll()
-    .then(a => console.log(a));
+    .then(a => {
+        console.log(a);
+    });
+
+// Test Code for adding a new user to the DB
+// User.createUser("Mondo", "mdondo", "abc", "coming soon")
+//     .then(a => console.log(a))
+
+
+// TEST CODE FOR DELETE A SPECFIC USER
+// User.getAll()
+//     .then(a => {
+//         console.log(a);
+//         console.log("Say bye to Mondo");
+//         User.deleteById(8)
+//             .then(a => {
+//                 User.getAll()
+//                     .then(b => console.log(b));
+//             })
+//         })
+
+
+
+
 // const Location = require('./models/Location');
 // const Init_Reminder = require('./models/Init_Reminder');
 // const Reminder = require('./models/Reminder');

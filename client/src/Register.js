@@ -52,7 +52,7 @@ class Register extends Component {
     }
     _onSubmit = (event) => {
         event.preventDefault();
-        console.log('Button clicked')
+        console.log('Registered')
         // What happens after submitting??
     }
 

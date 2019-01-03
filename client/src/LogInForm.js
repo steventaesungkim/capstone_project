@@ -8,54 +8,55 @@ import {
 const LogInForm = (props) => {
     // console.log(props)
     return (
-        <div>   
-            <form className='login-form' onSubmit = {(event) => {props.submit(event)}}>
-                <label>
-                    <input 
-                        className='input'
-                        type='text'
-                        placeholder='UserName'
-                        onChange = {(e) => {
-                            // console.log(e.target.value);
-                            props.updateUserName(e.target.value);
-                        }}
-                        value = {props.inputUserName}
-                    />
-                </label>
-                <label>
-                    <input 
-                        className='input'
-                        type='text'
-                        placeholder='Password'
-                        onChange = {(e) => {
-                            props.updatePassword(e.target.value);
-                        }}
-                        value = {props.inputPassword}
-                    />
-                </label>
+        <form className='login-form' onSubmit = {(event) => {props.submit(event)}}>
+            <label>Username:</label>
                 <input 
-                    className='input-submit'
-                    type='submit'
-                    value='Login'
+                    className='input'
+                    type='text'
+                    placeholder='UserName'
+                    onChange = {(e) => {
+                        // console.log(e.target.value);
+                        props.updateUserName(e.target.value);
+                    }}
+                    value = {props.inputUserName}
                 />
-                <br />
-                <Link to = '/register'>
+            <br />
+            <label>Password:</label>
+                <input 
+                    className='input'
+                    type='text'
+                    placeholder='Password'
+                    onChange = {(e) => {
+                        props.updatePassword(e.target.value);
+                    }}
+                    value = {props.inputPassword}
+                />
+            <br />
+            <input 
+                className='input-submit'
+                type='submit'
+                value='Login'
+            />
+            <br />
+            <Link to = '/register'>
+            <button 
+                className='btn' 
+                type='submit' 
+                value='submit'
+                
+                >Register
+            </button>
+            </Link>
+            <Link to = '/#'>   
                 <button 
                     className='btn' 
                     type='submit' 
                     value='submit'
                     
-                    >Register</button>
-                </Link>    
-
-                <button 
-                    className='btn' 
-                    type='submit' 
-                    value='submit'
-                    
-                    >Sign in as Guest</button>
-            </form>
-        </div>
+                    >Sign in as Guest
+                </button>
+            </Link> 
+        </form>
     )
 }
 

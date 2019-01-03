@@ -7,18 +7,19 @@ import {
 const RegisterForm = (props) => {
     return (
         <form className='register-form' onSubmit = {(event) => {props.submit(event)}}>
-            <label>
+            <label>Name:</label>
                 <input 
                     className='input'
                     type='text'
                     placeholder='name'
+                    name='name'
                     onChange = {(e) =>{
                         props.updateName(e.target.value);
                     }}
                     value = {props.inputName}
                 />
-            </label>
-            <label>
+                <br />
+            <label>UserName:</label>
                 <input 
                     className='input'
                     type='text'
@@ -29,8 +30,8 @@ const RegisterForm = (props) => {
                     }}
                     value = {props.inputUserName}
                 />
-            </label>
-            <label>
+                <br />
+            <label>Password:</label>
                 <input 
                     className='input'
                     type='text'
@@ -40,8 +41,8 @@ const RegisterForm = (props) => {
                     }}
                     value = {props.inputPassword}
                 />
-            </label>
-            <label>
+                <br />
+            <label>Avatar:</label>
                 <input 
                     className='input'
                     type='text'
@@ -51,7 +52,7 @@ const RegisterForm = (props) => {
                     }}
                     value = {props.inputAvatar}
                 />
-            </label>
+                <br />
             <input 
                 className='input-submit'
                 type='submit'
@@ -64,14 +65,18 @@ const RegisterForm = (props) => {
                     type='submit' 
                     value='submit'
                     
-                    >Log In</button>
+                    >Log In
+                </button>
+            </Link>    
+            <Link to = '/#'>
+                <button 
+                    className='btn' 
+                    type='submit' 
+                    value='submit'
+                    
+                    >Sign in as Guest
+                </button>
             </Link>        
-            <button 
-                className='btn' 
-                type='submit' 
-                value='submit'
-                
-                >Sign in as Guest</button>
         </form>
     )
 }

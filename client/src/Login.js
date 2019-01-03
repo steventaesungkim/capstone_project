@@ -34,10 +34,14 @@ class Login extends Component {
             username: input
         });
     }
+    _onSubmit = (event) => {
+        event.preventDefault();
+        console.log('Logging In')
+        // What happens after submitting??
+    }
 
 
 
-    
 }
 
 export default Login;

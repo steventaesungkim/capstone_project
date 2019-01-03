@@ -11,7 +11,8 @@ class User {
         this.avatar = avatar;
     }
 
-    // === ===  CREATE  === ===
+    // === ===  CREATE  === ===  [[START]]
+
     // Inserts a new record in the Users table after bcrypting password
     // Returns a new instance of the User class
     static createUser(name, username, password, avatar) {
@@ -29,9 +30,10 @@ class User {
                 return new User(data.id, name, username, hash, avatar);
             });
     }
+    // === ===  CREATE  === ===  [[END]]
 
 
-    // === === RETRIEVE === ===
+    // === ===  RETRIEVE  === ===  [[START]]
     
     // Gets all records from Users table
     // Returns an array of User class instances 
@@ -71,46 +73,27 @@ class User {
             });
     }
 
-    // NEED TO CONFIRM HOW/WHY THIS IS NEEDED
-    static from(userObj) {
-        const id = userObj.id;
-        const name = userObj.name;
-        const username = userObj.iusernamed;        // is this correct????
-        const pwhash = userObj.pwhash;
-        return new User(id, name, username, pwhash);  // could eliminate the consts
-    }
-
-    
+    // Gets all records from Users table for a specific Avatar
+    // Returns an array of IDs for all users that use the specific Avatar
     static getByAvatar(avatar) {
-        return db
-            .one('select * from users where avatar = $1', [avatar])
+        return db.any(`
+                SELECT id FROM users WHERE avatar = $1`,
+                [avatar]
+            )
             .then(result => {
-                // console.log('look at my', result.id);
-                return result.id;
+                return result.map(r => r.id);
             });
     }
 
-    
+    // === ===  RETRIEVE  === ===  [[END]]
 
-    // getReminders() {
-    //     return db.any(
-    //         `select reminder, id from reminders
-    //     where user_id = $1`,
-    //         [this.id]
-    //     );
-    // }
-    passwordDoesMatch(thePassword) {
-        const didMatch = bcrypt.compareSync(thePassword, this.pwhash);
-        return didMatch;
-    }
-    // UPDATE (working)
+
+    // === ===  UPDATE  === ===  [[START]]
+    // Updates the name for THIS user
+    // Returns boolean True if successful, False if unsuccessful
     updateName(name) {
-        this.name = name;
-        return db
-            .result(
-                `update users
-                    set name=$2
-                    where id=$1`,
+        return db.result(`
+                UPDATE users SET name=$2 WHERE id=$1`,
                 [this.id, name]
             )
             .then(result => {
@@ -118,7 +101,49 @@ class User {
             });
     }
 
-    // DELETE (working)
+    // Updates the username for THIS user
+    // Returns boolean True if successful, False if unsuccessful
+    updateUsername(username) {
+        return db.result(`
+                UPDATE users SET username=$2 WHERE id=$1`,
+                [this.id, username]
+            )
+            .then(result => {
+                return result.rowCount === 1;
+            });
+    }
+
+    // Updates the avatar for THIS user
+    // Returns boolean True if successful, False if unsuccessful
+    updateAvatar(avatar) {
+        return db.result(`
+                UPDATE users SET avatar=$2 WHERE id=$1`,
+                [this.id, avatar]
+            )
+            .then(result => {
+                return result.rowCount === 1;
+            });
+    }
+
+    // Updates the password for THIS user
+    // Returns boolean True if successful, False if unsuccessful
+    updatePassword(password) {
+        const salt = bcrypt.genSaltSync(saltRounds);
+        const hash = bcrypt.hashSync(password, salt);
+        return db.result(`
+                UPDATE users SET pwhash=$2 WHERE id=$1`,
+                [this.id, hash]
+            )
+            .then(result => {
+                return result.rowCount === 1;
+            });
+    }
+
+    // === ===  UPDATE  === ===  [[END]]
+
+    
+    // === ===  DELETE  === ===  [[START]]
+    // DELETE
     delete() {
         return db.result(
             `delete from users
@@ -133,5 +158,24 @@ class User {
             [id]
         );
     }
+    // === ===  DELETE  === ===  [[END]]
+
+
+    // NEED TO CONFIRM HOW/WHY THIS IS NEEDED
+    static from(userObj) {
+        const id = userObj.id;
+        const name = userObj.name;
+        const username = userObj.iusernamed;        // is this correct????
+        const pwhash = userObj.pwhash;
+        return new User(id, name, username, pwhash);  // could eliminate the consts
+    }
+    
+    
+    passwordDoesMatch(thePassword) {
+        const didMatch = bcrypt.compareSync(thePassword, this.pwhash);
+        return didMatch;
+    }
+
+
 }
 module.exports = User;

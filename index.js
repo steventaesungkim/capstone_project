@@ -31,12 +31,26 @@ const db = require('./models/db');
 // Model Variables
 const User = require('./models/User');
 
-User.createUser("Mondo", "mmdondo", "abc", "coming soon")
-    .then(a => console.log(a))
-    .then(
-        User.getAll());
-// User.getById(1)
+// User.createUser("Mondo", "mmdondo", "abc", "coming soon")
 //     .then(a => console.log(a))
+//     .then(
+//         User.getAll());
+User.getById(5)
+    .then(a => {
+        const Mondo = a;
+        console.log("Mondo's original password hash: " + Mondo.pwhash);
+        Mondo.updatePassword("zzz")
+            .then(changed => {
+                if (changed) {
+                    User.getById(Mondo.id)
+                        .then(res => {
+                            console.log("Mondo's new password is: " + res.pwhash)
+                        })
+                }
+                else {
+                    console.log("NOT CHANGED");
+                }});
+    })
 //     .then(User.getByUserName('mdondo')
 //         .then(a => console.log(a))
     

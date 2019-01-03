@@ -6,17 +6,17 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// const session = require('express-session');
-// const pgSession = require('connect-pg-simple')(session);
-// const db = require('./models/db');
+const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
+const db = require('./models/db');
 
-// app.use(session({
-//     store: new pgSession({pgPromise: db}),
-//     secret: 'bingbong0987654321234567890',
-//     saveUninitialized: false,
-//     cookie: {maxAge: 30 * 24 * 60 * 60 * 1000}
-//     })
-// );
+app.use(session({
+    store: new pgSession({pgPromise: db}),
+    secret: 'bingbong0987654321234567890',
+    saveUninitialized: false,
+    cookie: {maxAge: 30 * 24 * 60 * 60 * 1000}
+    })
+);
 
 // Views and CSS
 app.use(express.static('public'));
@@ -30,11 +30,19 @@ app.use(express.static('public'));
 
 // Model Variables
 const User = require('./models/User');
+const Category = require('./models/Category');
 
+// ========================================================
+// Listening 
+// ========================================================
 
-// // ========================================================
-// // Protects Routes
-// // ========================================================
+app.listen(5000, () => {
+    console.log('express app is ready.');
+});
+
+// ========================================================
+// Protects Routes
+// ========================================================
 
 // function protectRoute(req, res, next) {
 //     let isLoggedIn = req.session.user ? true : false;
@@ -63,6 +71,11 @@ const User = require('./models/User');
 // ========================================================
 
 
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// USER
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 // ========================================================
 // Register
 // ========================================================
@@ -84,11 +97,10 @@ app.post('/api/user/register', (req, res) => {
         });
 });
 
-// // ========================================================
-
+// ========================================================
 
 // ========================================================
-// Login (working)
+// Login 
 // ========================================================
 
 app.post('/api/user/login', (req, res) => {
@@ -109,8 +121,7 @@ app.post('/api/user/login', (req, res) => {
         });
 });
 
-// // ========================================================
-
+// ========================================================
 
 // ========================================================
 // Signout / Kill User Session
@@ -125,10 +136,10 @@ app.post('/api/user/login', (req, res) => {
 //     // 2. redirect them to the home page
 // });
 
-// // ========================================================
+// ========================================================
 
 // ========================================================
-// Get All Users (working)
+// Get All Users 
 // ========================================================
 
 app.get('/api/user', (req, res) => {
@@ -142,7 +153,7 @@ app.get('/api/user', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Get User by ID (working)
+// Get User by ID 
 // ========================================================
 
 app.get('/api/user/:id(\\d+)', (req, res) => {
@@ -155,7 +166,7 @@ app.get('/api/user/:id(\\d+)', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Get User by Username (working)
+// Get User by Username 
 // ========================================================
 
 app.get('/api/user/:username', (req, res) => {
@@ -168,7 +179,20 @@ app.get('/api/user/:username', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Update User's Name (working)
+// Get User by Avatar 
+// ========================================================
+
+app.get('/api/user/:avatar', (req, res) => {
+    User.getByAvatar(req.params.avatar)
+    .then(avatar => {
+        res.json(avatar);
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Update User's Name by ID 
 // ========================================================
 
 app.post('/api/user/:id(\\d+)', (req, res) => {
@@ -184,7 +208,55 @@ app.post('/api/user/:id(\\d+)', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Delete User (working)
+// Update User's Username by ID 
+// ========================================================
+
+app.post('/api/user/:id(\\d+)', (req, res) => {
+    User.getById(req.params.id)
+    .then(theUser => {
+        theUser.updateUsername(req.body.username)
+        .then(usernameUpdated => {
+            res.json(usernameUpdated);
+        });
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Update User's Avatar by ID 
+// ========================================================
+
+app.post('/api/user/:id(\\d+)', (req, res) => {
+    User.getById(req.params.id)
+    .then(theUser => {
+        theUser.updateAvatar(req.body.avatar)
+        .then(avatarUpdated => {
+            res.json(avatarUpdated);
+        });
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Update User's Password by ID 
+// ========================================================
+
+app.post('/api/user/:id(\\d+)', (req, res) => {
+    User.getById(req.params.id)
+    .then(theUser => {
+        theUser.updatePassword(req.body.password)
+        .then(passwordUpdated => {
+            res.json(passwordUpdated);
+        });
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Delete User by ID 
 // ========================================================
 
 app.delete('/api/user/:id(\\d+)', (req, res) => {
@@ -199,6 +271,118 @@ app.delete('/api/user/:id(\\d+)', (req, res) => {
 
 // ========================================================
 
-app.listen(5000, () => {
-    console.log('express app is ready.');
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// CATEGORY
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+// ========================================================
+// Create a Category
+// ========================================================
+
+app.post('/api/category/create', (req, res) => {
+    console.log(req.body);
+    const newCategoryType = req.body.category_type;
+    const newLevel = req.body.levels;
+    const newIdUser = req.body.id_user;
+    Category.createUser(newCategoryType, newLevel, newIdUser, newAvatar)
+        .catch(err => {
+            console.log(err);
+            res.send(err);
+        })
+        .then(newCategory => {
+            // req.session.user = newCategory;
+            res.json(newCategory);
+        });
 });
+
+// ========================================================
+
+// ========================================================
+// Get All Categories 
+// ========================================================
+
+app.get('/api/category', (req, res) => {
+    Category.getAll()
+    .then(allCategory => {
+        console.log(allCategory);
+        res.json(allCategory);
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Categories by ID 
+// ========================================================
+
+app.get('/api/category/:id(\\d+)', (req, res) => {
+    Category.getById(req.params.id)
+    .then(category => {
+        res.json(category);
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Categories by User's ID 
+// ========================================================
+
+app.get('/api/category/:id_user(\\d+)', (req, res) => {
+    Category.getById(req.params.id)
+    .then(category => {
+        res.json(category);
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Update Category type by ID 
+// ========================================================
+
+app.post('/api/category/:id(\\d+)', (req, res) => {
+    Category.getById(req.params.id)
+    .then(category => {
+        category.updateCategoryType(req.body.category_type)
+        .then(categoryTypeUpdated => {
+            res.json(categoryTypeUpdated);
+        });
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Update Category level by ID 
+// ========================================================
+
+app.post('/api/category/:id(\\d+)', (req, res) => {
+    Category.getById(req.params.id)
+    .then(category => {
+        category.updateLevels(req.body.levels)
+        .then(categoryLevelUpdated => {
+            res.json(categoryLevelUpdated);
+        });
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Delete Category by ID 
+// ========================================================
+
+app.delete('/api/category/:id(\\d+)', (req, res) => {
+    Category.getById(req.params.id)
+    .then(theCategory => {
+        theCategory.delete()
+        .then(delCategory => {
+            res.json(delCategory);
+        });
+    });
+});
+
+// ========================================================

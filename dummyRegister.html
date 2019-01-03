@@ -5,31 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./public/stylesheet/index.css">
-    <title>dummyLogin/Home</title>
+    <title>dummyRegister</title>
 </head>
 <body>
     <div class="title">
         <h1>MAMA here. What do you want to be tested on?</h1>
     </div>
-    <div class="login">
-        <h2>Login</h2>
-        <form action="/login">
+    <div class="register">
+        <h2>Sign up</h2>
+        <form>
             <label>
-                <span>UserName:</span>
+                <span>UserName: </span>
                     <input type="text" name="userName">
             </label>
-            <br> <br>
+            <br><br>
             <label>
                 <span>PassWord:</span>
                     <input type="password" name="passWord">
             </label>
-            <br> <br>
-            <input type="submit" value="Login">
-        </form>  
+            <br><br>
+            <label>
+                <span>Name:</span>
+                    <input type="text" name="name">
+            </label>
+            <br><br>
+            <label>
+                <span>Avatar: </span>
+                    <input type="text" name="avatar">
+            </label>
+            <br><br>
+            <input type="submit" value="Register">
+        </form>
         <br><br>
-        <button>Register</button>
+        <button>No, I want to login</button>
         <button>Sign in as Guest</button> 
     </div>
-
 </body>
 </html>

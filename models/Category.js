@@ -1,9 +1,9 @@
 const db = require('./db');
 
 class Category {
-    constructor(id, category, levels, id_user) {
+    constructor(id, category_type, levels, id_user) {
         this.id = id;
-        this.category = category;
+        this.category_type = category_type;
         this.levels = levels;
         this.id_user = id_user;
     }
@@ -12,17 +12,17 @@ class Category {
 
     // Inserts a new record in the Categories table
     // Returns a new instance of the Category class
-    static createCategory(category, levels, id_user) {
+    static createCategory(category_type, levels, id_user) {
         return db.one(`
                 INSERT INTO categories 
-                    (category, levels, id_user)
+                    (category_type, levels, id_user)
                 VALUES 
                     ($1, $2, $3)
                 RETURNING id`,
-                [category, levels, id_user]
+                [category_type, levels, id_user]
             )
             .then(data => {
-                return new Category (data.id, category, levels, id_user);
+                return new Category (data.id, category_type, levels, id_user);
             });
     }
     // === ===  CREATE  === ===  [[END]]
@@ -38,7 +38,7 @@ class Category {
             )
             .then(catArray => {
                 const instanceArray = catArray.map(catObj => {
-                    return new Category(catObj.id, catObj.category, catObj.levels, catObj.id_user);
+                    return new Category(catObj.id, catObj.category_type, catObj.levels, catObj.id_user);
                 });
                 return instanceArray;
             });
@@ -52,7 +52,7 @@ class Category {
                 [id]
             )
             .then(result => {
-                return new Category(result.id, result.category, result.levels, result.id_user);
+                return new Category(result.id, result.category_type, result.levels, result.id_user);
             });
         }
 
@@ -73,55 +73,31 @@ class Category {
 
     // === ===  UPDATE  === ===  [[START]]
 
-    // Updates the name for THIS user
+    // Updates the category_type for THIS category
     // Returns boolean True if successful, False if unsuccessful
-    updateName(name) {
+    updateCategoryType(newType) {
         return db.result(`
-                UPDATE categories SET name=$2 WHERE id=$1`,
-                [this.id, name]
+                UPDATE categories SET category_type=$2 WHERE id=$1`,
+                [this.id, newType]
             )
             .then(result => {
                 return result.rowCount === 1;
             });
     }
 
-    // Updates the username for THIS user
+    // Updates the levels for THIS category
     // Returns boolean True if successful, False if unsuccessful
-    updateUsername(username) {
+    updateLevels(newLevels) {       // newLevels should be boolean (true or false)
         return db.result(`
-                UPDATE categories SET username=$2 WHERE id=$1`,
-                [this.id, username]
+                UPDATE categories SET levels=$2 WHERE id=$1`,
+                [this.id, newLevels]
             )
             .then(result => {
                 return result.rowCount === 1;
             });
     }
 
-    // Updates the avatar for THIS user
-    // Returns boolean True if successful, False if unsuccessful
-    updateAvatar(avatar) {
-        return db.result(`
-                UPDATE categories SET avatar=$2 WHERE id=$1`,
-                [this.id, avatar]
-            )
-            .then(result => {
-                return result.rowCount === 1;
-            });
-    }
-
-    // Updates the password for THIS user
-    // Returns boolean True if successful, False if unsuccessful
-    updatePassword(password) {
-        const salt = bcrypt.genSaltSync(saltRounds);
-        const hash = bcrypt.hashSync(password, salt);
-        return db.result(`
-                UPDATE categories SET pwhash=$2 WHERE id=$1`,
-                [this.id, hash]
-            )
-            .then(result => {
-                return result.rowCount === 1;
-            });
-    }
+    // Could add an updateUserId for admin purposes, but not needed now
 
     // === ===  UPDATE  === ===  [[END]]
 

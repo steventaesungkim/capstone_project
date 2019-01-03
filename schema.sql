@@ -8,7 +8,7 @@ CREATE TABLE users(
 
 CREATE TABLE categories(
     id serial primary key,
-    category text,
+    category_type text,
     levels boolean,
     id_user integer references users (id)
 );

@@ -6,7 +6,7 @@ VALUES
     ('kim', 'kim', 'kim', 'kimIMG');
 
 INSERT INTO categories
-    (category, levels, id_user)
+    (category_type, levels, id_user)
 VALUES
     ('Arithemic', true, 1),
     ('Sequence', true, 2);

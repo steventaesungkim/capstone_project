@@ -45,20 +45,20 @@ class Clock extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            time: new Date().toLocaleString()
+            date: new Date().toLocaleString()
         };
     }
 
     componentDidMount() {
-        this.intervalID = setInterval(() => (
-            this.tick(), 1000
-        ));
+        this.intervalID = setInterval(
+            () => {this.tick()}, 1000
+        );
     }
 
     componentWillUnmount() {
         clearInterval(this.intervalID);
     }
-    
+
     tick() {
         this.setState({
             date: new Date().toLocaleString()
@@ -66,10 +66,10 @@ class Clock extends Component {
     }
 
     render() {
-        console.log(tick())
+        // console.log(this.state.time)
         return (
         <p className="App-clock">
-            The time is {this.state.time}.
+            The time is {this.state.date}.
         </p>
         );
     }

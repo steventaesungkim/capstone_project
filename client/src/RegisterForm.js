@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const RegisterForm = (props) => {
@@ -9,10 +9,10 @@ const RegisterForm = (props) => {
                 <input 
                     className='input'
                     type='text'
-                    placeholder='name'
+                    // placeholder='name'
                     name='name'
                     onChange = {(e) =>{
-                        props.updateName(e.target.value);
+                        props.newName(e.target.value);
                     }}
                     value = {props.inputName}
                 />
@@ -21,10 +21,10 @@ const RegisterForm = (props) => {
                 <input 
                     className='input'
                     type='text'
-                    placeholder='UserName'
+                    // placeholder='UserName'
                     onChange = {(e) => {
                         // console.log(e.target.value);
-                        props.updateUserName(e.target.value);
+                        props.newUserName(e.target.value);
                     }}
                     value = {props.inputUserName}
                 />
@@ -33,9 +33,9 @@ const RegisterForm = (props) => {
                 <input 
                     className='input'
                     type='text'
-                    placeholder='Password'
+                    // placeholder='Password'
                     onChange = {(e) => {
-                        props.updatePassword(e.target.value);
+                        props.newPassword(e.target.value);
                     }}
                     value = {props.inputPassword}
                 />
@@ -44,9 +44,9 @@ const RegisterForm = (props) => {
                 <input 
                     className='input'
                     type='text'
-                    placeholder='Select an Avatar'
+                    // placeholder='Select an Avatar'
                     onChange = {(e) => {
-                        props.updateAvatar(e.target.value);
+                        props.newAvatar(e.target.value);
                     }}
                     value = {props.inputAvatar}
                 />

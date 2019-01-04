@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 const LogInForm = (props) => {
     // console.log(props);
@@ -9,7 +10,7 @@ const LogInForm = (props) => {
                 <input 
                     className='input'
                     type='text'
-                    placeholder='UserName'
+                    // placeholder='UserName'
                     onChange = {(e) => {
                         // console.log(e.target.value);
                         props.newUserName(e.target.value);
@@ -21,7 +22,7 @@ const LogInForm = (props) => {
                 <input 
                     className='input'
                     type='text'
-                    placeholder='Password'
+                    // placeholder='Password'
                     onChange = {(e) => {
                         props.newPassword(e.target.value);
                     }}

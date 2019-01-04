@@ -22,7 +22,7 @@ class Register extends Component {
                     newName = {this._name}
                     inputUserName = {this.state.username}
                     newUserName = {this._userName}
-                    inputPassWord = {this.state.password}
+                    inputPassword = {this.state.password}
                     newPassword = {this._password}
                     inputAvatar = {this.state.avatar}
                     newAvatar = {this._avatar}
@@ -54,7 +54,7 @@ class Register extends Component {
     }
     _onSubmit = (event) => {
         event.preventDefault();
-        console.log('Registered')
+        console.log('Registering..')
         fetch('/api/user/register',{
             method: 'POST',
             body: JSON.stringify({
@@ -67,9 +67,9 @@ class Register extends Component {
                 "Content-type": "application/json"
             }
         })
-            .then(r => {
-                return r.json();
-            })
+        .then(r => {
+            return r.json();
+        })
     };
 
 

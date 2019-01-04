@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const RegisterForm = (props) => {
@@ -9,7 +9,7 @@ const RegisterForm = (props) => {
                 <input 
                     className='input'
                     type='text'
-                    placeholder='name'
+                    // placeholder='name'
                     name='name'
                     onChange = {(e) =>{
                         props.newName(e.target.value);
@@ -21,7 +21,7 @@ const RegisterForm = (props) => {
                 <input 
                     className='input'
                     type='text'
-                    placeholder='UserName'
+                    // placeholder='UserName'
                     onChange = {(e) => {
                         // console.log(e.target.value);
                         props.newUserName(e.target.value);
@@ -33,7 +33,7 @@ const RegisterForm = (props) => {
                 <input 
                     className='input'
                     type='text'
-                    placeholder='Password'
+                    // placeholder='Password'
                     onChange = {(e) => {
                         props.newPassword(e.target.value);
                     }}
@@ -44,7 +44,7 @@ const RegisterForm = (props) => {
                 <input 
                     className='input'
                     type='text'
-                    placeholder='Select an Avatar'
+                    // placeholder='Select an Avatar'
                     onChange = {(e) => {
                         props.newAvatar(e.target.value);
                     }}

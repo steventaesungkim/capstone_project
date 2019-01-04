@@ -26,28 +26,39 @@ class Login extends Component {
                 <LogInForm 
                     inputUserName = {this.state.username}
                     newUserName = {this._userName}
-                    inputPassWord = {this.state.password}
-                    newPassword = {this.state._password}
+                    inputPassword = {this.state.password}
+                    newPassword = {this._password}
                     submit = {this._onSubmit}
                 />
             </div>
         )
     }
-    _name = (input) => {
-        this.setState ({
-            name: input
-        });
-    }
-
     _userName = (input) => {
         this.setState ({
             username: input
         });
     }
+    _password = (input) => {
+        this.setState ({
+            password: input
+        });
+    }
     _onSubmit = (event) => {
         event.preventDefault();
-        console.log('Logging In')
-        fetch()
+        console.log('Logging In..')
+        fetch('api/user/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                username: this.state.username,
+                password: this.state.password
+            }),
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        .then(r => {
+            console.log(r);
+        })
     }
 
 

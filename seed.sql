@@ -9,7 +9,8 @@ INSERT INTO categories
     (category_type, levels, id_user)
 VALUES
     ('Arithemic', true, 1),
-    ('Sequence', true, 2);
+    ('Sequence', true, 2),
+    ('Flash Cards', false, 3);
 
 INSERT INTO timers
     (time, level, id_category, id_user)
@@ -43,7 +44,14 @@ VALUES
     ('2', 'I J K L M', 'N', 2),
     ('2', 'B D F G I', 'J', 2),
     ('2', 'BH CI DJ EK FL', 'GM', 2),
-    ('2', 'A Z B Y C', 'X', 2);
+    ('2', 'A Z B Y C', 'X', 2),
+    ('Physics', 'What is the formula for Force?', 'F = m * a', 3),
+    ('Physics', 'What is the formula for Ohms Law?', 'I = R * V', 3),
+    ('Physics', 'What is the acceleration of gravity on Earth?', '9.8 m/s^2', 3),
+    ('Physics', 'What is the formula for momentum?', 'p = m * v', 3),
+    ('Biology', 'What phenomenon relates to sunlight being converted to energy?', 'photosynthesis', 3),
+    ('Biology', 'What is the green pigment in plants that is affected by photosynthesis?', 'chlorophyll', 3),
+    ('Biology', 'Name a byproduct of photosynthesis in plants.', 'oxygen', 3);
 
 
 INSERT INTO results

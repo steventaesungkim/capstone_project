@@ -129,14 +129,7 @@ class Question {
             });
     }
 
-
     // === ===  UPDATE  === ===  [[END]]
-
-
-
-//  ++++++++++++++++++++++++++++++++++++++++++++++
-// UPDATES HAVE NOT BEEN MADE BELOW THIS LINE
-
 
     
     // === ===  DELETE  === ===  [[START]]
@@ -157,17 +150,23 @@ class Question {
         );
     }
 
-    // Delete all the questions owned by a specific User ID
-    static deleteByUserId(id_user) {
+    // Delete all the questions of the specifed level for the specified category ID
+    static deleteByLevel(catID, level) {
         return db.result(`
-                DELETE FROM questions WHERE id_user = $1`,
-                [id_user]
+                DELETE FROM questions WHERE (id_category = $1 AND level = $2)`,
+                [catID, level]
+        );
+    }
+
+    // Delete all the questions for a specific category ID
+    static deleteByCategory(catID) {
+        return db.result(`
+                DELETE FROM questions WHERE id_category = $1`,
+                [catID]
         );
     }
 
     // === ===  DELETE  === ===  [[END]]
-
-
 
 }
 module.exports = Question;

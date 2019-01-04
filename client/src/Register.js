@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import RegisterForm from './RegisterForm';
+// import axios from 'axios';
+
 
 class Register extends Component {
     constructor(props) {
@@ -53,8 +55,35 @@ class Register extends Component {
     _onSubmit = (event) => {
         event.preventDefault();
         console.log('Registered')
-        // What happens after submitting??
-    }
+        fetch('/',{
+            method: 'POST',
+            body: JSON.stringify({
+                name:
+            })
+        })
+
+
+
+
+
+
+
+
+
+            .post('/api/register/', this.state)
+            .then(r => {
+                if (r.data.status !== 'okay') {
+                    alert("Almost in, try again.")
+                } else {
+                    this.props.history.push('/');
+                    console.log(`Your're REGISTERED!`)
+                }
+                console.log(r.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
 
 
 

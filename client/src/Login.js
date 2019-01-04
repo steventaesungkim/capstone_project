@@ -9,6 +9,16 @@ class Login extends Component {
             password: ''
         }
     }
+
+    componentDidMount(){
+        fetch('/api/user')
+        .then(r => {
+            return r.json();
+        })
+        .then(users =>{
+            console.log(users)
+        })
+    }
     render() {
         return (
             <div>

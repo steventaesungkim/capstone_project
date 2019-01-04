@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 const LogInForm = (props) => {
-    // console.log(props)
+    // console.log(props);
     return (
         <form className='login-form' onSubmit = {(event) => {props.submit(event)}}>
             <label>Username:</label>

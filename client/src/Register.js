@@ -67,7 +67,9 @@ class Register extends Component {
                 "Content-type": "application/json"
             }
         })
-            .then(r => console.log(r.json()))
+            .then(r => {
+                return r.json();
+            })
             // .then(Nu => {
             //     if (Nu.data.status !== 'okay') {
             //         alert("Almost in, try again.")

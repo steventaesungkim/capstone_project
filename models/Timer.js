@@ -29,51 +29,88 @@ class Timer {
     // === ===  CREATE  === ===  [[END]]
 
 
-
-
-
-
-    
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//         CODE BELOW HAS NOT BEEN UPDATED YET      !!
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
     // === ===  RETRIEVE  === ===  [[START]]
     
-    // Gets all records from Categories table
-    // Returns an array of Category class instances 
+    // Gets all records from Timers table
+    // Returns an array of Timer class instances 
     static getAll() {
         return db.any(`
-                SELECT * FROM categories`
+                SELECT * FROM timers`
             )
-            .then(catArray => {
-                const instanceArray = catArray.map(catObj => {
-                    return new Category(catObj.id, catObj.time, catObj.level, catObj.id_user);
+            .then(timerArray => {
+                const instanceArray = timerArray.map(timerObj => {
+                    return new Timer(timerObj.id, timerObj.time, timerObj.level, timerObj.id_category, timerObj.id_user);
                 });
                 return instanceArray;
             });
     }
 
-    // Get individual record from Categories table for a specific ID
-    // Returns a Category class instance
+    // Gets individual record from Timers table for a specific ID
+    // Returns a Timer class instance
     static getById(id) {
         return db.one(`
-                SELECT * FROM categories WHERE id = $1`,
+                SELECT * FROM timers WHERE id = $1`,
                 [id]
             )
             .then(result => {
-                return new Category(result.id, result.time, result.level, result.id_user);
+                return new Timer(result.id, result.time, result.level, result.id_category, result.id_user);
             });
         }
 
-    // Gets all records from Categories table for a specific User ID
-    // Returns an array of Category IDs for all categories the user owns
-    static getByUserID(userID) {
+    // Gets all records from Timers table for a specific User ID
+    // The returnAllData flag determines what is returned:
+    //   - Returns an array of Timer IDs if returnAllData is false
+    //   - Returns an array of Timer class instances if returnAllData is true or omitted
+    static getByUserId(userID, returnAllData=true) {
+        if (returnAllData) {
+            return db.any(`
+                    SELECT * FROM timers WHERE id_user = $1`,
+                    [userID]
+                )
+                .then(tArray => {
+                    const instanceArray = tArray.map(t => {
+                        return new Timer(t.id, t.time, t.level, t.id_category, t.id_user);
+                    });
+                    return instanceArray;
+                });
+        } else {
+            return db.any(`
+                    SELECT id FROM timers WHERE id_user = $1`,
+                    [userID]
+                )
+                .then(result => {
+                    return result.map(r => r.id);
+                });
+        }
+    }
+
+    // Gets the IDs all records from Timers table for a specific User ID
+    // Returns an array of Timer IDs for all timers the user owns
+    static getByCategory(catID) {
         return db.any(`
-                SELECT id FROM categories WHERE id_user = $1`,
-                [userID]
+                SELECT id FROM timers WHERE id_category = $1`,
+                [catID]
+            )
+            .then(result => {
+                return result.map(r => r.id);
+            });
+    }
+
+
+
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//         CODE BELOW HAS NOT BEEN UPDATED YET      !!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// Need instance functions for allowing a User instance to request list of its timers and its categories
+
+    // Gets the IDs all records from Timers table for a specific User ID
+    // Returns an array of Timer IDs for all timers the user owns
+    static getByCat(catID) {
+        return db.any(`
+                SELECT id FROM timers WHERE id_category = $1`,
+                [catID]
             )
             .then(result => {
                 return result.map(r => r.id);

@@ -10,24 +10,24 @@ class Login extends Component {
         }
     }
 
-    componentDidMount(){
-        fetch('/api/user')
-        .then(r => {
-            return r.json();
-        })
-        .then(users =>{
-            console.log(users)
-        })
-    }
+    // componentDidMount(){
+    //     fetch('/api/user')
+    //     .then(r => {
+    //         return r.json();
+    //     })
+    //     .then(users =>{
+    //         console.log(users)
+    //     })
+    // }
     render() {
         return (
             <div>
                 <h2>Login</h2> 
                 <LogInForm 
                     inputUserName = {this.state.username}
-                    updateUserName = {this._userName}
+                    newUserName = {this._userName}
                     inputPassWord = {this.state.password}
-                    updatePassword = {this.state._password}
+                    newPassword = {this.state._password}
                     submit = {this._onSubmit}
                 />
             </div>
@@ -47,7 +47,7 @@ class Login extends Component {
     _onSubmit = (event) => {
         event.preventDefault();
         console.log('Logging In')
-        // What happens after submitting??
+        fetch()
     }
 
 

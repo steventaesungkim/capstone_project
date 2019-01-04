@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RegisterForm from './RegisterForm';
-// import axios from 'axios';
+
 
 
 class Register extends Component {
@@ -19,13 +19,13 @@ class Register extends Component {
                 <h2>Register</h2>
                 <RegisterForm 
                     inputName = {this.state.name}
-                    updateName = {this._name}
+                    newName = {this._name}
                     inputUserName = {this.state.username}
-                    updateUserName = {this._userName}
+                    newUserName = {this._userName}
                     inputPassWord = {this.state.password}
-                    updatePassword = {this._password}
+                    newPassword = {this._password}
                     inputAvatar = {this.state.avatar}
-                    updateAvatar = {this._avatar}
+                    newAvatar = {this._avatar}
                     submit = {this._onSubmit}
                 />
             </div>
@@ -67,10 +67,9 @@ class Register extends Component {
                 "Content-type": "application/json"
             }
         })
-            .then(r => console.log(r.json()))
-            // .catch(err => {
-            //     console.log(err);
-            // });
+            .then(r => {
+                return r.json();
+            })
     };
 
 

@@ -12,7 +12,7 @@ const RegisterForm = (props) => {
                     placeholder='name'
                     name='name'
                     onChange = {(e) =>{
-                        props.updateName(e.target.value);
+                        props.newName(e.target.value);
                     }}
                     value = {props.inputName}
                 />
@@ -24,7 +24,7 @@ const RegisterForm = (props) => {
                     placeholder='UserName'
                     onChange = {(e) => {
                         // console.log(e.target.value);
-                        props.updateUserName(e.target.value);
+                        props.newUserName(e.target.value);
                     }}
                     value = {props.inputUserName}
                 />
@@ -35,7 +35,7 @@ const RegisterForm = (props) => {
                     type='text'
                     placeholder='Password'
                     onChange = {(e) => {
-                        props.updatePassword(e.target.value);
+                        props.newPassword(e.target.value);
                     }}
                     value = {props.inputPassword}
                 />
@@ -46,7 +46,7 @@ const RegisterForm = (props) => {
                     type='text'
                     placeholder='Select an Avatar'
                     onChange = {(e) => {
-                        props.updateAvatar(e.target.value);
+                        props.newAvatar(e.target.value);
                     }}
                     value = {props.inputAvatar}
                 />

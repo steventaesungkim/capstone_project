@@ -12,7 +12,7 @@ const LogInForm = (props) => {
                     placeholder='UserName'
                     onChange = {(e) => {
                         // console.log(e.target.value);
-                        props.updateUserName(e.target.value);
+                        props.newUserName(e.target.value);
                     }}
                     value = {props.inputUserName}
                 />
@@ -23,7 +23,7 @@ const LogInForm = (props) => {
                     type='text'
                     placeholder='Password'
                     onChange = {(e) => {
-                        props.updatePassword(e.target.value);
+                        props.newPassword(e.target.value);
                     }}
                     value = {props.inputPassword}
                 />

@@ -28,14 +28,6 @@ class Question {
     }
     // === ===  CREATE  === ===  [[END]]
 
-// STILL NEED TO TEST THE CREATE FUNCTION
-
-
-//  ++++++++++++++++++++++++++++++++++++++++++++++
-// UPDATES HAVE NOT BEEN MADE BELOW THIS LINE
-
-
-
 
     // === ===  RETRIEVE  === ===  [[START]]
     
@@ -45,9 +37,9 @@ class Question {
         return db.any(`
                 SELECT * FROM questions`
             )
-            .then(catArray => {
-                const instanceArray = catArray.map(catObj => {
-                    return new Question(catObj.id, catObj.question, catObj.levels, catObj.id_user);
+            .then(qArray => {
+                const instanceArray = qArray.map(q => {
+                    return new Question(q.id, q.level, q.question, q.answer, q.id_category);
                 });
                 return instanceArray;
             });
@@ -60,24 +52,58 @@ class Question {
                 SELECT * FROM questions WHERE id = $1`,
                 [id]
             )
-            .then(result => {
-                return new Question(result.id, result.question, result.levels, result.id_user);
+            .then(q => {
+                return new Question(q.id, q.level, q.question, q.answer, q.id_category);
             });
         }
 
-    // Gets all records from Questions table for a specific User ID
-    // Returns an array of Question IDs for all questions the user owns
-    static getByUserID(userID) {
+    // Gets all records from Questions table for a specific Category ID
+    // Returns an array of Question IDs for all questions in the Category
+    static getByCategory(catID) {
         return db.any(`
-                SELECT id FROM questions WHERE id_user = $1`,
-                [userID]
+                SELECT id FROM questions WHERE id_category = $1`,
+                [catID]
             )
             .then(result => {
                 return result.map(r => r.id);
             });
     }
 
+    // Gets all records from Questions table for a specific Category ID and Level
+    // The returnAllData flag determines what is returned:
+    //   - Returns an array of Question IDs if returnAllData is false or omitted
+    //   - Returns an array of Question class instances if returnAllData is true
+    static getByLevel(catID, level, returnAllData=false) {
+        if (returnAllData) {
+            return db.any(`
+                    SELECT * FROM questions WHERE (id_category = $1 AND level = $2)`,
+                    [catID, level]
+                )
+                .then(qArray => {
+                    const instanceArray = qArray.map(q => {
+                        return new Question(q.id, q.level, q.question, q.answer, q.id_category);
+                    });
+                    return instanceArray;
+                });
+        } else {
+            return db.any(`
+                    SELECT * FROM questions WHERE (id_category = $1 AND level = $2)`,
+                    [catID, level]
+                )
+                .then(result => {
+                    return result.map(r => r.id);
+                });
+        }
+    }
+
     // === ===  RETRIEVE  === ===  [[END]]
+
+
+
+
+//  ++++++++++++++++++++++++++++++++++++++++++++++
+// UPDATES HAVE NOT BEEN MADE BELOW THIS LINE
+
 
 
     // === ===  UPDATE  === ===  [[START]]

@@ -55,34 +55,31 @@ class Register extends Component {
     _onSubmit = (event) => {
         event.preventDefault();
         console.log('Registered')
-        fetch('/',{
+        fetch('/api/user/register',{
             method: 'POST',
             body: JSON.stringify({
-                name:
-            })
+                name: this.state.name,
+                username: this.state.username, 
+                password: this.state.password,
+                avatar: this.state.avatar
+            }),
+            headers: {
+                "Content-type": "application/json"
+            }
         })
-
-
-
-
-
-
-
-
-
-            .post('/api/register/', this.state)
-            .then(r => {
-                if (r.data.status !== 'okay') {
-                    alert("Almost in, try again.")
-                } else {
-                    this.props.history.push('/');
-                    console.log(`Your're REGISTERED!`)
-                }
-                console.log(r.data);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+            .then(r => console.log(r.json()))
+            // .then(Nu => {
+            //     if (Nu.data.status !== 'okay') {
+            //         alert("Almost in, try again.")
+            //     } else {
+            //         this.props.history.push('/');
+            //         console.log(`Your're REGISTERED!`)
+            //     }
+            //     console.log(r.data);
+            // })
+            // .catch(err => {
+            //     console.log(err);
+            // });
     };
 
 

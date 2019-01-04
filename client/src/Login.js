@@ -10,15 +10,15 @@ class Login extends Component {
         }
     }
 
-    componentDidMount(){
-        fetch('/api/user')
-        .then(r => {
-            return r.json();
-        })
-        .then(users =>{
-            console.log(users)
-        })
-    }
+    // componentDidMount(){
+    //     fetch('/api/user')
+    //     .then(r => {
+    //         return r.json();
+    //     })
+    //     .then(users =>{
+    //         console.log(users)
+    //     })
+    // }
     render() {
         return (
             <div>

@@ -68,15 +68,6 @@ class Register extends Component {
             }
         })
             .then(r => console.log(r.json()))
-            // .then(Nu => {
-            //     if (Nu.data.status !== 'okay') {
-            //         alert("Almost in, try again.")
-            //     } else {
-            //         this.props.history.push('/');
-            //         console.log(`Your're REGISTERED!`)
-            //     }
-            //     console.log(r.data);
-            // })
             // .catch(err => {
             //     console.log(err);
             // });

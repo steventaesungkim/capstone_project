@@ -99,42 +99,44 @@ class Question {
     // === ===  RETRIEVE  === ===  [[END]]
 
 
+    // === ===  UPDATE  === ===  [[START]]
+
+    // Updates all fields for THIS question
+    // Returns boolean True if successful, False if unsuccessful
+    update() {
+        return db.result(`
+                UPDATE questions SET level=$2,
+                                    question=$3,
+                                    answer=$4,
+                                    id_category=$5
+                WHERE id=$1`,
+                [this.id, this.level, this.question, this.answer, this.id_category]
+            )
+            .then(result => {
+                return result.rowCount === 1;
+            });
+    }
+
+    // Updates the value of field fieldName to newValue for THIS question
+    // Returns boolean True if successful, False if unsuccessful
+    updateField(fieldName, newValue) {
+        return db.result(`
+                UPDATE questions SET ${fieldName}=$2 WHERE id=$1`,
+                [this.id, newValue]
+            )
+            .then(result => {
+                return result.rowCount === 1;
+            });
+    }
+
+
+    // === ===  UPDATE  === ===  [[END]]
+
 
 
 //  ++++++++++++++++++++++++++++++++++++++++++++++
 // UPDATES HAVE NOT BEEN MADE BELOW THIS LINE
 
-
-
-    // === ===  UPDATE  === ===  [[START]]
-
-    // Updates the question for THIS question
-    // Returns boolean True if successful, False if unsuccessful
-    updateQuestionType(newType) {
-        return db.result(`
-                UPDATE questions SET question=$2 WHERE id=$1`,
-                [this.id, newType]
-            )
-            .then(result => {
-                return result.rowCount === 1;
-            });
-    }
-
-    // Updates the levels for THIS question
-    // Returns boolean True if successful, False if unsuccessful
-    updateLevels(newLevels) {       // newLevels should be boolean (true or false)
-        return db.result(`
-                UPDATE questions SET levels=$2 WHERE id=$1`,
-                [this.id, newLevels]
-            )
-            .then(result => {
-                return result.rowCount === 1;
-            });
-    }
-
-    // Could add an updateUserId for admin purposes, but not needed now
-
-    // === ===  UPDATE  === ===  [[END]]
 
     
     // === ===  DELETE  === ===  [[START]]

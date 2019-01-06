@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LogInForm from './LogInForm';
 
+
 class Login extends Component {
     constructor(props) {
         super(props); 
@@ -15,10 +16,22 @@ class Login extends Component {
     //     .then(r => {
     //         return r.json();
     //     })
+    //     .then(loginUser => {
+    //         console.log(loginUser)
+    //     })
     //     .then(users =>{
-    //         console.log(users)
+    //         // console.log(users)
+    //         users.filter(larry => {
+    //             console.log(larry);
+    //             if ((this.state) === 3) {
+    //             console.log('Matched!');
+    //             } else {
+    //                 console.log('Naga');
+    //             }
+    //         })
     //     })
     // }
+
     render() {
         return (
             <div>
@@ -43,22 +56,27 @@ class Login extends Component {
             password: input
         });
     }
+    passwordDoesMatch = (thePassword) => {
+        const didMatch = bcrypt.compareSync(thePassword, this.state.password);
+        return didMatch;
+    }
+
     _onSubmit = (event) => {
+        // console.log(event)
         event.preventDefault();
         console.log('Logging In..')
-        fetch('api/user/login', {
-            method: 'POST',
-            body: JSON.stringify({
-                username: this.state.username,
-                password: this.state.password
-            }),
-            headers: {
-                "Content-type": "application/json"
-            }
-        })
-        .then(r => {
-            console.log(r);
-        })
+        fetch(`/api/user/login`) 
+            .then(r => {
+                return r.json();
+            })
+            .then(theUser => {
+            console.log(theUser)
+                if (theUser.passwordDoesMatch(theUser.pwhash)) {
+                console.log('Matched!');
+                } else {
+                    console.log('NOPE');
+                }
+            })
     }
 
 

@@ -103,7 +103,7 @@ app.post('/api/user/register', (req, res) => {
 // Login 
 // ========================================================
 
-app.post('/api/user/login', (req, res) => {
+app.post('/api/user/login/:', (req, res) => {
     const theUserName = req.body.username;
     const thePassword = req.body.password;
     User.getByUserName(theUserName)
@@ -116,7 +116,8 @@ app.post('/api/user/login', (req, res) => {
                 req.session.user = theUser;
                 res.json(theUser);
             } else {
-                res.send(err);
+                // res.send(err);
+                console.log('Incorrect info.')
             }
         });
 });

@@ -199,12 +199,6 @@ class Timer {
 
     // === ===  UPDATE  === ===  [[END]]
 
-    
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//         CODE BELOW HAS NOT BEEN UPDATED YET      !!
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-// Need instance functions for allowing a User instance to request list of its timers and its categories
 
     // === ===  DELETE  === ===  [[START]]
     
@@ -216,21 +210,33 @@ class Timer {
         );
     }
 
-    // Delete a specific category by ID
+    // Delete a specific timer by ID
     static deleteById(id) {
         return db.result(`
-                DELETE FROM categories WHERE id = $1`,
+                DELETE FROM timers WHERE id = $1`,
                 [id]
         );
     }
 
-    // Delete all the categories owned by a specific User ID
+    // Delete all the timers owned by a specific User ID
     static deleteByUserId(id_user) {
         return db.result(`
-                DELETE FROM categories WHERE id_user = $1`,
+                DELETE FROM timers WHERE id_user = $1`,
                 [id_user]
         );
     }
+
+    // Delete all the timers belonging to a specific Category ID
+    static deleteByCategoryId(id_category) {
+        return db.result(`
+                DELETE FROM timers WHERE id_category = $1`,
+                [id_category]
+        );
+    }
+
+// MAY NEED MORE DELETE OPTIONS TO DELETE BY COMBO OF USER+LEVEL, CAT+LEVEL, 
+// USER+CAT, OR USER+CAT+LEVEL, OR MAYBE SET IT UP SO THOSE DELETE AUTOMATICALLY
+// UPON DELETIONS FROM OTHER TABLES
 
     // === ===  DELETE  === ===  [[END]]
 
@@ -238,3 +244,5 @@ class Timer {
 
 }
 module.exports = Timer;
+
+// Need instance functions for allowing a User instance to request list of its timers and its categories

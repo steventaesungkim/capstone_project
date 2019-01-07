@@ -5,7 +5,14 @@ import { Link } from 'react-router-dom';
 const LogInForm = (props) => {
     // console.log(props);
     return (
-        <form className='login-form' onSubmit = {(event) => {props.submit(event)}}>
+        <form className='login-form' 
+            method="POST"
+            action='/api/user/login/'
+            onSubmit = {(event) => 
+            // console.log(event)
+            {props.submit(event)}
+            
+            }>
             <label>Username:</label>
                 <input 
                     className='input'
@@ -32,6 +39,8 @@ const LogInForm = (props) => {
             <input 
                 className='input-submit'
                 type='submit'
+                // value={(props.inputUserName, props.inputPassword)}
+                // value={props.inputPassword}
                 value='Login'
             />
             <br />

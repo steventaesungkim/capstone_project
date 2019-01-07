@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LogInForm from './LogInForm';
+import Axios from 'axios';
 
 
 class Login extends Component {
@@ -56,28 +57,46 @@ class Login extends Component {
             password: input
         });
     }
-    passwordDoesMatch = (thePassword) => {
-        const didMatch = bcrypt.compareSync(thePassword, this.state.password);
-        return didMatch;
+
+    _onSubmit = (event) =>{
+        event.preventDefault();
+        console.table(this.state)
+        
+        Axios
+        .post(`/api/user/login/`, this.state)
+        .then(response =>{
+            console.log(response);
+        })
     }
 
-    _onSubmit = (event) => {
-        // console.log(event)
-        event.preventDefault();
-        console.log('Logging In..')
-        fetch(`/api/user/login`) 
-            .then(r => {
-                return r.json();
-            })
-            .then(theUser => {
-            console.log(theUser)
-                if (theUser.passwordDoesMatch(theUser.pwhash)) {
-                console.log('Matched!');
-                } else {
-                    console.log('NOPE');
-                }
-            })
-    }
+    // _onSubmit = (event) => {
+    //     console.log(this.state.username)
+    //     // console.log(event)
+    //     event.preventDefault();
+    //     console.log('Logging In..')
+    //     // console.log(this.state.username)
+    //     fetch(`/api/user/login/`,
+    //         {
+    //         method: 'POST',
+    //         headers: {'Content-Type':'application/json'},
+    //         body: {
+    //             inputUserName: this.state.username,
+    //             inputPassword: this.state.password
+    //             }
+    //         }) 
+    //         // .then(r => {
+    //         //     // console.log(r)
+    //         //     return r.json();
+    //         // })
+    //         // .then(theUser => {
+    //         // console.log(theUser)
+    //             // if (theUser.passwordDoesMatch(theUser.pwhash)) {
+    //             // console.log('Matched!');
+    //             // } else {
+    //             //     console.log('NOPE');
+    //             // }
+    //         // })
+    // }
 
 
 

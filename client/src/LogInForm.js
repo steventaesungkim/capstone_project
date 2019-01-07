@@ -3,13 +3,11 @@ import { Link } from 'react-router-dom';
 
 
 const LogInForm = (props) => {
-    // console.log(props);
     return (
         <form className='login-form' 
             method="POST"
             action='/api/user/login/'
             onSubmit = {(event) => 
-            // console.log(event)
             {props.submit(event)}
             
             }>
@@ -19,7 +17,6 @@ const LogInForm = (props) => {
                     type='text'
                     // placeholder='UserName'
                     onChange = {(e) => {
-                        // console.log(e.target.value);
                         props.newUserName(e.target.value);
                     }}
                     value = {props.inputUserName}
@@ -39,8 +36,6 @@ const LogInForm = (props) => {
             <input 
                 className='input-submit'
                 type='submit'
-                // value={(props.inputUserName, props.inputPassword)}
-                // value={props.inputPassword}
                 value='Login'
             />
             <br />

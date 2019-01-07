@@ -18,6 +18,11 @@ app.use(session({
     })
 );
 
+// passwordDoesMatch(thePassword) {
+//     const didMatch = bcrypt.compareSync(thePassword, this.pwhash);
+//     return didMatch;
+// }
+
 // Views and CSS
 app.use(express.static('public'));
 // const coverPage = require('./views/coverPage');
@@ -116,13 +121,13 @@ app.post('/api/user/login/', (req, res) => {
             res.send(err);
         })
         .then(theUser => {
-            // console.log(theUser)
+            console.log(theUser)
             if (theUser.passwordDoesMatch(thePassword)) {
                 req.session.user = theUser;
                 res.json(theUser);
             } else {
-                // res.send(err);
-                // console.log('Incorrect info.')
+                res.json(err);
+                console.log('Incorrect info.')
             }
         });
 });
@@ -392,3 +397,4 @@ app.delete('/api/category/:id(\\d+)', (req, res) => {
 });
 
 // ========================================================
+

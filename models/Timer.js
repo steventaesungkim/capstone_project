@@ -170,51 +170,48 @@ class Timer {
     // === ===  RETRIEVE  === ===  [[END]]
 
 
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // === ===  UPDATE  === ===  [[START]]
+
+    // Updates all fields for THIS timer
+    // Returns boolean True if successful, False if unsuccessful
+    update() {
+        return db.result(`
+                UPDATE timers SET time=$2, level=$3, id_category=$4, id_user=$5
+                WHERE id=$1`,
+                [this.id, this.time, this.level, this.id_category, this.id_user]
+            )
+            .then(result => {
+                return result.rowCount === 1;
+            });
+    }
+
+    // Updates the value of field fieldName to newValue for THIS timer
+    // Returns boolean True if successful, False if unsuccessful
+    updateField(fieldName, newValue) {
+        return db.result(`
+                UPDATE timers SET ${fieldName}=$2 WHERE id=$1`,
+                [this.id, newValue]
+            )
+            .then(result => {
+                return result.rowCount === 1;
+            });
+    }
+
+    // === ===  UPDATE  === ===  [[END]]
+
+    
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //         CODE BELOW HAS NOT BEEN UPDATED YET      !!
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 // Need instance functions for allowing a User instance to request list of its timers and its categories
 
-
-
-    // === ===  UPDATE  === ===  [[START]]
-
-    // Updates the time for THIS category
-    // Returns boolean True if successful, False if unsuccessful
-    updateCategoryType(newType) {
-        return db.result(`
-                UPDATE categories SET time=$2 WHERE id=$1`,
-                [this.id, newType]
-            )
-            .then(result => {
-                return result.rowCount === 1;
-            });
-    }
-
-    // Updates the level for THIS category
-    // Returns boolean True if successful, False if unsuccessful
-    updateLevels(newLevels) {       // newLevels should be boolean (true or false)
-        return db.result(`
-                UPDATE categories SET level=$2 WHERE id=$1`,
-                [this.id, newLevels]
-            )
-            .then(result => {
-                return result.rowCount === 1;
-            });
-    }
-
-    // Could add an updateUserId for admin purposes, but not needed now
-
-    // === ===  UPDATE  === ===  [[END]]
-
-    
     // === ===  DELETE  === ===  [[START]]
     
-    // Delete THIS category
+    // Delete THIS timer
     delete() {
         return db.result(`
-                DELETE FROM categories WHERE id = $1`,
+                DELETE FROM timers WHERE id = $1`,
                [this.id]
         );
     }

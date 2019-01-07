@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Clock from './Clock';
+import SelectCategory from './SelectCategory';
 
 
 
@@ -7,28 +8,23 @@ class Timer extends Component {
     constructor(props) {
         super(props);
         this.state ={
-            time: "",
+            // time: "",
             category: "",
             level: ""
         }
     }
 
-    // componentDidMount() {
-    //     this.intervalID = setInterval(() => (
-    //         this.tick(), 1000
-    //     ));
-    // }
+    componentDidMount() {
+        fetch('/api/category')
+        .then(r => r.json())
+        .then(data =>{
+            // console.log(data);
+            this.setState({
+                categories: data
+            })
+        })
+    }
 
-    // componentWillUnmount() {
-    //     clearInterval(this.intervalID);
-    // }
-    
-    // tick() {
-    //     this.setState({
-    //         date: new Date().toLocaleString()
-    //     });
-    // }
-    
     render() {
         return (
             <div>
@@ -38,12 +34,19 @@ class Timer extends Component {
                 </header>
                 <Clock />
                 <div>
-                    <button>Set Timer</button>
-                    <button>Select Category</button>
-                    <button>Select Level</button>
+                    {/* <button>Set Timer</button> */}
+                <SelectCategory 
+                    _onSubmit = {this.onSubmit}
+
+                />
+                    
                 </div>
             </div>
         );
+    }
+
+    _onSubmit (event) {
+        console.log(event)
     }
 
     

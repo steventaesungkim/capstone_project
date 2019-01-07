@@ -103,21 +103,26 @@ app.post('/api/user/register', (req, res) => {
 // Login 
 // ========================================================
 
-app.post('/api/user/login/:', (req, res) => {
+app.post('/api/user/login/', (req, res) => {
     const theUserName = req.body.username;
     const thePassword = req.body.password;
+    // console.log(req.body)
+    console.log(theUserName)
+    console.log(thePassword)
     User.getByUserName(theUserName)
+        // console.log(theUserName)
         .catch(err => {
-            console.log(err);
+            // console.log(err);
             res.send(err);
         })
         .then(theUser => {
+            // console.log(theUser)
             if (theUser.passwordDoesMatch(thePassword)) {
                 req.session.user = theUser;
                 res.json(theUser);
             } else {
                 // res.send(err);
-                console.log('Incorrect info.')
+                // console.log('Incorrect info.')
             }
         });
 });

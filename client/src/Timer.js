@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import Clock from './Clock';
 import SelectCategory from './SelectCategory';
 
+import {
+    BrowserRouter as Router, 
+    Route, 
+}   from 'react-router-dom';
+
 
 
 class Timer extends Component {
@@ -9,7 +14,7 @@ class Timer extends Component {
         super(props);
         this.state ={
             // time: "",
-            category: "",
+            categories: "",
             level: ""
         }
     }
@@ -17,7 +22,7 @@ class Timer extends Component {
     componentDidMount() {
         fetch('/api/category')
         .then(r => r.json())
-        .then(data =>{
+        .then(data =>{ 
             // console.log(data);
             this.setState({
                 categories: data
@@ -26,29 +31,41 @@ class Timer extends Component {
     }
 
     render() {
+        const shithead = (this.state.categories)
+        // shithead.map((moreBullShit) =>{
+        //     console.log(moreBullShit)
+        // })
+        
         return (
-            <div>
-                <header className = "navBar" >
-                    <button>myAccount</button>
-                    <button>Logout</button>
-                </header>
-                <Clock />
+            <Router>
                 <div>
-                    {/* <button>Set Timer</button> */}
-                <SelectCategory 
-                    _onSubmit = {this.onSubmit}
+                    <header className = "navBar" >
+                        <button>myAccount</button>
+                        <button>Logout</button>
+                    </header>
+                    <Clock />
+                        {/* <button>Set Timer</button> */}
 
-                />
-                    
+                    <div>
+                        <Route path = '/timer' render = {(props) =>{ 
+                            return <SelectCategory categoryList= {this._theList} {...props}/>                        
+                        }} />
+
+                    </div>
                 </div>
-            </div>
+            </Router>
         );
     }
 
-    _onSubmit (event) {
-        console.log(event)
-    }
 
+
+    _theList = () =>{
+        const category = (this.state.categories)
+
+        const list = category.map((thecategory) => {
+            // console.log(thecategory);
+        })
+    }
     
 }
 

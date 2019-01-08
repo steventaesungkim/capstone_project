@@ -32,7 +32,7 @@ CREATE TABLE questions(
 CREATE TABLE results(
     id serial primary key,
     time timestamp,
-    correct boolean,
     id_user integer references users (id),
-    id_question integer references questions (id)
+    id_question integer references questions (id),
+    correct boolean
 );

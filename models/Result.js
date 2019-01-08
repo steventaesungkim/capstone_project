@@ -1,29 +1,29 @@
 const db = require('./db');
 
 class Result {
-    constructor(id, time, correct, id_user, id_question) {
+    constructor(id, time, id_user, id_question, correct) {
         this.id = id;
         this.time = time;
-        this.correct = correct;
         this.id_user = id_user;
         this.id_question = id_question;
+        this.correct = correct;
     }
 
     // === ===  CREATE  === ===  [[START]]
 
     // Inserts a new record in the Results table
     // Returns a new instance of the Result class
-    static createResult(time, correct, id_user, id_question) {
+    static createResult(time, id_user, id_question, correct) {
         return db.one(`
                 INSERT INTO results 
-                    (time, correct, id_user, id_question)
+                    (time, id_user, id_question, correct)
                 VALUES 
                     ($1, $2, $3, $4)
                 RETURNING id`,
-                [time, correct, id_user, id_question]
+                [time, id_user, id_question, correct]
             )
             .then(data => {
-                return new Result (data.id, time, correct, id_user, id_question);
+                return new Result (data.id, time, id_user, id_question, correct);
             });
     }
     // === ===  CREATE  === ===  [[END]]
@@ -45,9 +45,9 @@ class Result {
         return db.any(`
                 SELECT * FROM results`
             )
-            .then(timerArray => {
-                const instanceArray = timerArray.map(timerObj => {
-                    return new Result(timerObj.id, timerObj.time, timerObj.correct, timerObj.id_question, timerObj.id_user);
+            .then(resultArray => {
+                const instanceArray = resultArray.map(resultObj => {
+                    return new Result(resultObj.id, resultObj.time, resultObj.correct, resultObj.id_user, resultObj.id_question);
                 });
                 return instanceArray;
             });

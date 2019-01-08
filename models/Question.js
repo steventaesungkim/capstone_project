@@ -57,7 +57,7 @@ class Question {
             });
         }
 
-    // Gets all records from Questions table for a specific Category ID
+    // Gets the IDs for all records from Questions table for a specific Category ID
     // Returns an array of Question IDs for all questions in the Category
     static getByCategory(catID) {
         return db.any(`
@@ -71,9 +71,9 @@ class Question {
 
     // Gets all records from Questions table for a specific Category ID and Level
     // The returnAllData flag determines what is returned:
-    //   - Returns an array of Question IDs if returnAllData is false or omitted
-    //   - Returns an array of Question class instances if returnAllData is true
-    static getByLevel(catID, level, returnAllData=false) {
+    //   - Returns an array of Question IDs if returnAllData is false
+    //   - Returns an array of Question class instances if returnAllData is true or omitted
+    static getByLevel(catID, level, returnAllData=true) {
         if (returnAllData) {
             return db.any(`
                     SELECT * FROM questions WHERE (id_category = $1 AND level = $2)`,
@@ -87,7 +87,7 @@ class Question {
                 });
         } else {
             return db.any(`
-                    SELECT * FROM questions WHERE (id_category = $1 AND level = $2)`,
+                    SELECT id FROM questions WHERE (id_category = $1 AND level = $2)`,
                     [catID, level]
                 )
                 .then(result => {

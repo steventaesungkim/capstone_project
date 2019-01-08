@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Clock from './Clock';
 import Categories from './Categories';
+import Dropdown from './Dropdown';
 
 import {
     BrowserRouter as Router, 
@@ -15,7 +16,8 @@ class Timer extends Component {
         this.state ={
             // time: "",
             categories: [],
-            level: ""
+            level: [],
+            selection: 'Select'
         }
     }
 
@@ -27,12 +29,7 @@ class Timer extends Component {
             this.setState({
                 categories: data
             })
-            // return data
         })
-        // .then(categories => {
-        //     // console.log(categories)
-        //     this._theList(categories)
-        // })
     }
 
     render() {
@@ -44,14 +41,21 @@ class Timer extends Component {
                         <button>Logout</button>
                     </header>
                     <Clock />
+
+                    <Dropdown 
+                        name = 'Category'
+                        categoryList = {this.state.categories}
+                        handleChange= {this._handleSelect}
+                        selection = {this.state.selection}
+                    />
+
+
+
                         {/* <button>Set Timer</button> */}
 
-                    <div>
-                        <Route path = '/timer' render = {() =>{ 
+                        {/* <Route path = '/timer' render = {() =>{ 
                             return <Categories categoryList={this.state.categories}/>                        
-                        }} />
-
-                    </div>
+                        }} /> */}
                 </div>
             </Router>
         );

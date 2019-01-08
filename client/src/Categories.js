@@ -14,24 +14,21 @@ class Categories extends Component {
         console.log(props)
         this.state = { 
             categories: [props.categoryList]
-
-            // dropdownclass: "hidden"
         }
     }
 
 
     render() {
-        // console.log(this.state.categories)
+
         console.log(this.props.categoryList)
         // const dropdownClassName = "dropdown-content " + this.state.dropdownclass 
         return (
             <div>
                 {this.props.categoryList.map(list => (
                     <div>
-                     {list.category_type}
+                        {list.category_type}
                     </div>
-                    )                    
-                )}
+                ))}
             </div>
 
 

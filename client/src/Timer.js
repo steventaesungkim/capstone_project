@@ -78,7 +78,15 @@ class Timer extends Component {
         console.log('Selecting..')
         const selected = {name: event.target.value, value: event.target.value}
         console.log(selected)
+            this.setState({
+                selection: selected.value
+                
+            })
         
+        // if (selected.value !== this.state.selection) {
+
+        // }
+        console.log(this.state.categories)
     }
     
 }

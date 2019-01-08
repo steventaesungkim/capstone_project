@@ -56,15 +56,6 @@ class Resultset {
             });
         }
 
-
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//                                                                   +
-//                 CODE NOT COMPLETE BELOW HERE                      +
-//                                                                   +
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
-
     // Gets all records from Resultsets table for a specific User ID
     // The returnAllData flag determines what is returned:
     //   - Returns an array of Resultset IDs if returnAllData is false
@@ -75,9 +66,9 @@ class Resultset {
                     SELECT * FROM resultsets WHERE id_user = $1`,
                     [userID]
                 )
-                .then(tArray => {
-                    const instanceArray = tArray.map(t => {
-                        return new Resultset(t.id, t.time, t.score, t.id_question, t.id_user);
+                .then(rsArray => {
+                    const instanceArray = rsArray.map(rs => {
+                        return new Resultset(rs.id, rs.time, rs.id_user, rs.score);
                     });
                     return instanceArray;
                 });
@@ -92,91 +83,17 @@ class Resultset {
         }
     }
 
-    // Gets all records from Resultsets table for a specific User ID and score
-    // The returnAllData flag determines what is returned:
-    //   - Returns an array of Resultset IDs if returnAllData is false
-    //   - Returns an array of Resultset class instances if returnAllData is true or omitted
-    static getByUserLevel(userID, score, returnAllData=true) {
-        if (returnAllData) {
-            return db.any(`
-                    SELECT * FROM resultsets WHERE (id_user = $1 AND score = $2)`,
-                    [userID, score]
-                )
-                .then(tArray => {
-                    const instanceArray = tArray.map(t => {
-                        return new Resultset(t.id, t.time, t.score, t.id_question, t.id_user);
-                    });
-                    return instanceArray;
-                });
-        } else {
-            return db.any(`
-                    SELECT id FROM resultsets WHERE (id_user = $1 AND score = $2)`,
-                    [userID, score]
-                )
-                .then(result => {
-                    return result.map(r => r.id);
-                });
-        }
-    }
-
-    // Gets all records from Resultsets table for a specific question ID
-    // The returnAllData flag determines what is returned:
-    //   - Returns an array of Resultset IDs if returnAllData is false
-    //   - Returns an array of Resultset class instances if returnAllData is true or omitted
-    static getByCategoryId(catID, returnAllData=true) {
-        if (returnAllData) {
-            return db.any(`
-                    SELECT * FROM resultsets WHERE id_question = $1`,
-                    [catID]
-                )
-                .then(tArray => {
-                    const instanceArray = tArray.map(t => {
-                        return new Resultset(t.id, t.time, t.score, t.id_question, t.id_user);
-                    });
-                    return instanceArray;
-                });
-        
-        } else {
-            return db.any(`
-                    SELECT id FROM resultsets WHERE id_question = $1`,
-                    [catID]
-                )
-                .then(result => {
-                    return result.map(r => r.id);
-                });
-        }
-    }
-
-    // Gets all records from Resultsets table for a specific question ID and score
-    // The returnAllData flag determines what is returned:
-    //   - Returns an array of Resultset IDs if returnAllData is false
-    //   - Returns an array of Resultset class instances if returnAllData is true or omitted
-    static getByCategoryLevel(catID, score, returnAllData=true) {
-        if (returnAllData) {
-            return db.any(`
-                    SELECT * FROM resultsets WHERE (id_question = $1 AND score = $2)`,
-                    [catID, score]
-                )
-                .then(tArray => {
-                    const instanceArray = tArray.map(t => {
-                        return new Resultset(t.id, t.time, t.score, t.id_question, t.id_user);
-                    });
-                    return instanceArray;
-                });
-        
-        } else {
-            return db.any(`
-                    SELECT id FROM resultsets WHERE (id_question = $1 AND score = $2)`,
-                    [catID, score]
-                )
-                .then(result => {
-                    return result.map(r => r.id);
-                });
-        }
-    }
-
     // === ===  RETRIEVE  === ===  [[END]]
 
+
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                                                   +
+//                 CODE NOT COMPLETE BELOW HERE                      +
+//                                                                   +
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
 
     // === ===  UPDATE  === ===  [[START]]
 

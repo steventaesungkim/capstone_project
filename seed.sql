@@ -55,7 +55,13 @@ VALUES
 
 
 INSERT INTO results
-    (correct, time, id_user, id_question)
+    (time, correct, id_user, id_question)
 VALUES
-    (true, 'Jan 2 2019 09:33:34', 1, 1),
-    (true, 'Jan 3 2019 09:12:35', 2, 2);
+    ('Jan 2 2019 09:33:00', true, 1, 2),
+    ('Jan 2 2019 09:33:00', true, 1, 3),
+    ('Jan 2 2019 09:33:00', true, 1, 4),
+    ('Jan 3 2019 09:12:00', true, 1, 3);
+    ('Jan 3 2019 09:12:00', false, 1, 4);
+    ('Jan 3 2019 09:12:00', true, 3, 25);
+    ('Jan 3 2019 09:12:00', true, 3, 26);
+    ('Jan 4 2019 07:15:00', true, 3, 27);

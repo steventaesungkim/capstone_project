@@ -31,8 +31,8 @@ CREATE TABLE questions(
 
 CREATE TABLE results(
     id serial primary key,
-    correct boolean,
     time timestamp,
+    correct boolean,
     id_user integer references users (id),
     id_question integer references questions (id)
 );

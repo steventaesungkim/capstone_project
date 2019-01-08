@@ -36,6 +36,7 @@ app.use(express.static('public'));
 // Model Variables
 const User = require('./models/User');
 const Category = require('./models/Category');
+const Question = require('./models/Question');
 
 // ========================================================
 // Listening 
@@ -108,7 +109,7 @@ app.post('/api/user/register', (req, res) => {
 // Login 
 // ========================================================
 
-app.post('/api/user/login/', (req, res) => {
+app.post('/api/user/login', (req, res) => {
     const theUserName = req.body.username;
     const thePassword = req.body.password;
     // console.log(req.body)
@@ -296,14 +297,13 @@ app.post('/api/category/create', (req, res) => {
     console.log(req.body);
     const newCategoryType = req.body.category_type;
     const newLevel = req.body.levels;
-    const newIdUser = req.body.id_user;
-    Category.createUser(newCategoryType, newLevel, newIdUser, newAvatar)
+
+    Category.createUser(newCategoryType, newLevel, newIdUser)
         .catch(err => {
             console.log(err);
             res.send(err);
         })
         .then(newCategory => {
-            // req.session.user = newCategory;
             res.json(newCategory);
         });
 });
@@ -342,7 +342,7 @@ app.get('/api/category/:id(\\d+)', (req, res) => {
 // ========================================================
 
 app.get('/api/category/:id_user(\\d+)', (req, res) => {
-    Category.getById(req.params.id)
+    Category.getById(req.params.id_user)
     .then(category => {
         res.json(category);
     });
@@ -397,4 +397,158 @@ app.delete('/api/category/:id(\\d+)', (req, res) => {
 });
 
 // ========================================================
+
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Question
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+// ========================================================
+// Create a Question
+// ========================================================
+
+app.post('/api/question/create', (req, res) =>{
+    const newLevel = req.body.level;
+    const newQuestion = req.body.question;
+    const newAnswer = req.body.answer;
+    
+    Question.createQuestion(newLevel, newQuestion, newAnswer, id_category)
+        .catch(err =>{
+            console.log(err);
+            res.send(err);
+        })
+        .then(newQuestion =>{
+            res.json(newQuestion);
+        })
+
+})
+
+// ========================================================
+
+// ========================================================
+// Get all Questions
+// ========================================================
+
+app.get('/api/question', (req, res) => {
+    Question.getAll()
+    .then(allQuestion => {
+        console.log(allQuestion);
+        res.json(allQuestion);
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Question by ID 
+// ========================================================
+
+app.get('/api/question/:id(\\d+)', (req, res) => {
+    Question.getById(req.params.id)
+    .then(question => {
+        res.json(question);
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Questions by Category's ID 
+// ========================================================
+
+app.get('/api/question/:id_category(\\d+)', (req, res) => {
+    Question.getByCategory(req.params.id_category)
+    .then(category => {
+        res.json(category);
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Questions by Category's ID and Level
+// ========================================================
+// DOUBLE CHECK
+
+app.get('/api/question/:id_category(\\d+)/:level', (req, res) => {
+    const selectedLevel = req.body.level;
+
+    Question.getByLevel(req.params.id_category, selectedLevel, null)
+        .catch(err =>{
+            console.log(err)
+            res.send(err)
+        })
+    .then(questionLevel => {
+        res.json(questionLevel);
+    });
+});
+
+// ========================================================
+// Update Question
+// ========================================================
+
+app.post('/api/question/update/:id(\\d+)', (req,res) =>{
+    Question.getById(req.params.id)
+        .then(theQuestion =>{
+            theQuestion.level = req.body.level
+            theQuestion.question = req.body.question
+            theQuestion.answer = req.body.answer
+            theQuestion.update()
+        })
+        .then(updatedQuestion =>{
+            res.json(updatedQuestion)
+        })
+})
+
+// ========================================================
+
+// ========================================================
+// Delete Question by ID 
+// ========================================================
+
+app.delete('/api/question/:id(\\d+)', (req, res) => {
+    Question.deleteById(req.params.id)
+    .then(theQuestion => {
+        theQuestion.delete()
+        .then(delQuestion => {
+            res.json(delQuestion);
+        });
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Delete Question by Level using ID 
+// ========================================================
+
+app.delete('/api/question/:id_category(\\d+)/:level', (req, res) => {
+    Question.deleteByLevel(req.params.id_category, req.body.level)
+    .then(theLevelQuestion => {
+        theLevelQuestion.delete()
+        .then(delLevelQuestion => {
+            res.json(delLevelQuestion);
+        });
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Delete Questions by Category using ID 
+// ========================================================
+
+app.delete('/api/question/:id_category(\\d+)', (req, res) => {
+    Question.deleteByCategory(req.params.id_category)
+    .then(theLevelQuestion => {
+        theLevelQuestion.delete()
+        .then(delLevelQuestion => {
+            res.json(delLevelQuestion);
+        });
+    });
+});
+
+// ========================================================
+
 

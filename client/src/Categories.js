@@ -1,54 +1,54 @@
-import React, { Component } from 'react';
-// import SelectLevel from './SelectLevel';
-// import EachCategory from 'react';
-import {
-    BrowserRouter as Router, 
-    Route, 
-}   from 'react-router-dom';
-// import { compileFunction } from 'vm';
+// import React, { Component } from 'react';
+// // import SelectLevel from './SelectLevel';
+// // import EachCategory from 'react';
+// import {
+//     BrowserRouter as Router, 
+//     Route, 
+// }   from 'react-router-dom';
+// // import { compileFunction } from 'vm';
 
 
-class Categories extends Component {
-    constructor(props) {
-        super(props);
-        console.log(props)
-        this.state = { 
-            categories: [props.categoryList]
-        }
-    }
+// class Categories extends Component {
+//     constructor(props) {
+//         super(props);
+//         console.log(props)
+//         this.state = { 
+//             categories: [props.categoryList]
+//         }
+//     }
 
 
-    render() {
+//     render() {
 
-        console.log(this.props.categoryList)
-        // const dropdownClassName = "dropdown-content " + this.state.dropdownclass 
-        return (
-            <div>
-                {this.props.categoryList.map(list => (
-                    <div>
-                        {list.category_type}
-                    </div>
-                ))}
-            </div>
-
-
+//         console.log(this.props.categoryList)
+//         // const dropdownClassName = "dropdown-content " + this.state.dropdownclass 
+//         return (
+//             <div>
+//                 {this.props.categoryList.map(list => (
+//                     <div>
+//                         {list.category_type}
+//                     </div>
+//                 ))}
+//             </div>
 
 
 
-            // <Router>
-            //     <div className = "dropdown">
-            //         <button onClick = {this._toggledropdown}>Categories</button> 
-            //         <div className = {dropdownClassName}>
-            //         <link path = '/timer/category' render = {(props) =>{ 
-            //             return <EachCategory singleCategory= {this.state.categories} {...props}/>                        
-            //         }} />
-            //             <div onClick = {this._eachCat}>{this._dropDown()}</div>
-            //         </div>  
-            //         <SelectLevel />
-            //     </div>
-            // </Router>
-        );
-    }
+
+
+//             // <Router>
+//             //     <div className = "dropdown">
+//             //         <button onClick = {this._toggledropdown}>Categories</button> 
+//             //         <div className = {dropdownClassName}>
+//             //         <link path = '/timer/category' render = {(props) =>{ 
+//             //             return <EachCategory singleCategory= {this.state.categories} {...props}/>                        
+//             //         }} />
+//             //             <div onClick = {this._eachCat}>{this._dropDown()}</div>
+//             //         </div>  
+//             //         <SelectLevel />
+//             //     </div>
+//             // </Router>
+//         );
+//     }
 
 
 
@@ -61,45 +61,45 @@ class Categories extends Component {
 
 
     
-    // _dropDown = () =>{
-        // console.log(this.state.categories)
+//     // _dropDown = () =>{
+//         // console.log(this.state.categories)
         
-        // let listOfCategory = this.state.categories.map((types) =>{  
-            // return(
-                // <div>{types.category_type}</div>
-            // ) 
-        // })
+//         // let listOfCategory = this.state.categories.map((types) =>{  
+//             // return(
+//                 // <div>{types.category_type}</div>
+//             // ) 
+//         // })
 
-        // return ( 
-        //     <div>
-        //         <ul>{listOfCategory}</ul>
-        //     </div>
-        // )
-        // const categories = this.state.categories;
-        // categories.map((arrObject) =>{
-        //     this.setState({
-        //         categories: arrObject.category_type
-        //     })
-        // })
-    // }
+//         // return ( 
+//         //     <div>
+//         //         <ul>{listOfCategory}</ul>
+//         //     </div>
+//         // )
+//         // const categories = this.state.categories;
+//         // categories.map((arrObject) =>{
+//         //     this.setState({
+//         //         categories: arrObject.category_type
+//         //     })
+//         // })
+//     // }
 
-//     _toggledropdown = () =>{
-//         // console.log(this.state.dropdownclass)
-//         if(this.state.dropdownclass === "hidden"){
-//             this.setState({
-//                 dropdownclass: ""
-//             })
-//         }else{
-//             this.setState({
-//                 dropdownclass: "hidden"
-//             })
-//         }
-//     }
+// //     _toggledropdown = () =>{
+// //         // console.log(this.state.dropdownclass)
+// //         if(this.state.dropdownclass === "hidden"){
+// //             this.setState({
+// //                 dropdownclass: ""
+// //             })
+// //         }else{
+// //             this.setState({
+// //                 dropdownclass: "hidden"
+// //             })
+// //         }
+// //     }
 
-//     _eachCat = () =>{
-//         console.log('clicked')
-//         console.log(this._dropDown())
-//     }
-}   
+// //     _eachCat = () =>{
+// //         console.log('clicked')
+// //         console.log(this._dropDown())
+// //     }
+// }   
 
-export default Categories;
+// export default Categories;

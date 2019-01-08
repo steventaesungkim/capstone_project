@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Clock from './Clock';
-import Categories from './Categories';
+// import Categories from './Categories';
 import CategoryDropdown from './CategoryDropdown';
 
 import {
@@ -65,7 +65,7 @@ class Timer extends Component {
 
     _theList = () =>{
         const category = (this.state.categories)
-        console.log(category)
+        // console.log(category)
         this.setState({
             categories: category
         })
@@ -75,9 +75,9 @@ class Timer extends Component {
     }
 
     _handleSelect = (event) => {
-        console.log('Selecting..')
+        // console.log('Selecting..')
         const selected = {name: event.target.value, value: event.target.value}
-        console.log(selected)
+        // console.log(selected)
             this.setState({
                 selection: selected.value
                 
@@ -86,7 +86,7 @@ class Timer extends Component {
         // if (selected.value !== this.state.selection) {
 
         // }
-        console.log(this.state.categories)
+        // console.log(this.state.categories)
     }
     
 }

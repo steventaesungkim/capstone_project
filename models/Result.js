@@ -142,20 +142,9 @@ class Result {
     // === ===  UPDATE  === ===  [[END]]
 
 
-
-
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//                                                                   +
-//                 CODE NOT COMPLETE BELOW HERE                      +
-//                                                                   +
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
-
-
     // === ===  DELETE  === ===  [[START]]
     
-    // Delete THIS timer
+    // Delete THIS result
     delete() {
         return db.result(`
                 DELETE FROM results WHERE id = $1`,
@@ -163,7 +152,7 @@ class Result {
         );
     }
 
-    // Delete a specific timer by ID
+    // Delete a specific result by ID
     static deleteById(id) {
         return db.result(`
                 DELETE FROM results WHERE id = $1`,
@@ -171,26 +160,23 @@ class Result {
         );
     }
 
-    // Delete all the results owned by a specific User ID
-    static deleteByUserId(id_resultset) {
+    // Delete all the results owned by a specific Resultset ID
+    static deleteByResultSet(id_resultset) {
         return db.result(`
                 DELETE FROM results WHERE id_resultset = $1`,
                 [id_resultset]
         );
     }
 
-    // Delete all the results belonging to a specific question ID
-    static deleteByCategoryId(id_question) {
+    // Delete all the results belonging to a specific Question ID
+    static deleteByQuestion(id_question) {
         return db.result(`
                 DELETE FROM results WHERE id_question = $1`,
                 [id_question]
         );
     }
 
-
     // === ===  DELETE  === ===  [[END]]
-
-
 
 }
 module.exports = Result;

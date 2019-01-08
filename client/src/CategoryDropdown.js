@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Dropdown = (props) => {
-    const firstOption = (props.name === 'Category')
-    ? <option value= {props.categoryList}>Select a Category</option>
-    : <option value= {props.selection}></option> ;
+const CategoryDropdown = (props) => {
+    const firstOption = (props.name !== 'Category')
+    ?<option value= {props.selection}>Something messed up is you see this</option>  
+    :<option value= {props.categoryList}>Select a Category</option>; 
     console.log(props.categoryList)
     
     const theCategoryList = props.categoryList.map((eachCategory, index) => {
@@ -20,11 +20,13 @@ const Dropdown = (props) => {
                 value={props.selection}
                 onChange={(event) => props.handleChange(event)}
             >
+
                 {firstOption}
                 {theCategoryList}
+            
             </select>
         </div>
     )
 }
 
-export default Dropdown;
+export default CategoryDropdown;

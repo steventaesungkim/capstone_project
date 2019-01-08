@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Clock from './Clock';
 import Categories from './Categories';
-import Dropdown from './Dropdown';
+import CategoryDropdown from './CategoryDropdown';
 
 import {
     BrowserRouter as Router, 
@@ -42,7 +42,7 @@ class Timer extends Component {
                     </header>
                     <Clock />
 
-                    <Dropdown 
+                    <CategoryDropdown 
                         name = 'Category'
                         categoryList = {this.state.categories}
                         handleChange= {this._handleSelect}
@@ -72,6 +72,13 @@ class Timer extends Component {
         // const list = category.map((thecategory) => {
         //     console.log(thecategory);
         // })
+    }
+
+    _handleSelect = (event) => {
+        console.log('Selecting..')
+        const selected = {name: event.target.value, value: event.target.value}
+        console.log(selected)
+        
     }
     
 }

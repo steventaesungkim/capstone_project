@@ -8,13 +8,13 @@ class EachCategory extends Component {
         }
     }
     render() {
-        // const sections = props.singleCategory.map(typeCategory => {
+        const sections = props.singleCategory.map(typeCategory => {
             console.log(singleCategory)
             return (
-                <div>
-                    {/* <Link to= {`/`} */}
-                </div>
-            );
+                <li>
+                    <Link to= {`/`}
+                </li>
+            )
 
         })
         // console.log(props.categories.category_type)

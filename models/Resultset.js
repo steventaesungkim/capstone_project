@@ -115,19 +115,9 @@ class Resultset {
     // === ===  UPDATE  === ===  [[END]]
 
 
-
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//                                                                   +
-//                 CODE NOT COMPLETE BELOW HERE                      +
-//                                                                   +
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
-
-
     // === ===  DELETE  === ===  [[START]]
     
-    // Delete THIS timer
+    // Delete THIS resultset
     delete() {
         return db.result(`
                 DELETE FROM resultsets WHERE id = $1`,
@@ -135,7 +125,7 @@ class Resultset {
         );
     }
 
-    // Delete a specific timer by ID
+    // Delete a specific resultset by ID
     static deleteById(id) {
         return db.result(`
                 DELETE FROM resultsets WHERE id = $1`,
@@ -151,23 +141,7 @@ class Resultset {
         );
     }
 
-    // Delete all the resultsets belonging to a specific question ID
-    static deleteByCategoryId(id_question) {
-        return db.result(`
-                DELETE FROM resultsets WHERE id_question = $1`,
-                [id_question]
-        );
-    }
-
-// MAY NEED MORE DELETE OPTIONS TO DELETE BY COMBO OF USER+score, CAT+score, 
-// USER+CAT, OR USER+CAT+score, OR MAYBE SET IT UP SO THOSE DELETE AUTOMATICALLY
-// UPON DELETIONS FROM OTHER TABLES
-
     // === ===  DELETE  === ===  [[END]]
-
-
 
 }
 module.exports = Resultset;
-
-// Need instance functions for allowing a User instance to request list of its resultsets and its categories

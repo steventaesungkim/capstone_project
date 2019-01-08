@@ -86,31 +86,21 @@ class Resultset {
     // === ===  RETRIEVE  === ===  [[END]]
 
 
-
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//                                                                   +
-//                 CODE NOT COMPLETE BELOW HERE                      +
-//                                                                   +
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
-
     // === ===  UPDATE  === ===  [[START]]
 
-    // Updates all fields for THIS timer
+    // Updates all fields for THIS resultset
     // Returns boolean True if successful, False if unsuccessful
     update() {
         return db.result(`
-                UPDATE resultsets SET time=$2, score=$3, id_question=$4, id_user=$5
-                WHERE id=$1`,
-                [this.id, this.time, this.score, this.id_question, this.id_user]
+                UPDATE resultsets SET time=$2, id_user=$3, score=$4 WHERE id=$1`,
+                [this.id, this.time, this.id_user, this.score]
             )
             .then(result => {
                 return result.rowCount === 1;
             });
     }
 
-    // Updates the value of field fieldName to newValue for THIS timer
+    // Updates the value of field fieldName to newValue for THIS resultset
     // Returns boolean True if successful, False if unsuccessful
     updateField(fieldName, newValue) {
         return db.result(`
@@ -123,6 +113,16 @@ class Resultset {
     }
 
     // === ===  UPDATE  === ===  [[END]]
+
+
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                                                   +
+//                 CODE NOT COMPLETE BELOW HERE                      +
+//                                                                   +
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
 
 
     // === ===  DELETE  === ===  [[START]]

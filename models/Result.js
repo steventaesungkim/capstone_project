@@ -9,32 +9,33 @@ class Result {
         this.id_question = id_question;
     }
 
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    //                                                                   +
-    //                 CODE NOT COMPLETE BELOW HERE                      +
-    //                                                                   +
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
-
     // === ===  CREATE  === ===  [[START]]
 
     // Inserts a new record in the Results table
     // Returns a new instance of the Result class
-    static createTimer(time, correct, id_question, id_user) {
+    static createResult(time, correct, id_user, id_question) {
         return db.one(`
                 INSERT INTO results 
-                    (time, correct, id_question, id_user)
+                    (time, correct, id_user, id_question)
                 VALUES 
                     ($1, $2, $3, $4)
                 RETURNING id`,
-                [time, correct, id_question, id_user]
+                [time, correct, id_user, id_question]
             )
             .then(data => {
-                return new Result (data.id, time, correct, id_question, id_user);
+                return new Result (data.id, time, correct, id_user, id_question);
             });
     }
     // === ===  CREATE  === ===  [[END]]
 
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                                                   +
+//                 CODE NOT COMPLETE BELOW HERE                      +
+//                                                                   +
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
 
     // === ===  RETRIEVE  === ===  [[START]]
     

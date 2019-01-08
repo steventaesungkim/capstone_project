@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Clock from './Clock';
-import SelectCategory from './SelectCategory';
+import Categories from './Categories';
 
 import {
     BrowserRouter as Router, 
@@ -14,7 +14,7 @@ class Timer extends Component {
         super(props);
         this.state ={
             // time: "",
-            categories: "",
+            categories: [],
             level: ""
         }
     }
@@ -27,15 +27,15 @@ class Timer extends Component {
             this.setState({
                 categories: data
             })
+            // return data
         })
+        // .then(categories => {
+        //     // console.log(categories)
+        //     this._theList(categories)
+        // })
     }
 
     render() {
-        const shithead = (this.state.categories)
-        // shithead.map((moreBullShit) =>{
-        //     console.log(moreBullShit)
-        // })
-        
         return (
             <Router>
                 <div>
@@ -47,8 +47,8 @@ class Timer extends Component {
                         {/* <button>Set Timer</button> */}
 
                     <div>
-                        <Route path = '/timer' render = {(props) =>{ 
-                            return <SelectCategory categoryList= {this._theList} {...props}/>                        
+                        <Route path = '/timer' render = {() =>{ 
+                            return <Categories categoryList={this.state.categories}/>                        
                         }} />
 
                     </div>
@@ -61,10 +61,13 @@ class Timer extends Component {
 
     _theList = () =>{
         const category = (this.state.categories)
-
-        const list = category.map((thecategory) => {
-            // console.log(thecategory);
+        console.log(category)
+        this.setState({
+            categories: category
         })
+        // const list = category.map((thecategory) => {
+        //     console.log(thecategory);
+        // })
     }
     
 }

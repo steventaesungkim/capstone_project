@@ -29,10 +29,16 @@ CREATE TABLE questions(
     id_category integer references categories (id)
 );
 
-CREATE TABLE results(
+CREATE TABLE resultsets(
     id serial primary key,
-    correct boolean,
     time timestamp,
     id_user integer references users (id),
-    id_question integer references questions (id)
+    score integer
+);
+
+CREATE TABLE results(
+    id serial primary key,
+    id_resultset integer references resultsets (id),
+    id_question integer references questions (id),
+    correct boolean
 );

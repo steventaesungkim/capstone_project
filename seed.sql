@@ -21,7 +21,26 @@ VALUES
 INSERT INTO questions
     (level, question, answer, id_category)
 VALUES
-    ('1', '1+1', '2', 1),
+    ('1', '11 + 11', '22', 1),
+    ('1', '10 + 23', '33', 1),
+    ('1', '20 + 33', '53', 1),
+    ('1', '80 + 14', '94', 1),
+    ('1', '12 + 16', '28', 1),
+    ('1', '31 + 31', '62', 1),
+    ('1', '19 + 41', '60', 1),
+    ('1', '44 + 52', '96', 1),
+    ('1', '64 + 11', '75', 1),
+    ('1', '77 + 22', '99', 1),
+    ('2', '21 - 11', '10', 1),
+    ('2', '43 - 21', '22', 1),
+    ('2', '60 - 33', '27', 1),
+    ('2', '80 - 14', '76', 1),
+    ('2', '42 - 16', '26', 1),
+    ('2', '91 - 31', '60', 1),
+    ('2', '59 - 41', '18', 1),
+    ('2', '84 - 52', '32', 1),
+    ('2', '64 - 11', '53', 1),
+    ('2', '77 - 42', '35', 1),
     ('1', '11 22 33 44 55', '66', 2),
     ('1','2 4 9 11 16', '18', 2),
     ('1', '30 28 25 21 16', '10', 2),
@@ -53,9 +72,23 @@ VALUES
     ('Biology', 'What is the green pigment in plants that is affected by photosynthesis?', 'chlorophyll', 3),
     ('Biology', 'Name a byproduct of photosynthesis in plants.', 'oxygen', 3);
 
+INSERT INTO resultsets
+    (time, id_user, score)
+VALUES
+    ('Jan 2 2019 09:33:00', 1, 100),
+    ('Jan 3 2019 09:12:00', 1, 75),
+    ('Jan 4 2019 07:15:00', 3, 100);
 
 INSERT INTO results
-    (correct, time, id_user, id_question)
+    (id_resultset, id_question, correct)
 VALUES
-    (true, 'Jan 2 2019 09:33:34', 1, 1),
-    (true, 'Jan 3 2019 09:12:35', 2, 2);
+    (1, 2, true),
+    (1, 3, true),
+    (1, 4, true),
+    (2, 3, true),
+    (2, 4, false),
+    (2, 5, true),
+    (2, 6, true),
+    (3, 25, true),
+    (3, 26, true),
+    (3, 27, true);

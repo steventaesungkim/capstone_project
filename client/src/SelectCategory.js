@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import SelectLevel from './SelectLevel';
-import EachCategory from 'react';
+import SelectLevel from './SelectLevel';
+// import EachCategory from 'react';
+
 import {
     BrowserRouter as Router, 
     Route, 

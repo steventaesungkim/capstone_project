@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class SelectLevel extends Component {
-    render() {
-        return (
-            <div>
-                <button>Select Level</button>            
-            </div>
-        );
-    }
+const SelectLevel = (props) => {
+    return (
+        
+    )
 }
 
 export default SelectLevel;

@@ -53,17 +53,23 @@ VALUES
     ('Biology', 'What is the green pigment in plants that is affected by photosynthesis?', 'chlorophyll', 3),
     ('Biology', 'Name a byproduct of photosynthesis in plants.', 'oxygen', 3);
 
+INSERT INTO resultsets
+    (time, id_user, score)
+VALUES
+    ('Jan 2 2019 09:33:00', 1, 100),
+    ('Jan 3 2019 09:12:00', 1, 75),
+    ('Jan 4 2019 07:15:00', 3, 100);
 
 INSERT INTO results
-    (time, id_user, id_question, correct)
+    (id_resultset, id_question, correct)
 VALUES
-    ('Jan 2 2019 09:33:00', 1, 2, true),
-    ('Jan 2 2019 09:33:00', 1, 3, true),
-    ('Jan 2 2019 09:33:00', 1, 4, true),
-    ('Jan 3 2019 09:12:00', 1, 3, true),
-    ('Jan 3 2019 09:12:00', 1, 4, false),
-    ('Jan 3 2019 09:12:00', 1, 5, true),
-    ('Jan 3 2019 09:12:00', 1, 6, true),
-    ('Jan 4 2019 07:15:00', 3, 25, true),
-    ('Jan 4 2019 07:15:00', 3, 26, true),
-    ('Jan 4 2019 07:15:00', 3, 27, true);
+    (1, 2, true),
+    (1, 3, true),
+    (1, 4, true),
+    (2, 3, true),
+    (2, 4, false),
+    (2, 5, true),
+    (2, 6, true),
+    (3, 25, true),
+    (3, 26, true),
+    (3, 27, true);

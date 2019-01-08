@@ -1,10 +1,9 @@
 const db = require('./db');
 
 class Result {
-    constructor(id, time, id_user, id_question, correct) {
+    constructor(id, id_resultset, id_question, correct) {
         this.id = id;
-        this.time = time;
-        this.id_user = id_user;
+        this.id_resultset = id_resultset;
         this.id_question = id_question;
         this.correct = correct;
     }
@@ -13,29 +12,21 @@ class Result {
 
     // Inserts a new record in the Results table
     // Returns a new instance of the Result class
-    static createResult(time, id_user, id_question, correct) {
+    static createResult(id_resultset, id_question, correct) {
         return db.one(`
                 INSERT INTO results 
-                    (time, id_user, id_question, correct)
+                    (id_resultset, id_question, correct)
                 VALUES 
-                    ($1, $2, $3, $4)
+                    ($1, $2, $3)
                 RETURNING id`,
-                [time, id_user, id_question, correct]
+                [id_resultset, id_question, correct]
             )
             .then(data => {
-                return new Result (data.id, time, id_user, id_question, correct);
+                return new Result (data.id, id_resultset, id_question, correct);
             });
     }
     // === ===  CREATE  === ===  [[END]]
 
-
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//                                                                   +
-//                 CODE NOT COMPLETE BELOW HERE                      +
-//                                                                   +
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    
 
     // === ===  RETRIEVE  === ===  [[START]]
     
@@ -47,13 +38,13 @@ class Result {
             )
             .then(resultArray => {
                 const instanceArray = resultArray.map(resultObj => {
-                    return new Result(resultObj.id, resultObj.time, resultObj.correct, resultObj.id_user, resultObj.id_question);
+                    return new Result(resultObj.id, resultObj.id_resultset, resultObj.id_question, resultObj.correct);
                 });
                 return instanceArray;
             });
     }
 
-    // Gets individual record from Results table for a specific ID
+    // Gets individual record from Results table for a specific result ID
     // Returns a Result class instance
     static getById(id) {
         return db.one(`
@@ -61,57 +52,30 @@ class Result {
                 [id]
             )
             .then(result => {
-                return new Result(result.id, result.time, result.correct, result.id_question, result.id_user);
+                return new Result(result.id, result.id_resultset, result.id_question, result.correct);
             });
         }
 
-    // Gets all records from Results table for a specific User ID
+    // Gets all records from Results table for a specific resultset ID
     // The returnAllData flag determines what is returned:
     //   - Returns an array of Result IDs if returnAllData is false
     //   - Returns an array of Result class instances if returnAllData is true or omitted
-    static getByUserId(userID, returnAllData=true) {
+    static getByResultSet(resultsetID, returnAllData=true) {
         if (returnAllData) {
             return db.any(`
-                    SELECT * FROM results WHERE id_user = $1`,
-                    [userID]
+                    SELECT * FROM results WHERE id_resultset = $1`,
+                    [resultsetID]
                 )
-                .then(tArray => {
-                    const instanceArray = tArray.map(t => {
-                        return new Result(t.id, t.time, t.correct, t.id_question, t.id_user);
+                .then(resultArray => {
+                    const instanceArray = resultArray.map(r => {
+                        return new Result(r.id, r.id_resultset, r.id_question, r.correct);
                     });
                     return instanceArray;
                 });
         } else {
             return db.any(`
-                    SELECT id FROM results WHERE id_user = $1`,
-                    [userID]
-                )
-                .then(result => {
-                    return result.map(r => r.id);
-                });
-        }
-    }
-
-    // Gets all records from Results table for a specific User ID and correct
-    // The returnAllData flag determines what is returned:
-    //   - Returns an array of Result IDs if returnAllData is false
-    //   - Returns an array of Result class instances if returnAllData is true or omitted
-    static getByUserLevel(userID, correct, returnAllData=true) {
-        if (returnAllData) {
-            return db.any(`
-                    SELECT * FROM results WHERE (id_user = $1 AND correct = $2)`,
-                    [userID, correct]
-                )
-                .then(tArray => {
-                    const instanceArray = tArray.map(t => {
-                        return new Result(t.id, t.time, t.correct, t.id_question, t.id_user);
-                    });
-                    return instanceArray;
-                });
-        } else {
-            return db.any(`
-                    SELECT id FROM results WHERE (id_user = $1 AND correct = $2)`,
-                    [userID, correct]
+                    SELECT id FROM results WHERE id_resultset = $1`,
+                    [resultsetID]
                 )
                 .then(result => {
                     return result.map(r => r.id);
@@ -123,51 +87,22 @@ class Result {
     // The returnAllData flag determines what is returned:
     //   - Returns an array of Result IDs if returnAllData is false
     //   - Returns an array of Result class instances if returnAllData is true or omitted
-    static getByCategoryId(catID, returnAllData=true) {
+    static getByQuestion(qID, returnAllData=true) {
         if (returnAllData) {
             return db.any(`
                     SELECT * FROM results WHERE id_question = $1`,
-                    [catID]
+                    [qID]
                 )
-                .then(tArray => {
-                    const instanceArray = tArray.map(t => {
-                        return new Result(t.id, t.time, t.correct, t.id_question, t.id_user);
+                .then(resultArray => {
+                    const instanceArray = resultArray.map(r => {
+                        return new Result(r.id, r.id_resultset, r.id_question, r.correct);
                     });
                     return instanceArray;
                 });
-        
         } else {
             return db.any(`
                     SELECT id FROM results WHERE id_question = $1`,
-                    [catID]
-                )
-                .then(result => {
-                    return result.map(r => r.id);
-                });
-        }
-    }
-
-    // Gets all records from Results table for a specific question ID and correct
-    // The returnAllData flag determines what is returned:
-    //   - Returns an array of Result IDs if returnAllData is false
-    //   - Returns an array of Result class instances if returnAllData is true or omitted
-    static getByCategoryLevel(catID, correct, returnAllData=true) {
-        if (returnAllData) {
-            return db.any(`
-                    SELECT * FROM results WHERE (id_question = $1 AND correct = $2)`,
-                    [catID, correct]
-                )
-                .then(tArray => {
-                    const instanceArray = tArray.map(t => {
-                        return new Result(t.id, t.time, t.correct, t.id_question, t.id_user);
-                    });
-                    return instanceArray;
-                });
-        
-        } else {
-            return db.any(`
-                    SELECT id FROM results WHERE (id_question = $1 AND correct = $2)`,
-                    [catID, correct]
+                    [qID]
                 )
                 .then(result => {
                     return result.map(r => r.id);
@@ -178,15 +113,25 @@ class Result {
     // === ===  RETRIEVE  === ===  [[END]]
 
 
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//                                                                   +
+//                 CODE NOT COMPLETE BELOW HERE                      +
+//                                                                   +
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    
+
+
     // === ===  UPDATE  === ===  [[START]]
 
     // Updates all fields for THIS timer
     // Returns boolean True if successful, False if unsuccessful
     update() {
         return db.result(`
-                UPDATE results SET time=$2, correct=$3, id_question=$4, id_user=$5
+                UPDATE results SET time=$2, correct=$3, id_question=$4, id_resultset=$5
                 WHERE id=$1`,
-                [this.id, this.time, this.correct, this.id_question, this.id_user]
+                [this.id, this.time, this.correct, this.id_question, this.id_resultset]
             )
             .then(result => {
                 return result.rowCount === 1;
@@ -227,10 +172,10 @@ class Result {
     }
 
     // Delete all the results owned by a specific User ID
-    static deleteByUserId(id_user) {
+    static deleteByUserId(id_resultset) {
         return db.result(`
-                DELETE FROM results WHERE id_user = $1`,
-                [id_user]
+                DELETE FROM results WHERE id_resultset = $1`,
+                [id_resultset]
         );
     }
 
@@ -242,9 +187,6 @@ class Result {
         );
     }
 
-// MAY NEED MORE DELETE OPTIONS TO DELETE BY COMBO OF USER+correct, CAT+correct, 
-// USER+CAT, OR USER+CAT+correct, OR MAYBE SET IT UP SO THOSE DELETE AUTOMATICALLY
-// UPON DELETIONS FROM OTHER TABLES
 
     // === ===  DELETE  === ===  [[END]]
 
@@ -252,5 +194,3 @@ class Result {
 
 }
 module.exports = Result;
-
-// Need instance functions for allowing a User instance to request list of its results and its categories

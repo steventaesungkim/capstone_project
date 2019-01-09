@@ -3,7 +3,7 @@ import Axios from 'axios';
 
 
 const Logout = (props) =>{
-    // console.log(props.inSession)
+    console.log(props.inSession)
 
 
     // if(props.inSession === false){

@@ -7,7 +7,7 @@ const CategoryDropdown = (props) => {
     ? <option >Select a Category</option>
     : <option value= {props.categorySelection}>Something messed up is you see this</option>; 
    
-    console.log(props.showLevel)
+    // console.log(props.showLevel)
     
     let getLevelDropdown = () => {
         if(props.showLevel === true){

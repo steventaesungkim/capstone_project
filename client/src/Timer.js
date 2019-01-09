@@ -43,9 +43,9 @@ class Timer extends Component {
         })
         fetch('/api/user/isValid')
         .then(r => r.json())
-        .then(data =>{
-            console.log(data)
-        })
+        // .then(data =>{
+        //     console.log(data)
+        // })
     }
 
     render() {

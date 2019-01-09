@@ -18,7 +18,10 @@ class Timer extends Component {
             // time: "",
             categories: [],
             level: [],
-            selection: 'Select'
+            categorySelection: 'Select',
+            levelSelection: 'Select',
+            categoryId: '',
+            levelId: ''
         }
     }
 
@@ -26,16 +29,17 @@ class Timer extends Component {
         fetch('/api/category')
         .then(r => r.json())
         .then(data =>{ 
-            console.log(data);
+            // console.log(data);
             this.setState({
                 categories: data
             })
         })
-        fetch
+        fetch('/api/question')
+        .then(r => r.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             this.setState({
-                questions: data
+                level: data
             })
         })
     }
@@ -54,7 +58,12 @@ class Timer extends Component {
                         name = 'Category'
                         categoryList = {this.state.categories}
                         handleChange= {this._handleSelect}
-                        selection = {this.state.selection}
+                        categorySelection = {this.state.categorySelection}
+                        categoryId = {this.state.categoryId}
+                        
+                        levelList = {this.state.level}
+                        handleLevelSelect = {this._handleLevelSelect}
+                        levelSelection = {this.state.levelSelection}
                     />
 
                     {/* <LevelsDropdown
@@ -73,37 +82,23 @@ class Timer extends Component {
     }
 
 
-
-    _theList = () =>{
-        const category = (this.state.categories)
-        // console.log(category)
-        this.setState({
-            categories: category
-        })
-        // const list = category.map((thecategory) => {
-        //     console.log(thecategory);
-        // })
-    }
-
-
     _handleSelect = (event) => {
-        // console.log('Selecting..')
         const selected = {name: event.target.value, value: event.target.value}
-        // console.log(selected)
-            this.setState({
-                selection: selected.value
-                
-            })
+
+        this.state.categories.map((compare) =>{
+            if (selected.name === compare.category_type){
+                this.setState({
+                    categoryId: compare.id,
+                    categorySelection: selected.value 
+                })
+            }
+        })
+    }
+
+    // _handleLevelSelect = (event) => {
         
-        // if (selected.value !== this.state.selection) {
-
-        // }
-        // console.log(this.state.categories)
-    }
-
-    _handleLevelSelect = () => {
-
-    }
+    //     // const levelSelected = 
+    // }
     
 }
 

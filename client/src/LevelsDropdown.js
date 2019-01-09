@@ -1,30 +1,30 @@
 import React from 'react';
 
 const LevelsDropdown = (props) => {
-    // const levelChoices = (props.name !== 'Level')
-    // ? <option value= {props.selection}>WRONG</option>
-    // : <option value= {props.levelList}>Select a Level</option>;
-    // console.log(props.levelList)
     // console.log(props)
-    
-    // const eachlevels = (props.testlevel[1])
-    // const bs = eachlevel
-    // console.log(eachlevels)
+    const firstOption = (props.name !== 'Level')
+    ? <option value= {props.levelList}>Select a Level</option>
+    : <option value= {props.levelSelection}>WRONG</option>;
+    console.log(props.levelList)
 
-
-    // const testLevelList = props.testlevel.map((eachlevels) => {
-    //     console.log(eachlevels.id)
-
-    //     // const levelCategoryId = Object.keys(testLevelList)
-    //     // console.log(levelCategoryId)
-            
-
-    // })
+    const diffLevel = props.levelList.map((eachLevel, index) => {
+        // console.log(props.categoryId)
+        if (props.categoryId === eachLevel.id_category) {
+            return <option key={index} value={eachLevel.level}>{eachLevel.level}</option>
+        }
+    })
     
 
     return (
         <div>
-        
+            {props.name}:
+            <select
+                
+                handleLevel={(event) => props.handleLevel(event)}
+            >
+                {firstOption}  
+                {diffLevel}
+            </select>
         </div>
     )
 }

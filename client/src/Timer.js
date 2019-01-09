@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Clock from './Clock';
 import CategoryDropdown from './CategoryDropdown';
-
-import LevelsDropdown from './LevelsDropdown';
-
+import Logout from './Logout';
 import {
     BrowserRouter as Router, 
     Route, 
 }   from 'react-router-dom';
+// import Axios from 'axios';
 
 
 
@@ -22,7 +21,8 @@ class Timer extends Component {
             levelSelection: 'Select',
             categoryId: '',
             levelId: '',
-            showLevel: false
+            showLevel: false,
+            // inSession: true
             
         }
     }
@@ -44,16 +44,21 @@ class Timer extends Component {
                 level: data
             })
         })
+        fetch('/api/user/isValid')
+        .then(r => r.json())
+        .then(data =>{
+            // console.log(data)
+        })
     }
 
     render() {
         return (
             <Router>
                 <div>
-                    <header className = "navBar" >
-                        <button>myAccount</button>
-                        <button>Logout</button>
-                    </header>
+                    <Logout 
+                        inSession = {this.state.inSession}
+                        // handleLogout = {this._handleLogout}
+                    />
                     <Clock />
 
                     <CategoryDropdown 
@@ -100,14 +105,28 @@ class Timer extends Component {
     }
 
     _handleLevelSelect = (event) => {
-        console.log(event.target.value)
+        // console.log(event.target.value)
         const levelSelected = {value: event.target.value}
         this.setState({
             levelSelection: levelSelected.value
         })
-
     }
-    
+
+    // _handleLogout = (event) =>{
+    //     // console.log("clicked")
+    //     this.setState({
+    //         inSession: false
+    //     })        
+    //     if(this.state.inSession === false){
+    //         // console.log("trying to logout")
+    //         Axios
+    //         .post('/api/user/logout')
+    //         .then((response) =>{
+    //             console.log(response)
+    //         })
+    //         // .then(this.props.history.push('/'))
+    //     }
+    // }
 }
 
 export default Timer;

@@ -139,14 +139,19 @@ app.post('/api/user/login', (req, res) => {
 // Signout / Kill User Session
 // ========================================================
 
-// app.post('/logout', (req, res) => {
-//     // 1. destroy the session
-//     req.session.destroy(() => {
-//         req.session = null;
-//         res.redirect('/login');
-//     });
-//     // 2. redirect them to the home page
-// });
+app.get('/api/user/isValid', (req, res) =>{
+    let isLoggedIn = req.session.user ? true : false;
+    res.json({
+        isLoggedIn
+    })
+})
+
+app.post('/api/user/logout', (req, res) => {
+    // 1. destroy the session
+    req.session.destroy(() => {
+        req.session = null;
+    });
+});
 
 // ========================================================
 

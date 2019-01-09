@@ -47,7 +47,7 @@ class Login extends Component {
             // console.log(response);
 
             if(response.data.message === "No data returned from the query.") {
-                console.log("error")
+                // console.log("error")
                 alert('Incorrect Username and Password. Please re-enter correct Username and Password');
                 document.getElementById('resetUsername').value="";
                 document.getElementById('resetPassword').value="";

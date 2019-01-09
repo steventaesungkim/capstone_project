@@ -3,7 +3,6 @@ import RegisterForm from './RegisterForm';
 import Axios from 'axios';
 
 
-
 class Register extends Component {
     constructor(props) {
         super(props);
@@ -32,6 +31,7 @@ class Register extends Component {
             </div>
         )
     }
+
     _name = (input) => {
         this.setState ({
             name: input
@@ -43,16 +43,19 @@ class Register extends Component {
             username: input
         }); 
     }
+
     _password = (input) => {
         this.setState ({
             password: input
         });
     }
+
     _avatar = (input) => {
         this.setState ({
             avatar: input
         });
     }
+    
     _onSubmit = (event) => {
         event.preventDefault();
         // console.log('Registering..')

@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import Clock from './Clock';
 import CategoryDropdown from './CategoryDropdown';
 import Logout from './Logout';
-import {
-    BrowserRouter as Router, 
-    Route, 
-}   from 'react-router-dom';
-// import Axios from 'axios';
+
+import Axios from 'axios';
 
 
 
@@ -22,7 +19,7 @@ class Timer extends Component {
             categoryId: '',
             levelId: '',
             showLevel: false,
-            // inSession: true
+            inSession: true
             
         }
     }
@@ -47,45 +44,35 @@ class Timer extends Component {
         fetch('/api/user/isValid')
         .then(r => r.json())
         .then(data =>{
-            // console.log(data)
+            console.log(data)
         })
     }
 
     render() {
         return (
-            <Router>
-                <div>
-                    <Logout 
-                        inSession = {this.state.inSession}
-                        // handleLogout = {this._handleLogout}
-                    />
-                    <Clock />
+            <div>
+                <Logout 
+                    inSession = {this.state.inSession}
+                    handleLogout = {this._handleLogout}
+                />
+                <Clock />
 
-                    <CategoryDropdown 
-                        name = 'Category'
-                        categoryList = {this.state.categories}
-                        handleChange= {this._handleSelect}
-                        categorySelection = {this.state.categorySelection}
-                        categoryId = {this.state.categoryId}
-                        
-                        levelList = {this.state.level}
-                        handleLevelSelect = {this._handleLevelSelect}
-                        levelSelection = {this.state.levelSelection}
-                        showLevel = {this.state.showLevel}
-                    />
+                <CategoryDropdown 
+                    name = 'Category'
+                    categoryList = {this.state.categories}
+                    handleChange= {this._handleSelect}
+                    categorySelection = {this.state.categorySelection}
+                    categoryId = {this.state.categoryId}
+                    
+                    levelList = {this.state.level}
+                    handleLevelSelect = {this._handleLevelSelect}
+                    levelSelection = {this.state.levelSelection}
+                    showLevel = {this.state.showLevel}
+                />
 
-                    {/* <LevelsDropdown
-                        testlevel = {this.state.categories}
-                    /> */}
+                    {/* <button>Set Timer</button> */}
 
-
-                        {/* <button>Set Timer</button> */}
-
-                        {/* <Route path = '/timer' render = {() =>{ 
-                            return <Categories categoryList={this.state.categories}/>                        
-                        }} /> */}
-                </div>
-            </Router>
+            </div>
         );
     }
 
@@ -112,21 +99,19 @@ class Timer extends Component {
         })
     }
 
-    // _handleLogout = (event) =>{
-    //     // console.log("clicked")
-    //     this.setState({
-    //         inSession: false
-    //     })        
-    //     if(this.state.inSession === false){
-    //         // console.log("trying to logout")
-    //         Axios
-    //         .post('/api/user/logout')
-    //         .then((response) =>{
-    //             console.log(response)
-    //         })
-    //         // .then(this.props.history.push('/'))
-    //     }
-    // }
+    _handleLogout = (event) =>{
+        // console.log("clicked")
+        this.setState({
+            inSession: false
+        })  
+        Axios
+        .post('/api/user/logout')
+        .then((response) =>{
+            if (response.data.message === "Successfully logged out"){
+                this.props.history.push('/')
+            }
+        })
+    }
 }
 
 export default Timer;

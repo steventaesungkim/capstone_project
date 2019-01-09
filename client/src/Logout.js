@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
 
 
 const Logout = (props) =>{
-    // console.log(props.inSession)
-
-
-    // if(props.inSession === false){
-    //     // console.log("trying to logout")
-    //     Axios
-    //     .post('/api/user/logout')
-    //     .then(this.props.history.push('/'))
-    // }
+    console.log(props.inSession)
 
     return(
         <div>

@@ -22,6 +22,7 @@ class Timer extends Component {
             levelSelection: 'Select',
             categoryId: '',
             levelId: '',
+            showLevel: false
             
         }
     }
@@ -65,6 +66,7 @@ class Timer extends Component {
                         levelList = {this.state.level}
                         handleLevelSelect = {this._handleLevelSelect}
                         levelSelection = {this.state.levelSelection}
+                        showLevel = {this.state.showLevel}
                     />
 
                     {/* <LevelsDropdown
@@ -90,7 +92,8 @@ class Timer extends Component {
             if (selected.name === compare.category_type){
                 this.setState({
                     categoryId: compare.id,
-                    categorySelection: selected.value 
+                    categorySelection: selected.value,
+                    showLevel: true 
                 })
             }
         })

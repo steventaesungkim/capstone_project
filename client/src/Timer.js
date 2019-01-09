@@ -21,7 +21,8 @@ class Timer extends Component {
             categorySelection: 'Select',
             levelSelection: 'Select',
             categoryId: '',
-            levelId: ''
+            levelId: '',
+            
         }
     }
 
@@ -95,10 +96,14 @@ class Timer extends Component {
         })
     }
 
-    // _handleLevelSelect = (event) => {
-        
-    //     // const levelSelected = 
-    // }
+    _handleLevelSelect = (event) => {
+        console.log(event.target.value)
+        const levelSelected = {value: event.target.value}
+        this.setState({
+            levelSelection: levelSelected.value
+        })
+
+    }
     
 }
 

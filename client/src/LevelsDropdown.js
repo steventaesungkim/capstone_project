@@ -5,22 +5,25 @@ const LevelsDropdown = (props) => {
     const firstOption = (props.name !== 'Level')
     ? <option value= {props.levelList}>Select a Level</option>
     : <option value= {props.levelSelection}>WRONG</option>;
-    console.log(props.levelList)
+    // console.log(props.levelList)
+
+    
 
     const diffLevel = props.levelList.map((eachLevel, index) => {
-        // console.log(props.categoryId)
+        // console.log(eachLevel.level)
+        
         if (props.categoryId === eachLevel.id_category) {
+           
             return <option key={index} value={eachLevel.level}>{eachLevel.level}</option>
         }
     })
-    
 
     return (
         <div>
             {props.name}:
             <select
-                
-                handleLevel={(event) => props.handleLevel(event)}
+                value={props.levelSelection}
+                onChange={(event) => props.handleLevel(event)}
             >
                 {firstOption}  
                 {diffLevel}

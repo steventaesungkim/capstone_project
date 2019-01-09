@@ -6,7 +6,7 @@ const CategoryDropdown = (props) => {
     ? <option >Select a Category</option>
     : <option value= {props.categorySelection}>Something messed up is you see this</option>; 
    
-    console.log(props.categoryId)
+    // console.log(props.categoryId)
     
     const theCategoryList = props.categoryList.map((eachCategory,index) => {
         return <option key={index} value={(eachCategory.category_type)}>{eachCategory.category_type}</option>

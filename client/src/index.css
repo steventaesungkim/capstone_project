@@ -13,6 +13,10 @@ code {
     monospace;
 }
 
+.App {
+  text-align: center;
+}
+
 /* .clockDisplay {
   position: absolute;
   top: 50%;

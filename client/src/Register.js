@@ -55,15 +55,15 @@ class Register extends Component {
     }
     _onSubmit = (event) => {
         event.preventDefault();
-        console.log('Registering..')
+        // console.log('Registering..')
 
         Axios
         .post('/api/user/register', this.state)
         .then((response) =>{
-            console.log(response)
+            // console.log(response)
 
             if (response.data.constraint === "users_username_key"){
-                console.log(response.data.name)
+                // console.log(response.data.name)
                 alert('Username already exist. Please choose another username');
                 document.getElementById('resetRegisterName').value="";
                 document.getElementById('resetRegisterUsername').value="";

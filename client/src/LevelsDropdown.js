@@ -7,19 +7,17 @@ const LevelsDropdown = (props) => {
     : <option value= {props.levelSelection}>WRONG</option>;
     // console.log(props.levelList)
 
-    
-
-    const diffLevel = props.levelList.map((eachLevel, index) => {
-        
-        if (props.categoryId === eachLevel.id_category) {
-            if(eachLevel.level === eachLevel.level){
-                console.log('duplicates')
-            }
-            // console.log(eachLevel.level)
-           
-            return <option key={index} value={eachLevel.level}>{eachLevel.level}</option>
+    const theListOfLevel = [];
+    props.levelList.forEach((eachLevel) =>{
+        if((props.categoryId === eachLevel.id_category) && (!theListOfLevel.includes(eachLevel.level))){
+            theListOfLevel.push(eachLevel.level)
         }
     })
+
+    const theEachLevel = theListOfLevel.map((eachLevel, index) =>{
+        return <option key={index} value={eachLevel}>{eachLevel}</option>
+    })
+
 
     return (
         <div>
@@ -29,7 +27,7 @@ const LevelsDropdown = (props) => {
                 onChange={(event) => props.handleLevel(event)}
             >
                 {firstOption}  
-                {diffLevel}
+                {theEachLevel}
             </select>
         </div>
     )

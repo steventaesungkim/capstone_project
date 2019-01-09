@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Clock from './Clock';
-// import Categories from './Categories';
 import CategoryDropdown from './CategoryDropdown';
+
+import LevelsDropdown from './LevelsDropdown';
 
 import {
     BrowserRouter as Router, 
@@ -17,7 +18,11 @@ class Timer extends Component {
             // time: "",
             categories: [],
             level: [],
-            selection: 'Select'
+            categorySelection: 'Select',
+            levelSelection: 'Select',
+            categoryId: '',
+            levelId: '',
+            
         }
     }
 
@@ -28,6 +33,14 @@ class Timer extends Component {
             // console.log(data);
             this.setState({
                 categories: data
+            })
+        })
+        fetch('/api/question')
+        .then(r => r.json())
+        .then(data => {
+            // console.log(data)
+            this.setState({
+                level: data
             })
         })
     }
@@ -46,9 +59,17 @@ class Timer extends Component {
                         name = 'Category'
                         categoryList = {this.state.categories}
                         handleChange= {this._handleSelect}
-                        selection = {this.state.selection}
+                        categorySelection = {this.state.categorySelection}
+                        categoryId = {this.state.categoryId}
+                        
+                        levelList = {this.state.level}
+                        handleLevelSelect = {this._handleLevelSelect}
+                        levelSelection = {this.state.levelSelection}
                     />
 
+                    {/* <LevelsDropdown
+                        testlevel = {this.state.categories}
+                    /> */}
 
 
                         {/* <button>Set Timer</button> */}
@@ -62,31 +83,26 @@ class Timer extends Component {
     }
 
 
+    _handleSelect = (event) => {
+        const selected = {name: event.target.value, value: event.target.value}
 
-    _theList = () =>{
-        const category = (this.state.categories)
-        // console.log(category)
-        this.setState({
-            categories: category
+        this.state.categories.map((compare) =>{
+            if (selected.name === compare.category_type){
+                this.setState({
+                    categoryId: compare.id,
+                    categorySelection: selected.value 
+                })
+            }
         })
-        // const list = category.map((thecategory) => {
-        //     console.log(thecategory);
-        // })
     }
 
-    _handleSelect = (event) => {
-        // console.log('Selecting..')
-        const selected = {name: event.target.value, value: event.target.value}
-        // console.log(selected)
-            this.setState({
-                selection: selected.value
-                
-            })
-        
-        // if (selected.value !== this.state.selection) {
+    _handleLevelSelect = (event) => {
+        console.log(event.target.value)
+        const levelSelected = {value: event.target.value}
+        this.setState({
+            levelSelection: levelSelected.value
+        })
 
-        // }
-        // console.log(this.state.categories)
     }
     
 }

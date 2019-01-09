@@ -13,12 +13,12 @@ class Home extends Component {
     render() {
         return (
             <Router>
-            <div>
-                <h1>What do you want to be tested on?</h1>
-                <Route path =  '/' exact component = {Login} /> 
-                <Route path = '/register' component = {Register} />
-                <Route path = '/timer' component = {Timer} />
-            </div>
+                <div>
+                    <h1>What do you want to be tested on?</h1>
+                    <Route path =  '/' exact component = {Login} /> 
+                    <Route path = '/register' component = {Register} />
+                    <Route path = '/timer' component = {Timer} />
+                </div>
             </Router>
         );
     }

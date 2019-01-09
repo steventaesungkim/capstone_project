@@ -26,11 +26,13 @@ class Login extends Component {
             </div>
         )
     }
+
     _userName = (input) => {
         this.setState ({
             username: input
         });
     }
+    
     _password = (input) => {
         this.setState ({
             password: input

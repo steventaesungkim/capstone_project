@@ -18,7 +18,6 @@ const LevelsDropdown = (props) => {
         return <option key={index} value={eachLevel}>{eachLevel}</option>
     })
 
-
     return (
         <div>
             {props.name}:

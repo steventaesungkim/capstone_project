@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 const Logout = (props) =>{
-    console.log(props.inSession)
+    // console.log(props.inSession)
 
     return(
         <div>

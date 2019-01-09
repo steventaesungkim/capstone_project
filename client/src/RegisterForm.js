@@ -15,6 +15,7 @@ const RegisterForm = (props) => {
                         props.newName(e.target.value);
                     }}
                     value = {props.inputName}
+                    id = "resetRegisterName"
                 />
                 <br />
             <label>UserName:</label>
@@ -27,6 +28,7 @@ const RegisterForm = (props) => {
                         props.newUserName(e.target.value);
                     }}
                     value = {props.inputUserName}
+                    id = "resetRegisterUsername"
                 />
                 <br />
             <label>Password:</label>
@@ -38,6 +40,7 @@ const RegisterForm = (props) => {
                         props.newPassword(e.target.value);
                     }}
                     value = {props.inputPassword}
+                    id = 'resetRegisterPassword'
                 />
                 <br />
             <label>Avatar:</label>
@@ -49,6 +52,7 @@ const RegisterForm = (props) => {
                         props.newAvatar(e.target.value);
                     }}
                     value = {props.inputAvatar}
+                    id = 'resetRegisterAvatar'
                 />
                 <br />
             <input 

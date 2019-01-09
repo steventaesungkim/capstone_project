@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RegisterForm from './RegisterForm';
+import Axios from 'axios';
 
 
 
@@ -55,20 +56,22 @@ class Register extends Component {
     _onSubmit = (event) => {
         event.preventDefault();
         console.log('Registering..')
-        fetch('/api/user/register',{
-            method: 'POST',
-            body: JSON.stringify({
-                name: this.state.name,
-                username: this.state.username, 
-                password: this.state.password,
-                avatar: this.state.avatar
-            }),
-            headers: {
-                "Content-type": "application/json"
+
+        Axios
+        .post('/api/user/register', this.state)
+        .then((response) =>{
+            console.log(response)
+
+            if (response.data.constraint === "users_username_key"){
+                console.log(response.data.name)
+                alert('Username already exist. Please choose another username');
+                document.getElementById('resetRegisterName').value="";
+                document.getElementById('resetRegisterUsername').value="";
+                document.getElementById('resetRegisterPassword').value="";
+                document.getElementById('resetRegisterAvatar').value="";
+            }else{
+                this.props.history.push("/timer");
             }
-        })
-        .then(r => {
-            return r.json();
         })
     };
 

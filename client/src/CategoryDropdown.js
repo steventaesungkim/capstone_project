@@ -2,12 +2,30 @@ import React from 'react';
 import LevelsDropdown from './LevelsDropdown';
 
 const CategoryDropdown = (props) => {
+
     const firstOption = (props.name === 'Category')
     ? <option >Select a Category</option>
     : <option value= {props.categorySelection}>Something messed up is you see this</option>; 
    
-    // console.log(props.categoryId)
+    // console.log(props.showLevel)
     
+    let getLevelDropdown = () => {
+        if(props.showLevel === true){
+            return(
+                <div>   
+                    <LevelsDropdown 
+                    name = 'Levels'
+                    levelList = {props.levelList}
+                    handleLevel= {props.handleLevelSelect}
+                    levelSelection = {props.levelSelection}
+                    categoryId = {props.categoryId}
+                    />
+                </div>
+            )
+        }
+
+    }
+
     const theCategoryList = props.categoryList.map((eachCategory,index) => {
         return <option key={index} value={(eachCategory.category_type)}>{eachCategory.category_type}</option>
     }) 
@@ -25,14 +43,7 @@ const CategoryDropdown = (props) => {
                 {theCategoryList}
             
             </select>
-            <LevelsDropdown 
-                name = 'Levels'
-                levelList = {props.levelList}
-                handleLevel= {props.handleLevelSelect}
-                levelSelection = {props.levelSelection}
-                categoryId = {props.categoryId}
-            />
-            
+            {getLevelDropdown()}
         </div>
     )
 

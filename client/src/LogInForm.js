@@ -9,7 +9,6 @@ const LogInForm = (props) => {
             action='/api/user/login/'
             onSubmit = {(event) => 
             {props.submit(event)}
-            
             }>
             <label>Username:</label>
                 <input 
@@ -20,6 +19,7 @@ const LogInForm = (props) => {
                         props.newUserName(e.target.value);
                     }}
                     value = {props.inputUserName}
+                    id="resetUsername"
                 />
             <br />
             <label>Password:</label>
@@ -31,6 +31,7 @@ const LogInForm = (props) => {
                         props.newPassword(e.target.value);
                     }}
                     value = {props.inputPassword}
+                    id="resetPassword"
                 />
             <br />
             <input 

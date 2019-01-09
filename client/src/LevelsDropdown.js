@@ -10,9 +10,12 @@ const LevelsDropdown = (props) => {
     
 
     const diffLevel = props.levelList.map((eachLevel, index) => {
-        // console.log(eachLevel.level)
         
         if (props.categoryId === eachLevel.id_category) {
+            if(eachLevel.level === eachLevel.level){
+                console.log('duplicates')
+            }
+            // console.log(eachLevel.level)
            
             return <option key={index} value={eachLevel.level}>{eachLevel.level}</option>
         }

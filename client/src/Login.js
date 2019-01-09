@@ -49,6 +49,8 @@ class Login extends Component {
             if(response.data.message === "No data returned from the query.") {
                 console.log("error")
                 alert('Incorrect Username and Password. Please re-enter correct Username and Password');
+                document.getElementById('resetUsername').value="";
+                document.getElementById('resetPassword').value="";
             }else{
                 this.props.history.push("/timer");
             }

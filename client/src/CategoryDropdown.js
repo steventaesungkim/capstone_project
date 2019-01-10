@@ -19,6 +19,9 @@ const CategoryDropdown = (props) => {
                         handleLevel= {props.handleLevelSelect}
                         levelSelection = {props.levelSelection}
                         categoryId = {props.categoryId}
+                        categorySelection = {props.categorySelection}
+
+                        showButton = {props.showButton}
                     />
                 </div>
             )

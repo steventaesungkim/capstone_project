@@ -15,22 +15,6 @@ const Question = (props) =>{
         return array;
     }
 
-    // const listOfQuestions = [];
-    // shuffleQuestion(listOfObjectQuestion).forEach((eachQuestion) =>{
-    //     listOfQuestions.push(eachQuestion.question)
-    // })
-    
-    // const firstQuestion = listOfQuestions[0];
-    
-    // const something = firstQuestion.question
-    // console.log(something)
-    // console.log(firstQuestion.answer)
-
-    // const oneObjectQuestion = shuffleQuestion(listOfObjectQuestion)[0]
-
-    // console.log(oneObjectQuestion)
-    // console.log(oneObjectQuestion.question)
-
     const listOfQuestions = [];
     const listOfAnswers = [];
     const listOfQuestionId = []
@@ -40,13 +24,15 @@ const Question = (props) =>{
         listOfQuestionId.push(data.id);
     })
 
-    const questionId = listOfQuestionId[0]
+    const questionId = listOfQuestionId[0];
+    const theQuestion = listOfQuestions[0];
+    const theAnswer = listOfAnswers[0];
 
     // console.log(listOfAnswers[0])
 
     return(
         <div>
-            {listOfQuestions[0]}
+            {theQuestion}
             {/* <Answer /> */}
             <form className='answer-form'
                 method='POST'

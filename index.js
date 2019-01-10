@@ -37,6 +37,7 @@ app.use(express.static('public'));
 const User = require('./models/User');
 const Category = require('./models/Category');
 const Question = require('./models/Question');
+const Result = require('./models/Result');
 
 // ========================================================
 // Listening 
@@ -427,7 +428,6 @@ app.post('/api/question/create', (req, res) =>{
         .then(newQuestion =>{
             res.json(newQuestion);
         })
-
 })
 
 // ========================================================
@@ -478,9 +478,9 @@ app.get('/api/question/:id_category(\\d+)', (req, res) => {
 // DOUBLE CHECK
 
 app.get('/api/question/:id_category(\\d+)/:level', (req, res) => {
-    const selectedLevel = req.body.level;
+    const selectedLevel = req.params.level;
 
-    Question.getByLevel(req.params.id_category, selectedLevel, null)
+    Question.getByLevel(req.params.id_category, selectedLevel, true)
         .catch(err =>{
             console.log(err)
             res.send(err)
@@ -551,6 +551,153 @@ app.delete('/api/question/:id_category(\\d+)', (req, res) => {
         theLevelQuestion.delete()
         .then(delLevelQuestion => {
             res.json(delLevelQuestion);
+        });
+    });
+});
+
+// ========================================================
+
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Results
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+// ========================================================
+// Create a Result
+// ========================================================
+
+app.post('/api/result/:id_resultset/:id_question', (req, res) =>{
+    const resultSetId = req.params.id_resultset;
+    const questionId = req.params.id_question;
+    const isCorrect = req.body.correct;
+    
+    Question.createResult(resultSetId, questionId, isCorrect)
+        .catch(err =>{
+            console.log(err);
+            res.send(err);
+        })
+        .then(newResult =>{
+            res.json(newResult);
+        })
+})
+
+// ========================================================
+
+// ========================================================
+// Get all Result
+// ========================================================
+
+app.get('/api/result', (req, res) => {
+    Result.getAll()
+    .then(allResult => {
+        console.log(allResult);
+        res.json(allResult);
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Result by ID 
+// ========================================================
+
+app.get('/api/result/:id(\\d+)', (req, res) => {
+    Result.getById(req.params.id)
+    .then(result => {
+        res.json(result);
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Get all Results by ResultSet ID 
+// ========================================================
+
+app.get('/api/result/:resultsetID', (req, res) => {
+    Result.getByResultSet(req.params.resultsetID, true)
+    .then(result => {
+        res.json(result);
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Results by Question ID
+// ========================================================
+
+app.get('/api/result/:qID', (req, res) => {
+    Result.getByQuestion(req.params.qID, true)
+        .catch(err =>{
+            console.log(err)
+            res.send(err)
+        })
+    .then(result => {
+        res.json(result);
+    });
+});
+
+// ========================================================
+// Update Result
+// ========================================================
+
+app.post('/api/Result/update/:id(\\d+)', (req,res) =>{
+    Result.getById(req.params.id)
+        .then(theResult =>{
+            theResult.correct = req.body.correct
+            theResult.update()
+        })
+        .then(updateResult =>{
+            res.json(updateResult)
+        })
+})
+
+// ========================================================
+
+// ========================================================
+// Delete by ID 
+// ========================================================
+
+app.delete('/api/result/:id(\\d+)', (req, res) => {
+    Result.deleteById(req.params.id)
+    .then(theResult => {
+        theResult.delete()
+        .then(delResult => {
+            res.json(delResult);
+        });
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Delete ResultSet by ResultSet ID 
+// ========================================================
+
+app.delete('/api/result/:id_resultset', (req, res) => {
+    Result.deleteByResultSet(req.params.id_resultset)
+    .then(theResult => {
+        theResult.delete()
+        .then(delResult => {
+            res.json(delResult);
+        });
+    });
+});
+
+// ========================================================
+
+// ========================================================
+// Delete Result by question using ID 
+// ========================================================
+
+app.delete('/api/result/:id_question', (req, res) => {
+    Result.deleteByCategory(req.params.id_question)
+    .then(theResult => {
+        theResult.delete()
+        .then(delResult => {
+            res.json(delResult);
         });
     });
 });

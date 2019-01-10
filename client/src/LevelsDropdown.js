@@ -42,7 +42,7 @@ const LevelsDropdown = (props) => {
                 {firstOption}  
                 {theEachLevel}
             </select>
-            <Link to = {'/questions'}>{getButtonQuestions()}</Link>
+            <Link to = {`/question/${props.categoryId}/${props.levelSelection}`}>{getButtonQuestions()}</Link>
 
         </div>
     )

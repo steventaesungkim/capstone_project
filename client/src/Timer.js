@@ -70,6 +70,7 @@ class Timer extends Component {
                     showLevel = {this.state.showLevel}
 
                     showButton = {this.state.showButton}
+                    // handleButtonClick = {this._handleButton}
                 />
 
                     {/* <button>Set Timer</button> */}
@@ -103,9 +104,7 @@ class Timer extends Component {
             showButton: true
         })
     }
-
-
-
+    
     _handleLogout = (event) =>{
         // console.log("clicked")
         this.setState({

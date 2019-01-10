@@ -22,6 +22,7 @@ const CategoryDropdown = (props) => {
                         categorySelection = {props.categorySelection}
 
                         showButton = {props.showButton}
+                        // handleButton  = {props.handleButtonClick}
                     />
                 </div>
             )

@@ -19,7 +19,7 @@ class Home extends Component {
                     <Route path =  '/' exact component = {Login} /> 
                     <Route path = '/register' component = {Register} />
                     <Route path = '/timer' component = {Timer} />
-                    <Route path = '/qustions' component = {Questions} />
+                    <Route path = '/question/:categoryId/:levelSelection' component = {Questions} />
                 </div>
             </Router>
         );

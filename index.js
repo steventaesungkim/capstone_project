@@ -478,9 +478,9 @@ app.get('/api/question/:id_category(\\d+)', (req, res) => {
 // DOUBLE CHECK
 
 app.get('/api/question/:id_category(\\d+)/:level', (req, res) => {
-    const selectedLevel = req.body.level;
+    const selectedLevel = req.params.level;
 
-    Question.getByLevel(req.params.id_category, selectedLevel, null)
+    Question.getByLevel(req.params.id_category, selectedLevel, true)
         .catch(err =>{
             console.log(err)
             res.send(err)

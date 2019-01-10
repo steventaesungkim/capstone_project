@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const LevelsDropdown = (props) => {
     // console.log(props)
@@ -41,9 +42,13 @@ const LevelsDropdown = (props) => {
                 {firstOption}  
                 {theEachLevel}
             </select>
-            {getButtonQuestions()}
+            <Link to = {'/questions'}>{getButtonQuestions()}</Link>
+
         </div>
     )
+
+    
+
 }
 
 export default LevelsDropdown;

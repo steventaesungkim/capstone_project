@@ -19,8 +19,8 @@ class Timer extends Component {
             categoryId: '',
             levelId: '',
             showLevel: false,
+            showButton: false,
             inSession: true
-            
         }
     }
 
@@ -68,6 +68,8 @@ class Timer extends Component {
                     handleLevelSelect = {this._handleLevelSelect}
                     levelSelection = {this.state.levelSelection}
                     showLevel = {this.state.showLevel}
+
+                    showButton = {this.state.showButton}
                 />
 
                     {/* <button>Set Timer</button> */}
@@ -78,6 +80,7 @@ class Timer extends Component {
 
 
     _handleSelect = (event) => {
+        console.log('Category Selected')
         const selected = {name: event.target.value, value: event.target.value}
 
         this.state.categories.map((compare) =>{
@@ -92,12 +95,16 @@ class Timer extends Component {
     }
 
     _handleLevelSelect = (event) => {
-        // console.log(event.target.value)
+        console.log('Level Selected')
         const levelSelected = {value: event.target.value}
+
         this.setState({
-            levelSelection: levelSelected.value
+            levelSelection: levelSelected.value,
+            showButton: true
         })
     }
+
+
 
     _handleLogout = (event) =>{
         // console.log("clicked")

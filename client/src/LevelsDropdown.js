@@ -5,7 +5,20 @@ const LevelsDropdown = (props) => {
     const firstOption = (props.name !== 'Level')
     ? <option value= {props.levelList}>Select a Level</option>
     : <option value= {props.levelSelection}>WRONG</option>;
-    // console.log(props.levelList)
+    console.log(props.levelList)
+
+    let getButtonQuestions = () => {
+        // console.log(props.showButton)
+        if (props.showButton === true) { 
+            // console.log(props.categorySelection)
+            // console.log(props.levelSelection)
+            return (
+                <div>
+                    <button>Click to continue!</button>
+                </div>
+            )
+        }
+    }
 
     const theListOfLevel = [];
     props.levelList.forEach((eachLevel) =>{
@@ -28,6 +41,7 @@ const LevelsDropdown = (props) => {
                 {firstOption}  
                 {theEachLevel}
             </select>
+            {getButtonQuestions()}
         </div>
     )
 }

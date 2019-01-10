@@ -558,3 +558,156 @@ app.delete('/api/question/:id_category(\\d+)', (req, res) => {
 // ========================================================
 
 
+// // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// // Results
+// // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+// // ========================================================
+// // Create a Result
+// // ========================================================
+
+// app.post('/api/result/create', (req, res) =>{
+//     const newLevel = req.body.level;
+//     const newQuestion = req.body.question;
+//     const newAnswer = req.body.answer;
+    
+//     Question.createQuestion(newLevel, newQuestion, newAnswer, id_category)
+//         .catch(err =>{
+//             console.log(err);
+//             res.send(err);
+//         })
+//         .then(newQuestion =>{
+//             res.json(newQuestion);
+//         })
+
+// })
+
+// // ========================================================
+
+// // ========================================================
+// // Get all Questions
+// // ========================================================
+
+// app.get('/api/question', (req, res) => {
+//     Question.getAll()
+//     .then(allQuestion => {
+//         console.log(allQuestion);
+//         res.json(allQuestion);
+//     });
+// });
+
+// // ========================================================
+
+// // ========================================================
+// // Get Question by ID 
+// // ========================================================
+
+// app.get('/api/question/:id(\\d+)', (req, res) => {
+//     Question.getById(req.params.id)
+//     .then(question => {
+//         res.json(question);
+//     });
+// });
+
+// // ========================================================
+
+// // ========================================================
+// // Get Questions by Category's ID 
+// // ========================================================
+
+// app.get('/api/question/:id_category(\\d+)', (req, res) => {
+//     Question.getByCategory(req.params.id_category)
+//     .then(category => {
+//         res.json(category);
+//     });
+// });
+
+// // ========================================================
+
+// // ========================================================
+// // Get Questions by Category's ID and Level
+// // ========================================================
+// // DOUBLE CHECK
+
+// app.get('/api/question/:id_category(\\d+)/:level', (req, res) => {
+//     const selectedLevel = req.params.level;
+
+//     Question.getByLevel(req.params.id_category, selectedLevel, true)
+//         .catch(err =>{
+//             console.log(err)
+//             res.send(err)
+//         })
+//     .then(questionLevel => {
+//         res.json(questionLevel);
+//     });
+// });
+
+// // ========================================================
+// // Update Question
+// // ========================================================
+
+// app.post('/api/question/update/:id(\\d+)', (req,res) =>{
+//     Question.getById(req.params.id)
+//         .then(theQuestion =>{
+//             theQuestion.level = req.body.level
+//             theQuestion.question = req.body.question
+//             theQuestion.answer = req.body.answer
+//             theQuestion.update()
+//         })
+//         .then(updatedQuestion =>{
+//             res.json(updatedQuestion)
+//         })
+// })
+
+// // ========================================================
+
+// // ========================================================
+// // Delete Question by ID 
+// // ========================================================
+
+// app.delete('/api/question/:id(\\d+)', (req, res) => {
+//     Question.deleteById(req.params.id)
+//     .then(theQuestion => {
+//         theQuestion.delete()
+//         .then(delQuestion => {
+//             res.json(delQuestion);
+//         });
+//     });
+// });
+
+// // ========================================================
+
+// // ========================================================
+// // Delete Question by Level using ID 
+// // ========================================================
+
+// app.delete('/api/question/:id_category(\\d+)/:level', (req, res) => {
+//     Question.deleteByLevel(req.params.id_category, req.body.level)
+//     .then(theLevelQuestion => {
+//         theLevelQuestion.delete()
+//         .then(delLevelQuestion => {
+//             res.json(delLevelQuestion);
+//         });
+//     });
+// });
+
+// // ========================================================
+
+// // ========================================================
+// // Delete Questions by Category using ID 
+// // ========================================================
+
+// app.delete('/api/question/:id_category(\\d+)', (req, res) => {
+//     Question.deleteByCategory(req.params.id_category)
+//     .then(theLevelQuestion => {
+//         theLevelQuestion.delete()
+//         .then(delLevelQuestion => {
+//             res.json(delLevelQuestion);
+//         });
+//     });
+// });
+
+// // ========================================================
+
+

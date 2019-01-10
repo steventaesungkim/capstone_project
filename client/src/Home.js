@@ -7,7 +7,7 @@ import {
 import Login from './Login';
 import Register from './Register';
 import Timer from './Timer';
-import Questions from './Questions';
+import DisplayQuiz from './DisplayQuiz';
 
 
 class Home extends Component {
@@ -19,7 +19,7 @@ class Home extends Component {
                     <Route path =  '/' exact component = {Login} /> 
                     <Route path = '/register' component = {Register} />
                     <Route path = '/timer' component = {Timer} />
-                    <Route path = '/question/:categoryId/:levelSelection' component = {Questions} />
+                    <Route path = '/question/:categoryId/:levelSelection' component = {DisplayQuiz} />
                 </div>
             </Router>
         );

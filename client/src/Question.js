@@ -47,6 +47,20 @@ const Question = (props) =>{
     return(
         <div>
             {listOfQuestions[0]}
+            {/* <Answer /> */}
+            <form className='answer-form'
+                method='POST'
+                action=''
+                onSubmit = {(event) =>{
+                    props.theAnswer(event.target.value);
+                }}
+                // value = {this.state.inputAnswer}
+                id='resetAnswer'
+            >
+            <input
+                
+            />
+            </form>
         </div>
     )
 }

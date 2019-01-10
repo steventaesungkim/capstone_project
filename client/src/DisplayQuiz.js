@@ -41,22 +41,10 @@ class DisplayQuiz extends Component {
                 <Clock />
                 <Question 
                     question = {this.state.question}
-                    
+
                 />
-                {/* <form className='answer-form'
-                    method='POST'
-                    action=''
-                    onSubmit = {(event) =>{
-                        props.theAnswer(event.target.value);
-                    }}
-                    // value = {this.state.inputAnswer}
-                    id='resetAnswer'
-                >
-                    <input
                 
-                    />
-                </form> */}
-                {/* <Answer /> */}
+                
             </div>
         )
     }

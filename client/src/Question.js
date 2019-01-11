@@ -20,6 +20,7 @@ const Question = (props) =>{
                 questionId = {questionId}
                 alreadyAnswered = {props.alreadyAnswered}
 
+                click = {props.click}
             />
         </div>
     )

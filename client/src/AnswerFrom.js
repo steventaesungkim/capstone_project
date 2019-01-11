@@ -9,15 +9,12 @@ const AnswerForm = (props) => {
                 onSubmit={(event) =>{
                     event.preventDefault();
                     props.handleSubmit(props.userInput)
-
-                   
                 }}
-                
-                
                 id='resetAnswer'
             >
     
             <input
+                id='answerInput'
                 required
                 className='input'
                 type='text'
@@ -28,15 +25,10 @@ const AnswerForm = (props) => {
                 value={props.userInput}
             />
             <input 
-                type='hidden'
-                name='correct'
-                value={props.questionResult} 
-            />
-            <input 
                 className='input-submit'
                 type='submit'
                 value='submit'
-                
+                onClick = {props.click}
             />
         </form>
     )

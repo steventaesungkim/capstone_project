@@ -63,38 +63,14 @@ class Register extends Component {
         Axios
         .post('/api/user/register', this.state)
         .then((response) =>{
-            console.log(response)
+            // console.log(response)
 
-            // if (response.data.name === ""){
-            //     alert('Please enter in your name');
-            //     if (response.data.pwhash === ""){
-            //         alert('Please enter in your password');
-            //         if (response.data.username === ""){
-            //             alert('Please enter in your username');
-            //             if (response.data.avatar === ""){
-            //                 alert('Please select an avatart');
-            //             }
-            //         }
-            //     }
-            // }else{
-            //     this.props.history.push("/register");
-            // }
-            if ((response.data.name === '') || (response.data.pwhash === '') || (response.data.username === '') ||
-            (response.data.avatar === '')){
-                alert('Please enter all input fields');
+            if (response.data === "Username exist") {
+                alert('Username already exist. Please choose another username');
                 document.getElementById('resetRegisterName').value="";
                 document.getElementById('resetRegisterUsername').value="";
                 document.getElementById('resetRegisterPassword').value="";
                 document.getElementById('resetRegisterAvatar').value="";
-                
-                if (response.data === "Username exist") {
-                    // console.log(response.data.name)
-                    alert('Username already exist. Please choose another username');
-                    document.getElementById('resetRegisterName').value="";
-                    document.getElementById('resetRegisterUsername').value="";
-                    document.getElementById('resetRegisterPassword').value="";
-                    document.getElementById('resetRegisterAvatar').value="";
-                }
             }else{
                 this.props.history.push('/timer');
             }

@@ -1,11 +1,11 @@
 import React from 'react';
+import AnswerInput from './AnswerInput';
 
 const Question = (props) =>{
 
     const listOfObjectQuestion = props.question 
 
-    let shuffleQuestion = (array) =>{
-        
+    let shuffleQuestion = (array) =>{ 
         for (var i = array.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
             var temp = array[i]; 
@@ -42,25 +42,15 @@ const Question = (props) =>{
 
     const questionId = listOfQuestionId[0]
 
-    // console.log(listOfAnswers[0])
+    console.log(`Answer: `, listOfAnswers[0])
 
     return(
         <div>
             {listOfQuestions[0]}
-            {/* <Answer /> */}
-            <form className='answer-form'
-                method='POST'
-                action=''
-                onSubmit = {(event) =>{
-                    props.theAnswer(event.target.value);
-                }}
-                // value = {this.state.inputAnswer}
-                id='resetAnswer'
-            >
-            <input
-                
+            <AnswerInput 
+                userAnswer = {props.theAnswer}
             />
-            </form>
+            
         </div>
     )
 }

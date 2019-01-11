@@ -42,6 +42,9 @@ class DisplayQuiz extends Component {
                 <Question 
                     question = {this.state.question}
 
+                    newAnswer = {this.state.inputAnswer}
+                    theAnswer = {this._handleAnswerInput}
+
                 />
                 
                 
@@ -49,10 +52,16 @@ class DisplayQuiz extends Component {
         )
     }
 
+    _handleAnswerInput = (input) => {
+        this.setState ({
+            inputAnswer: input
+        });
+        console.log(input)
+    }
+
+
 
 
 }
-
-
 
 export default DisplayQuiz; 

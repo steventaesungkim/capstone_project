@@ -91,7 +91,7 @@ app.post('/api/user/register', (req, res) => {
     console.log(req.body);
     const newName = req.body.name.toUpperCase();
     const newUsername = req.body.username.toUpperCase();
-    const newPassword = req.body.password.toUpperCase();
+    const newPassword = req.body.password;
     const newAvatar = req.body.avatar.toUpperCase();
     User.createUser(newName, newUsername, newPassword, newAvatar)
         .catch(err => {
@@ -198,10 +198,11 @@ app.get('/api/user/:username', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Get User by Avatar 
+// Get User by Avatar   (NOTE THE DIFFERENT ROUTE - THIS
+//                     IS NEEDED TO DIFFER FROM USERNAME)
 // ========================================================
 
-app.get('/api/user/:avatar', (req, res) => {
+app.get('/api/user-avatar/:avatar', (req, res) => {
     User.getByAvatar(req.params.avatar)
     .then(avatar => {
         res.json(avatar);
@@ -211,49 +212,24 @@ app.get('/api/user/:avatar', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Update User's Name by ID 
+// Update User info (except password)
 // ========================================================
 
 app.post('/api/user/:id(\\d+)', (req, res) => {
     User.getById(req.params.id)
     .then(theUser => {
-        theUser.updateName(req.body.name)
-        .then(nameUpdated => {
-            res.json(nameUpdated);
-        });
-    });
-});
+        console.log(req.body);
+        console.log(theUser);
+        
+        theUser.name = req.body.name ? req.body.name.toUpperCase() : theUser.name;
+        theUser.username = req.body.username ? req.body.username.toUpperCase() : theUser.username;
+        theUser.avatar = req.body.avatar ? req.body.avatar.toUpperCase() : theUser.avatar;
 
-// ========================================================
-
-// ========================================================
-// Update User's Username by ID 
-// ========================================================
-
-app.post('/api/user/:id(\\d+)', (req, res) => {
-    User.getById(req.params.id)
-    .then(theUser => {
-        theUser.updateUsername(req.body.username)
-        .then(usernameUpdated => {
-            res.json(usernameUpdated);
-        });
-    });
-});
-
-// ========================================================
-
-// ========================================================
-// Update User's Avatar by ID 
-// ========================================================
-
-app.post('/api/user/:id(\\d+)', (req, res) => {
-    User.getById(req.params.id)
-    .then(theUser => {
-        theUser.updateAvatar(req.body.avatar)
-        .then(avatarUpdated => {
-            res.json(avatarUpdated);
-        });
-    });
+        theUser.update()
+            .then(nameUpdated => {
+                res.json(nameUpdated);
+            })
+    })
 });
 
 // ========================================================
@@ -262,7 +238,7 @@ app.post('/api/user/:id(\\d+)', (req, res) => {
 // Update User's Password by ID 
 // ========================================================
 
-app.post('/api/user/:id(\\d+)', (req, res) => {
+app.post('/api/user-pwd/:id(\\d+)', (req, res) => {
     User.getById(req.params.id)
     .then(theUser => {
         theUser.updatePassword(req.body.password)

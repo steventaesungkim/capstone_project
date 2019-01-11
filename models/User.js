@@ -140,6 +140,37 @@ class User {
             });
     }
 
+
+
+    // Updates all fields for THIS user except password
+    // Returns boolean True if successful, False if unsuccessful
+    update() {
+        return db.result(`
+                UPDATE users SET name=$2, username=$3, avatar=$4
+                WHERE id=$1`,
+                [this.id, this.name, this.username, this.avatar]
+            )
+            .then(result => {
+                return result.rowCount === 1;
+            });
+    }
+
+    // Updates the value of field fieldName to newValue for THIS user
+    // Returns boolean True if successful, False if unsuccessful
+    updateField(fieldName, newValue) {
+        if (fieldName === "password") {
+            const salt = bcrypt.genSaltSync(saltRounds);
+            newValue = bcrypt.hashSync(newValue, salt);
+            fieldName = "pwhash";
+        }
+        return db.result(`
+                UPDATE users SET ${fieldName}=$2 WHERE id=$1`,
+                [this.id, newValue]
+            )
+            .then(result => {
+                return result.rowCount === 1;
+            });
+    }
     // === ===  UPDATE  === ===  [[END]]
 
     

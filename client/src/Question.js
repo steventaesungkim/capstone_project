@@ -1,9 +1,23 @@
 import React from 'react';
-import AnswerInput from './AnswerInput';
+
 
 const Question = (props) =>{
 
     const listOfObjectQuestion = props.question 
+
+    // // console.log(listOfObjectQuestion.length)
+    // const numOfQuestions = listOfObjectQuestion.length  
+
+    // const getRandomNumber = parseInt(Math.random() * (numOfQuestions).toFixed(0))
+    // console.log(getRandomNumber)
+
+    // console.log(props.displayQuestion)
+
+    // console.log(listOfObjectQuestion)
+
+    // const listOfObjectQuestion = this.state.question;
+    // const numOfQuestions = listOfObjectQuestion.length;  
+    // const getRandomNumber = parseInt(Math.random() * (numOfQuestions).toFixed(0));
 
     let shuffleQuestion = (array) =>{ 
         for (var i = array.length - 1; i > 0; i--) {
@@ -15,22 +29,6 @@ const Question = (props) =>{
         return array;
     }
 
-    // const listOfQuestions = [];
-    // shuffleQuestion(listOfObjectQuestion).forEach((eachQuestion) =>{
-    //     listOfQuestions.push(eachQuestion.question)
-    // })
-    
-    // const firstQuestion = listOfQuestions[0];
-    
-    // const something = firstQuestion.question
-    // console.log(something)
-    // console.log(firstQuestion.answer)
-
-    // const oneObjectQuestion = shuffleQuestion(listOfObjectQuestion)[0]
-
-    // console.log(oneObjectQuestion)
-    // console.log(oneObjectQuestion.question)
-
     const listOfQuestions = [];
     const listOfAnswers = [];
     const listOfQuestionId = []
@@ -40,16 +38,18 @@ const Question = (props) =>{
         listOfQuestionId.push(data.id);
     })
 
-    const questionId = listOfQuestionId[0]
+    const questionId = listOfQuestionId[0];
+    const theQuestion = listOfQuestions[0];
+    const theAnswer = listOfAnswers[0];
 
-    console.log(`Answer: `, listOfAnswers[0])
+    console.log(`Answer:`, listOfAnswers[0])
+    // console.log({props.newAnswer})
 
     return(
         <div>
-            {listOfQuestions[0]}
-            <AnswerInput 
-                userAnswer = {props.theAnswer}
-            />
+            {theQuestion}
+            {props.ehh}
+        
             
         </div>
     )

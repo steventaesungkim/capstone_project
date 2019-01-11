@@ -5,25 +5,21 @@ import Question from './Question';
 
 class DisplayQuiz extends Component {
     constructor(props){
-        
         super(props);
         this.state = {
             question: [],
-
             questionId: '',
             displayQuestion: '',
             questionAnswer: '',
-
-            userInput: '',
-
-            correct: ''
+            alreadyAnswered: []
         }
     }
 
     componentDidMount(){
         const categoryId = this.props.match.params.categoryId;
         const levelSelection = this.props.match.params.levelSelection;
-        
+       
+
         fetch(`/api/question/${categoryId}/${levelSelection}`)
         .then(r => r.json())
         .then((data) =>{
@@ -49,23 +45,20 @@ class DisplayQuiz extends Component {
                 listOfQuestions.push(data.question);
                 listOfAnswers.push(data.answer);
                 listOfQuestionId.push(data.id);
-            })
 
+            })
             const theQuestionId = listOfQuestionId[0];
             const theQuestion = listOfQuestions[0];
-            const theAnswer = listOfAnswers[0];
+            const userAnswer = listOfAnswers[0];
                 this.setState({
                     question: data,
                     displayQuestion: theQuestion,
                     questionId: theQuestionId,
-                    questionAnswer: theAnswer
+                    questionAnswer: userAnswer
                 })
             })
         
     }
-
-    
-    
 
     
     render() {   
@@ -77,43 +70,29 @@ class DisplayQuiz extends Component {
                     displayQuestion = {this.state.displayQuestion}
                     questionId = {this.state.questionId}
                     questionAnswer = {this.state.questionAnswer}
-                    userInput = {this.state.userInput}
-
-                    userAnswer = {this._handleInputAnswer}
-
-                    answerResult = {this._isCorrect}
-
-                    questionResult = {this.state.correct}
-
+                    alreadyAnswered = {this.state.alreadyAnswered}
                 />
-                
                 
             </div>
         )
     }
 
-    _handleInputAnswer = (input) =>{
-        console.log(input)
-        this.setState({
-            userInput: input
-        })
+    _howManyQuestions = () => {
+        const refreshPage = () => {
+            window.location.reload();
+        }
+
+        if (this.alreadyAnswered.length <= 6) {
+            this.alreadyAnswered.push(this.questionId)
+            refreshPage()
+            console.log('Keep answering');
+        } else {
+            console.log('No more questions');
+        }
+
     }
 
-    _isCorrect = (input) =>{
-        // console.log(input)
-        this.setState({
-            correct: input
-        })
-        // const categoryId = this.props.match.params.categoryId;
-        // const levelSelection = this.props.match.params.levelSelection;
-
-        // this.props.history.push(`/question/${categoryId}/${levelSelection}`);
-    }
-
-
-
+    
 }
-
-
 
 export default DisplayQuiz; 

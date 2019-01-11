@@ -569,9 +569,11 @@ app.delete('/api/question/:id_category(\\d+)', (req, res) => {
 // ========================================================
 
 app.post('/api/result/:id_resultset/:id_question', (req, res) =>{
+
     const resultSetId = req.params.id_resultset;
     const questionId = req.params.id_question;
     const isCorrect = req.body.correct;
+    console.log(req.body)
     
     Result.createResult(resultSetId, questionId, isCorrect)
         .catch(err =>{

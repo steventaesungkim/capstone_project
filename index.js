@@ -96,7 +96,7 @@ app.post('/api/user/register', (req, res) => {
     User.createUser(newName, newUsername, newPassword, newAvatar)
         .catch(err => {
             console.log(err);
-            // res.json(message='Username exist');
+            res.json(message='Username exist');
         })
         .then(newUser => {
             req.session.user = newUser;
@@ -119,8 +119,9 @@ app.post('/api/user/login', (req, res) => {
     User.getByUserName(theUserName)
         // console.log(theUserName)
         .catch(err => {
-            // console.log(err);
+            console.log(err);
             res.json(message='Invalid Username');
+            // res.json(err);
         })
         .then(theUser => {
             console.log(theUser)

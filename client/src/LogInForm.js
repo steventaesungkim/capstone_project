@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const LogInForm = (props) => {
     return (
         <form className='login-form' 
+            name='login-form'
             method="POST"
             action='/api/user/login/'
             onSubmit = {(event) => 
@@ -12,6 +13,8 @@ const LogInForm = (props) => {
             }>
             <label>Username:</label>
                 <input 
+                    required
+                    name='username'
                     className='input'
                     type='text'
                     // placeholder='UserName'
@@ -24,6 +27,8 @@ const LogInForm = (props) => {
             <br />
             <label>Password:</label>
                 <input 
+                    required
+                    name='password'
                     className='input'
                     type='text'
                     // placeholder='Password'

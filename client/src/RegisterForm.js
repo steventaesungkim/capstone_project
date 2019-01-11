@@ -7,6 +7,7 @@ const RegisterForm = (props) => {
         <form className='register-form' onSubmit = {(event) => {props.submit(event)}}>
             <label>Name:</label>
                 <input 
+                    required
                     className='input'
                     type='text'
                     // placeholder='name'
@@ -20,6 +21,7 @@ const RegisterForm = (props) => {
                 <br />
             <label>UserName:</label>
                 <input 
+                    required
                     className='input'
                     type='text'
                     // placeholder='UserName'
@@ -32,7 +34,8 @@ const RegisterForm = (props) => {
                 />
                 <br />
             <label>Password:</label>
-                <input 
+                <input
+                    required
                     className='input'
                     type='text'
                     // placeholder='Password'
@@ -45,6 +48,7 @@ const RegisterForm = (props) => {
                 <br />
             <label>Avatar:</label>
                 <input 
+                    required
                     className='input'
                     type='text'
                     // placeholder='Select an Avatar'

@@ -43,15 +43,16 @@ class Login extends Component {
         event.preventDefault();
         
         Axios
-        .post(`/api/user/login/`, this.state)
+        .post(`/api/user/login`, this.state)
         .then((response) => {
-        
+            // console.log(response)
+             
             if ((response.data === "Invalid Username") || (response.data === "Invalid Password")) {
                 alert('Incorrect Username or Password. Please re-enter correct Username or Password');
                 document.getElementById('resetUsername').value="";
                 document.getElementById('resetPassword').value="";
             } else {
-                this.props.history.push('/timer');
+                this.props.history.push('/timer'); 
             }
         })
     }

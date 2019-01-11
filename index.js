@@ -96,7 +96,7 @@ app.post('/api/user/register', (req, res) => {
     User.createUser(newName, newUsername, newPassword, newAvatar)
         .catch(err => {
             console.log(err);
-            res.send(err);
+            // res.json(message='Username exist');
         })
         .then(newUser => {
             req.session.user = newUser;
@@ -572,7 +572,7 @@ app.post('/api/result/:id_resultset/:id_question', (req, res) =>{
     const questionId = req.params.id_question;
     const isCorrect = req.body.correct;
     
-    Question.createResult(resultSetId, questionId, isCorrect)
+    Result.createResult(resultSetId, questionId, isCorrect)
         .catch(err =>{
             console.log(err);
             res.send(err);

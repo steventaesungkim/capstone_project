@@ -79,16 +79,24 @@ class Register extends Component {
             // }else{
             //     this.props.history.push("/register");
             // }
-            
-            if (response.data.constraint === "users_username_key"){
-                // console.log(response.data.name)
-                alert('Username already exist. Please choose another username');
+            if ((response.data.name === '') || (response.data.pwhash === '') || (response.data.username === '') ||
+            (response.data.avatar === '')){
+                alert('Please enter all input fields');
                 document.getElementById('resetRegisterName').value="";
                 document.getElementById('resetRegisterUsername').value="";
                 document.getElementById('resetRegisterPassword').value="";
                 document.getElementById('resetRegisterAvatar').value="";
+                
+                if (response.data === "Username exist") {
+                    // console.log(response.data.name)
+                    alert('Username already exist. Please choose another username');
+                    document.getElementById('resetRegisterName').value="";
+                    document.getElementById('resetRegisterUsername').value="";
+                    document.getElementById('resetRegisterPassword').value="";
+                    document.getElementById('resetRegisterAvatar').value="";
+                }
             }else{
-                this.props.history.push("/timer");
+                this.props.history.push('/timer');
             }
         })
     };

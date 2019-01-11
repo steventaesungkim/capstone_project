@@ -71,10 +71,16 @@ class DisplayQuiz extends Component {
                     questionId = {this.state.questionId}
                     questionAnswer = {this.state.questionAnswer}
                     alreadyAnswered = {this.state.alreadyAnswered}
+
+                    click = {this._handleClick}
                 />
                 
             </div>
         )
+    }
+
+    _handleClick = () => {
+        this.componentDidMount()
     }
 
     _howManyQuestions = () => {

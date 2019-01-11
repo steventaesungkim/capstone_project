@@ -4,8 +4,8 @@ import Axios from 'axios';
 
 
 class Login extends Component {
-    constructor(props) {
-        super(props); 
+    constructor (props) {
+        super (props); 
         this.state = {
             username: '',
             password: ''
@@ -41,20 +41,17 @@ class Login extends Component {
 
     _onSubmit = (event) =>{
         event.preventDefault();
-        // console.table(this.state)
         
         Axios
         .post(`/api/user/login/`, this.state)
-        .then(response =>{
-            // console.log(response);
-
-            if(response.data.message === "No data returned from the query.") {
-                // console.log("error")
-                alert('Incorrect Username and Password. Please re-enter correct Username and Password');
+        .then((response) => {
+        
+            if ((response.data === "Invalid Username") || (response.data === "Invalid Password")) {
+                alert('Incorrect Username or Password. Please re-enter correct Username or Password');
                 document.getElementById('resetUsername').value="";
                 document.getElementById('resetPassword').value="";
-            }else{
-                this.props.history.push("/timer");
+            } else {
+                this.props.history.push('/timer');
             }
         })
     }

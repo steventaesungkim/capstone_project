@@ -20,7 +20,7 @@ class Timer extends Component {
             levelId: '',
             showLevel: false,
             showButton: false,
-            inSession: true
+            isLoggedIn: ''
         }
     }
 

@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import Clock from './Clock';
 import Question from './Question';
-import AnswerInput from './AnswerInput';
 
 
 class DisplayQuiz extends Component {
     constructor(props){
-        
         super(props);
         this.state = {
             question: [],
-            answer: [],
-            // randomNumber: parseInt(Math.random() * (this.state.question.length).toFixed(0)),
-            randomNumber: '',
             questionId: '',
             displayQuestion: '',
-            inputAnswer: ''
+            questionAnswer: '',
+            alreadyAnswered: []
         }
     }
 
@@ -23,32 +19,46 @@ class DisplayQuiz extends Component {
         const categoryId = this.props.match.params.categoryId;
         const levelSelection = this.props.match.params.levelSelection;
        
-        
-        
+
         fetch(`/api/question/${categoryId}/${levelSelection}`)
         .then(r => r.json())
         .then((data) =>{
             // console.log(data)
-            this.setState({
-                question: data
-            })
-        })
-    }
+            const listOfObjectQuestion = data 
 
-    // numberGenerator() {
-    //     const listOfObjectQuestion = this.state.question;
-    //     const numOfQuestions = listOfObjectQuestion.length;  
-    //     const getRandomNumber = parseInt(Math.random() * (numOfQuestions).toFixed(0));
-    //     // this.setState({
-    //     //     randomNumber: getRandomNumber
-    //     // })
-    //     console.log(getRandomNumber)
-    //     return (
-    //         getRandomNumber
-    //     )
-    // }
-    
-    
+            let shuffleQuestion = (array) =>{
+            
+                for (var i = array.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var temp = array[i]; 
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+                return array;
+            }
+
+            const listOfQuestions = [];
+            const listOfAnswers = [];
+            const listOfQuestionId = [];
+
+            shuffleQuestion(listOfObjectQuestion).map(data =>{
+                listOfQuestions.push(data.question);
+                listOfAnswers.push(data.answer);
+                listOfQuestionId.push(data.id);
+
+            })
+            const theQuestionId = listOfQuestionId[0];
+            const theQuestion = listOfQuestions[0];
+            const userAnswer = listOfAnswers[0];
+                this.setState({
+                    question: data,
+                    displayQuestion: theQuestion,
+                    questionId: theQuestionId,
+                    questionAnswer: userAnswer
+                })
+            })
+        
+    }
 
     
     render() {   
@@ -56,55 +66,33 @@ class DisplayQuiz extends Component {
             <div>
                 <Clock />
                 <Question 
-                    question = {this.state.question}
+                    all = {this.state.question}
                     displayQuestion = {this.state.displayQuestion}
-                    // ehh = {this._displayQuestion}
-                    // QD = {this.numberGenerator}
-                    randomNum = {this.state.randomNumber}
-                />
-                <AnswerInput 
-                    // userAnswer = {props.theAnswer}
-                    newAnswer = {this.state.inputAnswer}
-                    theAnswer = {this._handleAnswerInput}
-
+                    questionId = {this.state.questionId}
+                    questionAnswer = {this.state.questionAnswer}
+                    alreadyAnswered = {this.state.alreadyAnswered}
                 />
                 
             </div>
         )
     }
 
-    _handleAnswerInput = (input) => {
-        console.log(input)
-        this.setState({
-            inputAnswer: input  
-        })
+    _howManyQuestions = () => {
+        const refreshPage = () => {
+            window.location.reload();
+        }
 
+        if (this.alreadyAnswered.length <= 6) {
+            this.alreadyAnswered.push(this.questionId)
+            refreshPage()
+            console.log('Keep answering');
+        } else {
+            console.log('No more questions');
+        }
 
-
-        // event.preventDefault();
-        // console.log('got something')
-        // const userAnswer = {value: event.target.value}
-
-        // this.setState ({
-        //     inputAnswer: userAnswer
-        // });
     }
 
-    // _displayQuestion = () => {
-    //     // console.log(why)
-    //     numberGenerator() {
-    //         const listOfObjectQuestion = this.state.question;
-    //         const numOfQuestions = listOfObjectQuestion.length;  
-    //         const getRandomNumber = parseInt(Math.random() * (numOfQuestions).toFixed(0));
-    //         this.setState({
-    //             randomNumber: getRandomNumber
-    //         })
-    //         console.log(getRandomNumber)
-    //     }
-    // }
-
-
-
+    
 }
 
 export default DisplayQuiz; 

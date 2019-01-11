@@ -89,14 +89,14 @@ app.listen(5000, () => {
 
 app.post('/api/user/register', (req, res) => {
     console.log(req.body);
-    const newName = req.body.name;
-    const newUsername = req.body.username;
-    const newPassword = req.body.password;
-    const newAvatar = req.body.avatar;
+    const newName = req.body.name.toUpperCase();
+    const newUsername = req.body.username.toUpperCase();
+    const newPassword = req.body.password.toUpperCase();
+    const newAvatar = req.body.avatar.toUpperCase();
     User.createUser(newName, newUsername, newPassword, newAvatar)
         .catch(err => {
             console.log(err);
-            res.send(err);
+            // res.json(message='Username exist');
         })
         .then(newUser => {
             req.session.user = newUser;
@@ -111,8 +111,8 @@ app.post('/api/user/register', (req, res) => {
 // ========================================================
 
 app.post('/api/user/login', (req, res) => {
-    const theUserName = req.body.username;
-    const thePassword = req.body.password;
+    const theUserName = req.body.username.toUpperCase();
+    const thePassword = req.body.password.toUpperCase();
     // console.log(req.body)
     console.log(theUserName)
     console.log(thePassword)
@@ -120,7 +120,7 @@ app.post('/api/user/login', (req, res) => {
         // console.log(theUserName)
         .catch(err => {
             // console.log(err);
-            res.send(err);
+            res.json(message='Invalid Username');
         })
         .then(theUser => {
             console.log(theUser)
@@ -128,8 +128,8 @@ app.post('/api/user/login', (req, res) => {
                 req.session.user = theUser;
                 res.json(theUser);
             } else {
-                res.json(err);
-                console.log('Incorrect info.')
+                res.json(message='Invalid Password');
+                // console.log('Invalid info.')
             }
         });
 });
@@ -568,11 +568,13 @@ app.delete('/api/question/:id_category(\\d+)', (req, res) => {
 // ========================================================
 
 app.post('/api/result/:id_resultset/:id_question', (req, res) =>{
+
     const resultSetId = req.params.id_resultset;
     const questionId = req.params.id_question;
     const isCorrect = req.body.correct;
+    console.log(req.body)
     
-    Question.createResult(resultSetId, questionId, isCorrect)
+    Result.createResult(resultSetId, questionId, isCorrect)
         .catch(err =>{
             console.log(err);
             res.send(err);

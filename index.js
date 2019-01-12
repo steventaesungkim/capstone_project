@@ -217,10 +217,7 @@ app.get('/api/user-avatar/:avatar', (req, res) => {
 
 app.post('/api/user/:id(\\d+)', (req, res) => {
     User.getById(req.params.id)
-    .then(theUser => {
-        console.log(req.body);
-        console.log(theUser);
-        
+    .then(theUser => {        
         theUser.name = req.body.name ? req.body.name.toUpperCase() : theUser.name;
         theUser.username = req.body.username ? req.body.username.toUpperCase() : theUser.username;
         theUser.avatar = req.body.avatar ? req.body.avatar.toUpperCase() : theUser.avatar;
@@ -277,11 +274,8 @@ app.delete('/api/user/:id(\\d+)', (req, res) => {
 // ========================================================
 
 app.post('/api/category/create', (req, res) => {
-    console.log(req.body);
-    const newCategoryType = req.body.category_type;
-    const newLevel = req.body.levels;
-
-    Category.createUser(newCategoryType, newLevel, newIdUser)
+    //console.log(req.body);
+    Category.createCategory(req.body.category_type, req.body.levels, req.body.userID)
         .catch(err => {
             console.log(err);
             res.send(err);
@@ -324,8 +318,8 @@ app.get('/api/category/:id(\\d+)', (req, res) => {
 // Get Categories by User's ID 
 // ========================================================
 
-app.get('/api/category/:id_user(\\d+)', (req, res) => {
-    Category.getById(req.params.id_user)
+app.get('/api/category/user/:id_user(\\d+)', (req, res) => {
+    Category.getByUserId(req.params.id_user)
     .then(category => {
         res.json(category);
     });
@@ -334,33 +328,21 @@ app.get('/api/category/:id_user(\\d+)', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Update Category type by ID 
+// Update Category info 
 // ========================================================
 
 app.post('/api/category/:id(\\d+)', (req, res) => {
     Category.getById(req.params.id)
-    .then(category => {
-        category.updateCategoryType(req.body.category_type)
-        .then(categoryTypeUpdated => {
-            res.json(categoryTypeUpdated);
-        });
-    });
-});
+    .then(cat => {        
+        cat.category_type = req.body.category_type ? req.body.category_type : cat.category_type;
+        cat.levels = req.body.levels ? req.body.levels : cat.levels;
+        cat.id_user = req.body.id_user ? req.body.id_user : cat.id_user;
 
-// ========================================================
-
-// ========================================================
-// Update Category level by ID 
-// ========================================================
-
-app.post('/api/category/:id(\\d+)', (req, res) => {
-    Category.getById(req.params.id)
-    .then(category => {
-        category.updateLevels(req.body.levels)
-        .then(categoryLevelUpdated => {
-            res.json(categoryLevelUpdated);
-        });
-    });
+        cat.update()
+            .then(catUpdated => {
+                res.json(catUpdated);
+            })
+    })
 });
 
 // ========================================================

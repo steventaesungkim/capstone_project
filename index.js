@@ -332,6 +332,19 @@ app.get('/api/category/user/:id_user(\\d+)', (req, res) => {
 // ========================================================
 
 // ========================================================
+// Get Categories all available to User ID 
+// ========================================================
+
+app.get('/api/categories/:id_user(\\d+)', (req, res) => {
+    Category.getAvailable(req.params.id_user)
+    .then(category => {
+        res.json(category);
+    });
+});
+
+// ========================================================
+
+// ========================================================
 // Update Category info 
 // ========================================================
 
@@ -378,11 +391,7 @@ app.delete('/api/category/:id(\\d+)', (req, res) => {
 // ========================================================
 
 app.post('/api/question/create', (req, res) =>{
-    const newLevel = req.body.level;
-    const newQuestion = req.body.question;
-    const newAnswer = req.body.answer;
-    
-    Question.createQuestion(newLevel, newQuestion, newAnswer, id_category)
+    Question.createQuestion(req.body.level, req.body.question, req.body.answer, req.body.id_category)
         .catch(err =>{
             console.log(err);
             res.send(err);
@@ -425,7 +434,7 @@ app.get('/api/question/:id(\\d+)', (req, res) => {
 // Get Questions by Category's ID 
 // ========================================================
 
-app.get('/api/question/:id_category(\\d+)', (req, res) => {
+app.get('/api/question/category/:id_category(\\d+)', (req, res) => {
     Question.getByCategory(req.params.id_category)
     .then(category => {
         res.json(category);

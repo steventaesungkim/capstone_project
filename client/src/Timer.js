@@ -4,6 +4,7 @@ import CategoryDropdown from './CategoryDropdown';
 import Logout from './Logout';
 
 import Axios from 'axios';
+import Navbar from './Navbar';
 
 
 
@@ -51,9 +52,8 @@ class Timer extends Component {
     render() {
         return (
             <div>
-                <Logout 
-                    inSession = {this.state.inSession}
-                    handleLogout = {this._handleLogout}
+                <Navbar 
+                    handleLogout = {this._handleLogout}  
                 />
                 <Clock />
 
@@ -70,7 +70,6 @@ class Timer extends Component {
                     showLevel = {this.state.showLevel}
 
                     showButton = {this.state.showButton}
-                    // handleButtonClick = {this._handleButton}
                 />
 
                     {/* <button>Set Timer</button> */}

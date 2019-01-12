@@ -6,15 +6,9 @@ const Logout = (props) =>{
 
     return(
         <div>
-            <header className = "navBar" >
-                <button>myAccount</button>
-                <button 
-                    onClick={(event) =>{
-                        props.handleLogout(event)
-                    }}
-                
-                >Logout</button>
-            </header>
+            <button onClick={(event) =>{props.logout(event)}}>
+                Logout
+            </button>
         </div>
     )
 }

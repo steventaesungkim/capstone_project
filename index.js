@@ -142,9 +142,12 @@ app.post('/api/user/login', (req, res) => {
 // ========================================================
 
 app.get('/api/user/isValid', (req, res) =>{
-    let isLoggedIn = req.session.user ? true : false;
+    console.log(req.session.user)
+    let user = req.session.user;
+    let isLoggedIn = user ? true : false;
     res.json({
-        isLoggedIn
+        isLoggedIn,
+        user
     })
 })
 

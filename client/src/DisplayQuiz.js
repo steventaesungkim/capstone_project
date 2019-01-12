@@ -7,6 +7,8 @@ class DisplayQuiz extends Component {
     constructor(props){
         super(props);
         this.state = {
+            theUser: [],
+            isLogged: Boolean,
             question: [],
             questionId: '',
             displayQuestion: '',
@@ -16,6 +18,22 @@ class DisplayQuiz extends Component {
     }
 
     componentDidMount(){
+        fetch('/api/user/isValid')
+        .then(r => r.json())
+        .then(data =>{
+            console.log(data.isLoggedIn)
+            if(data.isLoggedIn === false){
+                this.props.history.push('/');
+            }else{
+                this.setState({
+                    theUser: data.user,
+                    isLoggedIn: data.isLoggedIn
+                })
+            }
+        })
+        .then(
+            
+        )
         const categoryId = this.props.match.params.categoryId;
         const levelSelection = this.props.match.params.levelSelection;
        

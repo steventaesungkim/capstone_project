@@ -7,12 +7,31 @@ class Login extends Component {
     constructor (props) {
         super (props); 
         this.state = {
+            theUser: [],
+            isLoggedIn: Boolean,
             username: '',
             password: ''
         }
     }
 
+    componentDidMount() {
+        fetch('/api/user/isValid')
+        .then(r => r.json())
+        .then(data =>{
+            console.log(data.isLoggedIn)
+            if(data.isLoggedIn === false){
+                this.props.history.push('/');
+            }else{
+                this.setState({
+                    theUser: data.user,
+                    isLoggedIn: data.isLoggedIn
+                })
+            }
+        })
+    }    
+
     render() {
+        console.log(this.state.isLoggedIn)
         return (
             <div>
                 <h2>Login</h2> 
@@ -45,7 +64,7 @@ class Login extends Component {
         Axios
         .post(`/api/user/login`, this.state)
         .then((response) => {
-            // console.log(response)
+            console.log(response)
              
             if ((response.data === "Invalid Username") || (response.data === "Invalid Password")) {
                 alert('Incorrect Username or Password. Please re-enter correct Username or Password');

@@ -112,7 +112,7 @@ app.post('/api/user/register', (req, res) => {
 
 app.post('/api/user/login', (req, res) => {
     const theUserName = req.body.username.toUpperCase();
-    const thePassword = req.body.password.toUpperCase();
+    const thePassword = req.body.password;
     // console.log(req.body)
     console.log(theUserName)
     console.log(thePassword)

@@ -61,6 +61,7 @@ class Timer extends Component {
 
     render() {
         console.log(this.state.theUser)
+        console.log(this.state.isLoggedIn)
         return (
             <div>
                 <Logout 

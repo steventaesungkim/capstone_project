@@ -7,7 +7,8 @@ class UserAnswer extends Component {
         super(props);
         this.state = {
             userInput: '',
-            correct: Boolean
+            correct: Boolean,
+            resultset_id: '100'
         }
     }
 
@@ -25,6 +26,8 @@ class UserAnswer extends Component {
 
                 questionId = {this.props.questionId}
                 questionAnswer = {this.props.questionAnswer}
+
+                resultset_id = {this.state.resultset_id}
                 
                 click = {this.props.click}
             />
@@ -32,29 +35,20 @@ class UserAnswer extends Component {
         )
     }
 
-    
-
-    _refreshPage = ()  => {
-        window.location.reload();
-    }
-    
-
     _submit = (input) => {
      
         if(this.props.questionAnswer === input){
             Axios
-            .post(`/api/result/100/${this.props.questionId}`, {correct: true})
+            .post(`/api/result/${this.state.resultset_id}/${this.props.questionId}`, {correct: true})
             .then(response => {
                 console.log(response)
-                // {this._refreshPage()}
                 document.getElementById('answerInput').value="";
             })
         } else {
             Axios
-            .post(`/api/result/100/${this.props.questionId}`, {correct: false})
+            .post(`/api/result/${this.state.resultset_id}/${this.props.questionId}`, {correct: false})
             .then(response => {
                 console.log(response)
-                // {this._refreshPage()}
                 document.getElementById('answerInput').value="";
             })
 

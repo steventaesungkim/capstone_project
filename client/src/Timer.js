@@ -28,7 +28,7 @@ class Timer extends Component {
         fetch('/api/user/isValid')
         .then(r => r.json())
         .then(data =>{
-            // console.log(data.isLoggedIn)
+            console.log(data.user.id)
             if(data.isLoggedIn === false){
                 this.props.history.push('/');
             }else{
@@ -37,26 +37,23 @@ class Timer extends Component {
                     isLoggedIn: data.isLoggedIn
                 })
             }
-        }).then(
-            console.log(this.state.theUser)
-        )
-        fetch('/api/category')
-        .then(r => r.json())
-        .then(data =>{ 
-            // console.log(data);
-            this.setState({
-                categories: data
+            fetch(`/api/categories/${data.user.id}`)
+            .then(r => r.json())
+            .then(data =>{ 
+                // console.log(data);
+                this.setState({
+                    categories: data
+                })
+                fetch('/api/question')
+                .then(r => r.json())
+                .then(data => {
+                    console.log(data)
+                    this.setState({
+                        level: data
+                    })
+                })
             })
-        })
-        fetch('/api/question')
-        .then(r => r.json())
-        .then(data => {
-            // console.log(data)
-            this.setState({
-                level: data
-            })
-        })
-        
+        })    
     }
 
     render() {

@@ -1,11 +1,12 @@
 import React from 'react';
 
 const AnswerForm = (props) => {
+    // console.log(props.resultset_id)
     return (
         <form className='answer-form'
                 method='POST'
                 //  ${resultset_id} needs to be add in place of '100'
-                action={`/api/result/100/${props.questionId}`}
+                action={`/api/result/${props.resultset_id}/${props.questionId}`}
                 onSubmit={(event) =>{
                     event.preventDefault();
                     props.handleSubmit(props.userInput)
@@ -30,9 +31,20 @@ const AnswerForm = (props) => {
                 value='submit'
                 onClick = {props.click}
             />
+            <input 
+                id='id_resultset'
+                name='id_resultset'
+                type='hidden'
+                value={props.resultset_id}
+            />
+            <input 
+                id='id_question'
+                name='id_question'
+                type='hidden'
+                value={props.questionId}
+            />
         </form>
     )
-
 }
 
 

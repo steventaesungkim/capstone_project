@@ -2,9 +2,9 @@ INSERT INTO users
     (name, userName, pwhash, avatar)
 VALUES
     ('GUEST', 'GUEST', '$2b$10$uhKgaVnjNfCqfb3xiPk9/O3okupaySnS0AZc466fnkl6VK/zss8xS', 'guestIMG'),
-    ('stan', 'stan', '$2b$10$mR0mYHjUO//SoDD7dyIRxuOH/TYkwglgGTmPx9FbHpoptUgeP8MhS', 'stanIMG'),
-    ('greg', 'greg', '$2b$10$Z8Oo7UeMiwRhFLUOId8Dgu/O0pnLuXg90Y9U6Da1XblanyQXAG3GC', 'gregIMG'),
-    ('kim', 'kim', '$2b$10$TAhxAfRRq9gXLCktzUEdZu2UI6Q11RbgZXhCO5BgFuWqgxrJMCuM.', 'kimIMG');
+    ('STAN', 'STAN', '$2b$10$mR0mYHjUO//SoDD7dyIRxuOH/TYkwglgGTmPx9FbHpoptUgeP8MhS', 'stanIMG'),
+    ('GREG', 'GREG', '$2b$10$Z8Oo7UeMiwRhFLUOId8Dgu/O0pnLuXg90Y9U6Da1XblanyQXAG3GC', 'gregIMG'),
+    ('KIM', 'KIM', '$2b$10$TAhxAfRRq9gXLCktzUEdZu2UI6Q11RbgZXhCO5BgFuWqgxrJMCuM.', 'kimIMG');
 
 INSERT INTO categories
     (category_type, levels, id_user)

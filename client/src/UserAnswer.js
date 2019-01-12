@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AnswerForm from './AnswerFrom';
+import AnswerForm from './AnswerForm';
 import Axios from 'axios';
 
 class UserAnswer extends Component {

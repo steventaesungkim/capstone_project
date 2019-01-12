@@ -11,7 +11,8 @@ class Timer extends Component {
     constructor(props) {
         super(props);
         this.state ={
-            // time: "",
+            theUser: [],
+            isLoggedIn: Boolean,
             categories: [],
             level: [],
             categorySelection: 'Select',
@@ -19,12 +20,26 @@ class Timer extends Component {
             categoryId: '',
             levelId: '',
             showLevel: false,
-            showButton: false,
-            isLoggedIn: ''
+            showButton: false
         }
     }
 
     componentDidMount() {
+        fetch('/api/user/isValid')
+        .then(r => r.json())
+        .then(data =>{
+            // console.log(data.isLoggedIn)
+            if(data.isLoggedIn === false){
+                this.props.history.push('/');
+            }else{
+                this.setState({
+                    theUser: data.user,
+                    isLoggedIn: data.isLoggedIn
+                })
+            }
+        }).then(
+            console.log(this.state.theUser)
+        )
         fetch('/api/category')
         .then(r => r.json())
         .then(data =>{ 
@@ -41,18 +56,16 @@ class Timer extends Component {
                 level: data
             })
         })
-        fetch('/api/user/isValid')
-        .then(r => r.json())
-        // .then(data =>{
-        //     console.log(data)
-        // })
+        
     }
 
     render() {
+        console.log(this.state.theUser)
         return (
             <div>
                 <Logout 
-                    inSession = {this.state.inSession}
+                    userInfo = {this._userInfo}
+                    inSession = {this.state.isLoggedIn}
                     handleLogout = {this._handleLogout}
                 />
                 <Clock />
@@ -71,6 +84,9 @@ class Timer extends Component {
 
                     showButton = {this.state.showButton}
                     // handleButtonClick = {this._handleButton}
+
+                    userInfo = {this._userInfo}
+                    inSession = {this.state.isLoggedIn}
                 />
 
                     {/* <button>Set Timer</button> */}
@@ -79,6 +95,9 @@ class Timer extends Component {
         );
     }
 
+    _userInfo = () =>{
+
+    }
 
     _handleSelect = (event) => {
         console.log('Category Selected')

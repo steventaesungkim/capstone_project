@@ -206,7 +206,7 @@ app.get('/api/user/:username', (req, res) => {
 //                     IS NEEDED TO DIFFER FROM USERNAME)
 // ========================================================
 
-app.get('/api/user-avatar/:avatar', (req, res) => {
+app.get('/api/user/avatar/:avatar', (req, res) => {
     User.getByAvatar(req.params.avatar)
     .then(avatar => {
         res.json(avatar);
@@ -239,7 +239,7 @@ app.post('/api/user/:id(\\d+)', (req, res) => {
 // Update User's Password by ID 
 // ========================================================
 
-app.post('/api/user-pwd/:id(\\d+)', (req, res) => {
+app.post('/api/user/pwd/:id(\\d+)', (req, res) => {
     User.getById(req.params.id)
     .then(theUser => {
         theUser.updatePassword(req.body.password)
@@ -332,7 +332,7 @@ app.get('/api/category/user/:id_user(\\d+)', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Get Categories all available to User ID 
+// Get Categories available to User ID 
 // ========================================================
 
 app.get('/api/categories/:id_user(\\d+)', (req, res) => {
@@ -446,7 +446,6 @@ app.get('/api/question/category/:id_category(\\d+)', (req, res) => {
 // ========================================================
 // Get Questions by Category's ID and Level
 // ========================================================
-// DOUBLE CHECK
 
 app.get('/api/question/:id_category(\\d+)/:level', (req, res) => {
     const selectedLevel = req.params.level;
@@ -465,18 +464,20 @@ app.get('/api/question/:id_category(\\d+)/:level', (req, res) => {
 // Update Question
 // ========================================================
 
-app.post('/api/question/update/:id(\\d+)', (req,res) =>{
+app.post('/api/question/:id(\\d+)', (req, res) => {
     Question.getById(req.params.id)
-        .then(theQuestion =>{
-            theQuestion.level = req.body.level
-            theQuestion.question = req.body.question
-            theQuestion.answer = req.body.answer
-            theQuestion.update()
+        .then(ques => {        
+            ques.level = req.body.level ? req.body.level : ques.level;
+            ques.question = req.body.question ? req.body.question : ques.question;
+            ques.answer = req.body.answer ? req.body.answer : ques.answer;
+            ques.id_category = req.body.id_category ? req.body.id_category : ques.id_category;
+
+            ques.update()
+                .then(updatedQuestion =>{
+                    res.json(updatedQuestion)
+                })
         })
-        .then(updatedQuestion =>{
-            res.json(updatedQuestion)
-        })
-})
+});
 
 // ========================================================
 
@@ -486,29 +487,20 @@ app.post('/api/question/update/:id(\\d+)', (req,res) =>{
 
 app.delete('/api/question/:id(\\d+)', (req, res) => {
     Question.deleteById(req.params.id)
-    .then(theQuestion => {
-        theQuestion.delete()
-        .then(delQuestion => {
-            res.json(delQuestion);
-        });
-    });
+        .then(delQuestion => res.json(delQuestion));
 });
 
 // ========================================================
 
 // ========================================================
-// Delete Question by Level using ID 
+// Delete Questions by Level using ID 
 // ========================================================
 
 app.delete('/api/question/:id_category(\\d+)/:level', (req, res) => {
-    Question.deleteByLevel(req.params.id_category, req.body.level)
-    .then(theLevelQuestion => {
-        theLevelQuestion.delete()
-        .then(delLevelQuestion => {
-            res.json(delLevelQuestion);
-        });
-    });
+    Question.deleteByLevel(req.params.id_category, req.params.level)
+        .then(delLevelQuestion => res.json(delLevelQuestion));
 });
+   
 
 // ========================================================
 
@@ -516,16 +508,11 @@ app.delete('/api/question/:id_category(\\d+)/:level', (req, res) => {
 // Delete Questions by Category using ID 
 // ========================================================
 
-app.delete('/api/question/:id_category(\\d+)', (req, res) => {
+app.delete('/api/question/category/:id_category(\\d+)', (req, res) => {
     Question.deleteByCategory(req.params.id_category)
-    .then(theLevelQuestion => {
-        theLevelQuestion.delete()
-        .then(delLevelQuestion => {
-            res.json(delLevelQuestion);
-        });
-    });
+        .then(delLevelQuestion => res.json(delLevelQuestion));
 });
-
+    
 // ========================================================
 
 

@@ -1,6 +1,7 @@
 INSERT INTO users
     (name, userName, pwhash, avatar)
 VALUES
+    ('GUEST', 'GUEST', '$2b$10$uhKgaVnjNfCqfb3xiPk9/O3okupaySnS0AZc466fnkl6VK/zss8xS', 'guestIMG'),
     ('stan', 'stan', 'stan', 'stanIMG'),
     ('greg', 'greg', 'greg', 'gregIMG'),
     ('kim', 'kim', 'kim', 'kimIMG');
@@ -9,7 +10,7 @@ INSERT INTO categories
     (category_type, levels, id_user)
 VALUES
     ('Arithemic', true, 1),
-    ('Sequence', true, 2),
+    ('Sequence', true, 1),
     ('Flash Cards', false, 3);
 
 INSERT INTO timers

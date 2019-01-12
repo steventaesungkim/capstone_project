@@ -91,7 +91,7 @@ app.post('/api/user/register', (req, res) => {
     console.log(req.body);
     const newName = req.body.name.toUpperCase();
     const newUsername = req.body.username.toUpperCase();
-    const newPassword = req.body.password.toUpperCase();
+    const newPassword = req.body.password;
     const newAvatar = req.body.avatar.toUpperCase();
     User.createUser(newName, newUsername, newPassword, newAvatar)
         .catch(err => {
@@ -142,9 +142,12 @@ app.post('/api/user/login', (req, res) => {
 // ========================================================
 
 app.get('/api/user/isValid', (req, res) =>{
-    let isLoggedIn = req.session.user ? true : false;
+    console.log(req.session.user)
+    let user = req.session.user;
+    let isLoggedIn = user ? true : false;
     res.json({
-        isLoggedIn
+        isLoggedIn,
+        user
     })
 })
 
@@ -199,10 +202,11 @@ app.get('/api/user/:username', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Get User by Avatar 
+// Get User by Avatar   (NOTE THE DIFFERENT ROUTE - THIS
+//                     IS NEEDED TO DIFFER FROM USERNAME)
 // ========================================================
 
-app.get('/api/user/:avatar', (req, res) => {
+app.get('/api/user/avatar/:avatar', (req, res) => {
     User.getByAvatar(req.params.avatar)
     .then(avatar => {
         res.json(avatar);
@@ -212,49 +216,21 @@ app.get('/api/user/:avatar', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Update User's Name by ID 
+// Update User info (except password)
 // ========================================================
 
 app.post('/api/user/:id(\\d+)', (req, res) => {
     User.getById(req.params.id)
-    .then(theUser => {
-        theUser.updateName(req.body.name)
-        .then(nameUpdated => {
-            res.json(nameUpdated);
-        });
-    });
-});
+    .then(theUser => {        
+        theUser.name = req.body.name ? req.body.name.toUpperCase() : theUser.name;
+        theUser.username = req.body.username ? req.body.username.toUpperCase() : theUser.username;
+        theUser.avatar = req.body.avatar ? req.body.avatar.toUpperCase() : theUser.avatar;
 
-// ========================================================
-
-// ========================================================
-// Update User's Username by ID 
-// ========================================================
-
-app.post('/api/user/:id(\\d+)', (req, res) => {
-    User.getById(req.params.id)
-    .then(theUser => {
-        theUser.updateUsername(req.body.username)
-        .then(usernameUpdated => {
-            res.json(usernameUpdated);
-        });
-    });
-});
-
-// ========================================================
-
-// ========================================================
-// Update User's Avatar by ID 
-// ========================================================
-
-app.post('/api/user/:id(\\d+)', (req, res) => {
-    User.getById(req.params.id)
-    .then(theUser => {
-        theUser.updateAvatar(req.body.avatar)
-        .then(avatarUpdated => {
-            res.json(avatarUpdated);
-        });
-    });
+        theUser.update()
+            .then(nameUpdated => {
+                res.json(nameUpdated);
+            })
+    })
 });
 
 // ========================================================
@@ -263,7 +239,7 @@ app.post('/api/user/:id(\\d+)', (req, res) => {
 // Update User's Password by ID 
 // ========================================================
 
-app.post('/api/user/:id(\\d+)', (req, res) => {
+app.post('/api/user/pwd/:id(\\d+)', (req, res) => {
     User.getById(req.params.id)
     .then(theUser => {
         theUser.updatePassword(req.body.password)
@@ -302,11 +278,8 @@ app.delete('/api/user/:id(\\d+)', (req, res) => {
 // ========================================================
 
 app.post('/api/category/create', (req, res) => {
-    console.log(req.body);
-    const newCategoryType = req.body.category_type;
-    const newLevel = req.body.levels;
-
-    Category.createUser(newCategoryType, newLevel, newIdUser)
+    //console.log(req.body);
+    Category.createCategory(req.body.category_type, req.body.levels, req.body.userID)
         .catch(err => {
             console.log(err);
             res.send(err);
@@ -349,8 +322,8 @@ app.get('/api/category/:id(\\d+)', (req, res) => {
 // Get Categories by User's ID 
 // ========================================================
 
-app.get('/api/category/:id_user(\\d+)', (req, res) => {
-    Category.getById(req.params.id_user)
+app.get('/api/category/user/:id_user(\\d+)', (req, res) => {
+    Category.getByUserId(req.params.id_user)
     .then(category => {
         res.json(category);
     });
@@ -359,33 +332,34 @@ app.get('/api/category/:id_user(\\d+)', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Update Category type by ID 
+// Get Categories available to User ID 
 // ========================================================
 
-app.post('/api/category/:id(\\d+)', (req, res) => {
-    Category.getById(req.params.id)
+app.get('/api/categories/:id_user(\\d+)', (req, res) => {
+    Category.getAvailable(req.params.id_user)
     .then(category => {
-        category.updateCategoryType(req.body.category_type)
-        .then(categoryTypeUpdated => {
-            res.json(categoryTypeUpdated);
-        });
+        res.json(category);
     });
 });
 
 // ========================================================
 
 // ========================================================
-// Update Category level by ID 
+// Update Category info 
 // ========================================================
 
 app.post('/api/category/:id(\\d+)', (req, res) => {
     Category.getById(req.params.id)
-    .then(category => {
-        category.updateLevels(req.body.levels)
-        .then(categoryLevelUpdated => {
-            res.json(categoryLevelUpdated);
-        });
-    });
+    .then(cat => {        
+        cat.category_type = req.body.category_type ? req.body.category_type : cat.category_type;
+        cat.levels = req.body.levels ? req.body.levels : cat.levels;
+        cat.id_user = req.body.id_user ? req.body.id_user : cat.id_user;
+
+        cat.update()
+            .then(catUpdated => {
+                res.json(catUpdated);
+            })
+    })
 });
 
 // ========================================================
@@ -417,11 +391,7 @@ app.delete('/api/category/:id(\\d+)', (req, res) => {
 // ========================================================
 
 app.post('/api/question/create', (req, res) =>{
-    const newLevel = req.body.level;
-    const newQuestion = req.body.question;
-    const newAnswer = req.body.answer;
-    
-    Question.createQuestion(newLevel, newQuestion, newAnswer, id_category)
+    Question.createQuestion(req.body.level, req.body.question, req.body.answer, req.body.id_category)
         .catch(err =>{
             console.log(err);
             res.send(err);
@@ -464,7 +434,7 @@ app.get('/api/question/:id(\\d+)', (req, res) => {
 // Get Questions by Category's ID 
 // ========================================================
 
-app.get('/api/question/:id_category(\\d+)', (req, res) => {
+app.get('/api/question/category/:id_category(\\d+)', (req, res) => {
     Question.getByCategory(req.params.id_category)
     .then(category => {
         res.json(category);
@@ -476,7 +446,6 @@ app.get('/api/question/:id_category(\\d+)', (req, res) => {
 // ========================================================
 // Get Questions by Category's ID and Level
 // ========================================================
-// DOUBLE CHECK
 
 app.get('/api/question/:id_category(\\d+)/:level', (req, res) => {
     const selectedLevel = req.params.level;
@@ -495,18 +464,20 @@ app.get('/api/question/:id_category(\\d+)/:level', (req, res) => {
 // Update Question
 // ========================================================
 
-app.post('/api/question/update/:id(\\d+)', (req,res) =>{
+app.post('/api/question/:id(\\d+)', (req, res) => {
     Question.getById(req.params.id)
-        .then(theQuestion =>{
-            theQuestion.level = req.body.level
-            theQuestion.question = req.body.question
-            theQuestion.answer = req.body.answer
-            theQuestion.update()
+        .then(ques => {        
+            ques.level = req.body.level ? req.body.level : ques.level;
+            ques.question = req.body.question ? req.body.question : ques.question;
+            ques.answer = req.body.answer ? req.body.answer : ques.answer;
+            ques.id_category = req.body.id_category ? req.body.id_category : ques.id_category;
+
+            ques.update()
+                .then(updatedQuestion =>{
+                    res.json(updatedQuestion)
+                })
         })
-        .then(updatedQuestion =>{
-            res.json(updatedQuestion)
-        })
-})
+});
 
 // ========================================================
 
@@ -516,29 +487,20 @@ app.post('/api/question/update/:id(\\d+)', (req,res) =>{
 
 app.delete('/api/question/:id(\\d+)', (req, res) => {
     Question.deleteById(req.params.id)
-    .then(theQuestion => {
-        theQuestion.delete()
-        .then(delQuestion => {
-            res.json(delQuestion);
-        });
-    });
+        .then(delQuestion => res.json(delQuestion));
 });
 
 // ========================================================
 
 // ========================================================
-// Delete Question by Level using ID 
+// Delete Questions by Level using ID 
 // ========================================================
 
 app.delete('/api/question/:id_category(\\d+)/:level', (req, res) => {
-    Question.deleteByLevel(req.params.id_category, req.body.level)
-    .then(theLevelQuestion => {
-        theLevelQuestion.delete()
-        .then(delLevelQuestion => {
-            res.json(delLevelQuestion);
-        });
-    });
+    Question.deleteByLevel(req.params.id_category, req.params.level)
+        .then(delLevelQuestion => res.json(delLevelQuestion));
 });
+   
 
 // ========================================================
 
@@ -546,16 +508,11 @@ app.delete('/api/question/:id_category(\\d+)/:level', (req, res) => {
 // Delete Questions by Category using ID 
 // ========================================================
 
-app.delete('/api/question/:id_category(\\d+)', (req, res) => {
+app.delete('/api/question/category/:id_category(\\d+)', (req, res) => {
     Question.deleteByCategory(req.params.id_category)
-    .then(theLevelQuestion => {
-        theLevelQuestion.delete()
-        .then(delLevelQuestion => {
-            res.json(delLevelQuestion);
-        });
-    });
+        .then(delLevelQuestion => res.json(delLevelQuestion));
 });
-
+    
 // ========================================================
 
 

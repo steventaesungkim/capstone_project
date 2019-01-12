@@ -1,15 +1,16 @@
 INSERT INTO users
     (name, userName, pwhash, avatar)
 VALUES
-    ('stan', 'stan', 'stan', 'stanIMG'),
-    ('greg', 'greg', 'greg', 'gregIMG'),
-    ('kim', 'kim', 'kim', 'kimIMG');
+    ('GUEST', 'GUEST', '$2b$10$uhKgaVnjNfCqfb3xiPk9/O3okupaySnS0AZc466fnkl6VK/zss8xS', 'guestIMG'),
+    ('stan', 'stan', '$2b$10$mR0mYHjUO//SoDD7dyIRxuOH/TYkwglgGTmPx9FbHpoptUgeP8MhS', 'stanIMG'),
+    ('greg', 'greg', '$2b$10$Z8Oo7UeMiwRhFLUOId8Dgu/O0pnLuXg90Y9U6Da1XblanyQXAG3GC', 'gregIMG'),
+    ('kim', 'kim', '$2b$10$TAhxAfRRq9gXLCktzUEdZu2UI6Q11RbgZXhCO5BgFuWqgxrJMCuM.', 'kimIMG');
 
 INSERT INTO categories
     (category_type, levels, id_user)
 VALUES
     ('Arithemic', true, 1),
-    ('Sequence', true, 2),
+    ('Sequence', true, 1),
     ('Flash Cards', false, 3);
 
 INSERT INTO timers

@@ -91,7 +91,7 @@ app.post('/api/user/register', (req, res) => {
     console.log(req.body);
     const newName = req.body.name.toUpperCase();
     const newUsername = req.body.username.toUpperCase();
-    const newPassword = req.body.password.toUpperCase();
+    const newPassword = req.body.password;
     const newAvatar = req.body.avatar.toUpperCase();
     User.createUser(newName, newUsername, newPassword, newAvatar)
         .catch(err => {
@@ -202,10 +202,11 @@ app.get('/api/user/:username', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Get User by Avatar 
+// Get User by Avatar   (NOTE THE DIFFERENT ROUTE - THIS
+//                     IS NEEDED TO DIFFER FROM USERNAME)
 // ========================================================
 
-app.get('/api/user/:avatar', (req, res) => {
+app.get('/api/user-avatar/:avatar', (req, res) => {
     User.getByAvatar(req.params.avatar)
     .then(avatar => {
         res.json(avatar);
@@ -215,49 +216,21 @@ app.get('/api/user/:avatar', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Update User's Name by ID 
+// Update User info (except password)
 // ========================================================
 
 app.post('/api/user/:id(\\d+)', (req, res) => {
     User.getById(req.params.id)
-    .then(theUser => {
-        theUser.updateName(req.body.name)
-        .then(nameUpdated => {
-            res.json(nameUpdated);
-        });
-    });
-});
+    .then(theUser => {        
+        theUser.name = req.body.name ? req.body.name.toUpperCase() : theUser.name;
+        theUser.username = req.body.username ? req.body.username.toUpperCase() : theUser.username;
+        theUser.avatar = req.body.avatar ? req.body.avatar.toUpperCase() : theUser.avatar;
 
-// ========================================================
-
-// ========================================================
-// Update User's Username by ID 
-// ========================================================
-
-app.post('/api/user/:id(\\d+)', (req, res) => {
-    User.getById(req.params.id)
-    .then(theUser => {
-        theUser.updateUsername(req.body.username)
-        .then(usernameUpdated => {
-            res.json(usernameUpdated);
-        });
-    });
-});
-
-// ========================================================
-
-// ========================================================
-// Update User's Avatar by ID 
-// ========================================================
-
-app.post('/api/user/:id(\\d+)', (req, res) => {
-    User.getById(req.params.id)
-    .then(theUser => {
-        theUser.updateAvatar(req.body.avatar)
-        .then(avatarUpdated => {
-            res.json(avatarUpdated);
-        });
-    });
+        theUser.update()
+            .then(nameUpdated => {
+                res.json(nameUpdated);
+            })
+    })
 });
 
 // ========================================================
@@ -266,7 +239,7 @@ app.post('/api/user/:id(\\d+)', (req, res) => {
 // Update User's Password by ID 
 // ========================================================
 
-app.post('/api/user/:id(\\d+)', (req, res) => {
+app.post('/api/user-pwd/:id(\\d+)', (req, res) => {
     User.getById(req.params.id)
     .then(theUser => {
         theUser.updatePassword(req.body.password)
@@ -305,11 +278,8 @@ app.delete('/api/user/:id(\\d+)', (req, res) => {
 // ========================================================
 
 app.post('/api/category/create', (req, res) => {
-    console.log(req.body);
-    const newCategoryType = req.body.category_type;
-    const newLevel = req.body.levels;
-
-    Category.createUser(newCategoryType, newLevel, newIdUser)
+    //console.log(req.body);
+    Category.createCategory(req.body.category_type, req.body.levels, req.body.userID)
         .catch(err => {
             console.log(err);
             res.send(err);
@@ -352,8 +322,8 @@ app.get('/api/category/:id(\\d+)', (req, res) => {
 // Get Categories by User's ID 
 // ========================================================
 
-app.get('/api/category/:id_user(\\d+)', (req, res) => {
-    Category.getById(req.params.id_user)
+app.get('/api/category/user/:id_user(\\d+)', (req, res) => {
+    Category.getByUserId(req.params.id_user)
     .then(category => {
         res.json(category);
     });
@@ -362,33 +332,21 @@ app.get('/api/category/:id_user(\\d+)', (req, res) => {
 // ========================================================
 
 // ========================================================
-// Update Category type by ID 
+// Update Category info 
 // ========================================================
 
 app.post('/api/category/:id(\\d+)', (req, res) => {
     Category.getById(req.params.id)
-    .then(category => {
-        category.updateCategoryType(req.body.category_type)
-        .then(categoryTypeUpdated => {
-            res.json(categoryTypeUpdated);
-        });
-    });
-});
+    .then(cat => {        
+        cat.category_type = req.body.category_type ? req.body.category_type : cat.category_type;
+        cat.levels = req.body.levels ? req.body.levels : cat.levels;
+        cat.id_user = req.body.id_user ? req.body.id_user : cat.id_user;
 
-// ========================================================
-
-// ========================================================
-// Update Category level by ID 
-// ========================================================
-
-app.post('/api/category/:id(\\d+)', (req, res) => {
-    Category.getById(req.params.id)
-    .then(category => {
-        category.updateLevels(req.body.levels)
-        .then(categoryLevelUpdated => {
-            res.json(categoryLevelUpdated);
-        });
-    });
+        cat.update()
+            .then(catUpdated => {
+                res.json(catUpdated);
+            })
+    })
 });
 
 // ========================================================

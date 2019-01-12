@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class MyAccount extends Component {
-    constructor(props) {
-        super(props); 
-        this.state = {
+    // constructor(props) {
+    //     super(props); 
+    //     this.state = {
 
-        }
-    }
+    //     }
+    // }
 
     render() {
         return (
             <div>
-                <h1>MyAccount</h1>
+                <h2>MyAccount</h2>
+                <Link to = '/settings' className='links'>Settings</Link>
             </div>
         )
     }

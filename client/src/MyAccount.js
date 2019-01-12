@@ -13,6 +13,8 @@ class MyAccount extends Component {
         return (
             <div>
                 <h2>MyAccount</h2>
+                <Link to ='/results' className='links'>Results</Link>
+                <br/>
                 <Link to = '/settings' className='links'>Settings</Link>
             </div>
         )

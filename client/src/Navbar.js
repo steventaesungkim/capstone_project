@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import MyAccount from './MyAccount';
 import Logout from './Logout';
+
 
 const Navbar = (props) => {
     return(
         <header className='navbar'>
-            <Link to = '/myaccount' className='links'>MyAccount</Link>
+            <Link to = '/myaccount' className='links'>MyAccount</Link> 
+            
             <Logout 
                 logout = {props.handleLogout}
             />

@@ -7,12 +7,31 @@ class Login extends Component {
     constructor (props) {
         super (props); 
         this.state = {
+            theUser: [],
+            isLoggedIn: Boolean,
             username: '',
             password: ''
+
         }
     }
 
+    componentDidMount() {
+        fetch('/api/user/isValid')
+        .then(r => r.json())
+        .then(data =>{
+            console.log(`LOGIN-STATUS:`,data.isLoggedIn)
+            if(data.isLoggedIn === false){
+                this.props.history.push('/');
+            }else{
+                this.setState({
+                    theUser: data.user,
+                    isLoggedIn: data.isLoggedIn
+                })
+            }
+        })}
+
     render() {
+        // console.log(this.state.isLoggedIn)
         return (
             <div>
                 <h2>Login</h2> 

@@ -9,7 +9,7 @@ import Register from './Register';
 import Timer from './Timer';
 import DisplayQuiz from './DisplayQuiz';
 import MyAccount from './MyAccount';
-import Results from './Results';
+
 import Settings from './Settings';
 
 
@@ -23,9 +23,8 @@ class Home extends Component {
                     <Route path = '/register' component = {Register} />
                     <Route path = '/timer' component = {Timer} />
                     <Route path = '/question/:categoryId/:levelSelection' component = {DisplayQuiz} />
-                    
+
                     <Route path = '/myaccount' component = {MyAccount} />
-                    <Route path = '/results' component = {Results} />
                     <Route path = '/settings' component = {Settings} />
                 </div>
             </Router>

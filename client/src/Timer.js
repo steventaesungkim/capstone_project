@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import Clock from './Clock';
 import CategoryDropdown from './CategoryDropdown';
-import Logout from './Logout';
-
-import Axios from 'axios';
 import Navbar from './Navbar';
 
 
@@ -39,7 +37,7 @@ class Timer extends Component {
                 })
             }
         }).then(
-            console.log(this.state.theUser)
+            // console.log(this.state.theUser)
         )
         fetch('/api/category')
         .then(r => r.json())
@@ -62,6 +60,7 @@ class Timer extends Component {
 
     render() {
         // console.log(this.state.theUser)
+        console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
         return (
             <div>
                 <Navbar 
@@ -96,6 +95,10 @@ class Timer extends Component {
         );
     }
 
+    // _onClick = (event) => {
+    //     {(event) =>{props.logout(event)}}
+    // }
+
     _userInfo = () =>{
 
     }
@@ -127,6 +130,7 @@ class Timer extends Component {
     
     _handleLogout = (event) =>{
         // console.log("clicked")
+    
         this.setState({
             inSession: false
         })  

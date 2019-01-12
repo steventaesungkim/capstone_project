@@ -36,17 +36,32 @@ class UserAnswer extends Component {
     }
 
     _submit = (input) => {
+        console.log(input)
+        console.log(this.state.resultset_id)
+        console.log(this.props.questionId)
      
         if(this.props.questionAnswer === input){
             Axios
-            .post(`/api/result/${this.state.resultset_id}/${this.props.questionId}`, {correct: true})
+            .post('/api/result/create', (
+                {
+                    correct: true,
+                    id_question: this.props.questionId,
+                    id_resultset: this.state.resultset_id
+                })
+            )    
             .then(response => {
                 console.log(response)
                 document.getElementById('answerInput').value="";
             })
         } else {
             Axios
-            .post(`/api/result/${this.state.resultset_id}/${this.props.questionId}`, {correct: false})
+            .post('/api/result/create', (
+                {
+                    correct: false,
+                    id_question: this.props.questionId,
+                    id_resultset: this.state.resultset_id
+                })
+            )
             .then(response => {
                 console.log(response)
                 document.getElementById('answerInput').value="";

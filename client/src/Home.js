@@ -9,8 +9,11 @@ import Register from './Register';
 import Timer from './Timer';
 import DisplayQuiz from './DisplayQuiz';
 import MyAccount from './MyAccount';
-
 import Settings from './Settings';
+import UpdateUser from './UpdateUser';
+import UpdatePassword from './UpdatePassword';
+import UpdateAvatar from './UpdateAvatar';
+
 
 
 class Home extends Component {
@@ -26,6 +29,12 @@ class Home extends Component {
 
                     <Route path = '/myaccount' component = {MyAccount} />
                     <Route path = '/settings' component = {Settings} />
+                    <Route path = '/updateUser' component = {UpdateUser} />
+                    <Route path = '/updatePassword' component = {UpdatePassword} />
+                    <Route path = '/updateAvatar' component = {UpdateAvatar} />
+
+
+
                 </div>
             </Router>
         );

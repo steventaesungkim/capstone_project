@@ -235,11 +235,14 @@ app.post('/api/user/:id(\\d+)', (req, res) => {
 // ========================================================
 
 app.post('/api/user/pwd/:id(\\d+)', (req, res) => {
+    // console.log(req.params.id)
     User.getById(req.params.id)
     .then(theUser => {
+        
         theUser.updatePassword(req.body.password)
         .then(passwordUpdated => {
             res.json(passwordUpdated);
+            // res.json({message: 'done'})
         });
     });
 });

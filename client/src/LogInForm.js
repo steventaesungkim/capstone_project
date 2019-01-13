@@ -9,6 +9,7 @@ const LogInForm = (props) => {
             name='login-form'
             method="POST"
             action='/api/user/login/'
+
             onSubmit = {(event) => {
                 props.submit(event)
             }}
@@ -48,13 +49,13 @@ const LogInForm = (props) => {
             />
             <br />
             <Link to = '/register'>
-            <button 
-                className='btn' 
-                type='submit' 
-                value='submit'
-                
-                >Register
-            </button>
+                <button 
+                    className='btn' 
+                    type='submit' 
+                    value='submit'
+                    
+                    >Register
+                </button>
             </Link>
             <Link to = '/#'>   
                 <button 

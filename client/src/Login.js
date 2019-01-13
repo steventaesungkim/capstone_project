@@ -19,6 +19,7 @@ class Login extends Component {
         fetch('/api/user/isValid')
         .then(r => r.json())
         .then(data =>{
+            console.log(data);
             console.log(`LOGIN-STATUS:`,data.isLoggedIn)
             if(data.isLoggedIn === false){
                 this.props.history.push('/');

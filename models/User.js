@@ -57,7 +57,8 @@ class User {
                 [id]
             )
             .then(result => {
-                return new User(result.id, result.name, result.username, result.pwhash, result.avatar);
+                // return new User(result.id, result.name, result.username, result.pwhash, result.avatar);
+                return new User(result.id, result.name, result.username, "", result.avatar);
             });
         }
         

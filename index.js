@@ -113,26 +113,18 @@ app.post('/api/user/register', (req, res) => {
 // ========================================================
 
 app.post('/api/user/login', (req, res) => {
-    const theUserName = req.body.username.toUpperCase();
-    const thePassword = req.body.password;
-    // console.log(req.body)
-    console.log(theUserName)
-    console.log(thePassword)
-    User.getByUserName(theUserName)
-        // console.log(theUserName)
+    User.getByUserName(req.body.username.toUpperCase())
         .catch(err => {
             console.log(err);
             res.json(message='Invalid Username');
-            // res.json(err);
         })
         .then(theUser => {
             console.log(theUser)
-            if (theUser.passwordDoesMatch(thePassword)) {
+            if (theUser.passwordDoesMatch(req.body.password)) {
                 req.session.user = theUser;
                 res.json(theUser);
             } else {
                 res.json(message='Invalid Password');
-                // console.log('Invalid info.')
             }
         });
 });
@@ -144,7 +136,8 @@ app.post('/api/user/login', (req, res) => {
 // ========================================================
 
 app.get('/api/user/isValid', (req, res) =>{
-    console.log(req.session.user)
+    console.log(req.session);
+    console.log(req.session.user);
     let user = req.session.user;
     let isLoggedIn = user ? true : false;
     res.json({

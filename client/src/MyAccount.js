@@ -5,9 +5,9 @@ class MyAccount extends Component {
     constructor(props) {
         super(props); 
         this.state = {
-            username: '',
-            password:'',
-            avatar: '',
+            // username: '',
+            // password:'',
+            // avatar: '',
             theUser: [],
             isLoggedIn: Boolean
         }
@@ -33,13 +33,16 @@ class MyAccount extends Component {
     render() {
         console.log(this.state.theUser)
         // console.log(this.state.isLoggedIn)
+
         const theUser = (this.state.theUser)
-        const thisUser = {
-            name: theUser.name,
-            username: theUser.username,
-            password: theUser.pwhash,
-            avatar: theUser.avatar 
-        }
+
+        // const inputValue = {
+        //     username: '',
+        //     password: '',
+        //     avatar: ''
+        // }
+
+        console.log(theUser)
 
         return (
             <div>
@@ -47,7 +50,8 @@ class MyAccount extends Component {
                 <Link to = {{
                     pathname: '/settings',
                     state: {
-                        thisUser
+                        thisUser: theUser
+                        // inputValue
                     }    
                 }} 
                     className='links'
@@ -58,22 +62,8 @@ class MyAccount extends Component {
         )
     }
 
-    _updateUsername = (input) => {
-        console.log(input)
-        this.setState ({
-            username: input
-        });
-    }
 
-    // _linkToProperty = () => {
-    //     const settingProps = {
-    //         pathname: '/settings',
-    //         state: (this.state.username)
-    //     } 
-    // }
-
-
-
+    
 
 }
 

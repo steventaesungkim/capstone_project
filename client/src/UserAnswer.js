@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AnswerForm from './AnswerFrom';
+import AnswerForm from './AnswerForm';
 import Axios from 'axios';
 
 class UserAnswer extends Component {
@@ -7,7 +7,8 @@ class UserAnswer extends Component {
         super(props);
         this.state = {
             userInput: '',
-            correct: Boolean
+            correct: Boolean,
+            resultset_id: '100'
         }
     }
 
@@ -25,6 +26,8 @@ class UserAnswer extends Component {
 
                 questionId = {this.props.questionId}
                 questionAnswer = {this.props.questionAnswer}
+
+                resultset_id = {this.state.resultset_id}
                 
                 click = {this.props.click}
             />
@@ -32,29 +35,35 @@ class UserAnswer extends Component {
         )
     }
 
-    
-
-    _refreshPage = ()  => {
-        window.location.reload();
-    }
-    
-
     _submit = (input) => {
+        console.log(input)
+        console.log(this.state.resultset_id)
+        console.log(this.props.questionId)
      
         if(this.props.questionAnswer === input){
             Axios
-            .post(`/api/result/100/${this.props.questionId}`, {correct: true})
+            .post('/api/result/create', (
+                {
+                    correct: true,
+                    id_question: this.props.questionId,
+                    id_resultset: this.state.resultset_id
+                })
+            )    
             .then(response => {
                 console.log(response)
-                // {this._refreshPage()}
                 document.getElementById('answerInput').value="";
             })
         } else {
             Axios
-            .post(`/api/result/100/${this.props.questionId}`, {correct: false})
+            .post('/api/result/create', (
+                {
+                    correct: false,
+                    id_question: this.props.questionId,
+                    id_resultset: this.state.resultset_id
+                })
+            )
             .then(response => {
                 console.log(response)
-                // {this._refreshPage()}
                 document.getElementById('answerInput').value="";
             })
 

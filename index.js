@@ -38,6 +38,7 @@ const User = require('./models/User');
 const Category = require('./models/Category');
 const Question = require('./models/Question');
 const Result = require('./models/Result');
+const Resultset = require('./models/Resultset');
 
 // ========================================================
 // Listening 
@@ -279,6 +280,9 @@ app.delete('/api/user/:id(\\d+)', (req, res) => {
 
 app.post('/api/category/create', (req, res) => {
     //console.log(req.body);
+
+    // may need to change this since userID may need to be a param instead of
+    // being in req.body, unless can use hidden form field to send it via body
     Category.createCategory(req.body.category_type, req.body.levels, req.body.userID)
         .catch(err => {
             console.log(err);
@@ -525,12 +529,10 @@ app.delete('/api/question/category/:id_category(\\d+)', (req, res) => {
 // Create a Result
 // ========================================================
 
-app.post('/api/result/:id_resultset/:id_question', (req, res) =>{
-
-    const resultSetId = req.params.id_resultset;
-    const questionId = req.params.id_question;
+app.post('/api/result/create', (req, res) => {
+    const resultSetId = req.body.id_resultset;
+    const questionId = req.body.id_question;
     const isCorrect = req.body.correct;
-    console.log(req.body)
     
     Result.createResult(resultSetId, questionId, isCorrect)
         .catch(err =>{
@@ -575,7 +577,7 @@ app.get('/api/result/:id(\\d+)', (req, res) => {
 // Get all Results by ResultSet ID 
 // ========================================================
 
-app.get('/api/result/:resultsetID', (req, res) => {
+app.get('/api/result/resultset/:resultsetID', (req, res) => {
     Result.getByResultSet(req.params.resultsetID, true)
     .then(result => {
         res.json(result);
@@ -588,7 +590,7 @@ app.get('/api/result/:resultsetID', (req, res) => {
 // Get Results by Question ID
 // ========================================================
 
-app.get('/api/result/:qID', (req, res) => {
+app.get('/api/result/question/:qID', (req, res) => {
     Result.getByQuestion(req.params.qID, true)
         .catch(err =>{
             console.log(err)
@@ -603,7 +605,7 @@ app.get('/api/result/:qID', (req, res) => {
 // Update Result
 // ========================================================
 
-app.post('/api/Result/update/:id(\\d+)', (req,res) =>{
+app.post('/api/result/:id(\\d+)', (req, res) => {
     Result.getById(req.params.id)
         .then(theResult =>{
             theResult.correct = req.body.correct
@@ -622,13 +624,8 @@ app.post('/api/Result/update/:id(\\d+)', (req,res) =>{
 
 app.delete('/api/result/:id(\\d+)', (req, res) => {
     Result.deleteById(req.params.id)
-    .then(theResult => {
-        theResult.delete()
-        .then(delResult => {
-            res.json(delResult);
-        });
+        .then(delResult => res.json(delResult));
     });
-});
 
 // ========================================================
 
@@ -636,15 +633,12 @@ app.delete('/api/result/:id(\\d+)', (req, res) => {
 // Delete ResultSet by ResultSet ID 
 // ========================================================
 
-app.delete('/api/result/:id_resultset', (req, res) => {
+app.delete('/api/result/resultset/:id_resultset', (req, res) => {
     Result.deleteByResultSet(req.params.id_resultset)
-    .then(theResult => {
-        theResult.delete()
         .then(delResult => {
             res.json(delResult);
         });
     });
-});
 
 // ========================================================
 
@@ -652,16 +646,134 @@ app.delete('/api/result/:id_resultset', (req, res) => {
 // Delete Result by question using ID 
 // ========================================================
 
-app.delete('/api/result/:id_question', (req, res) => {
-    Result.deleteByCategory(req.params.id_question)
-    .then(theResult => {
-        theResult.delete()
+app.delete('/api/result/question/:id_question', (req, res) => {
+    Result.deleteByQuestion(req.params.id_question)
         .then(delResult => {
             res.json(delResult);
         });
     });
-});
 
 // ========================================================
 
 
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//   RESULTSETS
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+// ========================================================
+// Create a Resultset
+// ========================================================
+
+app.post('/api/resultset/create', (req, res) => {
+    Resultset.createResultset(req.body.time, req.body.id_user, req.body.score)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(newResultset => {
+            res.json(newResultset);
+        });
+});
+
+// ========================================================
+
+// ========================================================
+// Get All Resultsets 
+// ========================================================
+
+app.get('/api/resultset', (req, res) => {
+    Resultset.getAll()
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(allResultset => {
+            res.json(allResultset);
+        });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Resultset by ID 
+// ========================================================
+
+app.get('/api/resultset/:id(\\d+)', (req, res) => {
+    Resultset.getById(req.params.id)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(rset => {
+            res.json(rset);
+        });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Resultsets by User's ID 
+// ========================================================
+
+app.get('/api/resultset/user/:id_user(\\d+)', (req, res) => {
+    Resultset.getByUserId(req.params.id_user)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(rset => {
+            res.json(rset);
+        });
+});
+
+// ========================================================
+
+// ========================================================
+// Update Resultset info 
+// ========================================================
+
+app.post('/api/resultset/:id(\\d+)', (req, res) => {
+    Resultset.getById(req.params.id)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(rset => {        
+            rset.time = req.body.time ? req.body.time : rset.time;
+            rset.id_user = req.body.id_user ? req.body.id_user : rset.id_user;
+            rset.score = req.body.score ? req.body.score : rset.score;
+
+            rset.update()
+                .catch(err => {
+                    res.send(err.message);
+                })
+                .then(rsetUpdated => {
+                    res.json(rsetUpdated);
+                })
+        })
+});
+
+// ========================================================
+
+// ========================================================
+// Delete Resultset by ID 
+// ========================================================
+
+app.delete('/api/resultset/:id(\\d+)', (req, res) => {
+    Resultset.deleteById(req.params.id)
+        .then(delResultset => {
+            res.json(`Records Deleted: ${delResultset.rowCount}`);
+        });
+    });
+
+// ========================================================
+
+// ========================================================
+// Delete Resultset by User ID 
+// ========================================================
+
+app.delete('/api/resultset/user/:id_user(\\d+)', (req, res) => {
+    Resultset.deleteByUserId(req.params.id_user)
+        .then(delResultset => {
+            res.json(`Records Deleted: ${delResultset.rowCount}`);
+        });
+    });
+
+// ========================================================

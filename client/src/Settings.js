@@ -18,13 +18,13 @@ class Settings extends Component {
         }
     }
     render () {
-        console.log(this.props.location.state.thisUser)
+        // console.log(this.props.location.state.thisUser)
         
         // console.log(theUser.id)
         return (
             <div>
                 <h2>Settings</h2>
-                <p>Change user info</p>
+                <h4>Change user info</h4>
                 <UpdateUser 
                     inputName = {this._updateName}
                     newName = {this.state.name}
@@ -32,19 +32,22 @@ class Settings extends Component {
                     newUsername = {this.state.username}
                     submit = {this._onSubmit}
                 />
-                <p>Change password</p>
+                <h4>Update password</h4>
                 <UpdatePassword 
+                    theUser = {this.props.location.state.thisUser}
                     inputPassword = {this._updatePassword}
-                    inewPassword = {this.state.pwhash}
-                    submit = {this._pwSubmit}
+                    newPassword = {this.state.pwhash}
+                    passwordSubmit = {this._pwSubmit}
                 />
-                <p>Change avatar</p>
+                <h4>Change avatar</h4>
                 <UpdateAvatar 
                     inputAvatar = {this._updateAvatar}
                     newAvatar = {this.state.avatar}
                     submit = {this._onSubmit}
                 />
-
+                <h3>Delete account</h3>
+                <p>Please rethink your next action.</p>
+                <button>Delete this account</button>
             </div>
         )
     }
@@ -55,13 +58,13 @@ class Settings extends Component {
         }); 
     }
     _updateUsername = (input) => {
-        // console.log(input)
         this.setState ({
             username: input
         });
         
     }
     _updatePassword = (input) => {
+        console.log(input)
         this.setState ({
             pwhash: input
         });
@@ -80,25 +83,39 @@ class Settings extends Component {
         .post(`/api/user/${userId}`,this.state)
         .then((response) => {
             console.log(response)
-            
-            // if (response)
-            alert('Information Updated')
+        
+            // alert('Information Updated')
 
         })
     }
     _pwSubmit = (event) => {
-        event.preventDefault();
+        // console.log(event)
+        event.preventDefault()
         const theUser = (this.props.location.state.thisUser)
         const userId = theUser.id
-        // const userPw = theUser.pwhash
-
+        const userPw = theUser.pwhash
+        
         Axios
-        .post(`/api/user/pwd/${userId}`, this.state.password)
+        .post(`/api/user/pwd/${userId}`, this.state.pwhash)
         .then((response) => {
-            alert('Password Updated')
             console.log(response)
+            // if (response.message === 'done') {
+            //     this.props.history.push('/timer');
+            // }
+            
+            // alert('Password Updated')
         })
     }
+
+    // _delete = (event) => {
+    //     const theUser = (this.props.location.state.thisUser)
+    //     const userId = theUser.id
+    //     Axios 
+    //     .post(`/api/user/${userId}`, this.state)
+    //     .then((response) => {
+
+    //     })
+    // }
 }
 
 export default Settings;

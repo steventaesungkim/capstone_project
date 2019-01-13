@@ -61,8 +61,6 @@ class Timer extends Component {
         return (
             <div>
                 <Navbar 
-                    // userInfo = {this.state.theUser}
-                    
                     inSession = {this.state.isLoggedIn}
                     handleLogout = {this._handleLogout}
                 />
@@ -81,7 +79,6 @@ class Timer extends Component {
                     showLevel = {this.state.showLevel}
 
                     showButton = {this.state.showButton}
-                    // handleButtonClick = {this._handleButton}
 
                     userInfo = {this._userInfo}
                     inSession = {this.state.isLoggedIn}

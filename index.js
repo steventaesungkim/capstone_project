@@ -458,6 +458,20 @@ app.get('/api/question/:id_category(\\d+)/:level', (req, res) => {
 });
 
 // ========================================================
+// Get all Available Questions
+// ========================================================
+
+app.get('/api/questions/:id_user(\\d+)', (req, res) => {
+    Question.getAvailable(req.params.id_user)
+    .then(allQuestion => {
+        console.log(allQuestion);
+        res.json(allQuestion);
+    });
+});
+
+// ========================================================
+
+// ========================================================
 // Update Question
 // ========================================================
 

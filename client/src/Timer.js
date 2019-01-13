@@ -103,7 +103,8 @@ class Timer extends Component {
         this.setState({
                     categoryId: selectedCategory.id,
                     categorySelection: event.target.value,
-                    showLevel: true 
+                    showLevel: true,
+                    showButton: false
         })
     }
 

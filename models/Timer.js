@@ -234,15 +234,8 @@ class Timer {
         );
     }
 
-// MAY NEED MORE DELETE OPTIONS TO DELETE BY COMBO OF USER+LEVEL, CAT+LEVEL, 
-// USER+CAT, OR USER+CAT+LEVEL, OR MAYBE SET IT UP SO THOSE DELETE AUTOMATICALLY
-// UPON DELETIONS FROM OTHER TABLES
-
     // === ===  DELETE  === ===  [[END]]
-
 
 
 }
 module.exports = Timer;
-
-// Need instance functions for allowing a User instance to request list of its timers and its categories

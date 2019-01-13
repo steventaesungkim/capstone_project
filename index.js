@@ -880,3 +880,69 @@ app.get('/api/timer/category/:id_category(\\d+)/:level', (req, res) => {
 });
 
 // ========================================================
+
+// ========================================================
+// Update Timer info 
+// ========================================================
+
+app.post('/api/timer/:id(\\d+)', (req, res) => {
+    Timer.getById(req.params.id)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(timer => {        
+            timer.time = req.body.time ? req.body.time : timer.time;
+            timer.level = req.body.level ? req.body.level : timer.level;
+            timer.id_category = req.body.id_category ? req.body.id_category : timer.id_category;
+            timer.id_user = req.body.id_user ? req.body.id_user : timer.id_user;
+
+            timer.update()
+                .catch(err => {
+                    res.send(err.message);
+                })
+                .then(timerUpdated => {
+                    res.json(timerUpdated);
+                })
+        })
+});
+
+// ========================================================
+
+// ========================================================
+// Delete Timer by ID 
+// ========================================================
+
+app.delete('/api/timer/:id(\\d+)', (req, res) => {
+    Timer.deleteById(req.params.id)
+        .then(delTimer => {
+            res.json(`Records Deleted: ${delTimer.rowCount}`);
+        });
+    });
+
+// ========================================================
+
+// ========================================================
+// Delete Timer by User ID 
+// ========================================================
+
+app.delete('/api/timer/user/:id_user(\\d+)', (req, res) => {
+    Timer.deleteByUserId(req.params.id_user)
+        .then(delTimer => {
+            res.json(`Records Deleted: ${delTimer.rowCount}`);
+        });
+    });
+
+// ========================================================
+
+// ========================================================
+// Delete Timer by Category ID 
+// ========================================================
+
+app.delete('/api/timer/category/:id_category(\\d+)', (req, res) => {
+    Timer.deleteByCategoryId(req.params.id_category)
+        .then(delTimer => {
+            res.json(`Records Deleted: ${delTimer.rowCount}`);
+        });
+    });
+
+// ========================================================

@@ -119,7 +119,6 @@ app.post('/api/user/login', (req, res) => {
             res.json(message='Invalid Username');
         })
         .then(theUser => {
-            console.log(theUser)
             if (theUser.passwordDoesMatch(req.body.password)) {
                 req.session.user = theUser;
                 res.json(theUser);

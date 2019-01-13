@@ -1,50 +1,79 @@
-import React from 'react';
+import React, { Component } from 'react';
+import UpdateForm from './UpdateForm';
+import Axios from 'axios';
 
 
-const Settings = (props) => {
-    console.log(props)
 
-    // const settings = props.match.params
-    // const thisUser = this.props.location.state
-
-    // console.log(thisUser)
-
+class Settings extends Component {
+    constructor(props) {
+        // console.log(props)
+        super(props); 
+        this.state = {
+            name: '',
+            username: '',
+            password: '',
+            avatar: ''
+        }
+    }
+    render () {
+        console.log(this.props.location.state.thisUser)
         
-    return (
-        <div>
-            <h2>Settings</h2>
-            <p>Please update your information</p>
+        // console.log(theUser.id)
+        return (
+            <div>
+                <h2>Settings</h2>
+                {/* <p>Please update your information</p> */}
+                <UpdateForm 
+                    inputName = {this._updateName}
+                    newName = {this.state.name}
 
-            <form>
-                <label>Username:</label>
-                <input 
-                    name='username'
-                    className='input'
-                    type='text'
+                    inputUsername = {this._updateUsername}
+                    newUsername = {this.state.username}
 
-                    // onChange = {(event) => {
-                    //     props.newUsername(event.target.value);
-                    // }}
-                    value = {props.inputValue}
-                />
-                <br/>
-                <label>Password:</label>
-                <input 
-                    name='password'
-                    className='input'
-                    type='text'
+                    inputPassword = {this._updatePassword}
+                    inewPassword = {this.state.password}
 
-                />
-                <br/>
-                <input 
-                    className='input-submit'
-                    type='submit'
-                    value='Update'
-                />
+                    inputAvatar = {this._updateAvatar}
+                    newAvatar = {this.state.avatar}
 
-            </form>    
-        </div>
-    );
+                    submit = {this._onSubmit}
+                    />                    
+            </div>
+        )
+    }
+    
+    _updateName = (input) => {
+        this.setState ({
+            name: input
+        });
+    }
+    _updateUsername = (input) => {
+        // console.log(input)
+        this.setState ({
+            username: input
+        });
+    }
+    _updatePassword = (input) => {
+        this.setState ({
+            password: input
+        });
+    }
+    _updateAvatar = (input) => {
+        this.setState ({
+            avatar: input
+        });
+    }
+    _onSubmit = (event) => {
+        event.preventDefault();
+        const theUser = (this.props.location.state.thisUser)
+        const userId = theUser.id
+        Axios
+        .post(`/api/user/${userId}`,this.state)
+        .then((response) => {
+            console.log(response)
+            alert('Information Updated')
+        })
+    }
 }
 
 export default Settings;

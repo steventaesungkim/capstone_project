@@ -4,40 +4,42 @@ import { Link } from 'react-router-dom';
 
 const LogInForm = (props) => {
     return (
-        <form className='login-form' 
+        <form 
+            className='login-form' 
             name='login-form'
             method="POST"
             action='/api/user/login/'
-            onSubmit = {(event) => 
-            {props.submit(event)}
-            }>
+            onSubmit = {(event) => {
+                props.submit(event)
+            }}
+        >
             <label>Username:</label>
-                <input 
-                    required
-                    name='username'
-                    className='input'
-                    type='text'
-                    // placeholder='UserName'
-                    onChange = {(e) => {
-                        props.newUserName(e.target.value);
-                    }}
-                    value = {props.inputUserName}
-                    id="resetUsername"
-                />
+            <input 
+                required
+                name='username'
+                className='input'
+                type='text'
+                // placeholder='UserName'
+                onChange = {(e) => {
+                    props.newUserName(e.target.value);
+                }}
+                value = {props.inputUserName}
+                id="resetUsername"
+            />
             <br />
             <label>Password:</label>
-                <input 
-                    required
-                    name='password'
-                    className='input'
-                    type='text'
-                    // placeholder='Password'
-                    onChange = {(e) => {
-                        props.newPassword(e.target.value);
-                    }}
-                    value = {props.inputPassword}
-                    id="resetPassword"
-                />
+            <input 
+                required
+                name='password'
+                className='input'
+                type='text'
+                // placeholder='Password'
+                onChange = {(e) => {
+                    props.newPassword(e.target.value);
+                }}
+                value = {props.inputPassword}
+                id="resetPassword"
+            />
             <br />
             <input 
                 className='input-submit'

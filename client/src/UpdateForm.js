@@ -11,7 +11,7 @@ const UpdateForm = (props) => {
                 props.submit(event)
             }}
         >
-            <label>Name:</label>
+            <label>Name:
             <input 
                 name='name'
                 className='input'
@@ -20,9 +20,9 @@ const UpdateForm = (props) => {
                     props.inputName(event.target.value)
                 }}
                 value = {props.newName}
-            />
+            /></label>
             <br />
-            <label>Username:</label>
+            <label>Username:
             <input 
                 name='username'
                 className='input'
@@ -31,9 +31,9 @@ const UpdateForm = (props) => {
                     props.inputUsername(event.target.value)
                 }}
                 value = {props.newUsername}
-            />
+            /></label>
             <br />
-            <label>Password:</label>
+            <label>Password:
             <input 
                 name='password'
                 className='input'
@@ -42,9 +42,9 @@ const UpdateForm = (props) => {
                     props.inputPassword(event.target.value)
                 }}
                 value = {props.newPassword}
-            />
+            /></label>
             <br />
-            <label>Avatar:</label>
+            <label>Avatar:
             <input 
                 name='avatar'
                 className='input'
@@ -53,7 +53,7 @@ const UpdateForm = (props) => {
                     props.inputAvatar(event.target.value)
                 }}
                 value = {props.newAvatar}
-            />
+            /></label>
             <br />
             <input 
                 className='input-submit'

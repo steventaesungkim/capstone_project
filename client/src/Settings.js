@@ -11,8 +11,8 @@ class Settings extends Component {
         this.state = {
             name: '',
             username: '',
-            password: '',
-            avatar: ''
+            avatar: '',
+            password: ''
         }
     }
     render () {
@@ -26,15 +26,13 @@ class Settings extends Component {
                 <UpdateForm 
                     inputName = {this._updateName}
                     newName = {this.state.name}
-
                     inputUsername = {this._updateUsername}
                     newUsername = {this.state.username}
+                    inputAvatar = {this._updateAvatar}
+                    newAvatar = {this.state.avatar}
 
                     inputPassword = {this._updatePassword}
                     inewPassword = {this.state.password}
-
-                    inputAvatar = {this._updateAvatar}
-                    newAvatar = {this.state.avatar}
 
                     submit = {this._onSubmit}
                     />                    

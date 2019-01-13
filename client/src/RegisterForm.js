@@ -12,7 +12,7 @@ const RegisterForm = (props) => {
                 props.submit(event)
             }}
         >
-            <label>Name:</label>
+            <label>Name:
             <input 
                 required
                 className='input'
@@ -24,9 +24,9 @@ const RegisterForm = (props) => {
                 }}
                 value = {props.inputName}
                 id = "resetRegisterName"
-            />
+            /></label>
             <br />
-            <label>UserName:</label>
+            <label>UserName:
             <input 
                 required
                 className='input'
@@ -38,9 +38,9 @@ const RegisterForm = (props) => {
                 }}
                 value = {props.inputUserName}
                 id = "resetRegisterUsername"
-            />
+            /></label>
             <br />
-            <label>Password:</label>
+            <label>Password:
             <input
                 required
                 className='input'
@@ -51,9 +51,9 @@ const RegisterForm = (props) => {
                 }}
                 value = {props.inputPassword}
                 id = 'resetRegisterPassword'
-            />
+            /></label>
             <br />
-            <label>Avatar:</label>
+            <label>Avatar:
             <input 
                 required
                 className='input'
@@ -64,7 +64,7 @@ const RegisterForm = (props) => {
                 }}
                 value = {props.inputAvatar}
                 id = 'resetRegisterAvatar'
-            />
+            /></label>
             <br />
             <input 
                 className='input-submit'

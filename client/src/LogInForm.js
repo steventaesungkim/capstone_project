@@ -13,7 +13,7 @@ const LogInForm = (props) => {
                 props.submit(event)
             }}
         >
-            <label>Username:</label>
+            <label>Username:
             <input 
                 required
                 name='username'
@@ -25,9 +25,9 @@ const LogInForm = (props) => {
                 }}
                 value = {props.inputUserName}
                 id="resetUsername"
-            />
+            /></label>
             <br />
-            <label>Password:</label>
+            <label>Password:
             <input 
                 required
                 name='password'
@@ -39,7 +39,7 @@ const LogInForm = (props) => {
                 }}
                 value = {props.inputPassword}
                 id="resetPassword"
-            />
+            /></label>
             <br />
             <input 
                 className='input-submit'

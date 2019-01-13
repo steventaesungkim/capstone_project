@@ -8,37 +8,32 @@ const LogInForm = (props) => {
             name='login-form'
             method="POST"
             action='/api/user/login/'
-            onSubmit = {(event) => 
-            {props.submit(event)}
-            }>
-            <label>Username:</label>
+            onSubmit = {(event) => {props.submit(event)}}
+        >
+            <label>Username:
                 <input 
                     required
                     name='username'
                     className='input'
                     type='text'
                     // placeholder='UserName'
-                    onChange = {(e) => {
-                        props.newUserName(e.target.value);
-                    }}
+                    onChange = {(e) => {props.newUserName(e.target.value);}}
                     value = {props.inputUserName}
                     id="resetUsername"
                 />
-            <br />
-            <label>Password:</label>
+            </label> <br />
+            <label>Password:
                 <input 
                     required
                     name='password'
                     className='input'
                     type='text'
                     // placeholder='Password'
-                    onChange = {(e) => {
-                        props.newPassword(e.target.value);
-                    }}
+                    onChange = {(e) => {props.newPassword(e.target.value);}}
                     value = {props.inputPassword}
                     id="resetPassword"
                 />
-            <br />
+            </label><br />
             <input 
                 className='input-submit'
                 type='submit'
@@ -46,13 +41,13 @@ const LogInForm = (props) => {
             />
             <br />
             <Link to = '/register'>
-            <button 
-                className='btn' 
-                type='submit' 
-                value='submit'
-                
-                >Register
-            </button>
+                <button 
+                    className='btn' 
+                    type='submit' 
+                    value='submit'
+                    
+                    >Register
+                </button>
             </Link>
             <Link to = '/#'>   
                 <button 

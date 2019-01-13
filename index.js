@@ -39,6 +39,7 @@ const Category = require('./models/Category');
 const Question = require('./models/Question');
 const Result = require('./models/Result');
 const Resultset = require('./models/Resultset');
+const Timer = require('./models/Timer');
 
 // ========================================================
 // Listening 
@@ -577,7 +578,7 @@ app.get('/api/result/:id(\\d+)', (req, res) => {
 // Get all Results by ResultSet ID 
 // ========================================================
 
-app.get('/api/result/resultset/:resultsetID', (req, res) => {
+app.get('/api/result/resultset/:resultsetID(\\d+)', (req, res) => {
     Result.getByResultSet(req.params.resultsetID, true)
     .then(result => {
         res.json(result);
@@ -590,7 +591,7 @@ app.get('/api/result/resultset/:resultsetID', (req, res) => {
 // Get Results by Question ID
 // ========================================================
 
-app.get('/api/result/question/:qID', (req, res) => {
+app.get('/api/result/question/:qID(\\d+)', (req, res) => {
     Result.getByQuestion(req.params.qID, true)
         .catch(err =>{
             console.log(err)
@@ -633,7 +634,7 @@ app.delete('/api/result/:id(\\d+)', (req, res) => {
 // Delete ResultSet by ResultSet ID 
 // ========================================================
 
-app.delete('/api/result/resultset/:id_resultset', (req, res) => {
+app.delete('/api/result/resultset/:id_resultset(\\d+)', (req, res) => {
     Result.deleteByResultSet(req.params.id_resultset)
         .then(delResult => {
             res.json(delResult);
@@ -646,7 +647,7 @@ app.delete('/api/result/resultset/:id_resultset', (req, res) => {
 // Delete Result by question using ID 
 // ========================================================
 
-app.delete('/api/result/question/:id_question', (req, res) => {
+app.delete('/api/result/question/:id_question(\\d+)', (req, res) => {
     Result.deleteByQuestion(req.params.id_question)
         .then(delResult => {
             res.json(delResult);
@@ -773,6 +774,174 @@ app.delete('/api/resultset/user/:id_user(\\d+)', (req, res) => {
     Resultset.deleteByUserId(req.params.id_user)
         .then(delResultset => {
             res.json(`Records Deleted: ${delResultset.rowCount}`);
+        });
+    });
+
+// ========================================================
+
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//   TIMERS
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+// ========================================================
+// Create a Timer
+// ========================================================
+
+app.post('/api/timer/create', (req, res) => {
+    Timer.createTimer(req.body.time, req.body.level, req.body.id_category, req.body.id_user)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(newTimer => {
+            res.json(newTimer);
+        });
+});
+
+// ========================================================
+
+// ========================================================
+// Get All Timers 
+// ========================================================
+
+app.get('/api/timer', (req, res) => {
+    Timer.getAll()
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(allTimers => {
+            res.json(allTimers);
+        });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Timer by ID 
+// ========================================================
+
+app.get('/api/timer/:id(\\d+)', (req, res) => {
+    Timer.getById(req.params.id)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(timer => {
+            res.json(timer);
+        });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Timers by User 
+// ========================================================
+
+app.get('/api/timer/user/:id_user(\\d+)', (req, res) => {
+    Timer.getByUserId(req.params.id_user)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(timer => {
+            res.json(timer);
+        });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Timers by Category 
+// ========================================================
+
+app.get('/api/timer/category/:id_category(\\d+)', (req, res) => {
+    Timer.getByCategoryId(req.params.id_category)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(timer => {
+            res.json(timer);
+        });
+});
+
+// ========================================================
+
+// ========================================================
+// Get Timers by Category and Level
+// ========================================================
+
+app.get('/api/timer/category/:id_category(\\d+)/:level', (req, res) => {
+    Timer.getByCategoryLevel(req.params.id_category, req.params.level)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(timer => {
+            res.json(timer);
+        });
+});
+
+// ========================================================
+
+// ========================================================
+// Update Timer info 
+// ========================================================
+
+app.post('/api/timer/:id(\\d+)', (req, res) => {
+    Timer.getById(req.params.id)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(timer => {        
+            timer.time = req.body.time ? req.body.time : timer.time;
+            timer.level = req.body.level ? req.body.level : timer.level;
+            timer.id_category = req.body.id_category ? req.body.id_category : timer.id_category;
+            timer.id_user = req.body.id_user ? req.body.id_user : timer.id_user;
+
+            timer.update()
+                .catch(err => {
+                    res.send(err.message);
+                })
+                .then(timerUpdated => {
+                    res.json(timerUpdated);
+                })
+        })
+});
+
+// ========================================================
+
+// ========================================================
+// Delete Timer by ID 
+// ========================================================
+
+app.delete('/api/timer/:id(\\d+)', (req, res) => {
+    Timer.deleteById(req.params.id)
+        .then(delTimer => {
+            res.json(`Records Deleted: ${delTimer.rowCount}`);
+        });
+    });
+
+// ========================================================
+
+// ========================================================
+// Delete Timer by User ID 
+// ========================================================
+
+app.delete('/api/timer/user/:id_user(\\d+)', (req, res) => {
+    Timer.deleteByUserId(req.params.id_user)
+        .then(delTimer => {
+            res.json(`Records Deleted: ${delTimer.rowCount}`);
+        });
+    });
+
+// ========================================================
+
+// ========================================================
+// Delete Timer by Category ID 
+// ========================================================
+
+app.delete('/api/timer/category/:id_category(\\d+)', (req, res) => {
+    Timer.deleteByCategoryId(req.params.id_category)
+        .then(delTimer => {
+            res.json(`Records Deleted: ${delTimer.rowCount}`);
         });
     });
 

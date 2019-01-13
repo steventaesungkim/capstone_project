@@ -21,15 +21,15 @@ class Register extends Component {
         .then(r => r.json())
         .then(data =>{
             console.log(`LOGIN-STATUS:`,data.isLoggedIn)
-            if(data.isLoggedIn === false){
-                this.props.history.push('/');
-            }else{
+            if(data.isLoggedIn === true){
                 this.setState({
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
                 })
                 this.props.history.push('/timer');
+
             }
+            
         })
     }
 
@@ -54,15 +54,27 @@ class Register extends Component {
     }
 
     _name = (input) => {
-        this.setState ({
-            name: input
-        });
+        const letters = /[a-z,A-Z]/; 
+
+        if (input.match(letters)) {
+            this.setState ({
+                name: input
+            })
+        } else {
+            alert('Please input alphabet characters only');
+        }
     }
 
     _userName = (input) => {
-        this.setState ({
-            username: input
-        }); 
+        const letters = /[0-9,a-z,A-Z]/; 
+
+        if (input.match(letters)) {
+            this.setState ({
+                username: input
+            }) 
+        } else {
+            alert('Please input alphanumeric characters only');
+        }
     }
 
     _password = (input) => {
@@ -84,7 +96,8 @@ class Register extends Component {
         Axios
         .post('/api/user/register', this.state)
         .then((response) =>{
-            // console.log(response)
+            console.log(response.data)
+
 
             if (response.data === "Username exist") {
                 alert('Username already exist. Please choose another username');

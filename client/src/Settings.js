@@ -2,18 +2,23 @@ import React from 'react';
 
 
 const Settings = (props) => {
+    // console.log(props.userInfo)
     return (
         <div>
             <h2>Settings</h2>
             <p>Please update your information</p>
 
-            {/* <form>
+            <form>
                 <label>Username:</label>
                 <input 
                     name='username'
                     className='input'
                     type='text'
 
+                    // onChange = {(event) => {
+                    //     props.newUsername(event.target.value);
+                    // }}
+                    value = {props.inputValue}
                 />
                 <br/>
                 <label>Password:</label>
@@ -30,7 +35,7 @@ const Settings = (props) => {
                     value='Update'
                 />
 
-            </form>     */}
+            </form>    
         </div>
     );
 }

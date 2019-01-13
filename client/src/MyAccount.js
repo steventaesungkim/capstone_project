@@ -5,9 +5,6 @@ class MyAccount extends Component {
     constructor(props) {
         super(props); 
         this.state = {
-            // username: '',
-            // password:'',
-            // avatar: '',
             theUser: [],
             isLoggedIn: Boolean
         }
@@ -33,16 +30,8 @@ class MyAccount extends Component {
     render() {
         console.log(this.state.theUser)
         // console.log(this.state.isLoggedIn)
-
         const theUser = (this.state.theUser)
-
-        // const inputValue = {
-        //     username: '',
-        //     password: '',
-        //     avatar: ''
-        // }
-
-        console.log(theUser)
+        // console.log(theUser)
 
         return (
             <div>

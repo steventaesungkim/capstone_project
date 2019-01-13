@@ -2,7 +2,14 @@ import React from 'react';
 
 
 const Settings = (props) => {
-    // console.log(props.userInfo)
+    console.log(props)
+
+    // const settings = props.match.params
+    // const thisUser = this.props.location.state
+
+    // console.log(thisUser)
+
+        
     return (
         <div>
             <h2>Settings</h2>

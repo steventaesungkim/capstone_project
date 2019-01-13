@@ -4,22 +4,14 @@ import Logout from './Logout';
 
 
 const Navbar = (props) => {
-    const thisUser = {}
-
+    // console.log(props.inSession)
     return(
         <header className='navbar'>
-            <Link to = {{
-                pathname: '/myaccount',
-                state: {
-                    userInfo: props.userInfo
-                } 
-            }}
-                className='links'
-            >MyAccount</Link> 
+            <Link to = '/myaccount' className='links'>MyAccount</Link> 
             <br />
             <Logout 
                 logout = {props.handleLogout}
-                userInfo = {props.userInfo}
+                thisUser = {props.userInfo}
                 inSession = {props.inSession}
             />
         </header>

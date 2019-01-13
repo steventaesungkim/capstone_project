@@ -27,7 +27,7 @@ class Timer extends Component {
         fetch('/api/user/isValid')
         .then(r => r.json())
         .then(data =>{
-            console.log(data.user.id)
+            // console.log(data.user.id)
             if(data.isLoggedIn === false){
                 this.props.history.push('/');
             }else{
@@ -46,7 +46,7 @@ class Timer extends Component {
                 fetch('/api/question')
                 .then(r => r.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     this.setState({
                         level: data
                     })
@@ -61,7 +61,8 @@ class Timer extends Component {
         return (
             <div>
                 <Navbar 
-                    userInfo = {this._userInfo}
+                    // userInfo = {this.state.theUser}
+                    
                     inSession = {this.state.isLoggedIn}
                     handleLogout = {this._handleLogout}
                 />
@@ -96,9 +97,9 @@ class Timer extends Component {
     //     {(event) =>{props.logout(event)}}
     // }
 
-    _userInfo = () =>{
-
-    }
+    // _userInfo = () =>{
+    // NOT USED....
+    // }
 
     _handleSelect = (event) => {
         console.log('Category Selected')

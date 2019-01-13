@@ -7,7 +7,7 @@ class MyAccount extends Component {
         this.state = {
             username: '',
             password:'',
-            // avatar: '',
+            avatar: '',
             theUser: [],
             isLoggedIn: Boolean
         }
@@ -17,7 +17,7 @@ class MyAccount extends Component {
         fetch('/api/user/isValid')
         .then(r => r.json())
         .then(data => {
-            console.log(data)
+            // console.log(data.user)
             if(data.isLoggedIn === false){
                 this.props.history.push('/');
             }else{
@@ -26,23 +26,29 @@ class MyAccount extends Component {
                     isLoggedIn: data.isLoggedIn
                 })
             }
-
         })
     }
     
 
     render() {
         console.log(this.state.theUser)
-        console.log(this.state.isLoggedIn)
+        // console.log(this.state.isLoggedIn)
+        const theUser = (this.state.theUser)
+        const thisUser = {
+            name: theUser.name,
+            username: theUser.username,
+            password: theUser.pwhash,
+            avatar: theUser.avatar 
+        }
+
         return (
             <div>
                 <h2>MyAccount</h2>
                 <Link to = {{
                     pathname: '/settings',
                     state: {
-                        theUser: [],
-                        isLoggedIn: ''
-                    }
+                        thisUser
+                    }    
                 }} 
                     className='links'
                 >Settings</Link>

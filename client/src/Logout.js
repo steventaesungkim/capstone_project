@@ -1,21 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
 const Logout = (props) =>{
     // console.log(props.inSession)
 
     return(
-        <div>
-            <header className = "navBar" >
-                <button>myAccount</button>
-                <button 
-                    onClick={(event) =>{
-                        props.handleLogout(event)
-                    }}
-                
-                >Logout</button>
-            </header>
-        </div>
+        <a href='/' onClick={(event) =>{props.logout(event)}}>Logout</a>
     )
 }
 

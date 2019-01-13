@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import Clock from './Clock';
 import CategoryDropdown from './CategoryDropdown';
-import Logout from './Logout';
-
-import Axios from 'axios';
+import Navbar from './Navbar';
 
 
 
@@ -28,7 +27,7 @@ class Timer extends Component {
         fetch('/api/user/isValid')
         .then(r => r.json())
         .then(data =>{
-            console.log(data.user.id)
+            // console.log(data.user.id)
             if(data.isLoggedIn === false){
                 this.props.history.push('/');
             }else{
@@ -47,7 +46,7 @@ class Timer extends Component {
                 fetch('/api/question')
                 .then(r => r.json())
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     this.setState({
                         level: data
                     })
@@ -57,12 +56,13 @@ class Timer extends Component {
     }
 
     render() {
-        console.log(this.state.theUser)
-        console.log(this.state.isLoggedIn)
+        // console.log(this.state.theUser)
+        console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
         return (
             <div>
-                <Logout 
-                    userInfo = {this._userInfo}
+                <Navbar 
+                    // userInfo = {this.state.theUser}
+                    
                     inSession = {this.state.isLoggedIn}
                     handleLogout = {this._handleLogout}
                 />
@@ -93,9 +93,13 @@ class Timer extends Component {
         );
     }
 
-    _userInfo = () =>{
+    // _onClick = (event) => {
+    //     {(event) =>{props.logout(event)}}
+    // }
 
-    }
+    // _userInfo = () =>{
+    // NOT USED....
+    // }
 
     _handleSelect = (event) => {
         console.log('Category Selected')
@@ -124,6 +128,7 @@ class Timer extends Component {
     
     _handleLogout = (event) =>{
         // console.log("clicked")
+    
         this.setState({
             inSession: false
         })  

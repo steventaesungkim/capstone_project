@@ -726,51 +726,54 @@ app.get('/api/resultset/user/:id_user(\\d+)', (req, res) => {
 
 // ========================================================
 
-// // ========================================================
-// // Get Resultsets available to User ID 
-// // ========================================================
+// ========================================================
+// Update Resultset info 
+// ========================================================
 
-// app.get('/api/categories/:id_user(\\d+)', (req, res) => {
-//     Resultset.getAvailable(req.params.id_user)
-//     .then(category => {
-//         res.json(category);
-//     });
-// });
+app.post('/api/resultset/:id(\\d+)', (req, res) => {
+    Resultset.getById(req.params.id)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(rset => {        
+            rset.time = req.body.time ? req.body.time : rset.time;
+            rset.id_user = req.body.id_user ? req.body.id_user : rset.id_user;
+            rset.score = req.body.score ? req.body.score : rset.score;
 
-// // ========================================================
+            rset.update()
+                .catch(err => {
+                    res.send(err.message);
+                })
+                .then(rsetUpdated => {
+                    res.json(rsetUpdated);
+                })
+        })
+});
 
-// // ========================================================
-// // Update Resultset info 
-// // ========================================================
+// ========================================================
 
-// app.post('/api/resultset/:id(\\d+)', (req, res) => {
-//     Resultset.getById(req.params.id)
-//     .then(cat => {        
-//         cat.category_type = req.body.category_type ? req.body.category_type : cat.category_type;
-//         cat.levels = req.body.levels ? req.body.levels : cat.levels;
-//         cat.id_user = req.body.id_user ? req.body.id_user : cat.id_user;
+// ========================================================
+// Delete Resultset by ID 
+// ========================================================
 
-//         cat.update()
-//             .then(catUpdated => {
-//                 res.json(catUpdated);
-//             })
-//     })
-// });
+app.delete('/api/resultset/:id(\\d+)', (req, res) => {
+    Resultset.deleteById(req.params.id)
+        .then(delResultset => {
+            res.json(`Records Deleted: ${delResultset.rowCount}`);
+        });
+    });
 
-// // ========================================================
+// ========================================================
 
-// // ========================================================
-// // Delete Resultset by ID 
-// // ========================================================
+// ========================================================
+// Delete Resultset by User ID 
+// ========================================================
 
-// app.delete('/api/resultset/:id(\\d+)', (req, res) => {
-//     Resultset.getById(req.params.id)
-//     .then(theCategory => {
-//         theCategory.delete()
-//         .then(delCategory => {
-//             res.json(delCategory);
-//         });
-//     });
-// });
+app.delete('/api/resultset/user/:id_user(\\d+)', (req, res) => {
+    Resultset.deleteByUserId(req.params.id_user)
+        .then(delResultset => {
+            res.json(`Records Deleted: ${delResultset.rowCount}`);
+        });
+    });
 
-// // ========================================================
+// ========================================================

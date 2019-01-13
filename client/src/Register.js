@@ -27,9 +27,16 @@ class Register extends Component {
                     isLoggedIn: data.isLoggedIn
                 })
                 this.props.history.push('/timer');
-
             }
-            
+            // else{
+            //     fetch('/api/user')
+            //     .then(r => r.json())
+            //     .then(data =>{
+            //         this.setState({
+            //             theUser: data
+            //         })
+            //     })
+            // }
         })
     }
 
@@ -56,17 +63,37 @@ class Register extends Component {
     _name = (input) => {
         const letters = /[a-z,A-Z]/; 
 
+        // if (input !== '') {
+        //     if (input.match(letters)) {
+        //         this.setState ({
+        //             name: input
+        //         })
+        //     }
+        // } else {
+        //     document.getElementById('resetRegisterName').value="";
+        //     alert('Please input alphabet characters only');
+        // }
+
         if (input.match(letters)) {
             this.setState ({
                 name: input
             })
         } else {
+            document.getElementById('resetRegisterName').value="";
             alert('Please input alphabet characters only');
         }
+
+        // this.setState ({
+        //     name: input
+        // })
     }
 
     _userName = (input) => {
         const letters = /[0-9,a-z,A-Z]/; 
+        console.log(input)
+        console.log(this.state.theUser)
+        
+
 
         if (input.match(letters)) {
             this.setState ({
@@ -74,7 +101,12 @@ class Register extends Component {
             }) 
         } else {
             alert('Please input alphanumeric characters only');
+            document.getElementById('resetRegisterUsername').value="";
         }
+
+        // this.setState ({
+        //     username: input
+        // })
     }
 
     _password = (input) => {

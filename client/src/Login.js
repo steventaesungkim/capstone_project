@@ -27,8 +27,10 @@ class Login extends Component {
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
                 })
+                this.props.history.push('/timer');
             }
-        })}
+        })
+    }
 
     render() {
         // console.log(this.state.isLoggedIn)

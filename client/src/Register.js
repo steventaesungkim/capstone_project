@@ -7,12 +7,33 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            theUser: [],
+            isLoggedIn: Boolean,
             name: '',
             username: '',
             password: '',
             avatar: ''
         }
     }
+
+    componentDidMount() {
+        fetch('/api/user/isValid')
+        .then(r => r.json())
+        .then(data =>{
+            console.log(`LOGIN-STATUS:`,data.isLoggedIn)
+            if(data.isLoggedIn === false){
+                this.props.history.push('/');
+            }else{
+                this.setState({
+                    theUser: data.user,
+                    isLoggedIn: data.isLoggedIn
+                })
+                this.props.history.push('/timer');
+            }
+        })
+    }
+
+
     render() {
         return (
             <div>

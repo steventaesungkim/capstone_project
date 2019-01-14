@@ -144,7 +144,6 @@ class Register extends Component {
         .then((response) =>{
             // console.log(response.data)
 
-
             if (response.data === "Username exist") {
                 alert('Username already exist. Please choose another username');
                 this.setState ({
@@ -160,6 +159,7 @@ class Register extends Component {
     };
 
     _handleAvatar = (event) =>{
+        console.log('click')
         event.preventDefault()
         const selectedImg = event.target.value
         // console.log(this.state.avatarData)

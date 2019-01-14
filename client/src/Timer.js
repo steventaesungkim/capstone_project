@@ -90,26 +90,18 @@ class Timer extends Component {
         );
     }
 
-    // _onClick = (event) => {
-    //     {(event) =>{props.logout(event)}}
-    // }
-
-    // _userInfo = () =>{
-    // NOT USED....
-    // }
 
     _handleSelect = (event) => {
         console.log('Category Selected')
-        const selected = {name: event.target.value, value: event.target.value}
 
-        this.state.categories.map((compare) =>{
-            if (selected.name === compare.category_type){
-                this.setState({
-                    categoryId: compare.id,
-                    categorySelection: selected.value,
-                    showLevel: true 
-                })
-            }
+        let selectedCategory = this.state.categories.filter(c => {
+            return event.target.value === c.category_type})[0];
+                
+        this.setState({
+                    categoryId: selectedCategory.id,
+                    categorySelection: event.target.value,
+                    showLevel: true,
+                    showButton: false
         })
     }
 

@@ -2,17 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const LevelsDropdown = (props) => {
-    // console.log(props)
     const firstOption = (props.name !== 'Level')
     ? <option value= {props.levelList}>Select a Level</option>
     : <option value= {props.levelSelection}>WRONG</option>;
     // console.log(props.levelList)
 
     let getButtonQuestions = () => {
-        // console.log(props.showButton)
-        if (props.showButton === true) { 
-            // console.log(props.categorySelection)
-            // console.log(props.levelSelection)
+        if (props.showButton) { 
             return (
                 <div>
                     <button>Click to continue!</button>
@@ -34,21 +30,18 @@ const LevelsDropdown = (props) => {
 
     return (
         <div>
-            {props.name}:
-            <select
-                value={props.levelSelection}
-                onChange={(event) => props.handleLevel(event)}
-            >
-                {firstOption}  
-                {theEachLevel}
-            </select>
+            <label>{props.name}:
+                <select
+                    value={props.levelSelection}
+                    onChange={(event) => props.handleLevel(event)}
+                >
+                    {firstOption}  
+                    {theEachLevel}
+                </select>
+            </label>
             <Link to = {`/question/${props.categoryId}/${props.levelSelection}`}>{getButtonQuestions()}</Link>
 
         </div>
     )
-
-    
-
 }
-
 export default LevelsDropdown;

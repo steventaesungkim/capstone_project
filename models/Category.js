@@ -85,18 +85,30 @@ class Category {
 
     // Gets all records from Categories table that are available to a specific User
     //  which includes those assigned to Guest and those for the specific User ID
-    // Returns an array of Category class instances
-    static getAvailable(userID) {
-        return db.any(`
-                SELECT * FROM categories WHERE id_user IN (1, $1)`,
-                [userID]
-            )
-            .then(cArray => {
-                const instanceArray = cArray.map(c => {
-                    return new Category(c.id, c.category_type, c.levels, c.id_user);
+    // The returnAllData flag determines what is returned:
+    //   - Returns an array of Category IDs if returnAllData is false
+    //   - Returns an array of Category class instances if returnAllData is true or omitted
+    static getAvailable(userID, returnAllData=true) {
+        if (returnAllData) {
+            return db.any(`
+                    SELECT * FROM categories WHERE id_user IN (1, $1)`,
+                    [userID]
+                )
+                .then(cArray => {
+                    const instanceArray = cArray.map(c => {
+                        return new Category(c.id, c.category_type, c.levels, c.id_user);
+                    });
+                    return instanceArray;
                 });
-                return instanceArray;
-            });
+        } else {
+            return db.any(`
+                    SELECT id FROM categories WHERE id_user IN (1, $1)`,
+                    [userID]
+                )
+                .then(result => {
+                    return result.map(r => r.id);
+                });
+        }
     }
 
     // === ===  RETRIEVE  === ===  [[END]]

@@ -119,7 +119,6 @@ app.post('/api/user/login', (req, res) => {
             res.json(message='Invalid Username');
         })
         .then(theUser => {
-            console.log(theUser)
             if (theUser.passwordDoesMatch(req.body.password)) {
                 req.session.user = theUser;
                 res.json(theUser);
@@ -235,11 +234,14 @@ app.post('/api/user/:id(\\d+)', (req, res) => {
 // ========================================================
 
 app.post('/api/user/pwd/:id(\\d+)', (req, res) => {
+    // console.log(req.params.id)
     User.getById(req.params.id)
     .then(theUser => {
+        
         theUser.updatePassword(req.body.password)
         .then(passwordUpdated => {
             res.json(passwordUpdated);
+            // res.json({message: 'done'})
         });
     });
 });
@@ -457,6 +459,20 @@ app.get('/api/question/:id_category(\\d+)/:level', (req, res) => {
         res.json(questionLevel);
     });
 });
+
+// ========================================================
+// Get all Available Questions
+// ========================================================
+
+app.get('/api/questions/:id_user(\\d+)', (req, res) => {
+    Question.getAvailable(req.params.id_user)
+    .then(allQuestion => {
+        console.log(allQuestion);
+        res.json(allQuestion);
+    });
+});
+
+// ========================================================
 
 // ========================================================
 // Update Question

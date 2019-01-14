@@ -1,7 +1,6 @@
 import React from 'react';
 
-const UpdateForm = (props) => {
-    console.log(props)
+const UpdateUser = (props) => {
     return (
         <form
             className='update-form'
@@ -33,35 +32,13 @@ const UpdateForm = (props) => {
                 value = {props.newUsername}
             /></label>
             <br />
-            <label>Password:
-            <input 
-                name='password'
-                className='input'
-                type='text'
-                onChange = {(event) => {
-                    props.inputPassword(event.target.value)
-                }}
-                value = {props.newPassword}
-            /></label>
-            <br />
-            <label>Avatar:
-            <input 
-                name='avatar'
-                className='input'
-                type='text'
-                onChange = {(event) => {
-                    props.inputAvatar(event.target.value)
-                }}
-                value = {props.newAvatar}
-            /></label>
-            <br />
             <input 
                 className='input-submit'
                 type='submit'
-                value='Update'
+                value='Change username'
             />
         </form>
     )
 }
 
-export default UpdateForm;
+export default UpdateUser;

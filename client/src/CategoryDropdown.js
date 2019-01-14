@@ -36,17 +36,18 @@ const CategoryDropdown = (props) => {
 
     return (
         <div>
-            {props.name}: 
-            <select
-                name={props.name}
-                value={props.categorySelection}
-                onChange={(event) => props.handleChange(event)}
-            >
+            <label>{props.name}: 
+                <select
+                    name={props.name}
+                    value={props.categorySelection}
+                    onChange={(event) => props.handleChange(event)}
+                >
 
-                {firstOption}
-                {theCategoryList}
-            
-            </select>
+                    {firstOption}
+                    {theCategoryList}
+                
+                </select>
+            </label>
             {getLevelDropdown()}
         </div>
     )

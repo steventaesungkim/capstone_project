@@ -57,11 +57,13 @@ class Timer extends Component {
 
     render() {
         // console.log(this.state.theUser)
+        const currentUser = (this.state.theUser)
+        console.log(currentUser)
         console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
         return (
             <div>
                 <Navbar 
-                    // userInfo = {this.state.theUser}
+                    user = {currentUser}
                     
                     inSession = {this.state.isLoggedIn}
                     handleLogout = {this._handleLogout}
@@ -95,10 +97,6 @@ class Timer extends Component {
 
     // _onClick = (event) => {
     //     {(event) =>{props.logout(event)}}
-    // }
-
-    // _userInfo = () =>{
-    // NOT USED....
     // }
 
     _handleSelect = (event) => {

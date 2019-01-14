@@ -57,10 +57,14 @@ class Timer extends Component {
 
     render() {
         // console.log(this.state.theUser)
+        const currentUser = (this.state.theUser)
+        console.log(currentUser)
         console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
         return (
             <div>
                 <Navbar 
+                    user = {currentUser}
+                    
                     inSession = {this.state.isLoggedIn}
                     handleLogout = {this._handleLogout}
                 />
@@ -79,6 +83,7 @@ class Timer extends Component {
                     showLevel = {this.state.showLevel}
 
                     showButton = {this.state.showButton}
+                    // handleButtonClick = {this._handleButton}
 
                     userInfo = {this._userInfo}
                     inSession = {this.state.isLoggedIn}
@@ -90,18 +95,22 @@ class Timer extends Component {
         );
     }
 
+    // _onClick = (event) => {
+    //     {(event) =>{props.logout(event)}}
+    // }
 
     _handleSelect = (event) => {
         console.log('Category Selected')
+        const selected = {name: event.target.value, value: event.target.value}
 
-        let selectedCategory = this.state.categories.filter(c => {
-            return event.target.value === c.category_type})[0];
-                
-        this.setState({
-                    categoryId: selectedCategory.id,
-                    categorySelection: event.target.value,
-                    showLevel: true,
-                    showButton: false
+        this.state.categories.map((compare) =>{
+            if (selected.name === compare.category_type){
+                this.setState({
+                    categoryId: compare.id,
+                    categorySelection: selected.value,
+                    showLevel: true 
+                })
+            }
         })
     }
 

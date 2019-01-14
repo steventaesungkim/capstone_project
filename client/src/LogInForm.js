@@ -48,24 +48,26 @@ const LogInForm = (props) => {
                 value='Login'
             />
             <br />
-            <Link to = '/register'>
-                <button 
-                    className='btn' 
-                    type='submit' 
-                    value='submit'
-                    
-                    >Register
-                </button>
-            </Link>
-            <Link to = '/#'>   
-                <button 
-                    className='btn' 
-                    type='submit' 
-                    value='submit'
-                    
-                    >Sign in as Guest
-                </button>
-            </Link> 
+            <div classname='btn-group'>
+                <Link to = '/register'>
+                    <button 
+                        className='btn' 
+                        type='submit' 
+                        value='submit'
+
+                        >Register
+                    </button>
+                </Link>
+                <Link to = '/#'>   
+                    <button 
+                        className='btn' 
+                        type='submit' 
+                        value='submit'
+
+                        >Sign in as Guest
+                    </button>
+                </Link> 
+            </div>
         </form>
     )
 }

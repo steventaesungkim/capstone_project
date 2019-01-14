@@ -37,8 +37,10 @@ class Login extends Component {
     render() {
         // console.log(this.state.isLoggedIn)
         return (
-            <div>
-                <h2>Login</h2> 
+            <section className='section-login'>
+                <div className='title'>
+                    <h2>Login</h2> 
+                </div>
                 <LogInForm 
                     inputUserName = {this.state.username}
                     newUserName = {this._userName}
@@ -46,7 +48,7 @@ class Login extends Component {
                     newPassword = {this._password}
                     submit = {this._onSubmit}
                 />
-            </div>
+            </section>
         )
     }
 

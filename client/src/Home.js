@@ -20,8 +20,8 @@ class Home extends Component {
     render() {
         return (
             <Router>
-                <div>
-                    <h1>What do you want to be tested on?</h1>
+                <div className='main'>
+                    <h1>Clock Signal</h1>
                     <Route path =  '/' exact component = {Login} /> 
                     <Route path = '/register' component = {Register} />
                     <Route path = '/timer' component = {Timer} />
@@ -32,9 +32,7 @@ class Home extends Component {
                     <Route path = '/updateUser' component = {UpdateUser} />
                     <Route path = '/updatePassword' component = {UpdatePassword} />
                     <Route path = '/updateAvatar' component = {UpdateAvatar} />
-
-
-
+                    
                 </div>
             </Router>
         );

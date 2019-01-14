@@ -223,23 +223,11 @@ app.post('/api/user/:id(\\d+)', (req, res) => {
         theUser.name = req.body.name ? req.body.name.toUpperCase() : theUser.name;
         theUser.username = req.body.username ? req.body.username.toUpperCase() : theUser.username;
         theUser.avatar = req.body.avatar ? req.body.avatar.toUpperCase() : theUser.avatar;
-        if (theUser.name !== req.body.name.toUpperCase()) {
-            res.json({message: 'name updated'})
-        } else{
-            console.log('already there')
-        }
-
-
-        
-        // if (theUser.username !== req.body.username.toUpperCase()) {
-        //     console.log('the username is updated')
-        // }
         
         theUser.update()
             .then(updated => {
-                // console.log("exxxxpppprreeesss")
-                console.log(updated)
                 res.json({
+                    updated: updated,
                     name: "Name Updated",
                     username: "Username Updated",
                     avatar: "Avatar Updated"

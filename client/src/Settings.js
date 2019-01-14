@@ -95,7 +95,9 @@ class Settings extends Component {
         .post(`/api/user/${userId}`,this.state)
         .then((response) => {
             console.log(response)
-            if (response.data === true) {
+            // if ((response.data.updated === true) && ((response.data.name === 'Name Updated') || (response.data.username === 'Username Updated') ) ) {
+            if ((response.data.name === 'Name Updated') || (response.data.username === 'Username Updated'))  {
+
                 alert('User info updated')
                 document.getElementById('updatedName').value="";
                 document.getElementById('updatedUserName').value="";
@@ -111,8 +113,8 @@ class Settings extends Component {
         Axios
         .post(`/api/user/${userId}`,this.state)
         .then((response) => {
-            // console.log(response)
-            if (response.data === true) {
+            console.log(response)
+            if (response.data.avatar === "Avatar Updated") {
                 alert('Avatar updated')
                 document.getElementById('updateAvatar').value="";
             }

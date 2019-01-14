@@ -40,6 +40,7 @@ const Question = require('./models/Question');
 const Result = require('./models/Result');
 const Resultset = require('./models/Resultset');
 const Timer = require('./models/Timer');
+const Avatar = require('./models/Avatar');
 
 // ========================================================
 // Listening 
@@ -94,7 +95,7 @@ app.post('/api/user/register', (req, res) => {
     const newName = req.body.name.toUpperCase();
     const newUsername = req.body.username.toUpperCase();
     const newPassword = req.body.password;
-    const newAvatar = req.body.avatar.toUpperCase();
+    const newAvatar = req.body.avatar;
     User.createUser(newName, newUsername, newPassword, newAvatar)
         .catch(err => {
             console.log(err);
@@ -953,5 +954,43 @@ app.delete('/api/timer/category/:id_category(\\d+)', (req, res) => {
             res.json(`Records Deleted: ${delTimer.rowCount}`);
         });
     });
+
+// ========================================================
+
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//   Avatar
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+// ========================================================
+// Create a Avatar for user
+// ========================================================
+
+// app.post('/api/timer/create', (req, res) => {
+//     Timer.createTimer(req.body.time, req.body.level, req.body.id_category, req.body.id_user)
+//         .catch(err => {
+//             res.send(err.message);
+//         })
+//         .then(newTimer => {
+//             res.json(newTimer);
+//         });
+// });
+
+// ========================================================
+
+// ========================================================
+// Get All avatar 
+// ========================================================
+
+app.get('/api/avatar', (req, res) => {
+    Avatar.getAll()
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(allAvatars => {
+            res.json(allAvatars);
+        });
+});
 
 // ========================================================

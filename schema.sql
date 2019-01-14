@@ -42,3 +42,10 @@ CREATE TABLE results(
     id_question integer references questions (id),
     correct boolean
 );
+
+CREATE TABLE avatars (
+    id serial primary key,
+    id_user integer references users (id),
+    name text,
+    img text
+);

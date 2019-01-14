@@ -27,7 +27,6 @@ const CategoryDropdown = (props) => {
                 </div>
             )
         }
-
     }
 
     const theCategoryList = props.categoryList.map((eachCategory,index) => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AvatarDropdown from './AvatarDropdown';
 
 
 const RegisterForm = (props) => {
@@ -53,7 +54,14 @@ const RegisterForm = (props) => {
                 id = 'resetRegisterPassword'
             /></label>
             <br />
-            <label>Avatar:
+            <AvatarDropdown
+                    name = 'Avatar'
+                    avatarData = {props.avatarData}
+                    avatarSelection = {props.avatarSelection}
+                    avatarId ={props.avatarId}
+                    handleAvatar = {props.handleAvatar}
+                />
+            {/* <label>Avatar:
             <input 
                 required
                 className='input'
@@ -64,7 +72,7 @@ const RegisterForm = (props) => {
                 }}
                 value = {props.inputAvatar}
                 id = 'resetRegisterAvatar'
-            /></label>
+            /></label> */}
             <br />
             <input 
                 className='input-submit'

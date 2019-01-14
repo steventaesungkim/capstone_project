@@ -35,27 +35,29 @@ class Timer extends Component {
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
                 })
-            }
-            fetch(`/api/categories/${data.user.id}`)
-            .then(r => r.json())
-            .then(data =>{ 
-                // console.log(data);
-                this.setState({
-                    categories: data
-                })
-                fetch('/api/question')
+                fetch(`/api/categories/${data.user.id}`)
                 .then(r => r.json())
-                .then(data => {
-                    // console.log(data)
+                .then(data =>{ 
+                    // console.log(data);
                     this.setState({
-                        level: data
+                        categories: data
+                    })
+                    fetch('/api/question')
+                    .then(r => r.json())
+                    .then(data => {
+                        // console.log(data)
+                        this.setState({
+                            level: data
+                        })
                     })
                 })
-            })
+            }
         })    
     }
 
     render() {
+
+        console.log(this.state.theUser.avatar)
         // console.log(this.state.theUser)
         const currentUser = (this.state.theUser)
         console.log(currentUser)

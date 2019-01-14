@@ -93,3 +93,17 @@ VALUES
     (3, 25, true),
     (3, 26, true),
     (3, 27, true);
+
+INSERT INTO avatars
+    (id_user, name, img)
+VALUES
+    (1, 'First Default', 'default1.png'),
+    (1, 'Second Default', 'default2.png'),
+    (1, 'Boy', 'boy1.png'),
+    (1, 'Guy', 'boy2.png'),
+    (1, 'Girl', 'girl1.png'),
+    (1, 'Lady', 'girl2.png'),
+    (1, 'DeadPool', 'deadPool.png'),
+    (1, 'MarvelGirl', 'marvelGirl.png'),
+    (1, 'SpiderMan', 'spiderMan.png'),
+    (1, 'The Ninja', 'ninja.png');

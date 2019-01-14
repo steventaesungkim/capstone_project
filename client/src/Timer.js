@@ -34,34 +34,36 @@ class Timer extends Component {
                 this.setState({
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
-                })
-            }
-            fetch(`/api/categories/${data.user.id}`)
-            .then(r => r.json())
-            .then(data => { 
-                // console.log(data);
-                this.setState({
-                    categories: data
-                })
-                fetch(`/api/questions/${this.state.theUser.id}`)
-                .then(r => r.json())
-                .then(data => {
-                    // console.log(data)
-                    this.setState({
-                        level: data
+                }, () =>{
+                    fetch(`/api/categories/${data.user.id}`)
+                    .then(r => r.json())
+                    .then(data => { 
+                        // console.log(data);
+                        this.setState({
+                            categories: data
+                        }, () => {
+                            fetch(`/api/questions/${this.state.theUser.id}`)
+                            .then(r => r.json())
+                            .then(data => {
+                                // console.log(data)
+                                this.setState({
+                                    level: data
+                                })
+                            })
+                        })
                     })
                 })
-            })
+            }
         })    
     }
 
     render() {
 
-        console.log(this.state.theUser.avatar)
+        // console.log(this.state.theUser.avatar)
         // console.log(this.state.theUser)
-        const currentUser = (this.state.theUser)
-        console.log(currentUser)
+        // console.log(currentUser)
         console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
+        const currentUser = (this.state.theUser)
         return (
             <div>
                 <Navbar 

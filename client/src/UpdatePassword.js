@@ -12,7 +12,6 @@ const UpdatePassword = (props) => {
         >
             <label>Password:
             <input 
-                id='updatedPassword'
                 name='password'
                 className='input'
                 type='text'

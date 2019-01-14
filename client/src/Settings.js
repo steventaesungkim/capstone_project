@@ -11,6 +11,8 @@ class Settings extends Component {
         // console.log(props)
         super(props); 
         this.state = {
+            theUser: [],
+            isLogged: Boolean,
             name: '',
             username: '',
             avatar: '',
@@ -22,14 +24,28 @@ class Settings extends Component {
     }
 
     componentDidMount() {
-        fetch('/api/avatar')
-            .then(r => r.json())
-            .then(data =>{
-                // console.log(data)
+        fetch('/api/user/isValid')
+        .then(r => r.json())
+        .then(data =>{
+            console.log(data.isLoggedIn)
+            if(data.isLoggedIn === false){
+                this.props.history.push('/');
+            }else{
                 this.setState({
-                    avatarData: data
+                    theUser: data.user,
+                    isLoggedIn: data.isLoggedIn
+                }, () => {
+                    fetch('/api/avatar')
+                    .then(r => r.json())
+                    .then(data =>{
+                        // console.log(data)
+                        this.setState({
+                            avatarData: data
+                        })
+                    })
                 })
-            })
+            }
+        })    
     }
     render () {
         // console.log(this.props.location.state.thisUser)
@@ -73,29 +89,35 @@ class Settings extends Component {
     }
     
     _updateName = (input) => {
-        const letters = /[a-z,A-Z]/; 
+        // const letters = /^[a-z A-Z \s]$/; 
 
-        if (input.match(letters)) {
-            this.setState ({
-                name: input
-            })
-        } else {
-            document.getElementById('updateName').value="";
-            alert('Please input alphabet characters only');
-        }
+        // if (input.search(letters) === letters.length) {
+        //     this.setState ({
+        //         name: input
+        //     })
+        // } else {
+        //     alert('Please input alphabet characters only');
+        //     // document.getElementById('updateName').value="";
+        // }
+        this.setState({
+            name: input
+        })
     }
 
     _updateUsername = (input) => {
-        const letters = /[0-9,a-z,A-Z]/;
+        // const letters = /[0-9,a-z,A-Z]*/;
 
-        if (input.match(letters)) {
-            this.setState ({
-                username: input
-            }) 
-        } else {
-            alert('Please input alphanumeric characters only');
-            document.getElementById('updatedUserName').value="";
-        }
+        // if (letters.test(input)) {
+        //     this.setState ({
+        //         username: input
+        //     }) 
+        // } else {
+        //     alert('Please input alphanumeric characters only');
+        //     // document.getElementById('updatedUserName').value="";
+        // }
+        this.setState({
+            username: input
+        })
     }
 
     _updatePassword = (input) => {
@@ -139,8 +161,10 @@ class Settings extends Component {
             if ((response.data.name === 'Name Updated') || (response.data.username === 'Username Updated'))  {
 
                 alert('User info updated')
-                document.getElementById('updatedName').value="";
-                document.getElementById('updatedUserName').value="";
+                this.setState ({
+                    name: '',
+                    username: ''
+                })
             }
         })
     }
@@ -156,7 +180,9 @@ class Settings extends Component {
             // console.log(response)
             if (response.data.avatar === "Avatar Updated") {
                 alert('Avatar updated')
-                document.getElementById('updatedAvatar').value="Select a Avatar";
+                this.setState ({
+                    avatar: 'Select a Avatar'
+                })
             }
         })
     }
@@ -172,7 +198,9 @@ class Settings extends Component {
         .then((response) => {
             if (response.data === true) {
                 alert('Password updated')
-                document.getElementById('updatedPassword').value="";
+                this.setState ({
+                    password: ''
+                })
             }
         })
     }

@@ -470,8 +470,9 @@ app.get('/api/question/:id_category(\\d+)/:level', (req, res) => {
 // ========================================================
 
 app.get('/api/questions/:id_user(\\d+)', (req, res) => {
-    Question.getAvailable(req.params.id_user)
+    Question.getAvailable(req.params.id_user, false)
     .then(allQuestion => {
+        console.log("allQuestion!!!!!!!!!!!!!!!!!!!!!!");
         console.log(allQuestion);
         res.json(allQuestion);
     });

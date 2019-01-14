@@ -98,27 +98,37 @@ class Question {
 
     // Gets all records from Questions table that are available to a specific User
     //  which includes those assigned to Guest and those for the specific User ID
-    // Returns an array of Question class instances
-    static getAvailable(userID) {
-        return db.any(`
-                SELECT
-                    q.id,
-                    q.id_category,
-                    q.level,
-                    q.question,
-                    q.answer,
-                    c.id_user
-                FROM questions q INNER JOIN categories c ON q.id_category = c.id
-                WHERE c.id_user IN (1, $1)`,
-                [userID]
-            )
-            .then(qArray => {
-                const instanceArray = qArray.map(q => {
-                    return new Question(q.id, q.level, q.question, q.answer, q.id_category);
+    // The returnAllData flag determines what is returned:
+    //   - Returns an array of Question Categories and Levels if returnAllData is false
+    //   - Returns an array of Question class instances if returnAllData is true or omitted
+    static getAvailable(userID, returnAllData=true) {
+        if (returnAllData) {
+            return db.any(`
+                    SELECT
+                        q.id,
+                        q.id_category,
+                        q.level,
+                        q.question,
+                        q.answer,
+                        c.id_user
+                    FROM questions q INNER JOIN categories c ON q.id_category = c.id
+                    WHERE c.id_user IN (1, $1)`,
+                    [userID]
+                )
+                .then(qArray => {
+                    const instanceArray = qArray.map(q => {
+                        return new Question(q.id, q.level, q.question, q.answer, q.id_category);
+                    });
+                    return instanceArray;
                 });
-                return instanceArray;
-            });
-
+            } else {
+                return db.any(`
+                    SELECT DISTINCT q.id_category, q.level
+                    FROM questions q INNER JOIN categories c ON q.id_category = c.id
+                    WHERE c.id_user IN (1, $1)`,
+                    [userID]
+                    )
+            }
     }
 
 

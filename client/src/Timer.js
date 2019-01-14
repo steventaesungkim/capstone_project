@@ -30,28 +30,28 @@ class Timer extends Component {
             // console.log(data.user.id)
             if(data.isLoggedIn === false){
                 this.props.history.push('/');
-            }else{
+            } else {
                 this.setState({
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
                 })
-                fetch(`/api/categories/${data.user.id}`)
+            }
+            fetch(`/api/categories/${data.user.id}`)
+            .then(r => r.json())
+            .then(data => { 
+                // console.log(data);
+                this.setState({
+                    categories: data
+                })
+                fetch(`/api/questions/${this.state.theUser.id}`)
                 .then(r => r.json())
-                .then(data =>{ 
-                    // console.log(data);
+                .then(data => {
+                    // console.log(data)
                     this.setState({
-                        categories: data
-                    })
-                    fetch('/api/question')
-                    .then(r => r.json())
-                    .then(data => {
-                        // console.log(data)
-                        this.setState({
-                            level: data
-                        })
+                        level: data
                     })
                 })
-            }
+            })
         })    
     }
 
@@ -97,31 +97,24 @@ class Timer extends Component {
         );
     }
 
-    // _onClick = (event) => {
-    //     {(event) =>{props.logout(event)}}
-    // }
 
     _handleSelect = (event) => {
-        console.log('Category Selected')
-        const selected = {name: event.target.value, value: event.target.value}
-
-        this.state.categories.forEach((compare) =>{
-            if (selected.name === compare.category_type){
-                this.setState({
-                    categoryId: compare.id,
-                    categorySelection: selected.value,
-                    showLevel: true 
-                })
-            }
+        //console.log('Category Selected')
+        let selectedCategory = this.state.categories.filter(c => {
+            return event.target.value === c.category_type})[0];
+                
+        this.setState({
+                    categoryId: selectedCategory.id,
+                    categorySelection: event.target.value,
+                    showLevel: true,
+                    showButton: false
         })
     }
 
     _handleLevelSelect = (event) => {
-        console.log('Level Selected')
-        const levelSelected = {value: event.target.value}
-
+        //console.log('Level Selected')
         this.setState({
-            levelSelection: levelSelected.value,
+            levelSelection: event.target.value,
             showButton: true
         })
     }

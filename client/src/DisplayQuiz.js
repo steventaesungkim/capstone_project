@@ -59,7 +59,7 @@ class DisplayQuiz extends Component {
             const listOfAnswers = [];
             const listOfQuestionId = [];
 
-            shuffleQuestion(listOfObjectQuestion).map(data =>{
+            shuffleQuestion(listOfObjectQuestion).forEach(data =>{
                 listOfQuestions.push(data.question);
                 listOfAnswers.push(data.answer);
                 listOfQuestionId.push(data.id);

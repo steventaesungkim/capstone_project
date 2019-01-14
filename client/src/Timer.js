@@ -105,7 +105,7 @@ class Timer extends Component {
         console.log('Category Selected')
         const selected = {name: event.target.value, value: event.target.value}
 
-        this.state.categories.map((compare) =>{
+        this.state.categories.forEach((compare) =>{
             if (selected.name === compare.category_type){
                 this.setState({
                     categoryId: compare.id,

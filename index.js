@@ -216,14 +216,19 @@ app.get('/api/user/avatar/:avatar', (req, res) => {
 
 app.post('/api/user/:id(\\d+)', (req, res) => {
     User.getById(req.params.id)
-    .then(theUser => {        
+    .then(theUser => { 
         theUser.name = req.body.name ? req.body.name.toUpperCase() : theUser.name;
         theUser.username = req.body.username ? req.body.username.toUpperCase() : theUser.username;
         theUser.avatar = req.body.avatar ? req.body.avatar.toUpperCase() : theUser.avatar;
-
+        
         theUser.update()
-            .then(nameUpdated => {
-                res.json(nameUpdated);
+            .then(updated => {
+                res.json({
+                    updated: updated,
+                    name: "Name Updated",
+                    username: "Username Updated",
+                    avatar: "Avatar Updated"
+                });
             })
     })
 });
@@ -238,7 +243,6 @@ app.post('/api/user/pwd/:id(\\d+)', (req, res) => {
     // console.log(req.params.id)
     User.getById(req.params.id)
     .then(theUser => {
-        
         theUser.updatePassword(req.body.password)
         .then(passwordUpdated => {
             res.json(passwordUpdated);

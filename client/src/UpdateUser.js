@@ -12,6 +12,7 @@ const UpdateUser = (props) => {
         >
             <label>Name:
             <input 
+                id='updatedName'
                 name='name'
                 className='input'
                 type='text'
@@ -23,6 +24,7 @@ const UpdateUser = (props) => {
             <br />
             <label>Username:
             <input 
+                id='updatedUserName'
                 name='username'
                 className='input'
                 type='text'

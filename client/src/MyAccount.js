@@ -35,14 +35,9 @@ class MyAccount extends Component {
         // console.log(this.state.isLoggedIn)
 
         const theUser = (this.state.theUser)
+        const thisUser = theUser.username
 
-        // const inputValue = {
-        //     username: '',
-        //     password: '',
-        //     avatar: ''
-        // }
-
-        console.log(theUser)
+        console.log(thisUser)
 
         return (
             <div>
@@ -56,7 +51,7 @@ class MyAccount extends Component {
                 }} 
                     className='links'
                 >Settings</Link>
-
+                <h3>{`${thisUser}'s Results `}</h3>
                    
             </div>
         )

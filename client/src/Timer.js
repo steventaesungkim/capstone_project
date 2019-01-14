@@ -30,7 +30,7 @@ class Timer extends Component {
             // console.log(data.user.id)
             if(data.isLoggedIn === false){
                 this.props.history.push('/');
-            }else{
+            } else {
                 this.setState({
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
@@ -38,7 +38,7 @@ class Timer extends Component {
             }
             fetch(`/api/categories/${data.user.id}`)
             .then(r => r.json())
-            .then(data =>{ 
+            .then(data => { 
                 // console.log(data);
                 this.setState({
                     categories: data
@@ -56,11 +56,17 @@ class Timer extends Component {
     }
 
     render() {
+
+        console.log(this.state.theUser.avatar)
         // console.log(this.state.theUser)
+        const currentUser = (this.state.theUser)
+        console.log(currentUser)
         console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
         return (
             <div>
                 <Navbar 
+                    user = {currentUser}
+                    
                     inSession = {this.state.isLoggedIn}
                     handleLogout = {this._handleLogout}
                 />
@@ -79,6 +85,7 @@ class Timer extends Component {
                     showLevel = {this.state.showLevel}
 
                     showButton = {this.state.showButton}
+                    // handleButtonClick = {this._handleButton}
 
                     userInfo = {this._userInfo}
                     inSession = {this.state.isLoggedIn}

@@ -12,7 +12,10 @@ class Register extends Component {
             name: '',
             username: '',
             password: '',
-            avatar: ''
+            avatar: '',
+            avatarData: [],
+            avatarSelection: 'Select',
+            avatarId: ''
         }
     }
 
@@ -27,10 +30,27 @@ class Register extends Component {
                     isLoggedIn: data.isLoggedIn
                 })
                 this.props.history.push('/timer');
-
             }
-            
+            // else{
+            //     fetch('/api/user')
+            //     .then(r => r.json())
+            //     .then(data =>{
+            //         this.setState({
+            //             theUser: data
+            //         })
+            //     })
+            // }
         })
+        .then(
+            fetch('/api/avatar')
+            .then(r => r.json())
+            .then(data =>{
+                // console.log(data)
+                this.setState({
+                    avatarData: data
+                })
+            })
+        )
     }
 
 
@@ -46,8 +66,13 @@ class Register extends Component {
                     inputPassword = {this.state.password}
                     newPassword = {this._password}
                     inputAvatar = {this.state.avatar}
-                    newAvatar = {this._avatar}
                     submit = {this._onSubmit}
+
+                    name = 'Avatar'
+                    avatarData = {this.state.avatarData}
+                    avatarSelection = {this.state.avatarSelection}
+                    avatarId = {this.state.avatarId}
+                    handleAvatar = {this._handleAvatar}
                 />
             </div>
         )
@@ -56,17 +81,37 @@ class Register extends Component {
     _name = (input) => {
         const letters = /[a-z,A-Z]/; 
 
+        // if (input !== '') {
+        //     if (input.match(letters)) {
+        //         this.setState ({
+        //             name: input
+        //         })
+        //     }
+        // } else {
+        //     document.getElementById('resetRegisterName').value="";
+        //     alert('Please input alphabet characters only');
+        // }
+
         if (input.match(letters)) {
             this.setState ({
                 name: input
             })
         } else {
+            document.getElementById('resetRegisterName').value="";
             alert('Please input alphabet characters only');
         }
+
+        // this.setState ({
+        //     name: input
+        // })
     }
 
     _userName = (input) => {
         const letters = /[0-9,a-z,A-Z]/; 
+        // console.log(input)
+        // console.log(this.state.theUser)
+        
+
 
         if (input.match(letters)) {
             this.setState ({
@@ -74,7 +119,12 @@ class Register extends Component {
             }) 
         } else {
             alert('Please input alphanumeric characters only');
+            document.getElementById('resetRegisterUsername').value="";
         }
+
+        // this.setState ({
+        //     username: input
+        // })
     }
 
     _password = (input) => {
@@ -83,20 +133,20 @@ class Register extends Component {
         });
     }
 
-    _avatar = (input) => {
-        this.setState ({
-            avatar: input
-        });
-    }
+    // _avatar = (input) => {
+    //     this.setState ({
+    //         avatar: input
+    //     });
+    // }
     
     _onSubmit = (event) => {
         event.preventDefault();
         // console.log('Registering..')
-
+        console.log(this.state)
         Axios
         .post('/api/user/register', this.state)
         .then((response) =>{
-            console.log(response.data)
+            // console.log(response.data)
 
 
             if (response.data === "Username exist") {
@@ -110,6 +160,22 @@ class Register extends Component {
             }
         })
     };
+
+    _handleAvatar = (event) =>{
+        event.preventDefault()
+        const selectedImg = event.target.value
+        // console.log(this.state.avatarData)
+
+        this.state.avatarData.forEach((compare) =>{
+            if (selectedImg === compare.img){
+                this.setState({
+                    avatar: selectedImg,
+                    avatarSelection: selectedImg,
+                    avatarId: compare.id
+                })
+            }
+        })
+    }
 
 
 

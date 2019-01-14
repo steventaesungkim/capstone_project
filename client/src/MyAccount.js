@@ -31,7 +31,9 @@ class MyAccount extends Component {
         console.log(this.state.theUser)
         // console.log(this.state.isLoggedIn)
         const theUser = (this.state.theUser)
-        // console.log(theUser)
+        const thisUser = theUser.username
+
+        console.log(thisUser)
 
         return (
             <div>
@@ -45,7 +47,7 @@ class MyAccount extends Component {
                 }} 
                     className='links'
                 >Settings</Link>
-
+                <h3>{`${thisUser}'s Results `}</h3>
                    
             </div>
         )

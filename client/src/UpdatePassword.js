@@ -1,22 +1,18 @@
 import React from 'react';
 
 const UpdatePassword = (props) => {
-    // console.log(props.userId.id)
-    const userId = props.theUser.id;
-    // console.log(props.newPassword)
-
     return (
         <form
             className='update-form'
             method='POST'
-            action={`/api/user/pwd/${userId}`}
+            action='/api/user/pwd/userId'
             onSubmit = {(event) => {
-                // console.log(event)
-                props.passwordSubmit(props.newPassword)
+                props.passwordSubmit(event)
             }}
         >
             <label>Password:
             <input 
+                id='updatedPassword'
                 name='password'
                 className='input'
                 type='text'

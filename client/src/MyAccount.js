@@ -28,12 +28,12 @@ class MyAccount extends Component {
     
 
     render() {
-        console.log(this.state.theUser)
-        // console.log(this.state.isLoggedIn)
+        // console.log(this.state.theUser)
+        console.log(this.state.isLoggedIn)
         const theUser = (this.state.theUser)
         const thisUser = theUser.username
 
-        console.log(thisUser)
+        // console.log(thisUser)
 
         return (
             <div>

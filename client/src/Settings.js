@@ -14,8 +14,22 @@ class Settings extends Component {
             name: '',
             username: '',
             avatar: '',
-            password: ''
+            password: '',
+            avatarData: [],
+            avatarSelection: 'Select',
+            avatarId: ''
         }
+    }
+
+    componentDidMount() {
+        fetch('/api/avatar')
+            .then(r => r.json())
+            .then(data =>{
+                // console.log(data)
+                this.setState({
+                    avatarData: data
+                })
+            })
     }
     render () {
         // console.log(this.props.location.state.thisUser)
@@ -41,6 +55,12 @@ class Settings extends Component {
                 />
                 <h4>Change avatar</h4>
                 <UpdateAvatar 
+                    name = 'Avatar'
+                    avatarData = {this.state.avatarData}
+                    avatarSelection = {this.state.avatarSelection}
+                    avatarId = {this.state.avatarId}
+                    handleAvatar = {this._handleAvatar}
+
                     inputAvatar = {this._updateAvatar}
                     newAvatar = {this.state.avatar}
                     avatarSubmit = {this._avatarSubmit}
@@ -64,6 +84,7 @@ class Settings extends Component {
             alert('Please input alphabet characters only');
         }
     }
+
     _updateUsername = (input) => {
         const letters = /[0-9,a-z,A-Z]/;
 
@@ -76,16 +97,35 @@ class Settings extends Component {
             document.getElementById('updatedUserName').value="";
         }
     }
+
     _updatePassword = (input) => {
         this.setState ({
             password: input
         });
     }
+
     _updateAvatar = (input) => {
         this.setState ({
             avatar: input
         });
     }
+
+    _handleAvatar = (event) =>{
+        event.preventDefault()
+        const selectedImg = event.target.value
+        // console.log(this.state.avatarData)
+
+        this.state.avatarData.forEach((compare) =>{
+            if (selectedImg === compare.img){
+                this.setState({
+                    avatar: selectedImg,
+                    avatarSelection: selectedImg,
+                    avatarId: compare.id
+                })
+            }
+        })
+    }
+
     _onSubmit = (event) => {
         event.preventDefault();
         const theUser = (this.props.location.state.thisUser);
@@ -94,7 +134,7 @@ class Settings extends Component {
         Axios
         .post(`/api/user/${userId}`,this.state)
         .then((response) => {
-            console.log(response)
+            // console.log(response)
             // if ((response.data.updated === true) && ((response.data.name === 'Name Updated') || (response.data.username === 'Username Updated') ) ) {
             if ((response.data.name === 'Name Updated') || (response.data.username === 'Username Updated'))  {
 
@@ -113,10 +153,10 @@ class Settings extends Component {
         Axios
         .post(`/api/user/${userId}`,this.state)
         .then((response) => {
-            console.log(response)
+            // console.log(response)
             if (response.data.avatar === "Avatar Updated") {
                 alert('Avatar updated')
-                document.getElementById('updateAvatar').value="";
+                document.getElementById('updatedAvatar').value="Select a Avatar";
             }
         })
     }

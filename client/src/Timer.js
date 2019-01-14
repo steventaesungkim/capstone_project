@@ -43,7 +43,7 @@ class Timer extends Component {
                 this.setState({
                     categories: data
                 })
-                fetch('/api/question')
+                fetch(`/api/questions/${this.state.theUser.id}`)
                 .then(r => r.json())
                 .then(data => {
                     // console.log(data)
@@ -92,8 +92,7 @@ class Timer extends Component {
 
 
     _handleSelect = (event) => {
-        console.log('Category Selected')
-
+        //console.log('Category Selected')
         let selectedCategory = this.state.categories.filter(c => {
             return event.target.value === c.category_type})[0];
                 
@@ -106,11 +105,9 @@ class Timer extends Component {
     }
 
     _handleLevelSelect = (event) => {
-        console.log('Level Selected')
-        const levelSelected = {value: event.target.value}
-
+        //console.log('Level Selected')
         this.setState({
-            levelSelection: levelSelected.value,
+            levelSelection: event.target.value,
             showButton: true
         })
     }

@@ -47,17 +47,3 @@ const AvatarDropdown = (props) =>{
 }
 
 export default AvatarDropdown;
-
-
-{/* <label>Password:
-            <input
-                required
-                className='input'
-                type='text'
-                // placeholder='Password'
-                onChange = {(e) => {
-                    props.newPassword(e.target.value);
-                }}
-                value = {props.inputPassword}
-                id = 'resetRegisterPassword'
-            /></label> */}

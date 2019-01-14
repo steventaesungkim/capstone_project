@@ -7,11 +7,12 @@ const UpdateAvatar = (props) => {
             method='POST'
             action='/api/user/userId'
             onSubmit = {(event) => {
-                props.submit(event)
+                props.avatarSubmit(event)
             }}
         >
             <label>Avatar:
             <input 
+                id='updateAvatar'
                 name='avatar'
                 className='input'
                 type='text'

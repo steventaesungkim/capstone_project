@@ -14,7 +14,7 @@ class Settings extends Component {
             name: '',
             username: '',
             avatar: '',
-            pwhash: ''
+            password: ''
         }
     }
     render () {
@@ -36,14 +36,14 @@ class Settings extends Component {
                 <UpdatePassword 
                     theUser = {this.props.location.state.thisUser}
                     inputPassword = {this._updatePassword}
-                    newPassword = {this.state.pwhash}
+                    newPassword = {this.state.password}
                     passwordSubmit = {this._pwSubmit}
                 />
                 <h4>Change avatar</h4>
                 <UpdateAvatar 
                     inputAvatar = {this._updateAvatar}
                     newAvatar = {this.state.avatar}
-                    submit = {this._onSubmit}
+                    avatarSubmit = {this._avatarSubmit}
                 />
                 <h3>Delete account</h3>
                 <p>Please rethink your next action.</p>
@@ -53,20 +53,32 @@ class Settings extends Component {
     }
     
     _updateName = (input) => {
-        this.setState ({
-            name: input
-        }); 
+        const letters = /[a-z,A-Z]/; 
+
+        if (input.match(letters)) {
+            this.setState ({
+                name: input
+            })
+        } else {
+            document.getElementById('updateName').value="";
+            alert('Please input alphabet characters only');
+        }
     }
     _updateUsername = (input) => {
-        this.setState ({
-            username: input
-        });
-        
+        const letters = /[0-9,a-z,A-Z]/;
+
+        if (input.match(letters)) {
+            this.setState ({
+                username: input
+            }) 
+        } else {
+            alert('Please input alphanumeric characters only');
+            document.getElementById('updatedUserName').value="";
+        }
     }
     _updatePassword = (input) => {
-        console.log(input)
         this.setState ({
-            pwhash: input
+            password: input
         });
     }
     _updateAvatar = (input) => {
@@ -76,34 +88,50 @@ class Settings extends Component {
     }
     _onSubmit = (event) => {
         event.preventDefault();
-        const theUser = (this.props.location.state.thisUser)
-        const userId = theUser.id
+        const theUser = (this.props.location.state.thisUser);
+        const userId = theUser.id;
 
         Axios
         .post(`/api/user/${userId}`,this.state)
         .then((response) => {
             console.log(response)
-        
-            // alert('Information Updated')
-
+            if (response.data === true) {
+                alert('User info updated')
+                document.getElementById('updatedName').value="";
+                document.getElementById('updatedUserName').value="";
+            }
         })
     }
-    _pwSubmit = (event) => {
-        // console.log(event)
-        event.preventDefault()
-        const theUser = (this.props.location.state.thisUser)
-        const userId = theUser.id
-        const userPw = theUser.pwhash
-        
+
+    _avatarSubmit = (event) => {
+        event.preventDefault();
+        const theUser = (this.props.location.state.thisUser);
+        const userId = theUser.id;
+
         Axios
-        .post(`/api/user/pwd/${userId}`, this.state.pwhash)
+        .post(`/api/user/${userId}`,this.state)
         .then((response) => {
-            console.log(response)
-            // if (response.message === 'done') {
-            //     this.props.history.push('/timer');
-            // }
-            
-            // alert('Password Updated')
+            // console.log(response)
+            if (response.data === true) {
+                alert('Avatar updated')
+                document.getElementById('updateAvatar').value="";
+            }
+        })
+    }
+
+    _pwSubmit = (event) => {
+        event.preventDefault()
+        const theUser = (this.props.location.state.thisUser);
+        const userId = theUser.id;
+        const newPassword = this.state.password;
+
+        Axios
+        .post(`/api/user/pwd/${userId}`, {password: newPassword})
+        .then((response) => {
+            if (response.data === true) {
+                alert('Password updated')
+                document.getElementById('updatedPassword').value="";
+            }
         })
     }
 

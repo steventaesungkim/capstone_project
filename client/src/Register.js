@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import RegisterForm from './RegisterForm';
-import AvatarDropdown from './AvatarDropdown';
 import Axios from 'axios';
 
 
@@ -67,7 +66,6 @@ class Register extends Component {
                     inputPassword = {this.state.password}
                     newPassword = {this._password}
                     inputAvatar = {this.state.avatar}
-                    // newAvatar = {this._avatar}
                     submit = {this._onSubmit}
 
                     name = 'Avatar'
@@ -168,7 +166,7 @@ class Register extends Component {
         const selectedImg = event.target.value
         // console.log(this.state.avatarData)
 
-        this.state.avatarData.map((compare) =>{
+        this.state.avatarData.forEach((compare) =>{
             if (selectedImg === compare.img){
                 this.setState({
                     avatar: selectedImg,

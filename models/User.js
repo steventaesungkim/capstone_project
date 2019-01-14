@@ -152,6 +152,8 @@ class User {
                 [this.id, this.name, this.username, this.avatar]
             )
             .then(result => {
+
+                console.log(result)
                 return result.rowCount === 1;
             });
     }

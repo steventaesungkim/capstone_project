@@ -5,9 +5,6 @@ class MyAccount extends Component {
     constructor(props) {
         super(props); 
         this.state = {
-            // username: '',
-            // password:'',
-            // avatar: '',
             theUser: [],
             isLoggedIn: Boolean
         }
@@ -33,16 +30,10 @@ class MyAccount extends Component {
     render() {
         console.log(this.state.theUser)
         // console.log(this.state.isLoggedIn)
-
         const theUser = (this.state.theUser)
+        const thisUser = theUser.username
 
-        // const inputValue = {
-        //     username: '',
-        //     password: '',
-        //     avatar: ''
-        // }
-
-        console.log(theUser)
+        console.log(thisUser)
 
         return (
             <div>
@@ -56,7 +47,7 @@ class MyAccount extends Component {
                 }} 
                     className='links'
                 >Settings</Link>
-
+                <h3>{`${thisUser}'s Results `}</h3>
                    
             </div>
         )

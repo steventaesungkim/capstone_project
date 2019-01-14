@@ -68,8 +68,7 @@ class Login extends Component {
         Axios
         .post(`/api/user/login`, this.state)
         .then((response) => {
-            console.log(response)
-             
+            //console.log(response)
             if ((response.data === "Invalid Username") || (response.data === "Invalid Password")) {
                 alert('Incorrect Username or Password. Please re-enter correct Username or Password');
                 document.getElementById('resetUsername').value="";

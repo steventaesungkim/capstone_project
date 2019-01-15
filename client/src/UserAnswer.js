@@ -10,8 +10,7 @@ class UserAnswer extends Component {
             theUser: [],
             isLoggedIn: Boolean,
             userInput: '',
-            correct: Boolean,
-            resultset_id: ''
+            correct: Boolean
         }
     }
 
@@ -45,7 +44,7 @@ class UserAnswer extends Component {
                 questionId = {this.props.questionId}
                 questionAnswer = {this.props.questionAnswer}
 
-                resultset_id = {this.state.resultset_id}
+                resultset_id = {this.props.resultset_id}
                 
                 handleResultSet = {this._handleResultSet}
                 handleNextQuestion = {this.props.handleNextQuestion}

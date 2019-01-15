@@ -688,6 +688,8 @@ app.post('/api/resultset/create', (req, res) => {
             res.send(err.message);
         })
         .then(newResultset => {
+            console.log('HERE IS YOUR RESULTSET')
+            console.log(newResultset)
             res.json(newResultset);
         });
 });

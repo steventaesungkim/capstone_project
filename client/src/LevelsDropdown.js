@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const LevelsDropdown = (props) => {
+    console.log('LEVEL DROPDOWN PROPS')
+    console.log(props.resultset_id)
 
     const firstOption = (props.name !== 'Level')
     ? <option value= {props.levelList}>Select a Level</option>
@@ -15,6 +17,7 @@ const LevelsDropdown = (props) => {
                     <button
                     onClick={(event) => {
                         props._handleTimeSubmit(event.target.value)
+                        props._handleResultSet_id(event.target.value)
                     }}
                     >
                     Set Timer
@@ -46,7 +49,7 @@ const LevelsDropdown = (props) => {
                     {theEachLevel}
                 </select>
             </label>
-            <Link to = {`/question/${props.categoryId}/${props.levelSelection}`}>{getButtonQuestions()}</Link>
+            <Link to = {{pathname: `/question/${props.categoryId}/${props.levelSelection}`, state: {resultset_id: props.resultset_id}}}>{getButtonQuestions()}</Link>
 
         </div>
     )

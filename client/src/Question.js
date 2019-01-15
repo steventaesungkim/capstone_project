@@ -18,6 +18,7 @@ const Question = (props) => {
 
                 timeStamp = {props.timeStamp}
 
+                resultSet_Id = {props.resultSet_Id}
                 handleResultSet = {props.handleResultSet}
                 handleNextQuestion = {props.handleNextQuestion}
             />

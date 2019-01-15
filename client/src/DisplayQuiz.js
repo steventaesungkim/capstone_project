@@ -5,7 +5,8 @@ import Question from './Question';
 
 class DisplayQuiz extends Component {
     constructor(props) {
-        console.log(props)
+        console.log('THIS IS WHERE WE SHOULD GET THE STUPID RESULTSET ID')
+        console.log(props.resultset_id)
         super(props);
         this.state = {
             theUser: [],
@@ -73,7 +74,14 @@ class DisplayQuiz extends Component {
         })    
     }
 
-    render() {   
+    render() {  
+        if(!this.props.resultset_id) {
+            return(
+                <div>
+                    <h1>OH NOOOO</h1>
+                </div>
+            )
+        }else {
         return(
             <div>
                 <Clock />
@@ -84,7 +92,7 @@ class DisplayQuiz extends Component {
                     questionId = {this.state.questionId}
                     questionAnswer = {this.state.questionAnswer}
 
-                    // resultSetId = {this.state.resultSetId}
+                    resultSetId = {this.state.resultSetId}
                     // handleResultSet = {this._handleResultSet}
 
                     timeStamp = {this.props.timeStamp}
@@ -92,7 +100,7 @@ class DisplayQuiz extends Component {
                     handleNextQuestion = {this._handleNextQuestion}
                 />
             </div>
-        )
+        )}
     }
 
     // _handleResultSet = () =>{

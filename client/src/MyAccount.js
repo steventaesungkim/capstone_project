@@ -58,6 +58,9 @@ class MyAccount extends Component {
 
                 <h3>{`${thisUser}'s Flash Card Decks`}</h3>
                 <List items={this.state.subjects}/>
+                <Link to = {{pathname: '/deckadd', state: {thisUser: theUser}}} className='links'>
+                   Add a Flash Card Deck
+                </Link>
 
                 <h3>{`${thisUser}'s Results `}</h3>
                 <ResultHistoryTable results={this.state.userHistory}/>

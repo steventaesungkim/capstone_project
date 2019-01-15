@@ -13,6 +13,7 @@ import Settings from './Settings';
 import UpdateUser from './UpdateUser';
 import UpdatePassword from './UpdatePassword';
 import UpdateAvatar from './UpdateAvatar';
+import DeckAdd from './DeckAdd';
 
 
 
@@ -32,6 +33,7 @@ class Home extends Component {
                     <Route path = '/updateUser' component = {UpdateUser} />
                     <Route path = '/updatePassword' component = {UpdatePassword} />
                     <Route path = '/updateAvatar' component = {UpdateAvatar} />
+                    <Route path = '/deckadd' component = {DeckAdd} />
                     
                 </div>
             </Router>

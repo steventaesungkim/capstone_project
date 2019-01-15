@@ -23,7 +23,7 @@ class Register extends Component {
         fetch('/api/user/isValid')
         .then(r => r.json())
         .then(data =>{
-            console.log(`LOGIN-STATUS:`,data.isLoggedIn)
+            // console.log(`LOGIN-STATUS:`,data.isLoggedIn)
             if(data.isLoggedIn === true){
                 this.setState ({
                     theUser: data.user,

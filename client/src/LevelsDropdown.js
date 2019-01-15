@@ -40,8 +40,8 @@ const LevelsDropdown = (props) => {
         return <option key={index} value={eachLevel}>{eachLevel}</option>
     })
 
-    console.log('This is the RESULTSETID')
-    console.log(props.resultset_id)
+    // console.log('This is the RESULTSETID')
+    // console.log(props.resultset_id)
     
     return (
         <div>

@@ -5,8 +5,8 @@ import Question from './Question';
 
 class DisplayQuiz extends Component {
     constructor(props) {
-        console.log('THIS IS WHERE WE SHOULD GET THE STUPID RESULTSET ID')
-        console.log(props.resultset_id)
+        // console.log('THIS IS WHERE WE SHOULD GET THE STUPID RESULTSET ID')
+        // console.log(props.resultset_id)
         super(props);
         this.state = {
             theUser: [],
@@ -71,7 +71,7 @@ class DisplayQuiz extends Component {
                             fetch('/api/resultset')
                             .then(r => r.json())
                             .then(data => {
-                                console.log(data)
+                                // console.log(data)
                             })
                         })
                     })

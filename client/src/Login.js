@@ -24,7 +24,7 @@ class Login extends Component {
             if(data.isLoggedIn === false){
                 this.props.history.push('/');
             }else{
-                this.setState({
+                this.setState ({
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
                 })
@@ -73,8 +73,10 @@ class Login extends Component {
             //console.log(response)
             if ((response.data === "Invalid Username") || (response.data === "Invalid Password")) {
                 alert('Incorrect Username or Password. Please re-enter correct Username or Password');
-                document.getElementById('resetUsername').value="";
-                document.getElementById('resetPassword').value="";
+                this.setState ({
+                    username: '',
+                    password: ''
+                })
             } else {
                 this.props.history.push('/timer'); 
             }

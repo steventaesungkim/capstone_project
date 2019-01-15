@@ -24,7 +24,6 @@ const RegisterForm = (props) => {
                     props.newName(e.target.value);
                 }}
                 value = {props.inputName}
-                id = "resetRegisterName"
             /></label>
             <br />
             <label>UserName:
@@ -38,7 +37,6 @@ const RegisterForm = (props) => {
                     props.newUserName(e.target.value);
                 }}
                 value = {props.inputUserName}
-                id = "resetRegisterUsername"
             /></label>
             <br />
             <label>Password:
@@ -51,7 +49,6 @@ const RegisterForm = (props) => {
                     props.newPassword(e.target.value);
                 }}
                 value = {props.inputPassword}
-                id = 'resetRegisterPassword'
             /></label>
             <br />
             <AvatarDropdown
@@ -85,7 +82,6 @@ const RegisterForm = (props) => {
                     className='btn' 
                     type='submit' 
                     value='submit'
-                    
                     >Log In
                 </button>
             </Link>    
@@ -94,7 +90,6 @@ const RegisterForm = (props) => {
                     className='btn' 
                     type='submit' 
                     value='submit'
-                    
                     >Sign in as Guest
                 </button>
             </Link>        

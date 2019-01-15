@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import Logout from './Logout';
 
 
 const Navbar = (props) => {
@@ -15,7 +14,6 @@ const Navbar = (props) => {
                 className='links hover'
                 // style = {{textDecoration: 'none'}}
             >MyAccount</Link> 
-            <br />
 
             <Link to = {{
                 pathname: '/',

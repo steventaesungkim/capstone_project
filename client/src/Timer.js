@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import Clock from './Clock';
 import CategoryDropdown from './CategoryDropdown';
-import Navbar from './Navbar';
+
 import SetTimer from './SetTimer';
 
 
@@ -76,15 +76,17 @@ class Timer extends Component {
 
     render() {
         console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
-        const currentUser = (this.state.theUser)
+        // const currentUser = (this.state.theUser)
         return (
             <div className='timer'>
-                <Navbar 
+                {/* <Navbar 
                     user = {currentUser}
                     
                     inSession = {this.state.isLoggedIn}
                     handleLogout = {this._handleLogout}
-                />
+                /> */}
+                <h1>BROCK</h1>
+                <p>the assisted brain clock</p>
                 <Clock />
 
                 <SetTimer 
@@ -184,19 +186,19 @@ class Timer extends Component {
         })
     }
     
-    _handleLogout = (event) => {
-        this.setState ({
-            inSession: false
-        })  
+    // _handleLogout = (event) => {
+    //     this.setState ({
+    //         inSession: false
+    //     })  
 
-        Axios
-        .post('/api/user/logout')
-        .then(response =>{
-            if (response.data.message === "Successfully logged out") {
-                this.props.history.push('/')
-            }
-        })
-    }
+    //     Axios
+    //     .post('/api/user/logout')
+    //     .then(response =>{
+    //         if (response.data.message === "Successfully logged out") {
+    //             this.props.history.push('/')
+    //         }
+    //     })
+    // }
 }
 
 export default Timer;

@@ -26,9 +26,7 @@ const SetTimer = (props) => {
 
     return(
         <div>
-            <label>
-                {'Set Date:'}
-            </label>
+            {'Set Date:'}
             <br></br>
             <label>
                 <input 
@@ -44,9 +42,7 @@ const SetTimer = (props) => {
                 />
             </label>
             <br></br>
-            <label>
-                {props.name}: 
-            </label>
+            {props.name}: 
             <br></br>
             <label>
                 <input
@@ -63,7 +59,7 @@ const SetTimer = (props) => {
                     // value={props.hourSelection}
                 />
             </label>
-                :
+                
             <label>
                 <input 
                     className='input field'

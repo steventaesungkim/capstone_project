@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import List from './List';
 import ResultHistoryTable from './ResultHistoryTable';
 
 class MyAccount extends Component {
@@ -56,7 +57,7 @@ class MyAccount extends Component {
                 </Link>
 
                 <h3>{`${thisUser}'s Flash Card Decks`}</h3>
-                <ResultHistoryTable results={this.state.userHistory}/>
+                <List items={this.state.subjects}/>
 
                 <h3>{`${thisUser}'s Results `}</h3>
                 <ResultHistoryTable results={this.state.userHistory}/>

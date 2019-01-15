@@ -3,7 +3,7 @@ import UserAnswer from './UserAnswer';
 
 
 const Question = (props) => {
-    console.log(props)
+    // console.log(props)
     const questionId = props.questionId;
     const questionAnswer = props.questionAnswer;
     const showQuestion = props.displayQuestion;

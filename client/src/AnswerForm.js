@@ -10,10 +10,10 @@ const AnswerForm = (props) => {
                 onSubmit={(event) =>{
                     event.preventDefault();
                     
-
-                    props.handleSubmit(props.userInput).then(() =>{
-                        props.handleResultSet(props.resultset_id)
-                    })
+                    props.handleSubmit(props.userInput)
+                    // props.handleSubmit(props.userInput).then(() =>{
+                        // props.handleResultSet(props.resultset_id)
+                    // })
                 }}
             >
             <input

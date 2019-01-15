@@ -12,7 +12,7 @@ const CategoryDropdown = (props) => {
     let getLevelDropdown = () => {
         if (props.showLevel === true) {
             return(
-                <div>   
+                <div className='dropdown'>   
                     <LevelsDropdown 
                         name = 'Levels'
                         levelList = {props.levelList}
@@ -44,14 +44,14 @@ const CategoryDropdown = (props) => {
     }) 
 
     return (
-        <div>
+        <div className='dropdown'>
             <label>{props.name}: 
                 <select
+                    className='selection'
                     name={props.name}
                     value={props.categorySelection}
                     onChange={(event) => props.handleCategoryChange(event)}
                 >
-
                     {firstOption}
                     {theCategoryList}
                 

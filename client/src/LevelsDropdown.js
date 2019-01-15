@@ -13,18 +13,17 @@ const LevelsDropdown = (props) => {
         if (props.showButton) { 
             return (
                 <div>
-                    <button
-                    onClick={(event) => {
+                    <input
+                        className='btn btn-ghost'
+                        type='submit'
+                        value='Set Timer'
+                        onClick={(event) => {
                         Promise.all([
                                 props._handleTimeSubmit(event.target.value),
                                 props._handleResultSet_id(event.target.value)
-                        ])
-                        
-                        
+                        ])   
                     }}
-                    >
-                    Set Timer
-                    </button>
+                    />
                 </div>
             )
         }
@@ -48,6 +47,7 @@ const LevelsDropdown = (props) => {
         <div>
             <label>{props.name}:
                 <select
+                    className='selection'
                     value={props.levelSelection}
                     onChange={(event) => props.handleLevel(event)}
                 >

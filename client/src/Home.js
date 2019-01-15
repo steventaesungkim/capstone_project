@@ -1,11 +1,13 @@
 import React, { Component } from 'react'; 
 import {
     BrowserRouter as Router, 
-    Route, 
+    Route, Link,
 }   from 'react-router-dom';
 
 import Login from './Login';
 import Register from './Register';
+import Navbar from './Navbar';
+import Axios from 'axios';
 import Timer from './Timer';
 import DisplayQuiz from './DisplayQuiz';
 import MyAccount from './MyAccount';
@@ -18,11 +20,24 @@ import DeckAdd from './DeckAdd';
 
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            theUser: [],
+            isLoggedIn: Boolean
+        }
+    }
     render() {
+        const currentUser = (this.state.theUser)
         return (
             <Router>
                 <div className='main'>
-                    <h1>Clock Signal</h1>
+                    <Navbar 
+                        user = {currentUser}
+                        
+                        inSession = {this.state.isLoggedIn}
+                        handleLogout = {this._handleLogout}
+                    />   
                     <Route path =  '/' exact component = {Login} /> 
                     <Route path = '/register' component = {Register} />
                     <Route path = '/timer' component = {Timer} />
@@ -38,6 +53,20 @@ class Home extends Component {
                 </div>
             </Router>
         );
+    }
+
+    _handleLogout = (event) => {
+        this.setState ({
+            inSession: false
+        })  
+
+        Axios
+        .post('/api/user/logout')
+        .then(response =>{
+            if (response.data.message === "Successfully logged out") {
+                this.props.history.push('/')
+            }
+        })
     }
     
 }

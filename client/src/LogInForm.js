@@ -17,7 +17,7 @@ const LogInForm = (props) => {
             <input 
                 required
                 name='username'
-                className='input field'
+                className='input'
                 type='text'
                 // placeholder='UserName'
                 onChange = {(e) => {
@@ -31,7 +31,7 @@ const LogInForm = (props) => {
             <input 
                 required
                 name='password'
-                className='input field'
+                className='input'
                 type='text'
                 // placeholder='Password'
                 onChange = {(e) => {

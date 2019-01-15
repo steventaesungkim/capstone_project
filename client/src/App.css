@@ -6,55 +6,54 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: inherit;
-    /* background-color: black; */
-    background-color: white;
+    /* background-color: rgb(53, 53, 53); */
+    background-color: black;
+    /* background-color: white; */
+    width: 100%;
 }
 html, body {
-    width: 100%;
     height: 100%;
     /* color: rgb(189, 189, 189); */
-    /* color: lime; */
-    color: black;
+    color: lime;
+    /* color: black; */
     font-family:  'Lato', 'Arial', sans-serif ;
     font-size: 20px;
     font-weight: 300;
     display: flex;
     justify-content: center;
 }
-
-/* ===== =====  HEADINGS  ===== ===== */
-h1 {
-    font-size: 170%;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    /* color: lime; */
-    letter-spacing: 1px;
-}
-h2 {
-    justify-content: center;
-    color: lime;
-    font-size: 120%;
-
-}
 .main {
     display: flex; 
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+}
+
+/* ===== =====  HEADINGS  ===== ===== */
+h1 {
+    text-align: center;
+    font-size: 170%;
+    letter-spacing: 1px;
+    margin: 20px 0 10px;
+}
+h2 {
+    justify-content: center;
+    color: lime;
+    font-size: 120%;
 }
 
 /* ===== =====  REUSABLE  ===== ===== */
 .btn:link,
 .btn:visited,
 input[type=submit] {
+    /* width: auto; */
     padding: 3px 8px;
     font-size: 70%;
     font-weight: 300;
     border-radius: 200px;
-    /* display: flex; */
-    justify-content: center;
-    align-content: center;
     color: white;
+    margin-bottom: 5px;
     background-color: rgb(39, 39, 39);
     transition: background-color 0.2s, border 0.2s, color 0.2s;
 }
@@ -76,9 +75,37 @@ input[type=submit]:active {
     border: 1px solid rgb(39, 39, 39);
     color: rgb(39, 39, 39);
 }
-/* ===== =====  FORMS  ===== ===== */
-.title {
+.links:link,
+.links:visited {
+    text-decoration: none;
+    width: auto;
+    font-size: 80%;
+    color: lime;
+    word-spacing: 2px;
+    letter-spacing: 0.5px;
+    padding-bottom: 5px;
+    margin-right: 10px;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s, color 0.3s;
     display: flex;
+    justify-content: center;
+}
+.links:active,
+.links:hover {
+    color: white;
+    border-bottom: 2px solid white;
+}
+.dropdown {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+.selection {
+    background-color: white;
+}
+/* ===== =====  FORMS  ===== ===== */
+.title h2{
+    display: flex; 
     justify-content: center;
     margin-bottom: 15px; 
 }
@@ -100,7 +127,7 @@ label {
     height: 25px;
     /* margin: 10px 0; */
     font-size: 80%;
-    color: white;
+    color: black;
     background-color: white;
     float: right;
 }
@@ -127,7 +154,7 @@ label {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
 }
 /* ===== =====  REGISTER  ===== ===== */
 .section-register {
@@ -139,9 +166,74 @@ label {
     align-content: center;
 }
 
+/* ===== =====  NAVBAR  ===== ===== */
+.navbar {
+    display: flex; 
+    justify-content: flex-end;
+    align-content: center;
+    padding: 10px;
+    margin: 10px 0;
+    /* border: 1px solid white;  */
+}
+
+/*  ===== =====  TIMER  ===== ===== */
+.timer {
+    border: 2px solid white;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+p {
+    font-size: 70%;
+    text-align: center;
+}
+
+.App-clock {
+    /* transform: translateX(-50%) translateY(-50%); */
+    color: lime;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+}
+.clock {
+    font-size: 250%;
+    font-weight: bold;
+    text-align: center;
+    margin: 25px 0;
+}
+
+.set-timer{
+    background-color: rgb(39, 39, 39);
+    border: 2px solid white;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+.field {
+    width: 15%;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ===== =====  AVATAR  ===== ===== */
-.avatarImg {
+/* .avatarImg {
     width: 30px;
 }
 
@@ -149,20 +241,9 @@ label {
 
 td {
     padding: 10px;
-  }
+  } */
 
 
 
 
 
-/* 
-  .App-clock {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  color: lime;
-  font-size: 70px;
-  font-family: Orbitron;
-  letter-spacing: 7px;
-} */

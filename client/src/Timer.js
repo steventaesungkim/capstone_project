@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import Clock from './Clock';
 import CategoryDropdown from './CategoryDropdown';
-import Navbar from './Navbar';
+
 import SetTimer from './SetTimer';
 
 
@@ -75,19 +75,17 @@ class Timer extends Component {
     }
 
     render() {
-        // console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
-        const currentUser = (this.state.theUser)
-
+        console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
+        // const currentUser = (this.state.theUser)
         return (
-            <div>
-                <Navbar 
-                    user = {currentUser}
-                    
-                    inSession = {this.state.isLoggedIn}
-                    handleLogout = {this._handleLogout}
-                />
-
-                <Clock />
+            <div className='timer'>
+                <div class='title'>
+                    <h1>BR'OCK</h1>
+                    <p>the assisted brain clock</p>
+                </div>
+                <div className='clock'>
+                    <Clock />
+                </div>
 
                 <SetTimer 
                     userInfo = {this._userInfo}
@@ -221,19 +219,20 @@ class Timer extends Component {
         })
     }
     
-    _handleLogout = () => {
-        this.setState ({
-            inSession: false
-        })  
+    // _handleLogout = (event) => {
+    //     this.setState ({
+    //         inSession: false
+    //     })  
 
-        Axios
-        .post('/api/user/logout')
-        .then(response => {
-            if (response.data.message === "Successfully logged out") {
-                this.props.history.push('/')
-            }
-        })
-    }
+    //     Axios
+    //     .post('/api/user/logout')
+    //     .then(response =>{
+    //         if (response.data.message === "Successfully logged out") {
+    //             this.props.history.push('/')
+    //         }
+    //     })
+    // }
+
 }
 
 export default Timer;

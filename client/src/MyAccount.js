@@ -52,7 +52,11 @@ class MyAccount extends Component {
         return (
             <div>
                 <h2>MyAccount</h2>
-                <Link to = {{pathname: '/settings', state: {thisUser: theUser}}} className='links'>
+                <Link to = {{
+                    pathname: '/settings', 
+                    state: {
+                        thisUser
+                        }}} className='links'>
                    Settings
                 </Link>
 

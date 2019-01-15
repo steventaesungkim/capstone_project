@@ -16,7 +16,7 @@ const RegisterForm = (props) => {
             <label>Name:
             <input 
                 required
-                className='input field'
+                className='input'
                 type='text'
                 // placeholder='name'
                 name='name'
@@ -29,7 +29,7 @@ const RegisterForm = (props) => {
             <label>UserName:
             <input 
                 required
-                className='input field'
+                className='input'
                 type='text'
                 // placeholder='UserName'
                 onChange = {(e) => {
@@ -42,7 +42,7 @@ const RegisterForm = (props) => {
             <label>Password:
             <input
                 required
-                className='input field'
+                className='input'
                 type='text'
                 // placeholder='Password'
                 onChange = {(e) => {

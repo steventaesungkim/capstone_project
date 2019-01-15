@@ -12,6 +12,10 @@ const AvatarDropdown = (props) =>{
             key={index} 
             className='avatarImg' 
             src={`/image/${eachAvatar.img}`}
+            name={props.name}
+            value={eachAvatar.name}
+            onClick={(event) => 
+                props.handleAvatar(event)}
             alt={`${eachAvatar.name}`}
              />
 

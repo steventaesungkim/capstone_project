@@ -160,7 +160,8 @@ class Register extends Component {
 
     _handleAvatar = (event) =>{
         console.log('click')
-        event.preventDefault()
+        // event.preventDefault()
+        console.log(event.target.value)
         const selectedImg = event.target.value
         // console.log(this.state.avatarData)
 

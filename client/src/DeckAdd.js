@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import DeckQandA from './DeckQandA';
-import UpdatePassword from './UpdatePassword';
-import UpdateAvatar from './UpdateAvatar';
 import Axios from 'axios';
 
 
@@ -100,62 +98,25 @@ class DeckAdd extends Component {
 
     _onSubmit = (event) => {
         event.preventDefault();
-        const theUser = (this.props.location.state.thisUser);
-        const userId = theUser.id;
 
         Axios
-        .post(`/api/user/${userId}`,this.state)
-        .then((response) => {
-            // console.log(response)
-            // if ((response.data.updated === true) && ((response.data.name === 'Name Updated') || (response.data.username === 'Username Updated') ) ) {
-            if ((response.data.name === 'Name Updated') || (response.data.username === 'Username Updated'))  {
+            .post(`/api/question/create`, {
+                level: this.state.subject,
+                question: this.state.question,
+                answer: this.state.answer,
+                id_category: this.state.categoryId
+            })
+            .then((response) => {
+                // console.log(response.data);
+                console.log(`Flash Card added: ${response.data.id}`);
 
-                alert('User info updated')
                 this.setState ({
-                    name: '',
-                    username: ''
+                    subject: '',
+                    question: '',
+                    answer: ''
                 })
-            }
-        })
+            })
     }
-
-    _avatarSubmit = (event) => {
-        event.preventDefault();
-        const theUser = (this.props.location.state.thisUser);
-        const userId = theUser.id;
-
-        Axios
-        .post(`/api/user/${userId}`,this.state)
-        .then((response) => {
-            // console.log(response)
-            if (response.data.avatar === "Avatar Updated") {
-                alert('Avatar updated')
-                this.setState ({
-                    avatar: 'Select a Avatar'
-                })
-            }
-        })
-    }
-
-    _pwSubmit = (event) => {
-        event.preventDefault()
-        const theUser = (this.props.location.state.thisUser);
-        const userId = theUser.id;
-        const newPassword = this.state.password;
-
-        Axios
-        .post(`/api/user/pwd/${userId}`, {password: newPassword})
-        .then((response) => {
-            if (response.data === true) {
-                alert('Password updated')
-                this.setState ({
-                    password: ''
-                })
-            }
-        })
-    }
-
-
 }
 
 export default DeckAdd;

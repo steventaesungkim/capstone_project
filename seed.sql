@@ -78,7 +78,13 @@ INSERT INTO resultsets
 VALUES
     ('Jan 2 2019 09:33:00', 1, 100),
     ('Jan 3 2019 09:12:00', 1, 75),
-    ('Jan 4 2019 07:15:00', 3, 100);
+    ('Jan 4 2019 07:15:00', 3, 100),
+    ('Jan 9 2019 08:30:00', 3, 75),
+    ('Jan 10 2019 08:30:00', 3, 100),
+    ('Jan 11 2019 08:00:00', 3, 90),
+    ('Jan 12 2019 08:00:00', 3, 100),
+    ('Jan 13 2019 08:00:00', 3, 75),
+    ('Jan 14 2019 08:00:00', 3, 100),
 
 INSERT INTO results
     (id_resultset, id_question, correct)
@@ -92,7 +98,13 @@ VALUES
     (2, 6, true),
     (3, 25, true),
     (3, 26, true),
-    (3, 27, true);
+    (3, 27, true),
+    (4, 25, true),
+    (5, 1, true),
+    (6, 2, true),
+    (7, 12, true),
+    (8, 44, true),
+    (9, 50, false)
 
 INSERT INTO avatars
     (id_user, name, img)

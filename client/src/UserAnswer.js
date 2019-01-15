@@ -4,8 +4,11 @@ import Axios from 'axios';
 
 class UserAnswer extends Component {
     constructor(props){
+        console.log(props)
         super(props);
         this.state = {
+            theUser: [],
+            isLoggedIn: Boolean,
             userInput: '',
             correct: Boolean,
             resultset_id: '100'
@@ -15,16 +18,16 @@ class UserAnswer extends Component {
     componentDidMount() {
         fetch('/api/user/isValid')
         .then(r => r.json())
-        .then(data =>{
+        .then(data => {
             console.log(`LOGIN-STATUS:`,data.isLoggedIn)
-            if(data.isLoggedIn === false){
+            if (data.isLoggedIn === false) {
                 this.props.history.push('/');
-            }else{
-                this.setState({
+            } else {
+                this.setState ({
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
                 })
-            }
+            }    
         })
     }
 

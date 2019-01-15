@@ -46,7 +46,7 @@ const LogInForm = (props) => {
                 type='submit'
                 value='Login'
             />
-
+                  
             <Link to = '/register'>
                 <input 
                     className='btn btn-ghost' 

@@ -22,6 +22,9 @@ const CategoryDropdown = (props) => {
                         categorySelection = {props.categorySelection}
 
                         showButton = {props.showButton}
+
+                        _handleTimeSubmit = {props.handleTimeSubmit}
+                        
                         // handleButton  = {props.handleButtonClick}
                     />
                 </div>
@@ -39,7 +42,7 @@ const CategoryDropdown = (props) => {
                 <select
                     name={props.name}
                     value={props.categorySelection}
-                    onChange={(event) => props.handleChange(event)}
+                    onChange={(event) => props.handleCategoryChange(event)}
                 >
 
                     {firstOption}

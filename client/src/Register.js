@@ -25,32 +25,24 @@ class Register extends Component {
         .then(data =>{
             console.log(`LOGIN-STATUS:`,data.isLoggedIn)
             if(data.isLoggedIn === true){
-                this.setState({
+                this.setState ({
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
                 })
                 this.props.history.push('/timer');
             }
-            // else{
-            //     fetch('/api/user')
-            //     .then(r => r.json())
-            //     .then(data =>{
-            //         this.setState({
-            //             theUser: data
-            //         })
-            //     })
-            // }
-        })
-        .then(
-            fetch('/api/avatar')
-            .then(r => r.json())
-            .then(data =>{
-                // console.log(data)
-                this.setState({
-                    avatarData: data
+            else{
+                fetch('/api/avatar')
+                .then(r => r.json())
+                .then(data =>{
+                    // console.log(data)
+                    this.setState ({
+                        avatarData: data
+                    })
                 })
-            })
-        )
+            }
+        })
+
     }
 
 
@@ -81,7 +73,7 @@ class Register extends Component {
     }
 
     _name = (input) => {
-        const letters = /[a-z,A-Z]/; 
+        // const letters = /[a-z,A-Z]/; 
 
         // if (input !== '') {
         //     if (input.match(letters)) {
@@ -94,39 +86,43 @@ class Register extends Component {
         //     alert('Please input alphabet characters only');
         // }
 
-        if (input.match(letters)) {
-            this.setState ({
-                name: input
-            })
-        } else {
-            document.getElementById('resetRegisterName').value="";
-            alert('Please input alphabet characters only');
-        }
+        // if (input.match(letters)) {
+        //     this.setState({
+        //         name: input
+        //     })
+        // } else {
+        //     alert('Please input alphabet characters only');
+        //     this.setState({
+        //         name: ''
+        //     })
+        // }
 
-        // this.setState ({
-        //     name: input
-        // })
+        this.setState ({
+            name: input
+        })
     }
 
     _userName = (input) => {
-        const letters = /[0-9,a-z,A-Z]/; 
+        // const letters = /[0-9,a-z,A-Z]/; 
         // console.log(input)
         // console.log(this.state.theUser)
         
 
 
-        if (input.match(letters)) {
-            this.setState ({
-                username: input
-            }) 
-        } else {
-            alert('Please input alphanumeric characters only');
-            document.getElementById('resetRegisterUsername').value="";
-        }
+        // if (input.match(letters)) {
+        //     this.setState({
+        //         username: input
+        //     }) 
+        // } else {
+        //     alert('Please input alphanumeric characters only');
+        //     this.setState({
+        //         username: ''
+        //     })
+        // }
 
-        // this.setState ({
-        //     username: input
-        // })
+        this.setState ({
+            username: input
+        })
     }
 
     _password = (input) => {
@@ -150,13 +146,14 @@ class Register extends Component {
         .then((response) =>{
             // console.log(response.data)
 
-
             if (response.data === "Username exist") {
                 alert('Username already exist. Please choose another username');
-                document.getElementById('resetRegisterName').value="";
-                document.getElementById('resetRegisterUsername').value="";
-                document.getElementById('resetRegisterPassword').value="";
-                document.getElementById('resetRegisterAvatar').value="";
+                this.setState ({
+                    name: '',
+                    username: '',
+                    password: '',
+                    avatar: 'Select a Avatar'
+                })
             }else{
                 this.props.history.push('/timer');
             }
@@ -164,13 +161,15 @@ class Register extends Component {
     };
 
     _handleAvatar = (event) =>{
-        event.preventDefault()
+        console.log('click')
+        // event.preventDefault()
+        console.log(event.target.value)
         const selectedImg = event.target.value
         // console.log(this.state.avatarData)
 
         this.state.avatarData.forEach((compare) =>{
             if (selectedImg === compare.img){
-                this.setState({
+                this.setState ({
                     avatar: selectedImg,
                     avatarSelection: selectedImg,
                     avatarId: compare.id

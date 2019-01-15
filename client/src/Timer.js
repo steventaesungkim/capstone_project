@@ -3,19 +3,26 @@ import Axios from 'axios';
 import Clock from './Clock';
 import CategoryDropdown from './CategoryDropdown';
 import Navbar from './Navbar';
+import SetTimer from './SetTimer';
 
 
 
 class Timer extends Component {
     constructor(props) {
         super(props);
-        this.state ={
+        this.state = {
             theUser: [],
             isLoggedIn: Boolean,
+            time: [],
             categories: [],
             level: [],
+            dateSelection: '',
+            hourSelection: '',
+            minuteSelection: '',
+            timeStamp: '',
             categorySelection: 'Select',
             levelSelection: 'Select',
+            timeId: '',
             categoryId: '',
             levelId: '',
             showLevel: false,
@@ -26,42 +33,50 @@ class Timer extends Component {
     componentDidMount() {
         fetch('/api/user/isValid')
         .then(r => r.json())
-        .then(data =>{
-            // console.log(data.user.id)
-            if(data.isLoggedIn === false){
+        .then(data => {
+            if (data.isLoggedIn === false) {
                 this.props.history.push('/');
             } else {
-                this.setState({
+                this.setState ({
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
-                })
-            }
-            fetch(`/api/categories/${data.user.id}`)
-            .then(r => r.json())
-            .then(data => { 
-                // console.log(data);
-                this.setState({
-                    categories: data
-                })
-                fetch(`/api/questions/${this.state.theUser.id}`)
-                .then(r => r.json())
-                .then(data => {
-                    // console.log(data)
-                    this.setState({
-                        level: data
+                }, () => {
+                    fetch(`/api/categories/${data.user.id}`)
+                    .then(r => r.json())
+                    .then(data => { 
+                        this.setState ({
+                            categories: data
+                        }, () => {
+                            fetch(`/api/questions/${this.state.theUser.id}`)
+                            .then(r => r.json())
+                            .then(data => {
+                                this.setState ({
+                                    level: data
+                                }, () => {
+                                    let timezoneOffSet = (new Date()).getTimezoneOffset() * 60000;
+                                    let localISOTime = (new Date(Date.now() - timezoneOffSet)).toISOString().slice(0, -1);
+                                    let date = localISOTime.substr(0,10);
+
+                                    let hrs = new Date().getHours();
+                                    let mins = new Date().getMinutes();
+
+                                    this.setState ({
+                                        dateSelection: date,
+                                        hourSelection: hrs,
+                                        minuteSelection: mins
+                                    })
+                                })
+                            })
+                        })
                     })
                 })
-            })
+            }
         })    
     }
 
     render() {
-
-        console.log(this.state.theUser.avatar)
-        // console.log(this.state.theUser)
-        const currentUser = (this.state.theUser)
-        console.log(currentUser)
         console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
+        const currentUser = (this.state.theUser)
         return (
             <div>
                 <Navbar 
@@ -72,10 +87,24 @@ class Timer extends Component {
                 />
                 <Clock />
 
+                <SetTimer 
+                    userInfo = {this._userInfo}
+                    inSession = {this.state.isLoggedIn}
+
+                    name = 'Set Timer'
+                    dateSelection = {this.state.dateSelection}
+                    hourSelection = {this.state.hourSelection}
+                    minuteSelection = {this.state.minuteSelection}
+                    handleDateChange = {this._handleDateChange}
+                    handleHourChange = {this._handleHourChange}
+                    handleMinuteChange = {this._handleMinuteChange}
+                />
+
                 <CategoryDropdown 
                     name = 'Category'
+
                     categoryList = {this.state.categories}
-                    handleChange= {this._handleSelect}
+                    handleCategoryChange= {this._handleCategorySelect}
                     categorySelection = {this.state.categorySelection}
                     categoryId = {this.state.categoryId}
                     
@@ -85,50 +114,85 @@ class Timer extends Component {
                     showLevel = {this.state.showLevel}
 
                     showButton = {this.state.showButton}
-                    // handleButtonClick = {this._handleButton}
 
                     userInfo = {this._userInfo}
                     inSession = {this.state.isLoggedIn}
+
+                    handleTimeSubmit = {this._handleTimeSubmit}
                 />
-
-                    {/* <button>Set Timer</button> */}
-
             </div>
         );
     }
 
+    _handleDateChange = (input) => {
+        this.setState ({
+            dateSelection: input
+        })
+    }
 
-    _handleSelect = (event) => {
-        //console.log('Category Selected')
+    _handleHourChange = (input) => {
+        input = (input < 10) ? ("0" + input) : input;
+        const hrs = input;
+        
+        this.setState ({
+            hourSelection: hrs
+        }) 
+    }
+
+    _handleMinuteChange = (input) => {
+        input = (input < 10) ? ("0" + input) : input;
+        const mins = input;
+
+        this.setState ({
+            minuteSelection: mins
+        })
+    }
+    
+    _handleTimeSubmit = () => {
+        const date = this.state.dateSelection;
+        const hour = this.state.hourSelection;
+        const minute = this.state.minuteSelection;
+        const level = this.state.levelSelection;
+        const id_category = this.state.categoryId;
+        const id_user = this.state.theUser.id;
+        const time = `${date} ${hour}:${minute}`;
+
+        Axios
+        .post('/api/timer/create', {time, level, id_category, id_user})
+        .then(response => {
+            console.log(response);
+        })
+        // .post('/api/resultset/create',)
+    }
+    
+    _handleCategorySelect = (event) => {
         let selectedCategory = this.state.categories.filter(c => {
             return event.target.value === c.category_type})[0];
                 
-        this.setState({
-                    categoryId: selectedCategory.id,
-                    categorySelection: event.target.value,
-                    showLevel: true,
-                    showButton: false
+        this.setState ({
+            categoryId: selectedCategory.id,
+            categorySelection: event.target.value,
+            showLevel: true,
+            showButton: false
         })
     }
 
     _handleLevelSelect = (event) => {
-        //console.log('Level Selected')
-        this.setState({
+        this.setState ({
             levelSelection: event.target.value,
             showButton: true
         })
     }
     
-    _handleLogout = (event) =>{
-        // console.log("clicked")
-    
-        this.setState({
+    _handleLogout = (event) => {
+        this.setState ({
             inSession: false
         })  
+
         Axios
         .post('/api/user/logout')
-        .then((response) =>{
-            if (response.data.message === "Successfully logged out"){
+        .then(response =>{
+            if (response.data.message === "Successfully logged out") {
                 this.props.history.push('/')
             }
         })

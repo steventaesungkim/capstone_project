@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const LevelsDropdown = (props) => {
+
     const firstOption = (props.name !== 'Level')
     ? <option value= {props.levelList}>Select a Level</option>
     : <option value= {props.levelSelection}>WRONG</option>;
@@ -11,7 +12,13 @@ const LevelsDropdown = (props) => {
         if (props.showButton) { 
             return (
                 <div>
-                    <button>Click to continue!</button>
+                    <button
+                    onClick={(event) => {
+                        props._handleTimeSubmit(event.target.value)
+                    }}
+                    >
+                    Set Timer
+                    </button>
                 </div>
             )
         }

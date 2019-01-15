@@ -24,7 +24,6 @@ const RegisterForm = (props) => {
                     props.newName(e.target.value);
                 }}
                 value = {props.inputName}
-                id = "resetRegisterName"
             /></label>
 
             <label>UserName:
@@ -38,7 +37,6 @@ const RegisterForm = (props) => {
                     props.newUserName(e.target.value);
                 }}
                 value = {props.inputUserName}
-                id = "resetRegisterUsername"
             /></label>
 
             <label>Password:
@@ -51,7 +49,6 @@ const RegisterForm = (props) => {
                     props.newPassword(e.target.value);
                 }}
                 value = {props.inputPassword}
-                id = 'resetRegisterPassword'
             /></label>
 
             {/* <AvatarDropdown

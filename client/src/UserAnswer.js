@@ -4,33 +4,32 @@ import Axios from 'axios';
 
 class UserAnswer extends Component {
     constructor(props){
+        console.log(props)
         super(props);
         this.state = {
-            // theUser: [],
-            // isLoggedIn: Boolean,
+            theUser: [],
+            isLoggedIn: Boolean,
             userInput: '',
             correct: Boolean,
             resultset_id: '100'
         }
     }
 
-    // componentDidMount() {
-    //     fetch('/api/user/isValid')
-    //     .then(r => r.json())
-    //     .then(data =>{
-    //         console.log(data)
-    //         console.log(`LOGIN-STATUS:`,data.isLoggedIn)
-    //         // if(data.isLoggedIn === false){
-    //         //     console.log('direct to /')
-    //         //     // this.props.history.push('/');
-    //         // }else{
-    //         //     this.setState({
-    //         //         theUser: data.user,
-    //         //         isLoggedIn: data.isLoggedIn
-    //         //     })
-    //         // }
-    //     })
-    // }
+    componentDidMount() {
+        fetch('/api/user/isValid')
+        .then(r => r.json())
+        .then(data => {
+            console.log(`LOGIN-STATUS:`,data.isLoggedIn)
+            if (data.isLoggedIn === false) {
+                this.props.history.push('/');
+            } else {
+                this.setState ({
+                    theUser: data.user,
+                    isLoggedIn: data.isLoggedIn
+                })
+            }    
+        })
+    }
 
     
 

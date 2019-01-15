@@ -22,6 +22,9 @@ const CategoryDropdown = (props) => {
                         categorySelection = {props.categorySelection}
 
                         showButton = {props.showButton}
+
+                        _handleTimeSubmit = {props.handleTimeSubmit}
+                        
                         // handleButton  = {props.handleButtonClick}
                     />
                 </div>

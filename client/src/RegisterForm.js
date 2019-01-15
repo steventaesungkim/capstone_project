@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AvatarDropdown from './AvatarDropdown';
+// import AvatarDropdown from './AvatarDropdown';
 
 
 const RegisterForm = (props) => {
     return (
         <form 
-            className='register-form' 
+            className='form' 
             method='POST'
             action='/api/user/register/'
             onSubmit = {(event) => {
@@ -16,7 +16,7 @@ const RegisterForm = (props) => {
             <label>Name:
             <input 
                 required
-                className='input'
+                className='input field'
                 type='text'
                 // placeholder='name'
                 name='name'
@@ -25,11 +25,11 @@ const RegisterForm = (props) => {
                 }}
                 value = {props.inputName}
             /></label>
-            <br />
+
             <label>UserName:
             <input 
                 required
-                className='input'
+                className='input field'
                 type='text'
                 // placeholder='UserName'
                 onChange = {(e) => {
@@ -38,11 +38,11 @@ const RegisterForm = (props) => {
                 }}
                 value = {props.inputUserName}
             /></label>
-            <br />
+
             <label>Password:
             <input
                 required
-                className='input'
+                className='input field'
                 type='text'
                 // placeholder='Password'
                 onChange = {(e) => {
@@ -50,14 +50,14 @@ const RegisterForm = (props) => {
                 }}
                 value = {props.inputPassword}
             /></label>
-            <br />
-            <AvatarDropdown
+
+            {/* <AvatarDropdown
                     name = 'Avatar'
                     avatarData = {props.avatarData}
                     avatarSelection = {props.avatarSelection}
                     avatarId ={props.avatarId}
                     handleAvatar = {props.handleAvatar}
-                />
+                /> */}
             {/* <label>Avatar:
             <input 
                 required
@@ -70,28 +70,26 @@ const RegisterForm = (props) => {
                 value = {props.inputAvatar}
                 id = 'resetRegisterAvatar'
             /></label> */}
-            <br />
+
             <input 
                 className='input-submit'
                 type='submit'
                 value='Register'
             />
-            <br />
+
             <Link to = '/'>
-                <button 
-                    className='btn' 
+                <input 
+                    className='btn btn-ghost' 
                     type='submit' 
-                    value='submit'
-                    >Log In
-                </button>
+                    value='Login'
+                    />
             </Link>    
             <Link to = '/#'>
-                <button 
-                    className='btn' 
+                <input 
+                    className='btn btn-ghost' 
                     type='submit' 
-                    value='submit'
-                    >Sign in as Guest
-                </button>
+                    value='Sign in as guest'
+                    />
             </Link>        
         </form>
     )

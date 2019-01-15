@@ -47,14 +47,14 @@ const UpdateAvatar = (props) => {
             }}
         >
             
-            <AvatarDropdown
+            {/* <AvatarDropdown
                 name='Avatar'
                 id='updatedAvatar'
                 avatarData = {props.avatarData}
                 avatarSelection = {props.avatarSelection}
                 avatarId ={props.avatarId}
                 handleAvatar = {props.handleAvatar}
-            />
+            /> */}
             {/* <label>Avatar:
             <input 
                 id='updateAvatar'

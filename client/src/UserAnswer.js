@@ -3,7 +3,7 @@ import AnswerForm from './AnswerForm';
 import Axios from 'axios';
 
 class UserAnswer extends Component {
-    constructor(props){
+    constructor(props) {
         console.log(props)
         super(props);
         this.state = {
@@ -11,7 +11,7 @@ class UserAnswer extends Component {
             isLoggedIn: Boolean,
             userInput: '',
             correct: Boolean,
-            resultset_id: '100'
+            resultset_id: ''
         }
     }
 
@@ -19,7 +19,6 @@ class UserAnswer extends Component {
         fetch('/api/user/isValid')
         .then(r => r.json())
         .then(data => {
-            console.log(`LOGIN-STATUS:`,data.isLoggedIn)
             if (data.isLoggedIn === false) {
                 this.props.history.push('/');
             } else {
@@ -48,42 +47,65 @@ class UserAnswer extends Component {
 
                 resultset_id = {this.state.resultset_id}
                 
-                click = {this.props.click}
+                handleResultSet = {this._handleResultSet}
+                handleNextQuestion = {this.props.handleNextQuestion}
             />
 
         )
     }
 
-    _submit = (input) => {
+    _handleResultSet = (input) =>{
         console.log(input)
-        console.log(this.state.resultset_id)
-        console.log(this.props.questionId)
+        let session = [];
+        // if (session.length === 0) {
+        //     Axios
+        //     .post('/api/resultset/create', {
+
+        //     })
+        //     .then(response => {
+        //         console.log(response)
+        //         session.push(input)
+        //         console.log(session)
+        //     })
+
+        // } else {
+        //     session.push(input)
+        //     console.log(session)
+        // }
+    }
+
+    _submit = (input) => {
+        // console.log(input)
+        // console.log(this.state.resultset_id)
+        // console.log(this.props.questionId)
      
         if(this.props.questionAnswer === input){
+            alert('Correct');
             Axios
-            .post('/api/result/create', (
-                {
-                    correct: true,
-                    id_question: this.props.questionId,
-                    id_resultset: this.state.resultset_id
-                })
-            )    
+            .post('/api/result/create', {
+                correct: true,
+                id_question: this.props.questionId,
+                id_resultset: this.state.resultset_id
+            })    
             .then(response => {
-                console.log(response)
-                document.getElementById('answerInput').value="";
+                // console.log(response)
+                this.setState ({
+                    userInput: ''
+                })
             })
         } else {
+            alert('Incorrect');
             Axios
-            .post('/api/result/create', (
-                {
-                    correct: false,
-                    id_question: this.props.questionId,
-                    id_resultset: this.state.resultset_id
-                })
-            )
+            .post('/api/result/create', {
+                correct: false,
+                id_question: this.props.questionId,
+                id_resultset: this.state.resultset_id
+            })
             .then(response => {
-                console.log(response)
-                document.getElementById('answerInput').value="";
+                // console.log(response)
+                this.setState ({
+                    userInput: ''
+                })
             })
 
         }

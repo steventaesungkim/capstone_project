@@ -18,6 +18,7 @@ const CategoryDropdown = (props) => {
                         levelList = {props.levelList}
                         handleLevel= {props.handleLevelSelect}
                         levelSelection = {props.levelSelection}
+                        
                         categoryId = {props.categoryId}
                         categorySelection = {props.categorySelection}
 

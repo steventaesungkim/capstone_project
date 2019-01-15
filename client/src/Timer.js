@@ -6,7 +6,6 @@ import Navbar from './Navbar';
 import SetTimer from './SetTimer';
 
 
-
 class Timer extends Component {
     constructor(props) {
         super(props);
@@ -85,6 +84,7 @@ class Timer extends Component {
                     inSession = {this.state.isLoggedIn}
                     handleLogout = {this._handleLogout}
                 />
+
                 <Clock />
 
                 <SetTimer 
@@ -119,6 +119,7 @@ class Timer extends Component {
                     inSession = {this.state.isLoggedIn}
 
                     handleTimeSubmit = {this._handleTimeSubmit}
+                    timeStamp = {this.state.timeStamp}
                 />
             </div>
         );
@@ -156,9 +157,19 @@ class Timer extends Component {
         const id_category = this.state.categoryId;
         const id_user = this.state.theUser.id;
         const time = `${date} ${hour}:${minute}`;
+        console.log(time)
+
+        this.setState ({
+            timeStamp: time
+        })
 
         Axios
-        .post('/api/timer/create', {time, level, id_category, id_user})
+        .post('/api/timer/create', {
+            time, 
+            level, 
+            id_category, 
+            id_user
+        })
         .then(response => {
             console.log(response);
         })

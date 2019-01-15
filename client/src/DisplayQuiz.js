@@ -5,6 +5,7 @@ import Question from './Question';
 
 class DisplayQuiz extends Component {
     constructor(props) {
+        console.log(props)
         super(props);
         this.state = {
             theUser: [],
@@ -12,8 +13,8 @@ class DisplayQuiz extends Component {
             question: [],
             questionId: '',
             displayQuestion: '',
-            questionAnswer: '',
-            alreadyAnswered: []
+            questionAnswer: ''
+            // resultSetId: ''
         }
     }
 
@@ -33,10 +34,10 @@ class DisplayQuiz extends Component {
                 
                     fetch(`/api/question/${categoryId}/${levelSelection}`)
                     .then(r => r.json())
-                    .then(data =>{
+                    .then(data => {
                         const listOfObjectQuestion = data 
 
-                        let shuffleQuestion = (array) =>{
+                        let shuffleQuestion = (array) => { 
                             for (let i = array.length - 1; i > 0; i--) {
                                 let j = Math.floor(Math.random() * (i + 1));
                                 let temp = array[i]; 
@@ -50,7 +51,7 @@ class DisplayQuiz extends Component {
                         const listOfAnswers = [];
                         const listOfQuestionId = [];
 
-                        shuffleQuestion(listOfObjectQuestion).forEach(data =>{
+                        shuffleQuestion(listOfObjectQuestion).forEach(data => {
                             listOfQuestions.push(data.question);
                             listOfAnswers.push(data.answer);
                             listOfQuestionId.push(data.id);
@@ -60,7 +61,7 @@ class DisplayQuiz extends Component {
                         const theQuestion = listOfQuestions[0];
                         const userAnswer = listOfAnswers[0];
 
-                        this.setState({
+                        this.setState ({
                             question: data,
                             displayQuestion: theQuestion,
                             questionId: theQuestionId,
@@ -76,29 +77,38 @@ class DisplayQuiz extends Component {
         return(
             <div>
                 <Clock />
+
                 <Question 
                     all = {this.state.question}
                     displayQuestion = {this.state.displayQuestion}
                     questionId = {this.state.questionId}
                     questionAnswer = {this.state.questionAnswer}
-                    alreadyAnswered = {this.state.alreadyAnswered}
 
-                    click = {this._handleClick}
+                    // resultSetId = {this.state.resultSetId}
+                    // handleResultSet = {this._handleResultSet}
+
+                    timeStamp = {this.props.timeStamp}
+
+                    handleNextQuestion = {this._handleNextQuestion}
                 />
             </div>
         )
     }
 
-    _handleClick = () => {
+    // _handleResultSet = () =>{
+
+    // }
+
+    _handleNextQuestion = () => {
         const categoryId = this.props.match.params.categoryId;
         const levelSelection = this.props.match.params.levelSelection;
     
         fetch(`/api/question/${categoryId}/${levelSelection}`)
         .then(r => r.json())
-        .then(data =>{
+        .then(data => {
             const listOfObjectQuestion = data 
 
-            let shuffleQuestion = (array) =>{
+            let shuffleQuestion = (array) => {
                 for (let i = array.length - 1; i > 0; i--) {
                     let j = Math.floor(Math.random() * (i + 1));
                     let temp = array[i]; 
@@ -112,7 +122,7 @@ class DisplayQuiz extends Component {
             const listOfAnswers = [];
             const listOfQuestionId = [];
 
-            shuffleQuestion(listOfObjectQuestion).forEach(data =>{
+            shuffleQuestion(listOfObjectQuestion).forEach(data => {
                 listOfQuestions.push(data.question);
                 listOfAnswers.push(data.answer);
                 listOfQuestionId.push(data.id);
@@ -122,7 +132,7 @@ class DisplayQuiz extends Component {
             const theQuestion = listOfQuestions[0];
             const userAnswer = listOfAnswers[0];
 
-            this.setState({
+            this.setState ({
                 question: data,
                 displayQuestion: theQuestion,
                 questionId: theQuestionId,

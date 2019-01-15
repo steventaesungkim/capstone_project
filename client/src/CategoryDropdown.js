@@ -2,15 +2,15 @@ import React from 'react';
 import LevelsDropdown from './LevelsDropdown';
 
 const CategoryDropdown = (props) => {
+    // console.log('CATEGORY DROPDOWN PROPS')
+    // console.log(props)
 
     const firstOption = (props.name === 'Category')
     ? <option >Select a Category</option>
     : <option value= {props.categorySelection}>Something messed up is you see this</option>; 
    
-    // console.log(props.showLevel)
-    
     let getLevelDropdown = () => {
-        if (props.showLevel === true){
+        if (props.showLevel === true) {
             return(
                 <div className='dropdown'>   
                     <LevelsDropdown 
@@ -18,14 +18,21 @@ const CategoryDropdown = (props) => {
                         levelList = {props.levelList}
                         handleLevel= {props.handleLevelSelect}
                         levelSelection = {props.levelSelection}
+                        
                         categoryId = {props.categoryId}
                         categorySelection = {props.categorySelection}
 
                         showButton = {props.showButton}
 
+                        timeStamp = {props.timeStamp}
                         _handleTimeSubmit = {props.handleTimeSubmit}
                         
                         // handleButton  = {props.handleButtonClick}
+
+                        resultset_id = {props.resultset_id}
+                        _handleResultSet_id = {props.handleResultSet_id}
+
+                        history = {props.history}
                     />
                 </div>
             )

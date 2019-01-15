@@ -6,7 +6,6 @@ import CategoryDropdown from './CategoryDropdown';
 import SetTimer from './SetTimer';
 
 
-
 class Timer extends Component {
     constructor(props) {
         super(props);
@@ -25,6 +24,7 @@ class Timer extends Component {
             timeId: '',
             categoryId: '',
             levelId: '',
+            resultset_id: '',
             showLevel: false,
             showButton: false
         }
@@ -102,7 +102,6 @@ class Timer extends Component {
 
                 <CategoryDropdown 
                     name = 'Category'
-
                     categoryList = {this.state.categories}
                     handleCategoryChange= {this._handleCategorySelect}
                     categorySelection = {this.state.categorySelection}
@@ -119,6 +118,12 @@ class Timer extends Component {
                     inSession = {this.state.isLoggedIn}
 
                     handleTimeSubmit = {this._handleTimeSubmit}
+                    timeStamp = {this.state.timeStamp}
+
+                    resultset_id = {this.state.resultset_id}
+                    handleResultSet_id = {this._handleResultSet_id}
+
+                    history = {this.props.history}
                 />
             </div>
         );
@@ -157,12 +162,42 @@ class Timer extends Component {
         const id_user = this.state.theUser.id;
         const time = `${date} ${hour}:${minute}`;
 
-        Axios
-        .post('/api/timer/create', {time, level, id_category, id_user})
-        .then(response => {
-            console.log(response);
+        this.setState ({
+            timeStamp: time
         })
-        // .post('/api/resultset/create',)
+
+        return Axios
+        .post('/api/timer/create', {
+            time, 
+            level, 
+            id_category, 
+            id_user
+        })
+        // .then(response => {
+        //     console.log(response);
+        // })
+    }
+
+    _handleResultSet_id = () =>{
+        const date = this.state.dateSelection;
+        const hour = this.state.hourSelection;
+        const minute = this.state.minuteSelection;
+        const time = `${date} ${hour}:${minute}`;
+        const id_user = this.state.theUser.id;
+
+        return Axios
+        .post('/api/resultset/create', {
+            time,
+            id_user,
+            score: 100
+        })
+        .then(response => {
+            console.log("OMG ITS BRITNEY!!!!!")
+            console.log( response)
+            this.setState ({
+                resultset_id: response.data.id
+            })
+        })
     }
     
     _handleCategorySelect = (event) => {
@@ -197,6 +232,7 @@ class Timer extends Component {
     //         }
     //     })
     // }
+
 }
 
 export default Timer;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import List from './List';
 import ResultHistoryTable from './ResultHistoryTable';
 
 class MyAccount extends Component {
@@ -8,7 +9,10 @@ class MyAccount extends Component {
         this.state = {
             theUser: [],
             isLoggedIn: Boolean,
-            userHistory: []
+            userHistory: [],
+            subjects: [],
+            decks: []
+
         }
     }
 
@@ -23,10 +27,17 @@ class MyAccount extends Component {
                 fetch(`/api/resultset/history/${data.user.id}`)
                 .then(r => r.json())
                 .then(results => {
+                    fetch(`/api/question/subjects/${data.user.id}`)
+                    .then(r => r.json())
+                    .then(subs => {
+
+
                     this.setState({
                         theUser: data.user,
                         isLoggedIn: data.isLoggedIn,
-                        userHistory: results
+                        userHistory: results,
+                        subjects: subs
+                    })
                     })
                 })
             }
@@ -47,6 +58,12 @@ class MyAccount extends Component {
                         thisUser
                         }}} className='links'>
                    Settings
+                </Link>
+
+                <h3>{`${thisUser}'s Flash Card Decks`}</h3>
+                <List items={this.state.subjects}/>
+                <Link to = {{pathname: '/deckadd', state: {thisUser: theUser}}} className='links'>
+                   Add a Flash Card Deck
                 </Link>
 
                 <h3>{`${thisUser}'s Results `}</h3>

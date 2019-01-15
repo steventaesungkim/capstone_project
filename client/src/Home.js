@@ -15,6 +15,7 @@ import Settings from './Settings';
 import UpdateUser from './UpdateUser';
 import UpdatePassword from './UpdatePassword';
 import UpdateAvatar from './UpdateAvatar';
+import DeckAdd from './DeckAdd';
 
 
 
@@ -40,13 +41,14 @@ class Home extends Component {
                     <Route path =  '/' exact component = {Login} /> 
                     <Route path = '/register' component = {Register} />
                     <Route path = '/timer' component = {Timer} />
-                    <Route path = '/question/:categoryId/:levelSelection' component = {DisplayQuiz} />
+                    <Route path = '/question/:categoryId/:levelSelection/:resultset_id' component = {DisplayQuiz} />
 
                     <Route path = '/myaccount' component = {MyAccount} />
                     <Route path = '/settings' component = {Settings} />
                     <Route path = '/updateUser' component = {UpdateUser} />
                     <Route path = '/updatePassword' component = {UpdatePassword} />
                     <Route path = '/updateAvatar' component = {UpdateAvatar} />
+                    <Route path = '/deckadd' component = {DeckAdd} />
                     
                 </div>
             </Router>

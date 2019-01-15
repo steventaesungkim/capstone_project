@@ -481,6 +481,22 @@ app.get('/api/questions/:id_user(\\d+)', (req, res) => {
 // ========================================================
 
 // ========================================================
+// Get all of a User's Flash Card subjects (levels)
+// ========================================================
+
+app.get('/api/question/subjects/:id_user(\\d+)', (req, res) => {
+    Question.getDeckSubjects(req.params.id_user)
+    .then(s => {
+        s = s.map(lev => lev.level);
+        console.log("Subjects!!!!!!!!!!!!!!!!!!!!!!");
+        console.log(s);
+        res.json(s);
+    });
+});
+
+// ========================================================
+
+// ========================================================
 // Update Question
 // ========================================================
 

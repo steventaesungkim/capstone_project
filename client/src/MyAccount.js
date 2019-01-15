@@ -8,7 +8,10 @@ class MyAccount extends Component {
         this.state = {
             theUser: [],
             isLoggedIn: Boolean,
-            userHistory: []
+            userHistory: [],
+            subjects: [],
+            decks: []
+
         }
     }
 
@@ -23,10 +26,17 @@ class MyAccount extends Component {
                 fetch(`/api/resultset/history/${data.user.id}`)
                 .then(r => r.json())
                 .then(results => {
+                    fetch(`/api/question/subjects/${data.user.id}`)
+                    .then(r => r.json())
+                    .then(subs => {
+
+
                     this.setState({
                         theUser: data.user,
                         isLoggedIn: data.isLoggedIn,
-                        userHistory: results
+                        userHistory: results,
+                        subjects: subs
+                    })
                     })
                 })
             }
@@ -44,6 +54,9 @@ class MyAccount extends Component {
                 <Link to = {{pathname: '/settings', state: {thisUser: theUser}}} className='links'>
                    Settings
                 </Link>
+
+                <h3>{`${thisUser}'s Flash Card Decks`}</h3>
+                <ResultHistoryTable results={this.state.userHistory}/>
 
                 <h3>{`${thisUser}'s Results `}</h3>
                 <ResultHistoryTable results={this.state.userHistory}/>

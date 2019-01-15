@@ -131,6 +131,19 @@ class Question {
             }
     }
 
+    // Gets all levels (ie. subjects) for the flash card decks owned by
+    // a specific User
+    // The returnAllData flag determines what is returned:
+    //   - Returns an array of Question Categories and Levels if returnAllData is false
+    //   - Returns an array of Question class instances if returnAllData is true or omitted
+    static getDeckSubjects(userID) {
+        return db.any(`
+            SELECT DISTINCT q.level
+            FROM questions q INNER JOIN categories c ON q.id_category = c.id
+            WHERE c.id_user = $1`,
+            [userID]
+            )
+    }
 
     // === ===  RETRIEVE  === ===  [[END]]
 

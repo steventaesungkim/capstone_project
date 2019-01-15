@@ -2,8 +2,8 @@ import React from 'react';
 import LevelsDropdown from './LevelsDropdown';
 
 const CategoryDropdown = (props) => {
-    console.log('CATEGORY DROPDOWN PROPS')
-    console.log(props)
+    // console.log('CATEGORY DROPDOWN PROPS')
+    // console.log(props)
 
     const firstOption = (props.name === 'Category')
     ? <option >Select a Category</option>
@@ -24,12 +24,15 @@ const CategoryDropdown = (props) => {
 
                         showButton = {props.showButton}
 
+                        timeStamp = {props.timeStamp}
                         _handleTimeSubmit = {props.handleTimeSubmit}
                         
                         // handleButton  = {props.handleButtonClick}
 
-                        resultSet_id = {props.resultSet_id}
+                        resultset_id = {props.resultset_id}
                         _handleResultSet_id = {props.handleResultSet_id}
+
+                        history = {props.history}
                     />
                 </div>
             )

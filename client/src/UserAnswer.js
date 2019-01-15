@@ -55,7 +55,7 @@ class UserAnswer extends Component {
 
     _handleResultSet = (input) =>{
         console.log(input)
-        let session = [];
+        // let session = [];
         // if (session.length === 0) {
         //     Axios
         //     .post('/api/resultset/create', {
@@ -80,7 +80,7 @@ class UserAnswer extends Component {
      
         if(this.props.questionAnswer === input){
             alert('Correct');
-            Axios
+            return Axios
             .post('/api/result/create', {
                 correct: true,
                 id_question: this.props.questionId,
@@ -94,7 +94,7 @@ class UserAnswer extends Component {
             })
         } else {
             alert('Incorrect');
-            Axios
+            return Axios
             .post('/api/result/create', {
                 correct: false,
                 id_question: this.props.questionId,

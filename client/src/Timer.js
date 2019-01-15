@@ -104,7 +104,6 @@ class Timer extends Component {
 
                 <CategoryDropdown 
                     name = 'Category'
-
                     categoryList = {this.state.categories}
                     handleCategoryChange= {this._handleCategorySelect}
                     categorySelection = {this.state.categorySelection}
@@ -123,8 +122,10 @@ class Timer extends Component {
                     handleTimeSubmit = {this._handleTimeSubmit}
                     timeStamp = {this.state.timeStamp}
 
-                    resultset_id = {this.state.resultset_id} // delete
+                    resultset_id = {this.state.resultset_id}
                     handleResultSet_id = {this._handleResultSet_id}
+
+                    history = {this.props.history}
                 />
             </div>
         );
@@ -167,16 +168,16 @@ class Timer extends Component {
             timeStamp: time
         })
 
-        Axios
+        return Axios
         .post('/api/timer/create', {
             time, 
             level, 
             id_category, 
             id_user
         })
-        .then(response => {
-            console.log(response);
-        })
+        // .then(response => {
+        //     console.log(response);
+        // })
     }
 
     _handleResultSet_id = () =>{
@@ -186,8 +187,7 @@ class Timer extends Component {
         const time = `${date} ${hour}:${minute}`;
         const id_user = this.state.theUser.id;
 
-
-        Axios
+        return Axios
         .post('/api/resultset/create', {
             time,
             id_user,

@@ -14,8 +14,8 @@ class DisplayQuiz extends Component {
             question: [],
             questionId: '',
             displayQuestion: '',
-            questionAnswer: ''
-            // resultSetId: ''
+            questionAnswer: '',
+            resultSetId: ''
         }
     }
 
@@ -67,6 +67,12 @@ class DisplayQuiz extends Component {
                             displayQuestion: theQuestion,
                             questionId: theQuestionId,
                             questionAnswer: userAnswer
+                        }, () => {
+                            fetch('/api/resultset')
+                            .then(r => r.json())
+                            .then(data => {
+                                console.log(data)
+                            })
                         })
                     })
                 })
@@ -75,13 +81,6 @@ class DisplayQuiz extends Component {
     }
 
     render() {  
-        if(!this.props.resultset_id) {
-            return(
-                <div>
-                    <h1>OH NOOOO</h1>
-                </div>
-            )
-        }else {
         return(
             <div>
                 <Clock />
@@ -92,15 +91,14 @@ class DisplayQuiz extends Component {
                     questionId = {this.state.questionId}
                     questionAnswer = {this.state.questionAnswer}
 
-                    resultSetId = {this.state.resultSetId}
+                    resultsetId = {this.props.match.params.resultset_id}
                     // handleResultSet = {this._handleResultSet}
-
-                    timeStamp = {this.props.timeStamp}
 
                     handleNextQuestion = {this._handleNextQuestion}
                 />
             </div>
-        )}
+        )
+        // }   
     }
 
     // _handleResultSet = () =>{
@@ -110,8 +108,10 @@ class DisplayQuiz extends Component {
     _handleNextQuestion = () => {
         const categoryId = this.props.match.params.categoryId;
         const levelSelection = this.props.match.params.levelSelection;
+        const resultsetId = this.state.resultSetId
+
     
-        fetch(`/api/question/${categoryId}/${levelSelection}`)
+        fetch(`/api/question/${categoryId}/${levelSelection}/${resultsetId}`)
         .then(r => r.json())
         .then(data => {
             const listOfObjectQuestion = data 

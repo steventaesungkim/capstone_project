@@ -9,8 +9,11 @@ const AnswerForm = (props) => {
                 action='/api/result/create'
                 onSubmit={(event) =>{
                     event.preventDefault();
-                    props.handleSubmit(props.userInput)
-                    props.handleResultSet(props.resultset_id)
+                    
+
+                    props.handleSubmit(props.userInput).then(() =>{
+                        props.handleResultSet(props.resultset_id)
+                    })
                 }}
             >
             <input

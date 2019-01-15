@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const LevelsDropdown = (props) => {
-    console.log('LEVEL DROPDOWN PROPS')
-    console.log(props.resultset_id)
 
+    // console.log(props.resultset_id)
     const firstOption = (props.name !== 'Level')
     ? <option value= {props.levelList}>Select a Level</option>
     : <option value= {props.levelSelection}>WRONG</option>;
@@ -16,8 +15,12 @@ const LevelsDropdown = (props) => {
                 <div>
                     <button
                     onClick={(event) => {
-                        props._handleTimeSubmit(event.target.value)
-                        props._handleResultSet_id(event.target.value)
+                        Promise.all([
+                                props._handleTimeSubmit(event.target.value),
+                                props._handleResultSet_id(event.target.value)
+                        ])
+                        
+                        
                     }}
                     >
                     Set Timer
@@ -38,6 +41,9 @@ const LevelsDropdown = (props) => {
         return <option key={index} value={eachLevel}>{eachLevel}</option>
     })
 
+    console.log('This is the RESULTSETID')
+    console.log(props.resultset_id)
+    
     return (
         <div>
             <label>{props.name}:
@@ -49,8 +55,10 @@ const LevelsDropdown = (props) => {
                     {theEachLevel}
                 </select>
             </label>
-            <Link to = {{pathname: `/question/${props.categoryId}/${props.levelSelection}`, state: {resultset_id: props.resultset_id}}}>{getButtonQuestions()}</Link>
-
+            {
+                (props.resultset_id === '') ?
+                getButtonQuestions() : <Redirect to={`/question/${props.categoryId}/${props.levelSelection}/${props.resultset_id}`}/>
+            }
         </div>
     )
 }

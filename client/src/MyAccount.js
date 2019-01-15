@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ResultHistoryTable from './ResultHistoryTable';
 
 class MyAccount extends Component {
     constructor(props) {
@@ -34,35 +35,22 @@ class MyAccount extends Component {
     
 
     render() {
-        //console.log("this.state.theUser!!!!!!!!!!!!!")
-        //console.log(this.state.theUser)
-        // console.log(this.state.isLoggedIn)
         const theUser = (this.state.theUser)
         const thisUser = theUser.username
-
-        //console.log("thisUser: ", thisUser);
 
         return (
             <div>
                 <h2>MyAccount</h2>
-                <Link to = {{
-                    pathname: '/settings',
-                    state: {
-                        thisUser: theUser
-                        // inputValue
-                    }    
-                }} 
-                    className='links'
-                >Settings</Link>
+                <Link to = {{pathname: '/settings', state: {thisUser: theUser}}} className='links'>
+                   Settings
+                </Link>
 
                 <h3>{`${thisUser}'s Results `}</h3>
+                <ResultHistoryTable results={this.state.userHistory}/>
                    
             </div>
         )
     }
-
-
-    
 
 }
 

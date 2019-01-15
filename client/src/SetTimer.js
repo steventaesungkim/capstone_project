@@ -32,6 +32,7 @@ const SetTimer = (props) => {
             <br></br>
             <label>
                 <input 
+                    className='input field'
                     type='date'
                     min={date}
                     onChange={(event) =>{
@@ -48,7 +49,8 @@ const SetTimer = (props) => {
             </label>
             <br></br>
             <label>
-                <input 
+                <input
+                    className='input field' 
                     type='number'
                     name='hour'
                     min='0'
@@ -64,6 +66,7 @@ const SetTimer = (props) => {
                 :
             <label>
                 <input 
+                    className='input field'
                     type='number'
                     name='minute'
                     min='0'

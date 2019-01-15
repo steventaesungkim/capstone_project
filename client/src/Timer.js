@@ -78,7 +78,7 @@ class Timer extends Component {
         console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
         const currentUser = (this.state.theUser)
         return (
-            <div>
+            <div className='timer'>
                 <Navbar 
                     user = {currentUser}
                     

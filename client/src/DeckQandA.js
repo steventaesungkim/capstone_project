@@ -29,13 +29,13 @@ const DeckQandA = (props) => {
             </label>
             
             <label>Answer:
-            <input 
-                name='answer'
-                className='input'
-                type='text'
-                onChange = {(event) => {props.inputAnswer(event.target.value)}}
-                value = {props.newAnswer}
-            />
+                <input 
+                    name='answer'
+                    className='input'
+                    type='text'
+                    onChange = {(event) => {props.inputAnswer(event.target.value)}}
+                    value = {props.newAnswer}
+                />
             </label>
             
             <input 

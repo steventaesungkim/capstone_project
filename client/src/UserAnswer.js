@@ -75,7 +75,7 @@ class UserAnswer extends Component {
 
     _submit = (input) => {
         // console.log(input)
-        // console.log(this.state.resultset_id)
+        console.log(this.state.resultset_id)
         // console.log(this.props.questionId)
      
         if(this.props.questionAnswer === input){
@@ -84,7 +84,7 @@ class UserAnswer extends Component {
             .post('/api/result/create', {
                 correct: true,
                 id_question: this.props.questionId,
-                id_resultset: this.state.resultset_id
+                id_resultset: this.props.resultsetId
             })    
             .then(response => {
                 // console.log(response)
@@ -98,7 +98,7 @@ class UserAnswer extends Component {
             .post('/api/result/create', {
                 correct: false,
                 id_question: this.props.questionId,
-                id_resultset: this.state.resultset_id
+                id_resultset: this.props.match.params.resultset_id
             })
             .then(response => {
                 // console.log(response)

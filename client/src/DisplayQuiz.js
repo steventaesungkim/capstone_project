@@ -108,10 +108,9 @@ class DisplayQuiz extends Component {
     _handleNextQuestion = () => {
         const categoryId = this.props.match.params.categoryId;
         const levelSelection = this.props.match.params.levelSelection;
-        const resultsetId = this.state.resultSetId
 
     
-        fetch(`/api/question/${categoryId}/${levelSelection}/${resultsetId}`)
+        fetch(`/api/question/${categoryId}/${levelSelection}`)
         .then(r => r.json())
         .then(data => {
             const listOfObjectQuestion = data 

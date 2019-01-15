@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom';
 const LogInForm = (props) => {
     return (
         <form 
-            className='login-form' 
+            className='form' 
             name='login-form'
             method="POST"
             action='/api/user/login/'
-
             onSubmit = {(event) => {
                 props.submit(event)
             }}
@@ -18,7 +17,7 @@ const LogInForm = (props) => {
             <input 
                 required
                 name='username'
-                className='input'
+                className='input field'
                 type='text'
                 // placeholder='UserName'
                 onChange = {(e) => {
@@ -27,12 +26,12 @@ const LogInForm = (props) => {
                 value = {props.inputUserName}
                 id="resetUsername"
             /></label>
-            <br />
+
             <label>Password:
             <input 
                 required
                 name='password'
-                className='input'
+                className='input field'
                 type='text'
                 // placeholder='Password'
                 onChange = {(e) => {
@@ -41,33 +40,27 @@ const LogInForm = (props) => {
                 value = {props.inputPassword}
                 id="resetPassword"
             /></label>
-            <br />
+
             <input 
                 className='input-submit'
                 type='submit'
                 value='Login'
             />
-            <br />
-            <div classname='btn-group'>
-                <Link to = '/register'>
-                    <button 
-                        className='btn' 
-                        type='submit' 
-                        value='submit'
 
-                        >Register
-                    </button>
-                </Link>
-                <Link to = '/#'>   
-                    <button 
-                        className='btn' 
-                        type='submit' 
-                        value='submit'
-
-                        >Sign in as Guest
-                    </button>
-                </Link> 
-            </div>
+            <Link to = '/register'>
+                <input 
+                    className='btn btn-ghost' 
+                    type='submit' 
+                    value='Register'
+                />
+            </Link>
+            <Link to = '/#'>   
+                <input 
+                    className='btn btn-ghost' 
+                    type='submit' 
+                    value='Sign in as guest'
+                />
+            </Link> 
         </form>
     )
 }

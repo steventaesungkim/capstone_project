@@ -56,8 +56,10 @@ class Register extends Component {
 
     render() {
         return (
-            <div>
-                <h2>Register</h2>
+            <section className='section-register'>
+                <div className='title'>
+                    <h2>Register</h2>
+                </div>
                 <RegisterForm 
                     inputName = {this.state.name}
                     newName = {this._name}
@@ -74,7 +76,7 @@ class Register extends Component {
                     avatarId = {this.state.avatarId}
                     handleAvatar = {this._handleAvatar}
                 />
-            </div>
+            </section>
         )
     }
 

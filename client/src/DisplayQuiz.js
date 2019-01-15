@@ -5,6 +5,8 @@ import Question from './Question';
 
 class DisplayQuiz extends Component {
     constructor(props) {
+        console.log('THIS IS WHERE WE SHOULD GET THE STUPID RESULTSET ID')
+        console.log(props.resultset_id)
         super(props);
         this.state = {
             theUser: [],
@@ -13,7 +15,7 @@ class DisplayQuiz extends Component {
             questionId: '',
             displayQuestion: '',
             questionAnswer: '',
-            alreadyAnswered: []
+            resultSetId: ''
         }
     }
 
@@ -33,10 +35,10 @@ class DisplayQuiz extends Component {
                 
                     fetch(`/api/question/${categoryId}/${levelSelection}`)
                     .then(r => r.json())
-                    .then(data =>{
+                    .then(data => {
                         const listOfObjectQuestion = data 
 
-                        let shuffleQuestion = (array) =>{
+                        let shuffleQuestion = (array) => { 
                             for (let i = array.length - 1; i > 0; i--) {
                                 let j = Math.floor(Math.random() * (i + 1));
                                 let temp = array[i]; 
@@ -50,7 +52,7 @@ class DisplayQuiz extends Component {
                         const listOfAnswers = [];
                         const listOfQuestionId = [];
 
-                        shuffleQuestion(listOfObjectQuestion).forEach(data =>{
+                        shuffleQuestion(listOfObjectQuestion).forEach(data => {
                             listOfQuestions.push(data.question);
                             listOfAnswers.push(data.answer);
                             listOfQuestionId.push(data.id);
@@ -60,11 +62,17 @@ class DisplayQuiz extends Component {
                         const theQuestion = listOfQuestions[0];
                         const userAnswer = listOfAnswers[0];
 
-                        this.setState({
+                        this.setState ({
                             question: data,
                             displayQuestion: theQuestion,
                             questionId: theQuestionId,
                             questionAnswer: userAnswer
+                        }, () => {
+                            fetch('/api/resultset')
+                            .then(r => r.json())
+                            .then(data => {
+                                console.log(data)
+                            })
                         })
                     })
                 })
@@ -72,33 +80,43 @@ class DisplayQuiz extends Component {
         })    
     }
 
-    render() {   
+    render() {  
         return(
             <div>
                 <Clock />
+
                 <Question 
                     all = {this.state.question}
                     displayQuestion = {this.state.displayQuestion}
                     questionId = {this.state.questionId}
                     questionAnswer = {this.state.questionAnswer}
-                    alreadyAnswered = {this.state.alreadyAnswered}
 
-                    click = {this._handleClick}
+                    resultsetId = {this.props.match.params.resultset_id}
+                    // handleResultSet = {this._handleResultSet}
+
+                    handleNextQuestion = {this._handleNextQuestion}
                 />
             </div>
         )
+        // }   
     }
 
-    _handleClick = () => {
+    // _handleResultSet = () =>{
+
+    // }
+
+    _handleNextQuestion = () => {
         const categoryId = this.props.match.params.categoryId;
         const levelSelection = this.props.match.params.levelSelection;
+        const resultsetId = this.state.resultSetId
+
     
-        fetch(`/api/question/${categoryId}/${levelSelection}`)
+        fetch(`/api/question/${categoryId}/${levelSelection}/${resultsetId}`)
         .then(r => r.json())
-        .then(data =>{
+        .then(data => {
             const listOfObjectQuestion = data 
 
-            let shuffleQuestion = (array) =>{
+            let shuffleQuestion = (array) => {
                 for (let i = array.length - 1; i > 0; i--) {
                     let j = Math.floor(Math.random() * (i + 1));
                     let temp = array[i]; 
@@ -112,7 +130,7 @@ class DisplayQuiz extends Component {
             const listOfAnswers = [];
             const listOfQuestionId = [];
 
-            shuffleQuestion(listOfObjectQuestion).forEach(data =>{
+            shuffleQuestion(listOfObjectQuestion).forEach(data => {
                 listOfQuestions.push(data.question);
                 listOfAnswers.push(data.answer);
                 listOfQuestionId.push(data.id);
@@ -122,7 +140,7 @@ class DisplayQuiz extends Component {
             const theQuestion = listOfQuestions[0];
             const userAnswer = listOfAnswers[0];
 
-            this.setState({
+            this.setState ({
                 question: data,
                 displayQuestion: theQuestion,
                 questionId: theQuestionId,

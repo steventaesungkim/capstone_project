@@ -6,15 +6,17 @@ const AnswerForm = (props) => {
         <form className='answer-form'
                 method='POST'
                 //  ${resultset_id} needs to be add in place of '100'
-                action={'/api/result/create'}
+                action='/api/result/create'
                 onSubmit={(event) =>{
                     event.preventDefault();
-                    props.handleSubmit(props.userInput)
+                    
+
+                    props.handleSubmit(props.userInput).then(() =>{
+                        props.handleResultSet(props.resultset_id)
+                    })
                 }}
-                id='resetAnswer'
             >
             <input
-                id='answerInput'
                 required
                 className='input'
                 type='text'
@@ -25,13 +27,11 @@ const AnswerForm = (props) => {
                 value={props.userInput}
             />
             <input 
-                id='id_resultset'
                 name='id_resultset'
                 type='hidden'
                 value={props.resultset_id}
             />
             <input 
-                id='id_question'
                 name='id_question'
                 type='hidden'
                 value={props.questionId}
@@ -41,7 +41,7 @@ const AnswerForm = (props) => {
                 className='input-submit'
                 type='submit'
                 value='submit'
-                onClick = {props.click}
+                onClick = {props.handleNextQuestion}
             />
         </form>
     )

@@ -26,7 +26,7 @@ class Home extends Component {
                     <Route path =  '/' exact component = {Login} /> 
                     <Route path = '/register' component = {Register} />
                     <Route path = '/timer' component = {Timer} />
-                    <Route path = '/question/:categoryId/:levelSelection' component = {DisplayQuiz} />
+                    <Route path = '/question/:categoryId/:levelSelection/:resultset_id' component = {DisplayQuiz} />
 
                     <Route path = '/myaccount' component = {MyAccount} />
                     <Route path = '/settings' component = {Settings} />

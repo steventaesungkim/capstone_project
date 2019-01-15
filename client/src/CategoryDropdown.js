@@ -39,7 +39,7 @@ const CategoryDropdown = (props) => {
                 <select
                     name={props.name}
                     value={props.categorySelection}
-                    onChange={(event) => props.handleCategoryChange(event)}
+                    onChange={(event) => props.handleChange(event)}
                 >
 
                     {firstOption}

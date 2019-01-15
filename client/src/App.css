@@ -93,10 +93,17 @@ h2 {
     font-size: 80%;
 }
 
+
 /* ===== =====  AVATAR  ===== ===== */
 .avatarImg {
     width: 30px;
 }
+
+
+
+td {
+    padding: 10px;
+  }
 
 
 

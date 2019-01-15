@@ -9,7 +9,6 @@ const AvatarDropdown = (props) =>{
 
     const theAvatarList = props.avatarData.map((eachAvatar, index) => {
         return <img 
-            alt='img'
             key={index} 
             className='avatarImg' 
             src={`/image/${eachAvatar.img}`}
@@ -17,7 +16,7 @@ const AvatarDropdown = (props) =>{
             value={eachAvatar.name}
             onClick={(event) => 
                 props.handleAvatar(event)}
-            
+            alt={`${eachAvatar.name}`}
              />
 
         // console.log(eachAvatar.img)

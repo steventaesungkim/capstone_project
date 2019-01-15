@@ -48,7 +48,7 @@ const LogInForm = (props) => {
                 value='Login'
             />
             <br />
-            <div classname='btn-group'>
+            <div className='btn-group'>
                 <Link to = '/register'>
                     <button 
                         className='btn' 

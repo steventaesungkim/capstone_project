@@ -83,6 +83,27 @@ class Resultset {
         }
     }
 
+
+    // Get all resultset history for a specific User ID
+    // Returns an array of resultsets with date, category type, level and score
+    static getResultHistory(userID) {
+        return db.any(`
+                SELECT DISTINCT rs.time, c.category_type, q.level, rs.score
+                FROM resultsets rs
+                INNER JOIN results r ON rs.id = r.id_resultset
+                INNER JOIN questions q ON r.id_question = q.id
+                INNER JOIN categories c ON q.id_category = c.id    
+                WHERE rs.id_user = $1`,
+                [userID]
+            )
+            // .then(rsArray => {
+            //     const instanceArray = rsArray.map(rs => {
+            //         return new Resultset(rs.id, rs.time, rs.id_user, rs.score);
+            //     });
+            //     return instanceArray;
+            // });
+    }
+
     // === ===  RETRIEVE  === ===  [[END]]
 
 

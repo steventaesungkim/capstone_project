@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UpdateUser from './UpdateUser';
+import DeckQandA from './DeckQandA';
 import UpdatePassword from './UpdatePassword';
 import UpdateAvatar from './UpdateAvatar';
 import Axios from 'axios';
@@ -13,9 +13,9 @@ class DeckAdd extends Component {
         this.state = {
             theUser: [],
             isLogged: Boolean,
-            name: '',
-            username: '',
-            avatar: '',
+            subject: '',
+            question: '',
+            answer: '',
             password: '',
             avatarData: [],
             avatarSelection: 'Select',
@@ -34,19 +34,11 @@ class DeckAdd extends Component {
                 this.setState({
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
-                }, () => {
-                    fetch('/api/avatar')
-                    .then(r => r.json())
-                    .then(data =>{
-                        // console.log(data)
-                        this.setState({
-                            avatarData: data
-                        })
-                    })
                 })
             }
         })    
     }
+
     render () {
         // console.log(this.props.location.state.thisUser)
         
@@ -54,12 +46,20 @@ class DeckAdd extends Component {
         return (
             <div>
                 <h2>Flash Cards</h2>
-                <h4>Create a new flash card deck</h4>
-                <UpdateUser 
-                    inputName = {this._updateName}
-                    newName = {this.state.name}
-                    inputUsername = {this._updateUsername}
-                    newUsername = {this.state.username}
+                <h4>Create a new flash card</h4>
+                {/* <form>
+                    <label>Subject:
+                        <input type="text" ></input>
+                    </label>
+
+                </form> */}
+                <DeckQandA 
+                    inputSubject = {this._updateSubject}
+                    newSubject = {this.state.subject}
+                    inputQuestion = {this._updateQuestion}
+                    newQuestion = {this.state.question}
+                    inputAnswer = {this._updateAnswer}
+                    newAnswer = {this.state.answer}
                     submit = {this._onSubmit}
                 />
 
@@ -67,32 +67,24 @@ class DeckAdd extends Component {
         )
     }
     
-    _updateName = (input) => {
-
-    
+    _updateSubject = (input) => {
         this.setState({
-            name: input
+            subject: input
         })
     }
 
-    _updateUsername = (input) => {
-
+    _updateQuestion = (input) => {
         this.setState({
-            username: input
+            question: input
         })
     }
 
-    _updatePassword = (input) => {
-        this.setState ({
-            password: input
-        });
+    _updateAnswer = (input) => {
+        this.setState({
+            answer: input
+        })
     }
 
-    _updateAvatar = (input) => {
-        this.setState ({
-            avatar: input
-        });
-    }
 
     _handleAvatar = (event) =>{
         event.preventDefault()

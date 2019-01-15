@@ -44,7 +44,7 @@ class UserAnswer extends Component {
                 questionId = {this.props.questionId}
                 questionAnswer = {this.props.questionAnswer}
 
-                resultset_id = {this.props.resultset_id}
+                // resultset_id = {this.props.resultset_id}
                 
                 handleResultSet = {this._handleResultSet}
                 handleNextQuestion = {this.props.handleNextQuestion}
@@ -98,7 +98,7 @@ class UserAnswer extends Component {
             .post('/api/result/create', {
                 correct: false,
                 id_question: this.props.questionId,
-                id_resultset: this.props.match.params.resultset_id
+                id_resultset: this.props.resultsetId
             })
             .then(response => {
                 // console.log(response)

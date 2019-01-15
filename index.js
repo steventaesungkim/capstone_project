@@ -743,6 +743,22 @@ app.get('/api/resultset/user/:id_user(\\d+)', (req, res) => {
 // ========================================================
 
 // ========================================================
+// Get Resultset History by User ID 
+// ========================================================
+
+app.get('/api/resultset/history/:id_user(\\d+)', (req, res) => {
+    Resultset.getResultHistory(req.params.id_user)
+        .catch(err => {
+            res.send(err.message);
+        })
+        .then(rset => {
+            res.json(rset);
+        });
+});
+
+// ========================================================
+
+// ========================================================
 // Update Resultset info 
 // ========================================================
 

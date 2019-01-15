@@ -25,57 +25,56 @@ const SetTimer = (props) => {
 
 
     return(
-        <div>
-            {'Set Date:'}
-            <br></br>
-            <label>
-                <input 
-                    className='input field'
-                    type='date'
-                    min={date}
-                    onChange={(event) =>{
-                        props.handleDateChange(event.target.value)
-                    }}
-                    select={props.dateSelection}
-                    defaultValue={theDate}
-                    // value={props.dateSelection}   
-                />
-            </label>
-            <br></br>
-            {props.name}: 
-            <br></br>
-            <label>
-                <input
-                    className='input field' 
-                    type='number'
-                    name='hour'
-                    min='0'
-                    max='23'
-                    onChange={(event) => {
-                        props.handleHourChange(event.target.value)
-                    }}
-                    select={props.hourSelection}
-                    defaultValue={theHrs}
-                    // value={props.hourSelection}
-                />
-            </label>
-                
-            <label>
-                <input 
-                    className='input field'
-                    type='number'
-                    name='minute'
-                    min='0'
-                    max='59'
-                    onChange={(event) => {
-                        props.handleMinuteChange(event.target.value)
-                    }}
-                    select={props.minuteSelection}
-                    defaultValue={theMin}
-                    // value={props.minuteSelection}
-                />
-            </label>
-        </div>
+        <form 
+            className='set-timer'
+            name='set-timer'
+        >
+        <label>{'Set Date:'}
+        <input 
+            className='input'
+            type='date'
+            min={date}
+            onChange={(event) =>{
+                props.handleDateChange(event.target.value)
+            }}
+            select={props.dateSelection}
+            defaultValue={theDate}
+            // value={props.dateSelection}   
+        /></label>
+
+        
+        <label>{props.name}
+        <input
+            className='input field' 
+            type='number'
+            name='hour'
+            min='0'
+            max='23'
+            onChange={(event) => {
+                props.handleHourChange(event.target.value)
+            }}
+            select={props.hourSelection}
+            defaultValue={theHrs}
+            // value={props.hourSelection}
+        />
+        
+        </label>:
+        <label>
+        <input 
+            className='input field'
+            type='number'
+            name='minute'
+            min='0'
+            max='59'
+            onChange={(event) => {
+                props.handleMinuteChange(event.target.value)
+            }}
+            select={props.minuteSelection}
+            defaultValue={theMin}
+            // value={props.minuteSelection}
+        />
+        </label>
+        </form>
     )
 }
 

@@ -79,15 +79,13 @@ class Timer extends Component {
         // const currentUser = (this.state.theUser)
         return (
             <div className='timer'>
-                {/* <Navbar 
-                    user = {currentUser}
-                    
-                    inSession = {this.state.isLoggedIn}
-                    handleLogout = {this._handleLogout}
-                /> */}
-                <h1>BROCK</h1>
-                <p>the assisted brain clock</p>
-                <Clock />
+                <div class='title'>
+                    <h1>BR'OCK</h1>
+                    <p>the assisted brain clock</p>
+                </div>
+                <div className='clock'>
+                    <Clock />
+                </div>
 
                 <SetTimer 
                     userInfo = {this._userInfo}

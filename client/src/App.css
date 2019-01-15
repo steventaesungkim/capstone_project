@@ -47,7 +47,7 @@ h2 {
 .btn:link,
 .btn:visited,
 input[type=submit] {
-    width: auto;
+    /* width: auto; */
     padding: 3px 8px;
     font-size: 70%;
     font-weight: 300;
@@ -84,7 +84,7 @@ input[type=submit]:active {
     word-spacing: 2px;
     letter-spacing: 0.5px;
     padding-bottom: 5px;
-    margin-left: 10px;
+    margin-right: 10px;
     border-bottom: 2px solid transparent;
     transition: border-bottom 0.3s, color 0.3s;
     display: flex;
@@ -94,7 +94,14 @@ input[type=submit]:active {
 .links:hover {
     color: white;
     border-bottom: 2px solid white;
-
+}
+.dropdown {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+.selection {
+    background-color: white;
 }
 /* ===== =====  FORMS  ===== ===== */
 .title h2{
@@ -120,7 +127,7 @@ label {
     height: 25px;
     /* margin: 10px 0; */
     font-size: 80%;
-    color: white;
+    color: black;
     background-color: white;
     float: right;
 }
@@ -172,11 +179,11 @@ label {
 /*  ===== =====  TIMER  ===== ===== */
 .timer {
     border: 2px solid white;
-    width: auto;
+    width: 70%;
     display: flex;
-    /* justify-content: center; */
     flex-direction: column;
-    /* align-content: center; */
+    align-items: center;
+    
 }
 p {
     font-size: 70%;
@@ -184,17 +191,49 @@ p {
 }
 
 .App-clock {
-    transform: translateX(-50%) translateY(-50%);
+    /* transform: translateX(-50%) translateY(-50%); */
     color: lime;
-    font-size: 170%;
     font-family: Orbitron;
     letter-spacing: 7px;
+}
+.clock {
+    font-size: 250%;
+    font-weight: bold;
     text-align: center;
-    width: 50%;
+    margin: 25px 0;
 }
 
+.set-timer{
+    background-color: rgb(39, 39, 39);
+    border: 2px solid white;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+.field {
+    width: 15%;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ===== =====  AVATAR  ===== ===== */
-.avatarImg {
+/* .avatarImg {
     width: 30px;
 }
 
@@ -202,7 +241,7 @@ p {
 
 td {
     padding: 10px;
-  }
+  } */
 
 
 

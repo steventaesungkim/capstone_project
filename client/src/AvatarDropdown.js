@@ -12,7 +12,7 @@ const AvatarDropdown = (props) =>{
             key={index} 
             className='avatarImg' 
             src={`/image/${eachAvatar.img}`}
-            
+            alt={`${eachAvatar.name}`}
              />
 
         // console.log(eachAvatar.img)

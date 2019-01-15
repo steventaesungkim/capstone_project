@@ -5,7 +5,8 @@ const ResultHistoryTable = props => {
     const results = props.results.map((item, index) => {
         return (
             <tr key={index}>
-                <td>{item.time}</td>
+                <td>{item.time.substring(0, 10)}</td>
+                <td>{item.time.substring(11, 16)}</td>
                 <td>{item.category_type}</td>
                 <td>{item.level}</td>
                 <td>{item.score}</td>
@@ -16,6 +17,7 @@ const ResultHistoryTable = props => {
     return (  
         <table className="">
             <thead><tr>
+                <th>DATE</th>
                 <th>TIME</th>
                 <th>CATEGORY</th>
                 <th>LEVEL</th>

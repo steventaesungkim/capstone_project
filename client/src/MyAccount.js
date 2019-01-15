@@ -51,8 +51,6 @@ class MyAccount extends Component {
             </div>
         )
     }
-
 }
-
 
 export default MyAccount;

@@ -41,8 +41,9 @@ class MyAccount extends Component {
                 <Link to = {{
                     pathname: '/settings',
                     state: {
-                        thisUser: theUser
-                        // inputValue
+                        thisUser,
+                        name: 'greg'
+
                     }    
                 }} 
                     className='links'

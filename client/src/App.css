@@ -328,6 +328,7 @@ button {
 b {
     display: flex; 
     justify-content: flex-start;
+    font-weight: bold;
 }
 .deck-content {
     display:flex;

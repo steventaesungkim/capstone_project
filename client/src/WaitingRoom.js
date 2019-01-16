@@ -70,7 +70,7 @@ class WaitingRoom extends Component {
 
 
         return (
-        <div className="App-clock" >
+        <div className="clock" >
             {
                 (isHourMatch && isMinMatch) ?
                 <Redirect to={`/question/${this.state.categoryId}/${this.state.levelSelection}/${this.state.resultset_id}`}/>

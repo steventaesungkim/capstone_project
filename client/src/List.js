@@ -23,8 +23,8 @@ const List = (props) => {
                     <p 
                         className='qa'
                     >
-                        <b>Q: {i.question}</b><br />
-                        <b>A: {i.answer}</b><br />
+                        <b>Q:&nbsp; {i.question}</b><br />
+                        <b>A:&nbsp; {i.answer}</b><br />
                     </p>
                     <button className='btn btn-ghost' onClick={(e) => props.btnClickEdit(i.id, e)}>Edit</button>
                     <button className='btn btn-ghost' onClick={(e) => props.btnClickDelete(i.id, e)}>Delete</button>

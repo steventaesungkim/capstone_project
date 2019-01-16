@@ -19,13 +19,15 @@ const List = (props) => {
         return (
             filtered.map((i, index) => {
             return (
-                <div key={index}>
-                    <p>
-                        <b>Q: </b>{i.question}<br />
-                        <b>A: </b>{i.answer}<br />
+                <div className='deck-content' key={index}>
+                    <p 
+                        className='qa'
+                    >
+                        <b>Q:&nbsp; {i.question}</b><br />
+                        <b>A:&nbsp; {i.answer}</b><br />
                     </p>
-                    <button onClick={(e) => props.btnClickEdit(i.id, e)}>Edit</button>
-                    <button onClick={(e) => props.btnClickDelete(i.id, e)}>Delete</button>
+                    <button className='btn btn-ghost' onClick={(e) => props.btnClickEdit(i.id, e)}>Edit</button>
+                    <button className='btn btn-ghost' onClick={(e) => props.btnClickDelete(i.id, e)}>Delete</button>
                 </div>
                     )
             })
@@ -33,7 +35,7 @@ const List = (props) => {
     };
 
     return (
-    <div>
+    <div className='decks'>
         {props.items.map((item, index) => {
             return (
                 <details key={index}>

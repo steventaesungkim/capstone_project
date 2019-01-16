@@ -9,7 +9,7 @@ This capstone project was conceived, designed, and coded by Steven Kim, Stanley 
 ## Features
 - User Account creation and login (password hashing and authentication provided via [bcrypt](https://www.npmjs.com/package/body-parser))
 - Set an alarm timer for a future date/time
-- Choose a canned set of Math or Sequence flash cards for your BR'OCK alarm, or one of your private flash card decks
+- Choose a canned deck of Math or Sequence flash cards, or one of your private flash card decks, for your BR'OCK alarm
 - Create, Retrieve, Update, and Delete you our decks of question and answer flash cards
 - When your timer goes off, you get 6 attempts to correctly answer 3 flash cards
 - Track your progress with saved scores from each alarm session to see how you have improved

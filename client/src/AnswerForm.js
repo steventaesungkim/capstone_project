@@ -10,7 +10,7 @@ const AnswerForm = (props) => {
                 onSubmit={(event) =>{
                     event.preventDefault();
                     
-                    props.handleSubmit(props.userInput)
+                    props.handleSubmit(props.userInput, event)
                     // props.handleSubmit(props.userInput).then(() =>{
                         // props.handleResultSet(props.resultset_id)
                     // })
@@ -18,7 +18,7 @@ const AnswerForm = (props) => {
             >
             <input
                 required
-                className='input'
+                className='input-answer'
                 type='text'
                 placeholder='What is your answer?'
                 onChange={(event) =>{
@@ -38,7 +38,7 @@ const AnswerForm = (props) => {
             />
             
             <input 
-                className='input-submit'
+                className='answer-submit'
                 type='submit'
                 value='submit'
                 onClick = {props.handleNextQuestion}

@@ -20,7 +20,7 @@ const UpdateUser = (props) => {
                 }}
                 value = {props.newName}
             /></label>
-            <br />
+
             <label>Username:
             <input 
                 name='username'
@@ -31,7 +31,7 @@ const UpdateUser = (props) => {
                 }}
                 value = {props.newUsername}
             /></label>
-            <br />
+
             <input 
                 className='input-submit'
                 type='submit'

@@ -10,8 +10,12 @@ const Navbar = (props) => {
     // console.log(thisUser)
     return(
         <header className='navbar'>
+            <Link to = '/timer'
+                className='links'
+            >Timer</Link>
+
             <Link to = '/myaccount' 
-                className='links hover'
+                className='links'
                 // style = {{textDecoration: 'none'}}
             >MyAccount</Link> 
 
@@ -23,7 +27,7 @@ const Navbar = (props) => {
                     inSession
                 }
             }}
-                className='links hover'
+                className='links'
                 onClick={(event) =>{logout(event)}}
                 // style={{textDecoration: 'none'}}
             >Logout</Link> 

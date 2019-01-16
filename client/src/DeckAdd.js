@@ -66,9 +66,11 @@ class DeckAdd extends Component {
 
     render () {
         return (
-            <div>
-                <h2>Flash Cards</h2>
-                <h4>Create a new flash card</h4>
+            <section className='section-deck'>
+                <div className='title'>
+                    <h2>Flash Cards</h2>
+                </div>
+                <p>Create a new flash card</p>
                 <DeckQandA 
                     inputSubject = {this._updateSubject}
                     newSubject = {this.state.subject}
@@ -80,7 +82,7 @@ class DeckAdd extends Component {
                     btnValue = "Add"
                 />
 
-            </div>
+            </section>
         )
     }
     

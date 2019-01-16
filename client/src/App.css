@@ -6,8 +6,8 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: inherit;
-    /* background-color: rgb(53, 53, 53); */
-    background-color: black;
+    background-color: rgb(41, 41, 41);
+    /* background-color: black; */
     /* background-color: white; */
     width: 100%;
 }
@@ -53,27 +53,29 @@ input[type=submit] {
     font-weight: 300;
     border-radius: 200px;
     color: white;
-    margin-bottom: 5px;
-    background-color: rgb(39, 39, 39);
+
+    margin: 5px;
+    background-color: rgb(41, 41, 41);
     transition: background-color 0.2s, border 0.2s, color 0.2s;
 }
 .btn-ghost:link,
 .btn-ghost:visited {
-    border: 1px solid rgb(167, 167, 167);
-    background-color: rgb(39, 39, 39);
+    border: 1px solid rgb(143, 143, 143);
+    background-color: rgb(41, 41, 41);
 }
 .btn:hover, 
 .btn:active,
 input[type=submit]:hover,
 input[type=submit]:active {
-    background-color: rgb(167, 167, 167);
-    border: 1px solid rgb(39, 39, 39);
-    color: rgb(39, 39, 39);
+    background-color: rgb(143, 143, 143);
+    border: 1px solid rgb(41, 41, 41);
+    /* color: rgb(41, 41, 41); */
+    color: white;
 }
 .btn-ghost:active,
 .btn-ghost:hover {
-    border: 1px solid rgb(39, 39, 39);
-    color: rgb(39, 39, 39);
+    border: 1px solid rgb(41, 41, 41);
+    color: rgb(41, 41, 41);
 }
 .links:link,
 .links:visited {
@@ -85,7 +87,7 @@ input[type=submit]:active {
     letter-spacing: 0.5px;
     padding-bottom: 5px;
     margin-right: 10px;
-    border-bottom: 2px solid transparent;
+    border-bottom: 3px solid transparent;
     transition: border-bottom 0.3s, color 0.3s;
     display: flex;
     justify-content: center;
@@ -114,25 +116,27 @@ input[type=submit]:active {
     border: 2px solid white;
     display: flex;
     flex-direction: column;
-    background-color: rgb(39, 39, 39);
+    background-color: rgb(41, 41, 41);
     text-align: center;
 }
 label {
-    background-color: rgb(39, 39, 39);
+    background-color: rgb(41, 41, 41);
     font-size: 80%;
     margin: 10px 0;
 }
 .input{ 
     width: 220px;
     height: 25px;
-    /* margin: 10px 0; */
+    padding-left: 5px;
     font-size: 80%;
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: rgb(41, 41, 41);
+    border-style: groove;
     float: right;
 }
 .field {
-    color: black;
+    color: white;
+    padding-left: 2px;
 }
 .input-submit {
     width: 25%;
@@ -144,7 +148,11 @@ label {
     margin-bottom: 10px;
     font-size: 80%;
     text-align: center;
-    background-color: rgb(39, 39, 39);
+    background-color: rgb(41, 41, 41);
+}
+.field {
+    width: 15%;
+    text-align: center;
 }
 
 /* ===== =====  LOGIN  ===== ===== */
@@ -177,21 +185,18 @@ label {
 }
 
 /*  ===== =====  TIMER  ===== ===== */
-.timer {
+.section-timer {
     border: 2px solid white;
     width: 70%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    
+    align-items: center; 
 }
 p {
     font-size: 70%;
     text-align: center;
 }
-
 .App-clock {
-    /* transform: translateX(-50%) translateY(-50%); */
     color: lime;
     font-family: Orbitron;
     letter-spacing: 7px;
@@ -202,9 +207,8 @@ p {
     text-align: center;
     margin: 25px 0;
 }
-
 .set-timer{
-    background-color: rgb(39, 39, 39);
+    background-color: rgb(41, 41, 41);
     border: 2px solid white;
     padding: 10px;
     text-align: center;
@@ -212,11 +216,32 @@ p {
     flex-direction: column;
     width: 60%;
 }
-.field {
-    width: 15%;
+
+/* ===== =====  DISPLAY-QUIZ  ===== ===== */
+.section-display-quiz {
+    border: 2px solid white;
+    width: 90%;
     text-align: center;
 }
+.answer-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+    padding: 8px;
+}
+.answer-submit {
+    width: 25%;
+    margin-bottom: 0;
+}
 
+
+/* ===== =====  MYACCOUNT  ===== ===== */
+/* .section-myaccount {
+    width: 70%;
+} */
 
 
 

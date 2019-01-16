@@ -38,7 +38,7 @@ const AnswerForm = (props) => {
             />
             
             <input 
-                className='input-submit'
+                className='answer-submit'
                 type='submit'
                 value='submit'
                 onClick = {props.handleNextQuestion}

@@ -38,22 +38,24 @@ class UserAnswer extends Component {
         console.log(this.state.numberCorrect.length)
         console.log(this.state.numberIncorrect.length)
         return (
-            <AnswerForm 
-                userInput = {this.state.userInput}
-                questionResult = {this.state.correct}
-
-                userAnswer = {this._handleInputAnswer}
-                answerResult = {this._isCorrect}
-                handleSubmit = {this._submit}
-
-                questionId = {this.props.questionId}
-                questionAnswer = {this.props.questionAnswer}
-
-                // resultset_id = {this.props.resultset_id}
-                
-                // handleResultSet = {this._handleResultSet}
-                handleNextQuestion = {this.props.handleNextQuestion}
-            />
+            <div className='answer'>
+                <AnswerForm 
+                    userInput = {this.state.userInput}
+                    questionResult = {this.state.correct}
+                    
+                    userAnswer = {this._handleInputAnswer}
+                    answerResult = {this._isCorrect}
+                    handleSubmit = {this._submit}
+                    
+                    questionId = {this.props.questionId}
+                    questionAnswer = {this.props.questionAnswer}
+                    
+                    // resultset_id = {this.props.resultset_id}
+                    
+                    // handleResultSet = {this._handleResultSet}
+                    handleNextQuestion = {this.props.handleNextQuestion}
+                />
+             </div>
 
         )
     }

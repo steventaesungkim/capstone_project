@@ -50,14 +50,18 @@ class MyAccount extends Component {
         const thisUser = theUser.username
 
         return (
-            <div>
-                <h2>MyAccount</h2>
+            <section className='section-myaccount'>
+                <div className='title'>
+                    <h2>MyAccount</h2>
+                </div>
                 <Link to = {{
                     pathname: '/settings', 
                     state: {
                         thisUser
-                        }}} className='links'>
-                   Settings
+                    }
+                }} 
+                    className='links hover'
+                    >Settings
                 </Link>
 
                 <h3>{`${thisUser}'s Flash Card Decks`}</h3>
@@ -69,7 +73,7 @@ class MyAccount extends Component {
                 <h3>{`${thisUser}'s Results `}</h3>
                 <ResultHistoryTable results={this.state.userHistory}/>
                    
-            </div>
+            </section>
         )
     }
 }

@@ -82,8 +82,10 @@ class DisplayQuiz extends Component {
 
     render() {  
         return(
-            <div>
-                <Clock />
+            <section className='section-display-quiz'>
+                <div className='clock'>
+                    <Clock />
+                </div>
 
                 <Question 
                     all = {this.state.question}
@@ -96,7 +98,7 @@ class DisplayQuiz extends Component {
 
                     handleNextQuestion = {this._handleNextQuestion}
                 />
-            </div>
+            </section>
         )
         // }   
     }

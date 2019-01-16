@@ -58,14 +58,17 @@ class Question {
         }
 
     // Gets the IDs for all records from Questions table for a specific Category ID
-    // Returns an array of Question IDs for all questions in the Category
+    // Returns an array of Question class instances for all questions in the Category
     static getByCategory(catID) {
         return db.any(`
-                SELECT id FROM questions WHERE id_category = $1`,
+                SELECT * FROM questions WHERE id_category = $1`,
                 [catID]
             )
-            .then(result => {
-                return result.map(r => r.id);
+            .then(qArray => {
+                const instanceArray = qArray.map(q => {
+                    return new Question(q.id, q.level, q.question, q.answer, q.id_category);
+                });
+                return instanceArray;
             });
     }
 
@@ -138,7 +141,7 @@ class Question {
     //   - Returns an array of Question class instances if returnAllData is true or omitted
     static getDeckSubjects(userID) {
         return db.any(`
-            SELECT DISTINCT q.level
+            SELECT DISTINCT q.level, q.id_category
             FROM questions q INNER JOIN categories c ON q.id_category = c.id
             WHERE c.id_user = $1`,
             [userID]

@@ -52,9 +52,12 @@ class Settings extends Component {
         
         // console.log(theUser.id)
         return (
-            <div>
+            <section className='section-settings'>
+            <div className='title'>
                 <h2>Settings</h2>
-                <h4>Change user info</h4>
+            </div>
+            <div className='title'>
+                <h4>Change user info:</h4>
                 <UpdateUser 
                     inputName = {this._updateName}
                     newName = {this.state.name}
@@ -62,14 +65,18 @@ class Settings extends Component {
                     newUsername = {this.state.username}
                     submit = {this._onSubmit}
                 />
-                <h4>Update password</h4>
+            </div>
+            <div className='title'>  
+                <h4>Update password:</h4>
                 <UpdatePassword 
                     theUser = {this.props.location.state.thisUser}
                     inputPassword = {this._updatePassword}
                     newPassword = {this.state.password}
                     passwordSubmit = {this._pwSubmit}
                 />
-                <h4>Change avatar</h4>
+            </div>
+            <div className='title'>
+                <h4>Change avatar:</h4>
                 <UpdateAvatar 
                     name = 'Avatar'
                     avatarData = {this.state.avatarData}
@@ -81,10 +88,15 @@ class Settings extends Component {
                     newAvatar = {this.state.avatar}
                     avatarSubmit = {this._avatarSubmit}
                 />
-                <h3>Delete account</h3>
-                <p>Please rethink your next action.</p>
-                <button>Delete this account</button>
             </div>
+            <div className='title'>
+                <h3>Delete account</h3>
+            </div>
+            <div>
+                <p>Please rethink your next action.</p>
+            </div>
+                <button>Delete this account</button>
+            </section>
         )
     }
     

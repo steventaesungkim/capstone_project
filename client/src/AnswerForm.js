@@ -18,7 +18,7 @@ const AnswerForm = (props) => {
             >
             <input
                 required
-                className='input'
+                className='input-answer'
                 type='text'
                 placeholder='What is your answer?'
                 onChange={(event) =>{

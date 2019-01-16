@@ -12,7 +12,7 @@ const LevelsDropdown = (props) => {
     let getButtonQuestions = () => {
         if (props.showButton) { 
             return (
-                <div>
+                <div className='dd-btn'>
                     <input
                         className='btn btn-ghost'
                         type='submit'
@@ -44,8 +44,8 @@ const LevelsDropdown = (props) => {
     // console.log(props.resultset_id)
     
     return (
-        <div>
-            <label>{props.name}:
+        <div className ='level-dropdown'>
+            <label className='bgc'>{props.name}:
                 <select
                     className='selection'
                     value={props.levelSelection}

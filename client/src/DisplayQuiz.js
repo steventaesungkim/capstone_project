@@ -86,7 +86,7 @@ class DisplayQuiz extends Component {
                 <div className='clock'>
                     <Clock />
                 </div>
-
+                
                 <Question 
                     all = {this.state.question}
                     displayQuestion = {this.state.displayQuestion}

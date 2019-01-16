@@ -788,7 +788,7 @@ app.post('/api/resultset/:id(\\d+)', (req, res) => {
         .then(rset => {        
             rset.time = req.body.time ? req.body.time : rset.time;
             rset.id_user = req.body.id_user ? req.body.id_user : rset.id_user;
-            rset.score = req.body.score ? req.body.score : rset.score;
+            rset.score = req.body.score !== undefined ? req.body.score : rset.score;
 
             rset.update()
                 .catch(err => {

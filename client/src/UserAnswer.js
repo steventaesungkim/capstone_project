@@ -82,7 +82,7 @@ class UserAnswer extends Component {
                     alert(`Your score is: ${score}`);
     
                     Axios
-                    .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
+                    .post(`/api/resultset/${this.props.resultsetId}`, {score: Number(score)})
                     .then(response => {
                         this.setState ({
                             numberCorrect: 0,
@@ -113,8 +113,10 @@ class UserAnswer extends Component {
                     
                     alert(`Your score is: ${score}`);
 
+                    console.log(Number(score))
+
                     Axios
-                    .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
+                    .post(`/api/resultset/${this.props.resultsetId}`, {score: Number(score)})
                     .then(response => {
                         this.setState ({
                             numberCorrect: 0,

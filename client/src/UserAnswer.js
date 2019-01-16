@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import AnswerForm from './AnswerForm';
 import Axios from 'axios';
-import { timingSafeEqual } from 'crypto';
 
 class UserAnswer extends Component {
     constructor(props) {
         // console.log(props)
+        console.log(props.history)
         super(props);
         this.state = {
             theUser: [],
@@ -13,7 +13,8 @@ class UserAnswer extends Component {
             userInput: '',
             correct: Boolean,
             numberCorrect: 0,
-            numberIncorrect: 0
+            numberIncorrect: 0,
+            nextQuestion: true
         }
     }
 
@@ -32,11 +33,9 @@ class UserAnswer extends Component {
         })
     }
 
-    
-
     render() {
-        console.log(this.state.numberCorrect.length)
-        console.log(this.state.numberIncorrect.length)
+        // console.log(this.state.numberCorrect.length)
+        // console.log(this.state.numberIncorrect.length)
         return (
             <div className='answer'>
                 <AnswerForm 
@@ -56,96 +55,60 @@ class UserAnswer extends Component {
                     handleNextQuestion = {this.props.handleNextQuestion}
                 />
              </div>
-
         )
     }
 
-    // _handleResultSet = (input) =>{
-    //     console.log(input)
-        // let session = [];
-        // if (session.length === 0) {
-        //     Axios
-        //     .post('/api/resultset/create', {
-
-        //     })
-        //     .then(response => {
-        //         console.log(response)
-        //         session.push(input)
-        //         console.log(session)
-        //     })
-
-        // } else {
-        //     session.push(input)
-        //     console.log(session)
-        // }
-    // }
-
     _submit = (input) => {
-        // console.log(this.state.numberCorrect)
-        // console.log(this.state.numberIncorrect)
-        // console.log(this.props.questionId)
-
-
         if (this.props.questionAnswer === input) {
 
-            if (this.state.numberCorrect === 2) {
+            if (this.state.numberCorrect !== 3){
+                alert('Correct');
 
-                const totalNumberQuestions = (this.state.numberCorrect + this.state.numberIncorrect);
-                const score = (((this.state.numberCorrect) / (totalNumberQuestions)) * 100).toFixed(0); 
-                
+            this.setState ({
+                numberCorrect: this.state.numberCorrect + 1,
+                userInput: ''
+            })
+
+            Axios
+            .post('/api/result/create', {
+                correct: true,
+                id_question: this.props.questionId,
+                id_resultset: this.props.resultsetId
+            })
+            .then(
+                this.setState ({
+                    numberCorrect: this.state.numberCorrect + 1,
+                    userInput: ''
+                })
+            )
+
+            }else{
+                const totalNumberAnswered = (this.state.numberCorrect + this.state.numberIncorrect);
+                let score = (((this.state.numberCorrect) / (totalNumberAnswered)) * 100).toFixed(0); 
+
                 alert(`Your score is: ${score}`);
+                alert(`totalnumber: ${totalNumberAnswered}`);
 
-                Axios
-                .post(`/api/resultset/${this.props.resultsetId}`, score)
-                .then(response => {
-
-                    this.setState ({
-                        numberCorrect: []
-                    })
-                
                 this.props.history.push('/timer');
-                })
-
-            } else {
-                alert('Correct')
-
+        
                 Axios
-                .post('/api/result/create', {
-                    correct: true,
-                    id_question: this.props.questionId,
-                    id_resultset: this.props.resultsetId
-                })
-
-                .then(
-                    this.setState ({
-                        numberCorrect: this.state.numberCorrect + 1,
-                        userInput: ''
-                    })
-                )
-            }
-        } else {
-
-            if (this.state.numberIncorrect === 2) {
-
-                const totalNumberQuestions = (this.state.numberCorrect + this.state.numberIncorrect);
-                const score = (((this.state.numberCorrect) / (totalNumberQuestions)) * 100).toFixed(0);
-
-                alert(`Your score is: ${score}`);
-
-                Axios
-                .post(`/api/resultset/${this.props.resultsetId}`, score)
+                .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
                 .then(response => {
-
                     this.setState ({
-                        numberIncorrect: []
+                        numberCorrect: 0,
+                        numberIncorrect: 0
                     })
-
-                    this.props.history.push('/timer');
                 })
+            }
 
-            } else {
+        }else{
+
+            if(this.state.numberIncorrect !== 3) {
                 alert('Incorrect');
-
+                this.setState ({
+                    numberIncorrect: this.state.numberIncorrect + 1,
+                    userInput: ''
+                })
                 Axios
                 .post('/api/result/create', {
                     correct: false,
@@ -153,86 +116,217 @@ class UserAnswer extends Component {
                     id_resultset: this.props.resultsetId
                 })
 
-                .then(
+            }else{
+                const totalNumberAnswered = (this.state.numberCorrect + this.state.numberIncorrect);
+                let score = (((this.state.numberCorrect) / (totalNumberAnswered)) * 100).toFixed(0);
+                
+                alert(`Your score is: ${score}`);
+                alert(`totalnumber: ${totalNumberAnswered}`);
+
+                this.historyprops.history.push('/timer');
+
+                Axios
+                .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
+                .then(response => {
                     this.setState ({
-                        numberIncorrect: this.state.numberIncorrect + 1,
-                        userInput: ''
+                        numberCorrect: 0,
+                        numberIncorrect: 0
                     })
-                )
+                })
             }
         }
 
 
-            // alert('Correct');
-            // return Axios
-            // .post('/api/result/create', {
-            //     correct: true,
-            //     id_question: this.props.questionId,
-            //     id_resultset: this.props.resultsetId
-            // })    
-            // .then(response => {
-            //     // console.log(response)
-            //     if (this.state.numberCorrect.length === 3) {
-            //         const totalNumberQuestions = (this.state.numberCorrect.length + this.state.numberIncorrect.length);
-            //         const score = (((this.state.numberCorrect.length) / (totalNumberQuestions.length)) * 100).toFixed(0); 
+
+
+
+        // if ((this.props.questionAnswer === input) && (this.state.numberCorrect !== 3)) {
+        //     alert('Correct');
+
+        //     this.setState ({
+        //         numberCorrect: this.state.numberCorrect + 1,
+        //         userInput: ''
+        //     })
+
+        //     Axios
+        //     .post('/api/result/create', {
+        //         correct: true,
+        //         id_question: this.props.questionId,
+        //         id_resultset: this.props.resultsetId
+        //     })
+        //     .then(
+        //         this.setState ({
+        //             numberCorrect: this.state.numberCorrect + 1,
+        //             userInput: ''
+        //         })
+        //     )
+        // }else{
+        //     const totalNumberAnswered = (this.state.numberCorrect + this.state.numberIncorrect);
+        //     let score = (((this.state.numberCorrect) / (totalNumberAnswered)) * 100).toFixed(0); 
+        //     alert(`Your score is: ${score}`);
                     
-            //         alert(`Your score is: ${score}`)
+        //     alert(`totalnumber: ${totalNumberAnswered}`);
+    
+        //     Axios
+        //     .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
+        //     .then(response => {
+        //         this.setState ({
+        //             numberCorrect: 0,
+        //             numberIncorrect: 0
+        //         })
+        //         this.props.history.push('/timer')
+        //     })
+        // }else{
+        //     const totalNumberAnswered = (this.state.numberCorrect + this.state.numberIncorrect);
+        //     let score = (((this.state.numberCorrect) / (totalNumberAnswered)) * 100).toFixed(0);
+        //     console.log(this.state.numberIncorrect)
+        //     console.log(totalNumberAnswered)
+        //     console.log(score)
+        //     alert(`Your score is: ${score}`);
+            
+        //     alert(`totalnumber: ${totalNumberAnswered}`);
+        //     this.state.history.push('/timer');
+        //     Axios
+        //     .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
+        //     .then(response => {
+        //         this.setState ({
+        //             numberCorrect: 0,
+        //             numberIncorrect: 0
+        //         })
+        //     })
+        // }
 
-            //         Axios
-            //         .post(`/api/resultset/${this.props.resultsetId}`, score)
-            //         .then(response => {
-            //             this.setState ({
-            //                 numberCorrect: []
-            //             })
-
-            //             this.props.history.push('/timer');
-            //         })
-            //     } else {
-            //         this.setState ({
-            //             numberCorrect: {... this.props.questionId},
-            //             userInput: ''
-            //         })
-            //     }
-
-
-                
-            // })
-        // } else {
+        // if((this.props.questionAnswer !== input) && (this.state.numberIncorrect !== 3)) {
         //     alert('Incorrect');
-        //     return Axios
+        //     this.setState ({
+        //         numberIncorrect: this.state.numberIncorrect + 1,
+        //         userInput: ''
+        //     })
+        //     Axios
         //     .post('/api/result/create', {
         //         correct: false,
         //         id_question: this.props.questionId,
         //         id_resultset: this.props.resultsetId
         //     })
+        // }else{
+        //     const totalNumberAnswered = (this.state.numberCorrect + this.state.numberIncorrect);
+        //     let score = (((this.state.numberCorrect) / (totalNumberAnswered)) * 100).toFixed(0);
+        //     console.log(this.state.numberIncorrect)
+        //     console.log(totalNumberAnswered)
+        //     console.log(score)
+        //     alert(`Your score is: ${score}`);
+            
+        //     alert(`totalnumber: ${totalNumberAnswered}`);
+        //     this.state.history.push('/timer');
+        //     Axios
+        //     .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
         //     .then(response => {
-        //         // console.log(response)
-        //         if(this.state.numberIncorrect.length === 3) {
-        //             console.log("YOU GOT IT CORRECT")
-        //             const totalNumberQuestions = (this.state.numberIncorrect.lenth + this.state.numberIncorrect.length);
-        //             const score = (((this.state.numberIncorrect.length) / (totalNumberQuestions.length)) * 100).toFixed(0);
-
-        //             alert(`Your score is: ${score}`)
-
-        //             Axios
-        //             .post(`/api/resultset/${this.props.resultsetId}`, score)
-        //             .then(response => {
-        //                 this.setState ({
-        //                     numberIncorrect: []
-        //                 })
-
-        //                 this.props.history.push('/timer');
-        //             })
-        //         }else{
-        //             this.setState ({
-        //                 numberIncorrect: {... this.props.questionId},
-        //                 userInput: ''
-        //             })
-
-        //         }
+        //         this.setState ({
+        //             numberCorrect: 0,
+        //             numberIncorrect: 0
+        //         })
         //     })
-
         // }
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //     if (this.props.questionAnswer === input) {
+    //         if (this.state.numberCorrect === 3) {
+    //             const totalNumberAnswered = (this.state.numberCorrect + this.state.numberIncorrect);
+    //             let score = (((this.state.numberCorrect) / (totalNumberAnswered)) * 100).toFixed(0); 
+    //             alert(`Your score is: ${score}`);
+                
+    //             alert(`totalnumber: ${totalNumberAnswered}`);
+
+    //             Axios
+    //             .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
+    //             .then(response => {
+    //                 this.setState ({
+    //                     numberCorrect: 0,
+    //                     numberIncorrect: 0
+    //                 })
+    //             // history.push('/timer');
+    //             })
+    //         } else {
+                // alert('Correct')
+                // this.setState ({
+                //     numberCorrect: this.state.numberCorrect + 1,
+                //     userInput: ''
+                // })
+
+                // Axios
+                // .post('/api/result/create', {
+                //     correct: true,
+                //     id_question: this.props.questionId,
+                //     id_resultset: this.props.resultsetId
+                // })
+                // // .then(
+                // //     this.setState ({
+                // //         numberCorrect: this.state.numberCorrect + 1,
+                // //         userInput: ''
+                // //     })
+                // // )
+    //         }
+    //     } else {
+    //         if (this.state.numberIncorrect === 3) {
+    //             this.setState ({
+    //                 nextQuestion: false
+    //             })
+    //             if (this.state.nextQuestion === true) {
+
+    //             }
+                // const totalNumberAnswered = (this.state.numberCorrect + this.state.numberIncorrect);
+                // let score = (((this.state.numberCorrect) / (totalNumberAnswered)) * 100).toFixed(0);
+                // console.log(this.state.numberIncorrect)
+                // console.log(totalNumberAnswered)
+                // console.log(score)
+
+                // // if (this.state.numberIncorrect === 3) {
+                //     alert(`Your score is: ${score}`);
+                    
+                //     alert(`totalnumber: ${totalNumberAnswered}`);
+                //     this.state.history.push('/timer');
+                // // }
+
+                // Axios
+                // .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
+                // .then(response => {
+                //     this.setState ({
+                //         numberCorrect: [],
+                //         numberIncorrect: []
+                //     })
+                //     // history.push('/timer');
+                // })
+    //         } else {
+                // alert('Incorrect');
+                // this.setState ({
+                //     numberIncorrect: this.state.numberIncorrect + 1,
+                //     userInput: ''
+                // })
+
+                // Axios
+                // .post('/api/result/create', {
+                //     correct: false,
+                //     id_question: this.props.questionId,
+                //     id_resultset: this.props.resultsetId
+                // })
+    //             // .then(
+                    
+    //             // )
+    //         }
+    //     }
     }
 
     _handleInputAnswer = (input) => {

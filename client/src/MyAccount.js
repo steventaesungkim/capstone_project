@@ -37,8 +37,8 @@ class MyAccount extends Component {
                         fetch(`/api/question/category/${CategoryID}`)
                         .then(r => r.json())
                         .then(q => {
-                            console.log("QUESTIONS");
-                            console.log(q);
+                            // console.log("QUESTIONS");
+                            // console.log(q);
                             this.setState({
                                 theUser: data.user,
                                 isLoggedIn: data.isLoggedIn,
@@ -76,6 +76,7 @@ class MyAccount extends Component {
                     items={this.state.subjects}
                     categoryID={this.state.flashID}
                     questionList={this.state.questions}
+                    btnClick={this._handleClick}
                 />
                 <Link to = {{pathname: '/deckadd', state: {thisUser: theUser}}} className='links'>
                    Add a Flash Card Deck
@@ -86,6 +87,18 @@ class MyAccount extends Component {
                    
             </div>
         )
+    }
+
+    _handleClick = (id, event) => {
+        // console.log("id");
+        // console.log(id);
+        const myQues = this.state.questions.filter(x => x.id === id);
+        // this.props.history.push(`/deckedit/${id}`)
+        this.props.history.push({
+            pathname: `/deckedit/${id}`,
+            state: {q: myQues}
+        })
+
     }
 }
 

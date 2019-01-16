@@ -41,7 +41,7 @@ const DeckQandA = (props) => {
             <input 
                 className='submit'
                 type='submit'
-                value='Add Flash Card'
+                value={`${props.btnValue} Flash Card`}
             />
         </form>
     )

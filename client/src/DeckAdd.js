@@ -77,6 +77,7 @@ class DeckAdd extends Component {
                     inputAnswer = {this._updateAnswer}
                     newAnswer = {this.state.answer}
                     submit = {this._onSubmit}
+                    btnValue = "Add"
                 />
 
             </div>

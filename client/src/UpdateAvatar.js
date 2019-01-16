@@ -34,7 +34,7 @@
 // export default UpdateAvatar;
 
 import React from 'react';
-import AvatarDropdown from './AvatarDropdown';
+// import AvatarDropdown from './AvatarDropdown';
 
 const UpdateAvatar = (props) => {
     return (

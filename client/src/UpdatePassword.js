@@ -14,7 +14,7 @@ const UpdatePassword = (props) => {
             <input 
                 name='password'
                 className='input'
-                type='text'
+                type='password'
                 onChange = {(event) => {
                     props.inputPassword(event.target.value)
                 }}

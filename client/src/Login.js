@@ -11,19 +11,16 @@ class Login extends Component {
             isLoggedIn: Boolean,
             username: '',
             password: ''
-
         }
     }
 
     componentDidMount() {
         fetch('/api/user/isValid')
         .then(r => r.json())
-        .then(data =>{
-            console.log(data);
-            console.log(`LOGIN-STATUS:`,data.isLoggedIn)
-            if(data.isLoggedIn === false){
+        .then(data => { 
+            if (data.isLoggedIn === false) {
                 this.props.history.push('/');
-            }else{
+            } else {
                 this.setState ({
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
@@ -31,7 +28,6 @@ class Login extends Component {
                 this.props.history.push('/timer');
             }
         })
-        
     }
 
     render() {
@@ -64,15 +60,15 @@ class Login extends Component {
         });
     }
 
-    _onSubmit = (event) =>{
+    _onSubmit = (event) => { 
         event.preventDefault();
         
         Axios
         .post(`/api/user/login`, this.state)
         .then((response) => {
-            //console.log(response)
             if ((response.data === "Invalid Username") || (response.data === "Invalid Password")) {
                 alert('Incorrect Username or Password. Please re-enter correct Username or Password');
+                
                 this.setState ({
                     username: '',
                     password: ''

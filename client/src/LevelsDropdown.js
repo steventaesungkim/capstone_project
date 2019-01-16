@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 const LevelsDropdown = (props) => {
-    console.log(props)
+    // console.log(props)
     // console.log(props.resultset_id)
     const firstOption = (props.name !== 'Level')
     ? <option value= {props.levelList}>Select a Level</option>

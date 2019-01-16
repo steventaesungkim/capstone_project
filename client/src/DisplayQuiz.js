@@ -5,7 +5,7 @@ import Question from './Question';
 
 class DisplayQuiz extends Component {
     constructor(props) {
-        console.log(props)
+        // console.log(props)
         // console.log('THIS IS WHERE WE SHOULD GET THE STUPID RESULTSET ID')
         // console.log(props.resultset_id)
         super(props);

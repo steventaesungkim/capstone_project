@@ -7,7 +7,7 @@ import Axios from 'axios';
 class UserAnswer extends Component {
     constructor(props) {
         // console.log(props)
-        console.log(props.history)
+        // console.log(props.history)
         super(props);
         this.state = {
             theUser: [],
@@ -113,7 +113,7 @@ class UserAnswer extends Component {
                     
                     alert(`Your score is: ${score}`);
 
-                    console.log(Number(score))
+                    // console.log(Number(score))
 
                     Axios
                     .post(`/api/resultset/${this.props.resultsetId}`, {score: Number(score)})

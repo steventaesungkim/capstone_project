@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UpdateUser from './UpdateUser';
 import UpdatePassword from './UpdatePassword';
-import UpdateAvatar from './UpdateAvatar';
+// import UpdateAvatar from './UpdateAvatar';
 import Axios from 'axios';
 
 
@@ -27,7 +27,7 @@ class Settings extends Component {
         fetch('/api/user/isValid')
         .then(r => r.json())
         .then(data =>{
-            console.log(data.isLoggedIn)
+            // console.log(data.isLoggedIn)
             if(data.isLoggedIn === false){
                 this.props.history.push('/');
             }else{

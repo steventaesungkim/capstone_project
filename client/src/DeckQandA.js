@@ -39,9 +39,9 @@ const DeckQandA = (props) => {
             </label>
             
             <input 
-                className='submit'
+                className='input-submit'
                 type='submit'
-                value='Add Flash Card'
+                value={`${props.btnValue} Flash Card`}
             />
         </form>
     )

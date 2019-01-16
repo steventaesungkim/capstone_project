@@ -83,11 +83,10 @@ class DisplayQuiz extends Component {
 
     render() {  
             return(
-                <div>
-                    <Clock 
-                    
-                    />
-    
+                <section className='section-display-quiz'>
+                <div className='clock'>
+                    <Clock />
+                </div>
                     <Question 
                         all = {this.state.question}
                         displayQuestion = {this.state.displayQuestion}
@@ -99,13 +98,9 @@ class DisplayQuiz extends Component {
                         history = {this.props.history}
                         handleNextQuestion = {this._handleNextQuestion}
                     />
-                </div>
+               </section>
             )
     }
-
-    // _handleResultSet = () =>{
-
-    // }
 
     _handleNextQuestion = () => {
         const categoryId = this.props.match.params.categoryId;

@@ -441,8 +441,8 @@ app.get('/api/question/:id(\\d+)', (req, res) => {
 
 app.get('/api/question/category/:id_category(\\d+)', (req, res) => {
     Question.getByCategory(req.params.id_category)
-    .then(category => {
-        res.json(category);
+    .then(question => {
+        res.json(question);
     });
 });
 
@@ -487,7 +487,7 @@ app.get('/api/questions/:id_user(\\d+)', (req, res) => {
 app.get('/api/question/subjects/:id_user(\\d+)', (req, res) => {
     Question.getDeckSubjects(req.params.id_user)
     .then(s => {
-        s = s.map(lev => lev.level);
+        //s = s.map(lev => lev.level);
         console.log("Subjects!!!!!!!!!!!!!!!!!!!!!!");
         console.log(s);
         res.json(s);

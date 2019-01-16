@@ -9,13 +9,16 @@ const Question = (props) => {
     const showQuestion = props.displayQuestion;
 
     return(
-        <div>
-            {showQuestion}
+        <div className='questions-display'>
+        <h3>Your question is!</h3>
+            <div className='questions'>
+                {showQuestion}
+            </div>
 
             <UserAnswer 
                 questionId = {questionId}
                 questionAnswer = {questionAnswer}
-
+                
                 timeStamp = {props.timeStamp}
 
                 resultsetId = {props.resultsetId}

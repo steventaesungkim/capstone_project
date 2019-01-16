@@ -4,18 +4,18 @@ import Axios from 'axios';
 
 
 
-class DeckAdd extends Component {
+class DeckEdit extends Component {
     constructor(props) {
         // console.log(props)
         super(props); 
         this.state = {
             theUser: [],
             isLogged: Boolean,
+            questionId: '',
             categoryId: '',
             subject: '',
             question: '',
             answer: ''
-
         }
     }
 
@@ -27,39 +27,20 @@ class DeckAdd extends Component {
             if(data.isLoggedIn === false){
                 this.props.history.push('/');
             } else {
-                // Get the user's Flash category ID. Add one if they don't have one yet
-                fetch(`/api/category/user/${data.user.id}`)
-                .then(r => r.json())
-                .then(d =>{
-                    console.log(d);
-                    //console.log(d[0].id);
-
-                    if (d.length > 0) {
-                        this.setState({
-                            theUser: data.user,
-                            isLoggedIn: data.isLoggedIn,
-                            categoryId: d[0].id
-                        })
-                    } else {
-                        Axios
-                        .post(`/api/category/create`, {
-                            category_type: "Flash Cards",
-                            levels: false,
-                            userID: data.user.id
-                        })
-                        .then((response) => {
-                            // console.log(response.data);
-                            console.log(`Category added: ${response.data.id} / ${response.data.category_type}`);
-
-                            this.setState ({
-                                theUser: data.user,
-                                isLoggedIn: data.isLoggedIn,
-                                categoryId: response.data.id
-                            })
-                        })
-                    }
-
+                const flashCard = this.props.location.state.q[0];
+                
+                
+                this.setState({
+                    theUser: data.user,
+                    isLoggedIn: data.isLoggedIn,
+                    questionId: flashCard.id,
+                    categoryId: flashCard.id_category,
+                    subject: flashCard.level,
+                    question: flashCard.question,
+                    answer: flashCard.answer
                 })
+                    
+
             }
         })    
     }
@@ -70,7 +51,8 @@ class DeckAdd extends Component {
                 <div className='title'>
                     <h2>Flash Cards</h2>
                 </div>
-                <p>Create a new flash card</p>
+                <p>Edit an existing flash card</p><br />
+                <p>User:  {this.state.theUser.username} |  Card#: {this.state.questionId}</p>
                 <DeckQandA 
                     inputSubject = {this._updateSubject}
                     newSubject = {this.state.subject}
@@ -79,7 +61,7 @@ class DeckAdd extends Component {
                     inputAnswer = {this._updateAnswer}
                     newAnswer = {this.state.answer}
                     submit = {this._onSubmit}
-                    btnValue = "Add"
+                    btnValue = "Update"
                 />
 
             </section>
@@ -103,23 +85,16 @@ class DeckAdd extends Component {
         event.preventDefault();
 
         Axios
-            .post(`/api/question/create`, {
+            .post(`/api/question/${this.state.questionId}`, {
                 level: this.state.subject,
                 question: this.state.question,
                 answer: this.state.answer,
-                id_category: this.state.categoryId
             })
             .then((response) => {
-                // console.log(response.data);
-                console.log(`Flash Card added: ${response.data.id}`);
-
-                this.setState ({
-                    subject: '',
-                    question: '',
-                    answer: ''
-                })
+                //console.log(response.data);
+                this.props.history.push(`/myaccount`);
             })
     }
 }
 
-export default DeckAdd;
+export default DeckEdit;

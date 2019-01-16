@@ -80,7 +80,7 @@ class Timer extends Component {
         console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
         // const currentUser = (this.state.theUser)
         return (
-            <div className='timer'>
+            <section className='section-timer'>
                 <div className='title'>
                     <h1>BR'OCK</h1>
                     <p>the assisted brain clock</p>
@@ -129,7 +129,7 @@ class Timer extends Component {
 
                     history = {this.props.history}
                 />
-            </div>
+            </section>
         );
     }
 
@@ -219,20 +219,6 @@ class Timer extends Component {
             showButton: true
         })
     }
-    
-    // _handleLogout = (event) => {
-    //     this.setState ({
-    //         inSession: false
-    //     })  
-
-    //     Axios
-    //     .post('/api/user/logout')
-    //     .then(response =>{
-    //         if (response.data.message === "Successfully logged out") {
-    //             this.props.history.push('/')
-    //         }
-    //     })
-    // }
 
 }
 

@@ -58,82 +58,70 @@ class UserAnswer extends Component {
 
     _submit = (input) => {
         if (this.props.questionAnswer === input) {
-
-            if (this.state.numberCorrect !== 3){
-                alert('Correct');
-
             this.setState ({
                 numberCorrect: this.state.numberCorrect + 1,
                 userInput: ''
-            })
-
-            Axios
-            .post('/api/result/create', {
-                correct: true,
-                id_question: this.props.questionId,
-                id_resultset: this.props.resultsetId
-            })
-            .then(
-                this.setState ({
-                    numberCorrect: this.state.numberCorrect + 1,
-                    userInput: ''
-                })
-            )
-
-            }else{
-                const totalNumberAnswered = (this.state.numberCorrect + this.state.numberIncorrect);
-                let score = (((this.state.numberCorrect) / (totalNumberAnswered)) * 100).toFixed(0); 
-
-                alert(`Your score is: ${score}`);
-                alert(`totalnumber: ${totalNumberAnswered}`);
-
-                // <Redirect to={'/timer'} />
-                this.props.history.push('/timer')
-        
-                Axios
-                .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
-                .then(response => {
-                    this.setState ({
-                        numberCorrect: 0,
-                        numberIncorrect: 0
+            }, () => {
+                if (this.state.numberCorrect !== 3){
+                    alert('Correct');
+    
+                    Axios
+                    .post('/api/result/create', {
+                        correct: true,
+                        id_question: this.props.questionId,
+                        id_resultset: this.props.resultsetId
                     })
-                })
-            }
-
+                }else{
+                    const totalNumberAnswered = (this.state.numberCorrect + this.state.numberIncorrect);
+                    let score = (((this.state.numberCorrect) / (totalNumberAnswered)) * 100).toFixed(0); 
+    
+                    alert(`Your score is: ${score}`);
+    
+                    Axios
+                    .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
+                    .then(response => {
+                        this.setState ({
+                            numberCorrect: 0,
+                            numberIncorrect: 0
+                        }, () => {
+                            this.props.history.push('/timer');
+                        })
+                    })
+                }
+            })
         }else{
-
-            if(this.state.numberIncorrect !== 3) {
-                alert('Incorrect');
-                this.setState ({
-                    numberIncorrect: this.state.numberIncorrect + 1,
-                    userInput: ''
-                })
-                Axios
-                .post('/api/result/create', {
-                    correct: false,
-                    id_question: this.props.questionId,
-                    id_resultset: this.props.resultsetId
-                })
-
-            }else{
-                const totalNumberAnswered = (this.state.numberCorrect + this.state.numberIncorrect);
-                let score = (((this.state.numberCorrect) / (totalNumberAnswered)) * 100).toFixed(0);
-                
-                alert(`Your score is: ${score}`);
-                alert(`totalnumber: ${totalNumberAnswered}`);
-
-                // <Redirect to={Timer} />
-                this.props.history.push('/timer')
-
-                Axios
-                .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
-                .then(response => {
-                    this.setState ({
-                        numberCorrect: 0,
-                        numberIncorrect: 0
+            this.setState ({
+                numberIncorrect: this.state.numberIncorrect + 1,
+                userInput: ''
+            }, () =>{
+                if(this.state.numberIncorrect !== 3) {
+                    alert('Incorrect');
+                    
+                    Axios
+                    .post('/api/result/create', {
+                        correct: false,
+                        id_question: this.props.questionId,
+                        id_resultset: this.props.resultsetId
                     })
-                })
-            }
+                }else{
+                    const totalNumberAnswered = (this.state.numberCorrect + this.state.numberIncorrect);
+                    let score = (((this.state.numberCorrect) / (totalNumberAnswered)) * 100).toFixed(0);
+                    
+                    alert(`Your score is: ${score}`);
+
+                    Axios
+                    .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
+                    .then(response => {
+                        this.setState ({
+                            numberCorrect: 0,
+                            numberIncorrect: 0
+                        }, () =>{
+
+                            this.props.history.push('/timer')
+                        })
+                    })
+                }
+            })
         }
 
 

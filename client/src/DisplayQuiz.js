@@ -96,7 +96,7 @@ class DisplayQuiz extends Component {
     
                         resultsetId = {this.props.match.params.resultset_id}
                         // handleResultSet = {this._handleResultSet}
-    
+                        history = {this.props.history}
                         handleNextQuestion = {this._handleNextQuestion}
                     />
                 </div>

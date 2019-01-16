@@ -55,6 +55,7 @@ h4 {
 /* ===== =====  REUSABLE  ===== ===== */
 .btn:link,
 .btn:visited,
+button,
 input[type=submit] {
     /* width: auto; */
     padding: 3px 8px;
@@ -313,8 +314,26 @@ p {
 .sep-link:hover {
     color: white;
 }
-
-
+details {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+summary {
+    font-size: 90%;
+}
+button {
+    margin: 5px 0;
+}
+b {
+    display: flex; 
+    justify-content: flex-start;
+}
+.deck-content {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 /* ===== =====  SETTINGS  ===== ===== */
 .section-settings {

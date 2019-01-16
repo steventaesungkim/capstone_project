@@ -14,32 +14,32 @@ const LogInForm = (props) => {
             }}
         >
             <label>Username:
-            <input 
-                required
-                name='username'
-                className='input'
-                type='text'
-                // placeholder='UserName'
-                onChange = {(e) => {
-                    props.newUserName(e.target.value);
-                }}
-                value = {props.inputUserName}
-                id="resetUsername"
-            /></label>
+                <input 
+                    required
+                    name='username'
+                    className='input'
+                    type='text'
+                    onChange = {(e) => {
+                        props.newUserName(e.target.value);
+                    }}
+                    value = {props.inputUserName}
+                    id="resetUsername"
+                />
+            </label>
 
             <label>Password:
-            <input 
-                required
-                name='password'
-                className='input'
-                type='text'
-                // placeholder='Password'
-                onChange = {(e) => {
-                    props.newPassword(e.target.value);
-                }}
-                value = {props.inputPassword}
-                id="resetPassword"
-            /></label>
+                <input 
+                    required
+                    name='password'
+                    className='input'
+                    type='text'
+                    onChange = {(e) => {
+                        props.newPassword(e.target.value);
+                    }}
+                    value = {props.inputPassword}
+                    id="resetPassword"
+                />
+            </label>
 
             <input 
                 className='input-submit'

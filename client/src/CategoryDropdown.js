@@ -12,7 +12,7 @@ const CategoryDropdown = (props) => {
     let getLevelDropdown = () => {
         if (props.showLevel === true) {
             return(
-                <div className='dropdown'>   
+                <div>   
                     <LevelsDropdown 
                         name = 'Levels'
                         levelList = {props.levelList}
@@ -44,8 +44,8 @@ const CategoryDropdown = (props) => {
     }) 
 
     return (
-        <div className='dropdown'>
-            <label>{props.name}: 
+        <div className='category-dropdown'>
+            <label className='bgc'>{props.name}: 
                 <select
                     className='selection'
                     name={props.name}

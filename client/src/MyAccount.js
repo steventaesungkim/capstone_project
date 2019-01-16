@@ -50,26 +50,36 @@ class MyAccount extends Component {
         const thisUser = theUser.username
 
         return (
-            <div>
-                <h2>MyAccount</h2>
+            <section className='section-myaccount'>
+                <div className='title'>
+                    <h2>MyAccount</h2>
+                </div>
                 <Link to = {{
                     pathname: '/settings', 
                     state: {
                         thisUser
-                        }}} className='links'>
-                   Settings
+                    }
+                }} 
+                    className='sep-link'
+                    >Settings
                 </Link>
 
                 <h3>{`${thisUser}'s Flash Card Decks`}</h3>
                 <List items={this.state.subjects}/>
-                <Link to = {{pathname: '/deckadd', state: {thisUser: theUser}}} className='links'>
-                   Add a Flash Card Deck
+                <Link to = {{
+                    pathname: '/deckadd', 
+                    state: {
+                        thisUser: theUser
+                    }
+                }} 
+                    className='sep-link'
+                    >Add a Flash Card Deck
                 </Link>
 
                 <h3>{`${thisUser}'s Results `}</h3>
                 <ResultHistoryTable results={this.state.userHistory}/>
                    
-            </div>
+            </section>
         )
     }
 }

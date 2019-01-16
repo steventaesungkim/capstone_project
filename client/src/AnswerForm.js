@@ -18,7 +18,7 @@ const AnswerForm = (props) => {
             >
             <input
                 required
-                className='input'
+                className='input-answer'
                 type='text'
                 placeholder='What is your answer?'
                 onChange={(event) =>{
@@ -38,7 +38,7 @@ const AnswerForm = (props) => {
             />
             
             <input 
-                className='input-submit'
+                className='answer-submit'
                 type='submit'
                 value='submit'
                 onClick = {props.handleNextQuestion}

@@ -10,6 +10,10 @@ const Navbar = (props) => {
     // console.log(thisUser)
     return(
         <header className='navbar'>
+            <Link to = '/timer'
+                className='links'
+            >Timer</Link>
+
             <Link to = '/myaccount' 
                 className='links'
                 // style = {{textDecoration: 'none'}}

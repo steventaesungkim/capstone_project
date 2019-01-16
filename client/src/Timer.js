@@ -119,6 +119,8 @@ class Timer extends Component {
 
                     handleTimeSubmit = {this._handleTimeSubmit}
                     timeStamp = {this.state.timeStamp}
+                    hourSelection = {this.state.hourSelection}
+                    minuteSelection = {this.state.minuteSelection}
 
                     resultset_id = {this.state.resultset_id}
                     handleResultSet_id = {this._handleResultSet_id}

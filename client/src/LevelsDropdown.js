@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 const LevelsDropdown = (props) => {
-
+    console.log(props)
     // console.log(props.resultset_id)
     const firstOption = (props.name !== 'Level')
     ? <option value= {props.levelList}>Select a Level</option>
@@ -56,10 +56,30 @@ const LevelsDropdown = (props) => {
                 </select>
             </label>
             {
-                (props.resultset_id === '') ?
-                getButtonQuestions() : <Redirect to={`/question/${props.categoryId}/${props.levelSelection}/${props.resultset_id}`}/>
+                ((props.resultset_id === '')) ?
+                getButtonQuestions() : <Redirect to={`/waitingroom/${props.categoryId}/${props.levelSelection}/${props.resultset_id}/${props.hourSelection}/${props.minuteSelection}`}/>
             }
         </div>
     )
 }
 export default LevelsDropdown;
+
+
+// return (
+//     <div>
+//         <label>{props.name}:
+//             <select
+//                 className='selection'
+//                 value={props.levelSelection}
+//                 onChange={(event) => props.handleLevel(event)}
+//             >
+//                 {firstOption}  
+//                 {theEachLevel}
+//             </select>
+//         </label>
+//         {
+//             (props.resultset_id === '') ?
+//             getButtonQuestions() : <Redirect to={`/question/${props.categoryId}/${props.levelSelection}/${props.resultset_id}`}/>
+//         }
+//     </div>
+// )

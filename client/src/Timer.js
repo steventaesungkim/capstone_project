@@ -79,7 +79,7 @@ class Timer extends Component {
         // const currentUser = (this.state.theUser)
         return (
             <div className='timer'>
-                <div class='title'>
+                <div className='title'>
                     <h1>BR'OCK</h1>
                     <p>the assisted brain clock</p>
                 </div>
@@ -188,12 +188,9 @@ class Timer extends Component {
         return Axios
         .post('/api/resultset/create', {
             time,
-            id_user,
-            score: 100
+            id_user 
         })
         .then(response => {
-            console.log("OMG ITS BRITNEY!!!!!")
-            console.log( response)
             this.setState ({
                 resultset_id: response.data.id
             })

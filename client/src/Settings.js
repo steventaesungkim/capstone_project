@@ -53,49 +53,39 @@ class Settings extends Component {
         // console.log(theUser.id)
         return (
             <section className='section-settings'>
-            <div className='title'>
-                <h2>Settings</h2>
-            </div>
-            <div className='title'>
-                <h4>Change user info:</h4>
-                <UpdateUser 
-                    inputName = {this._updateName}
-                    newName = {this.state.name}
-                    inputUsername = {this._updateUsername}
-                    newUsername = {this.state.username}
-                    submit = {this._onSubmit}
+                <div className='title'>
+                    <h2>Settings</h2>
+                </div>
+                <div className='title'>
+                    <h4>Change user info:</h4>
+                </div>
+                    <UpdateUser 
+                        inputName = {this._updateName}
+                        newName = {this.state.name}
+                        inputUsername = {this._updateUsername}
+                        newUsername = {this.state.username}
+                        submit = {this._onSubmit}
+                    />
+                <div className='title'>  
+                    <h4>Update password:</h4>
+                </div>
+                    <UpdatePassword 
+                        theUser = {this.props.location.state.thisUser}
+                        inputPassword = {this._updatePassword}
+                        newPassword = {this.state.password}
+                        passwordSubmit = {this._pwSubmit}
                 />
-            </div>
-            <div className='title'>  
-                <h4>Update password:</h4>
-                <UpdatePassword 
-                    theUser = {this.props.location.state.thisUser}
-                    inputPassword = {this._updatePassword}
-                    newPassword = {this.state.password}
-                    passwordSubmit = {this._pwSubmit}
-                />
-            </div>
-            <div className='title'>
-                <h4>Change avatar:</h4>
-                <UpdateAvatar 
-                    name = 'Avatar'
-                    avatarData = {this.state.avatarData}
-                    avatarSelection = {this.state.avatarSelection}
-                    avatarId = {this.state.avatarId}
-                    handleAvatar = {this._handleAvatar}
-
-                    inputAvatar = {this._updateAvatar}
-                    newAvatar = {this.state.avatar}
-                    avatarSubmit = {this._avatarSubmit}
-                />
-            </div>
-            <div className='title'>
-                <h3>Delete account</h3>
-            </div>
-            <div>
-                <p>Please rethink your next action.</p>
-            </div>
-                <button>Delete this account</button>
+                <div>
+                    <div className='title'>
+                        <h3>Delete account</h3>
+                    </div>
+                    <p>Please rethink your next action.</p>
+                    <input
+                        className='input-dummy'
+                        type='submit'
+                        value="Delete"
+                    />
+                </div>
             </section>
         )
     }
@@ -144,22 +134,6 @@ class Settings extends Component {
         });
     }
 
-    _handleAvatar = (event) =>{
-        event.preventDefault()
-        const selectedImg = event.target.value
-        // console.log(this.state.avatarData)
-
-        this.state.avatarData.forEach((compare) =>{
-            if (selectedImg === compare.img){
-                this.setState({
-                    avatar: selectedImg,
-                    avatarSelection: selectedImg,
-                    avatarId: compare.id
-                })
-            }
-        })
-    }
-
     _onSubmit = (event) => {
         event.preventDefault();
         const theUser = (this.props.location.state.thisUser);
@@ -181,23 +155,6 @@ class Settings extends Component {
         })
     }
 
-    _avatarSubmit = (event) => {
-        event.preventDefault();
-        const theUser = (this.props.location.state.thisUser);
-        const userId = theUser.id;
-
-        Axios
-        .post(`/api/user/${userId}`,this.state)
-        .then((response) => {
-            // console.log(response)
-            if (response.data.avatar === "Avatar Updated") {
-                alert('Avatar updated')
-                this.setState ({
-                    avatar: 'Select a Avatar'
-                })
-            }
-        })
-    }
 
     _pwSubmit = (event) => {
         event.preventDefault()

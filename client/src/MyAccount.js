@@ -60,14 +60,20 @@ class MyAccount extends Component {
                         thisUser
                     }
                 }} 
-                    className='links hover'
+                    className='sep-link'
                     >Settings
                 </Link>
 
                 <h3>{`${thisUser}'s Flash Card Decks`}</h3>
                 <List items={this.state.subjects}/>
-                <Link to = {{pathname: '/deckadd', state: {thisUser: theUser}}} className='links'>
-                   Add a Flash Card Deck
+                <Link to = {{
+                    pathname: '/deckadd', 
+                    state: {
+                        thisUser: theUser
+                    }
+                }} 
+                    className='sep-link'
+                    >Add a Flash Card Deck
                 </Link>
 
                 <h3>{`${thisUser}'s Results `}</h3>

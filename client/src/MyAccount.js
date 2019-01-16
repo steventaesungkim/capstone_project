@@ -81,7 +81,8 @@ class MyAccount extends Component {
                     items={this.state.subjects}
                     categoryID={this.state.flashID}
                     questionList={this.state.questions}
-                    btnClick={this._handleClick}
+                    btnClickEdit={this._handleEditBtn}
+                    btnClickDelete={this._handleDeleteBtn}
                 />
                 <Link to = {{pathname: '/deckadd', state: {thisUser: theUser}}} className='sep-link'>
                    Add a Flash Card Deck
@@ -95,13 +96,25 @@ class MyAccount extends Component {
         )
     }
 
-    _handleClick = (id, event) => {
+    _handleEditBtn = (id, event) => {
         // console.log("id");
         // console.log(id);
         const myQues = this.state.questions.filter(x => x.id === id);
         // this.props.history.push(`/deckedit/${id}`)
         this.props.history.push({
             pathname: `/deckedit/${id}`,
+            state: {q: myQues}
+        })
+
+    }
+
+    _handleDeleteBtn = (id, event) => {
+        // console.log("id");
+        // console.log(id);
+        const myQues = this.state.questions.filter(x => x.id === id);
+        // this.props.history.push(`/deckedit/${id}`)
+        this.props.history.push({
+            pathname: `/deckdelete/${id}`,
             state: {q: myQues}
         })
 

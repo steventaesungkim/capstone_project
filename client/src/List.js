@@ -24,7 +24,8 @@ const List = (props) => {
                         <b>Q: </b>{i.question}<br />
                         <b>A: </b>{i.answer}<br />
                     </p>
-                    <button onClick={(e) => props.btnClick(i.id, e)}>Edit</button>
+                    <button onClick={(e) => props.btnClickEdit(i.id, e)}>Edit</button>
+                    <button onClick={(e) => props.btnClickDelete(i.id, e)}>Delete</button>
                 </div>
                     )
             })

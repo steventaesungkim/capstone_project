@@ -17,6 +17,7 @@ import UpdatePassword from './UpdatePassword';
 import UpdateAvatar from './UpdateAvatar';
 import DeckAdd from './DeckAdd';
 import DeckEdit from './DeckEdit';
+import DeckDelete from './DeckDelete';
 
 
 
@@ -51,6 +52,7 @@ class Home extends Component {
                     <Route path = '/updateAvatar' component = {UpdateAvatar} />
                     <Route path = '/deckadd' component = {DeckAdd} />
                     <Route path = '/deckedit/:qid' component = {DeckEdit} />
+                    <Route path = '/deckdelete/:qid' component = {DeckDelete} />
                     
                 </div>
             </Router>

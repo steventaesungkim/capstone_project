@@ -51,47 +51,62 @@ class DeckEdit extends Component {
                 <div className='title'>
                     <h2>Flash Cards</h2>
                 </div>
-                <p>Edit an existing flash card</p><br />
+                <p>Delete an existing flash card</p><br />
                 <p>User:  {this.state.theUser.username} |  Card#: {this.state.questionId}</p>
-                <DeckQandA 
-                    inputSubject = {this._updateSubject}
-                    newSubject = {this.state.subject}
-                    inputQuestion = {this._updateQuestion}
-                    newQuestion = {this.state.question}
-                    inputAnswer = {this._updateAnswer}
-                    newAnswer = {this.state.answer}
-                    submit = {this._onSubmit}
-                    btnValue = "Update"
-                />
+
+                <form className='form' method='POST' action='/api/user/userId'
+                    onSubmit = {(event) => {this._onSubmit(event)}}
+                >
+                    <label>Subject:
+                        <input 
+                            name='subject'
+                            className='input'
+                            type='text'
+                            value = {this.state.subject}
+                            disabled
+                        />
+                    </label>
+                    
+                    <label>Question:
+                        <input 
+                            name='question'
+                            className='input'
+                            type='text'
+                            value = {this.state.question}
+                            disabled
+                        />
+                    </label>
+                    
+                    <label>Answer:
+                        <input 
+                            name='answer'
+                            className='input'
+                            type='text'
+                            value = {this.state.answer}
+                            disabled
+                        />
+                    </label>
+                    
+                    <input 
+                        className='input-submit'
+                        type='submit'
+                        value='DELETE Flash Card'
+                    />
+                </form>
 
             </section>
         )
     }
     
-    _updateSubject = (input) => {
-        this.setState({subject: input})
-    }
-
-    _updateQuestion = (input) => {
-        this.setState({question: input})
-    }
-
-    _updateAnswer = (input) => {
-        this.setState({answer: input})
-    }
 
 
     _onSubmit = (event) => {
         event.preventDefault();
 
         Axios
-            .post(`/api/question/${this.state.questionId}`, {
-                level: this.state.subject,
-                question: this.state.question,
-                answer: this.state.answer,
-            })
+            .delete(`/api/question/${this.state.questionId}`)
             .then((response) => {
-                //console.log(response.data);
+                console.log(response.data);
                 this.props.history.push(`/myaccount`);
             })
     }

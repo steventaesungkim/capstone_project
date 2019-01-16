@@ -36,6 +36,7 @@ class WaitingRoom extends Component {
     componentWillUnmount() {
         clearInterval(this.intervalID);
     }
+    
 
     tick() {
         let hrs = new Date().getHours();
@@ -58,16 +59,23 @@ class WaitingRoom extends Component {
     }
 
     render() {
-        console.log(this.state.hour)
-        console.log(this.state.hourSelection)
-        console.log(this.state.minute)
-        console.log(this.state.minuteSelection)
+        console.log('comp hour',this.state.hour)
+        console.log('me hour',this.state.hourSelection)
+        console.log('comp min',this.state.minute)
+        console.log('me min',this.state.minuteSelection)
+
+        const isHourMatch = this.state.hour == this.state.hourSelection;
+        const isMinMatch = this.state.minute == this.state.minuteSelection;
+
+
         return (
         <div className="App-clock" >
             {
-                ((this.state.hourSelection !== this.state.hour) && (this.state.minuteSelection !== this.state.minute)) ?
-                (this.state.time) : <Redirect to={`/question/${this.state.categoryId}/${this.state.levelSelection}/${this.state.resultset_id}`}/> 
+                (isHourMatch && isMinMatch) ?
+                <Redirect to={`/question/${this.state.categoryId}/${this.state.levelSelection}/${this.state.resultset_id}`}/>
+                : null
 
+                
             }
         </div>
         );

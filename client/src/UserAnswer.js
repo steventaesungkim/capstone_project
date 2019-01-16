@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import AnswerForm from './AnswerForm';
 import Axios from 'axios';
+// import { Redirect } from 'react-router-dom';
+// import Timer from './Timer';
 
 class UserAnswer extends Component {
     constructor(props) {
@@ -85,7 +87,8 @@ class UserAnswer extends Component {
                 alert(`Your score is: ${score}`);
                 alert(`totalnumber: ${totalNumberAnswered}`);
 
-                this.props.history.push('/timer');
+                // <Redirect to={'/timer'} />
+                this.props.history.push('/timer')
         
                 Axios
                 .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)
@@ -119,7 +122,8 @@ class UserAnswer extends Component {
                 alert(`Your score is: ${score}`);
                 alert(`totalnumber: ${totalNumberAnswered}`);
 
-                this.historyprops.history.push('/timer');
+                // <Redirect to={Timer} />
+                this.props.history.push('/timer')
 
                 Axios
                 .post(`/api/resultset/${this.props.resultsetId}`, `${score}`)

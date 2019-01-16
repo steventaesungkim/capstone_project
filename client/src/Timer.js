@@ -59,6 +59,8 @@ class Timer extends Component {
 
                                     let hrs = new Date().getHours();
                                     let mins = new Date().getMinutes();
+                                    hrs = (hrs < 10) ? ("0" + hrs) : hrs;
+                                    
 
                                     this.setState ({
                                         dateSelection: date,
@@ -139,7 +141,7 @@ class Timer extends Component {
 
     _handleHourChange = (input) => {
         input = (input < 10) ? ("0" + input) : input;
-        const hrs = input;
+        let hrs = input;
         
         this.setState ({
             hourSelection: hrs
@@ -148,7 +150,7 @@ class Timer extends Component {
 
     _handleMinuteChange = (input) => {
         input = (input < 10) ? ("0" + input) : input;
-        const mins = input;
+        let mins = input;
 
         this.setState ({
             minuteSelection: mins

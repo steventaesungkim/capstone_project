@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import Clock from './Clock';
 
 
 
@@ -73,7 +74,7 @@ class WaitingRoom extends Component {
             {
                 (isHourMatch && isMinMatch) ?
                 <Redirect to={`/question/${this.state.categoryId}/${this.state.levelSelection}/${this.state.resultset_id}`}/>
-                : null
+                : (<Clock />)
 
                 
             }

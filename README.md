@@ -18,5 +18,5 @@ This capstone project was conceived, designed, and coded by Steven Kim, Stanley 
 
 ## Team Members
 - Steven Kim - [GitHub](https://github.com/steventaesungkim), [LinkedIn](https://www.linkedin.com/in/steventaesungkim/)
-- Stanley Chen - [GitHub](https://github.com/DannyShien), [LinkedIn] (https://www.linkedin.com/in/stanley-chen-224043a5/)
-- Greg Foreman - [GitHub](https://github.com/GFore), [LinkedIn] (https://www.linkedin.com/in/greg-foreman/)
+- Stanley Chen - [GitHub](https://github.com/DannyShien), [LinkedIn](https://www.linkedin.com/in/stanley-chen-224043a5/)
+- Greg Foreman - [GitHub](https://github.com/GFore), [LinkedIn](https://www.linkedin.com/in/greg-foreman/)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DeckQandA from './DeckQandA';
+// import DeckQandA from './DeckQandA';
 import Axios from 'axios';
 
 

@@ -6,12 +6,12 @@ import Clock from './Clock';
 
 class WaitingRoom extends Component {
     constructor(props) {
-        console.log(props.match.params)
-        console.log(props.match.params.categoryId)
-        console.log(props.match.params.levelSelection)
-        console.log(props.match.params.resultset_id)
-        console.log(props.match.params.hourSelection)
-        console.log(props.match.params.minuteSelection)
+        // console.log(props.match.params)
+        // console.log(props.match.params.categoryId)
+        // console.log(props.match.params.levelSelection)
+        // console.log(props.match.params.resultset_id)
+        // console.log(props.match.params.hourSelection)
+        // console.log(props.match.params.minuteSelection)
 
         super(props);
         this.state = {
@@ -60,10 +60,10 @@ class WaitingRoom extends Component {
     }
 
     render() {
-        console.log('comp hour',this.state.hour)
-        console.log('me hour',this.state.hourSelection)
-        console.log('comp min',this.state.minute)
-        console.log('me min',this.state.minuteSelection)
+        // console.log('comp hour',this.state.hour)
+        // console.log('me hour',this.state.hourSelection)
+        // console.log('comp min',this.state.minute)
+        // console.log('me min',this.state.minuteSelection)
 
         const isHourMatch = this.state.hour == this.state.hourSelection;
         const isMinMatch = this.state.minute == this.state.minuteSelection;

@@ -25,7 +25,7 @@ import DeckDelete from './DeckDelete';
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state= {
             theUser: [],
             isLoggedIn: Boolean
         }
@@ -41,6 +41,7 @@ class Home extends Component {
                         inSession = {this.state.isLoggedIn}
                         handleLogout = {this._handleLogout}
                     />   
+
                     <Route path =  '/' exact component = {Login} /> 
                     <Route path = '/register' component = {Register} />
                     <Route path = '/timer' component = {Timer} />
@@ -68,13 +69,12 @@ class Home extends Component {
 
         Axios
         .post('/api/user/logout')
-        .then(response =>{
+        .then(response => {
             if (response.data.message === "Successfully logged out") {
                 this.props.history.push('/')
             }
         })
     }
-    
 }
 
 

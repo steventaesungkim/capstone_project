@@ -23,7 +23,6 @@ const LogInForm = (props) => {
                         props.newUserName(e.target.value);
                     }}
                     value = {props.inputUserName}
-                    id="resetUsername"
                 />
             </label>
 
@@ -32,12 +31,11 @@ const LogInForm = (props) => {
                     required
                     name='password'
                     className='input'
-                    type='text'
+                    type='password'
                     onChange = {(e) => {
                         props.newPassword(e.target.value);
                     }}
                     value = {props.inputPassword}
-                    id="resetPassword"
                 />
             </label>
             <label>
@@ -55,13 +53,13 @@ const LogInForm = (props) => {
                     value='Register'
                 />
             </Link>
-            <Link to = '/#'>   
+            {/* <Link to = '/#'>   
                 <input 
                     className='btn btn-ghost' 
                     type='submit' 
                     value='Sign in as guest'
                 />
-            </Link> 
+            </Link>  */}
         </form>
     )
 }

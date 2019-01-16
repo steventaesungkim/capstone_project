@@ -43,7 +43,7 @@ const RegisterForm = (props) => {
             <input
                 required
                 className='input'
-                type='text'
+                type='password'
                 // placeholder='Password'
                 onChange = {(e) => {
                     props.newPassword(e.target.value);
@@ -84,13 +84,13 @@ const RegisterForm = (props) => {
                     value='Login'
                     />
             </Link>    
-            <Link to = '/#'>
+            {/* <Link to = '/#'>
                 <input 
                     className='btn btn-ghost' 
                     type='submit' 
                     value='Sign in as guest'
                     />
-            </Link>        
+            </Link>         */}
         </form>
     )
 }

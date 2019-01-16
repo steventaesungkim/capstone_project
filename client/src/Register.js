@@ -24,14 +24,13 @@ class Register extends Component {
         .then(r => r.json())
         .then(data =>{
             // console.log(`LOGIN-STATUS:`,data.isLoggedIn)
-            if(data.isLoggedIn === true){
+            if (data.isLoggedIn === true) {
                 this.setState ({
                     theUser: data.user,
                     isLoggedIn: data.isLoggedIn
                 })
                 this.props.history.push('/timer');
-            }
-            else{
+            } else {
                 fetch('/api/avatar')
                 .then(r => r.json())
                 .then(data =>{

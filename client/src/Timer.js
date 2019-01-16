@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import Clock from './Clock';
 import CategoryDropdown from './CategoryDropdown';
-
 import SetTimer from './SetTimer';
 
 
@@ -77,8 +76,7 @@ class Timer extends Component {
     }
 
     render() {
-        console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
-        // const currentUser = (this.state.theUser)
+        // console.log(`LOGIN-STATUS:`,this.state.isLoggedIn)
         return (
             <section className='section-timer'>
                 <div className='title'>
@@ -219,7 +217,6 @@ class Timer extends Component {
             showButton: true
         })
     }
-
 }
 
 export default Timer;

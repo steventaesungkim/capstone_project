@@ -4,21 +4,23 @@ import Logout from './Logout';
 
 
 const Navbar = (props) => {
-    // console.log(props)
-    const thisUser = (props.user)
-    const logout = (props.handleLogout)
-    const inSession = (props.inSession)
-    // console.log(thisUser)
-    return(
+    // const thisUser = (props.user)
+    // const logout = (props.handleLogout)
+    // const inSession = (props.inSession)
+
+    return (
         <header className='navbar'>
             <Link to = '/timer'
                 className='links'
-            >Timer</Link>
+            >
+                Timer
+            </Link>
 
             <Link to = '/myaccount' 
                 className='links'
-                // style = {{textDecoration: 'none'}}
-            >MyAccount</Link> 
+            >
+                MyAccount
+            </Link> 
 {/* 
             <Link to = {{
                 pathname: '/',
@@ -30,7 +32,6 @@ const Navbar = (props) => {
             }}
                 className='links'
                 onClick={(event) =>{logout(event)}}
-                // style={{textDecoration: 'none'}}
             >Logout</Link>  */}
 
              <Logout 

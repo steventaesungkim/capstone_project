@@ -11,8 +11,9 @@ class MyAccount extends Component {
             isLoggedIn: Boolean,
             userHistory: [],
             subjects: [],
-            decks: []
-
+            decks: [],
+            flashID: 1,
+            questions: []
         }
     }
 
@@ -30,14 +31,24 @@ class MyAccount extends Component {
                     fetch(`/api/question/subjects/${data.user.id}`)
                     .then(r => r.json())
                     .then(subs => {
+                        // console.log(subs);
+                        let CategoryID = subs[0].id_category; 
+                        subs = subs.map(x => x.level);
+                        fetch(`/api/question/category/${CategoryID}`)
+                        .then(r => r.json())
+                        .then(q => {
+                            console.log("QUESTIONS");
+                            console.log(q);
+                            this.setState({
+                                theUser: data.user,
+                                isLoggedIn: data.isLoggedIn,
+                                userHistory: results,
+                                subjects: subs,
+                                flashID: CategoryID,
+                                questions: q
+                            })
+                        })
 
-
-                    this.setState({
-                        theUser: data.user,
-                        isLoggedIn: data.isLoggedIn,
-                        userHistory: results,
-                        subjects: subs
-                    })
                     })
                 })
             }
@@ -61,7 +72,11 @@ class MyAccount extends Component {
                 </Link>
 
                 <h3>{`${thisUser}'s Flash Card Decks`}</h3>
-                <List items={this.state.subjects}/>
+                <List 
+                    items={this.state.subjects}
+                    categoryID={this.state.flashID}
+                    questionList={this.state.questions}
+                />
                 <Link to = {{pathname: '/deckadd', state: {thisUser: theUser}}} className='links'>
                    Add a Flash Card Deck
                 </Link>
@@ -73,5 +88,7 @@ class MyAccount extends Component {
         )
     }
 }
+
+
 
 export default MyAccount;

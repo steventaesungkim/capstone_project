@@ -32,22 +32,33 @@ class MyAccount extends Component {
                     .then(r => r.json())
                     .then(subs => {
                         // console.log(subs);
-                        let CategoryID = subs[0].id_category; 
-                        subs = subs.map(x => x.level);
-                        fetch(`/api/question/category/${CategoryID}`)
-                        .then(r => r.json())
-                        .then(q => {
-                            // console.log("QUESTIONS");
-                            // console.log(q);
+                        if (subs[0]) {
+                            let CategoryID = subs[0].id_category; 
+                            subs = subs.map(x => x.level);
+                            fetch(`/api/question/category/${CategoryID}`)
+                            .then(r => r.json())
+                            .then(q => {
+                                // console.log("QUESTIONS");
+                                // console.log(q);
+                                this.setState({
+                                    theUser: data.user,
+                                    isLoggedIn: data.isLoggedIn,
+                                    userHistory: results,
+                                    subjects: subs,
+                                    flashID: CategoryID,
+                                    questions: q
+                                })
+                            })
+                        } else {
                             this.setState({
                                 theUser: data.user,
                                 isLoggedIn: data.isLoggedIn,
                                 userHistory: results,
-                                subjects: subs,
-                                flashID: CategoryID,
-                                questions: q
+                                //subjects: subs,
+                                //flashID: CategoryID,
+                                //questions: q
                             })
-                        })
+                        }
 
                     })
                 })

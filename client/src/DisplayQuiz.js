@@ -82,24 +82,24 @@ class DisplayQuiz extends Component {
     }
 
     render() {  
-            return(
-                <section className='section-display-quiz'>
-                <div className='clock'>
-                    <Clock />
-                </div>
-                    <Question 
-                        all = {this.state.question}
-                        displayQuestion = {this.state.displayQuestion}
-                        questionId = {this.state.questionId}
-                        questionAnswer = {this.state.questionAnswer}
-    
-                        resultsetId = {this.props.match.params.resultset_id}
-                        // handleResultSet = {this._handleResultSet}
-                        history = {this.props.history}
-                        handleNextQuestion = {this._handleNextQuestion}
-                    />
-               </section>
-            )
+        return(
+            <section className='section-display-quiz'>
+            <div className='clock'>
+                <Clock />
+            </div>
+                <Question 
+                    all = {this.state.question}
+                    displayQuestion = {this.state.displayQuestion}
+                    questionId = {this.state.questionId}
+                    questionAnswer = {this.state.questionAnswer}
+
+                    resultsetId = {this.props.match.params.resultset_id}
+                    // handleResultSet = {this._handleResultSet}
+                    history = {this.props.history}
+                    handleNextQuestion = {this._handleNextQuestion}
+                />
+           </section>
+        )
     }
 
     _handleNextQuestion = () => {

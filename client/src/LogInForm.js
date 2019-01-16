@@ -40,13 +40,14 @@ const LogInForm = (props) => {
                     id="resetPassword"
                 />
             </label>
-
+            <label>
+            
             <input 
                 className='input-submit'
                 type='submit'
                 value='Login'
             />
-                  
+            </label>      
             <Link to = '/register'>
                 <input 
                     className='btn btn-ghost' 

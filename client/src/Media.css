@@ -1,0 +1,80 @@
+ /* ===== =====  MEDIA-QUERIES  ===== ===== */ 
+
+@media only screen and (max-width: 1200px) {
+
+ }
+
+@media only screen and (max-width: 1024px) {
+     
+}
+
+@media only screen and (max-width: 768px) {
+     
+}
+
+@media screen and (max-width: 480px) {
+    .navbar {
+        font-size: 80%;
+    }
+    .section-login {
+        width: 70%;
+    }
+    .title {
+        font-size: 120%;
+    }
+    .input {
+        width: 100%;
+    }
+    .label {
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+    }
+    .input-submit{ 
+        text-align: center;
+        margin-left: 85px;
+        height: 25px;
+        padding: 3px;
+    }
+    .input-answer {
+        width: 200px;
+    }
+    .clock {
+        font-size: 130%
+    }
+    h2 {
+        font-size: 100%;
+    }
+    h3 {
+        font-size: 80%;
+    }
+    h4 {
+        font-size: 80%;
+    }
+    .section-myaccount {
+        height: 100%;
+    }
+    .questions {
+        width: 80%;
+        /* padding: 0; */
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%
+    }
+    th {
+        height: 23px;
+    }
+    table, th, td {
+        font-size: 80%;
+        font-weight: 100;
+        padding: 3px;
+        border: 1px solid white;
+    }
+    .section-settings {
+        width: 70%;
+    }
+    .section-deck {
+        width: 70%;
+    }
+}

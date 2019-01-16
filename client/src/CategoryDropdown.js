@@ -25,6 +25,8 @@ const CategoryDropdown = (props) => {
                         showButton = {props.showButton}
 
                         timeStamp = {props.timeStamp}
+                        hourSelection = {props.hourSelection}
+                        minuteSelection = {props.minuteSelection}
                         _handleTimeSubmit = {props.handleTimeSubmit}
                         
                         // handleButton  = {props.handleButtonClick}

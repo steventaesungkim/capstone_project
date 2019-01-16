@@ -24,6 +24,8 @@ const Question = (props) => {
                 resultsetId = {props.resultsetId}
                 handleResultSet = {props.handleResultSet}
                 handleNextQuestion = {props.handleNextQuestion}
+
+                history = {props.history}
             />
         </div>
     )

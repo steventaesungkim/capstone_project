@@ -16,6 +16,7 @@ import UpdateUser from './UpdateUser';
 import UpdatePassword from './UpdatePassword';
 import UpdateAvatar from './UpdateAvatar';
 import DeckAdd from './DeckAdd';
+import WaitingRoom from './WaitingRoom';
 import DeckEdit from './DeckEdit';
 import DeckDelete from './DeckDelete';
 
@@ -44,6 +45,7 @@ class Home extends Component {
                     <Route path = '/register' component = {Register} />
                     <Route path = '/timer' component = {Timer} />
                     <Route path = '/question/:categoryId/:levelSelection/:resultset_id' component = {DisplayQuiz} />
+                    <Route path = '/waitingroom/:categoryId/:levelSelection/:resultset_id/:hourSelection/:minuteSelection' component = {WaitingRoom} />
 
                     <Route path = '/myaccount' component = {MyAccount} />
                     <Route path = '/settings' component = {Settings} />

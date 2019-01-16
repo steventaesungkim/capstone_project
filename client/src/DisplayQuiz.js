@@ -5,6 +5,7 @@ import Question from './Question';
 
 class DisplayQuiz extends Component {
     constructor(props) {
+        console.log(props)
         // console.log('THIS IS WHERE WE SHOULD GET THE STUPID RESULTSET ID')
         // console.log(props.resultset_id)
         super(props);
@@ -14,8 +15,11 @@ class DisplayQuiz extends Component {
             question: [],
             questionId: '',
             displayQuestion: '',
+            doQuestion: true,
             questionAnswer: '',
-            resultSetId: ''
+            resultSetId: '',
+            compareHour: '',
+            compareMin: ''
         }
     }
 
@@ -68,11 +72,8 @@ class DisplayQuiz extends Component {
                             questionId: theQuestionId,
                             questionAnswer: userAnswer
                         }, () => {
-                            fetch('/api/resultset')
-                            .then(r => r.json())
-                            .then(data => {
-                                // console.log(data)
-                            })
+                            fetch(`/api/resultset/${this.props.match.params.resultset_id}`)
+                            .then(r => r.json())    
                         })
                     })
                 })
@@ -81,31 +82,25 @@ class DisplayQuiz extends Component {
     }
 
     render() {  
-        return(
-            <section className='section-display-quiz'>
+            return(
+                <section className='section-display-quiz'>
                 <div className='clock'>
                     <Clock />
                 </div>
-                
-                <Question 
-                    all = {this.state.question}
-                    displayQuestion = {this.state.displayQuestion}
-                    questionId = {this.state.questionId}
-                    questionAnswer = {this.state.questionAnswer}
-
-                    resultsetId = {this.props.match.params.resultset_id}
-                    // handleResultSet = {this._handleResultSet}
-
-                    handleNextQuestion = {this._handleNextQuestion}
-                />
-            </section>
-        )
-        // }   
+                    <Question 
+                        all = {this.state.question}
+                        displayQuestion = {this.state.displayQuestion}
+                        questionId = {this.state.questionId}
+                        questionAnswer = {this.state.questionAnswer}
+    
+                        resultsetId = {this.props.match.params.resultset_id}
+                        // handleResultSet = {this._handleResultSet}
+                        history = {this.props.history}
+                        handleNextQuestion = {this._handleNextQuestion}
+                    />
+               </section>
+            )
     }
-
-    // _handleResultSet = () =>{
-
-    // }
 
     _handleNextQuestion = () => {
         const categoryId = this.props.match.params.categoryId;

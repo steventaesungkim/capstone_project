@@ -338,10 +338,20 @@ p {
 .section-deck {
     width: 40%;
 }
-
-
-
-
+table {
+    border-collapse: collapse;
+    
+}
+table, th, td {
+    border: 1px solid white;
+    font-size: 95%;
+    padding: 3px;
+    text-align: center;
+}
+li {
+    list-style-type: none;
+    font-size: 80%;
+}
 
 
 

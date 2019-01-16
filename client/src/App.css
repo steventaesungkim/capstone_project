@@ -113,6 +113,7 @@ input[type=submit]:active {
 }
 .form {
     padding: 10px;
+    margin-top: 5px;
     border: 2px solid white;
     display: flex;
     flex-direction: column;
@@ -331,7 +332,9 @@ p {
 }
 
 /* ===== =====  CREATE-FLASHCARDS  ===== ===== */
-
+.section-deck {
+    width: 40%;
+}
 
 
 

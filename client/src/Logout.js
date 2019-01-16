@@ -5,7 +5,7 @@ const Logout = (props) =>{
     // console.log(props.inSession)
 
     return(
-        <a href='/' onClick={(event) =>{props.logout(event)}}>Logout</a>
+        <a href='/' className='links' onClick={(event) =>{props.logout(event)}}>Logout</a>
     )
 }
 

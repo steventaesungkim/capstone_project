@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logout from './Logout';
 
 
 const Navbar = (props) => {
@@ -18,7 +19,7 @@ const Navbar = (props) => {
                 className='links'
                 // style = {{textDecoration: 'none'}}
             >MyAccount</Link> 
-
+{/* 
             <Link to = {{
                 pathname: '/',
                 state: {
@@ -30,13 +31,13 @@ const Navbar = (props) => {
                 className='links'
                 onClick={(event) =>{logout(event)}}
                 // style={{textDecoration: 'none'}}
-            >Logout</Link> 
+            >Logout</Link>  */}
 
-             {/* <Logout 
+             <Logout 
                  logout = {props.handleLogout}
-                //  thisUser = {props.userInfo}
-                //  inSession = {props.inSession}
-            /> */}
+                 thisUser = {props.userInfo}
+                 inSession = {props.inSession}
+            />
         </header>
     );
 }
